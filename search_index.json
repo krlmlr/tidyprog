@@ -1,0 +1,9 @@
+[
+["index.html", "Programming in the tidyverse Preface", " Programming in the tidyverse Kirill Müller Preface Start writing your book here. If you are in RStudio, Click the Build button to build the book. "],
+["introduction.html", "1 Introduction", " 1 Introduction "],
+["iteration.html", "2 Iteration", " 2 Iteration Processing multiple files that contain different parts of the same dataset "],
+["functions.html", "3 Functions", " 3 Functions Structuring the code to avoid too much copy-pasting "],
+["non-rectangular-data.html", "4 Non-rectangular data", " 4 Non-rectangular data working with raw data from online services (JSON) "],
+["tidy-evaluation.html", "5 Tidy evaluation", " 5 Tidy evaluation writing functions that work with datasets of different shape "],
+["references.html", "# References", " # References "]
+]
