@@ -1,0 +1,11 @@
+---
+title: "Programming in the tidyverse"
+author: "Kirill Müller"
+documentclass: "book"
+site: bookdown::bookdown_site
+---
+
+# Preface {-}
+
+Start writing your book here. If you are in RStudio,
+Click the Build button to build the book.
