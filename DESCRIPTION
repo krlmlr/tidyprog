@@ -1,0 +1,18 @@
+Package: tidyprog
+Title: Programming in the tidyverse
+Version: 0.0.0.9000
+Date: 2019-04-27
+Authors@R: 
+    person(given = "Kirill",
+           family = "Müller",
+           role = c("aut", "cre"),
+           email = "krlmlr+r@mailbox.org",
+           comment = c(ORCID = "0000-0002-1416-3412"))
+Description: What the package does (one paragraph).
+License: GPL-3
+URL: https://github.com/krlmlr/tidyprog,
+    http://krlmlr.github.io/tidyprog
+BugReports: https://github.com/krlmlr/tidyprog/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
