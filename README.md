@@ -8,7 +8,7 @@ RStudio project and supporting files for a quick start of the workshop.
 
 ## Cloud instance
 
-Navigate to https://rstudio.cloud/project/271256. (Please use a modern browser, Firefox or Chrome should work reasonably well.) A login page appears. To create an account, please click the "Sign up" link at the bottom right of the sign in page. You can also sign in with a GitHub or Google account.
+Navigate to https://rstudio.cloud/project/329883. (Please use a modern browser, Firefox or Chrome should work reasonably well.) A login page appears. To create an account, please click the "Sign up" link at the bottom right of the sign in page. You can also sign in with a GitHub or Google account.
 
 After signing in, please wait for a few seconds for the project to open. In the "Console" tab, type: `library(tidyverse)` (enter). You should see output similar to the following:
 
