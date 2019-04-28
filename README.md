@@ -77,7 +77,7 @@ After signing in, please wait for a few seconds for the project to open. In the 
 
 ### Intro script
 
-Please review the [introductory script `script/01-intro.R`](script/01-intro.R).  You should be able to open and run it directly in rstudio.cloud or from the RStudio session that starts after opening the `R-workshop.Rproj` file.
+Please review the [introductory script located in `script/01-intro.R`](script/01-intro.R).  You should be able to open and run it directly in rstudio.cloud or from the RStudio session that starts after opening the `R-workshop.Rproj` file.
 
 
 ## Material
