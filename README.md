@@ -8,6 +8,8 @@ RStudio project and supporting files for a quick start of the workshop.
 
 2. (Optional) A local installation
 
+3. Review the intro R script.
+
 
 **NOTE**: Unfortunately we cannot help you troubleshoot problems with your system setup during the workshop.  The cloud instance is an RStudio IDE that works from your browser, with R and all packages preinstalled.  It should work reasonably well in a modern browser (Chrome or Firefox) on any operating system.  Please make sure that you have access to the cloud instance before the workshop.  Ideally you can install and use R on your local machine, but we have experienced various problems in the past.
 
@@ -33,19 +35,17 @@ After signing in, please wait for a few seconds for the project to open. In the 
 
 ### Alternative: Local installation
 
-Required software:
-
-1. R, preferably in the most recent version
+1. Install R, preferably in the most recent version.
 
     - Windows: https://cran.r-project.org/bin/windows/base/
     - Mac OS: https://cran.r-project.org/bin/macosx/
     - Linux: Use your system's package manager, or https://cran.r-project.org/bin/linux/
 
-2. RStudio, preferably in the most recent version
+2. Install RStudio, preferably in the most recent version.
 
     https://www.rstudio.com/products/rstudio/download/#download
 
-3. R packages. Copy the following code at once into RStudio's "Console" pane and press "Enter".
+3. Install R packages. Start RStudio, copy the following code at once into RStudio's "Console" pane and press "Enter".
 
     ```r
     install.packages(c(
@@ -66,6 +66,19 @@ Required software:
     ✖ dplyr::filter() masks stats::filter()
     ✖ dplyr::lag()    masks stats::lag()
     ```
+
+5. Close RStudio.
+
+6. Download this project. Click the green "Clone or download" button on the top of this page, then click the "Download ZIP" link.
+
+7. Extract the downloaded file to a directory on your computer. (Opening the file is not sufficient, you need to extract the contents.)
+
+8. Open the `R-workshop.Rproj` file.
+
+### Intro script
+
+Please review the [introductory script `script/01-intro.R`](script/01-intro.R).  You should be able to open and run it directly in rstudio.cloud or from the RStudio session that starts after opening the `R-workshop.Rproj` file.
+
 
 ## Material
 
