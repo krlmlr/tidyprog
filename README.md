@@ -43,7 +43,7 @@ Required software:
 
     ```r
     install.packages(c(
-      "tidyverse", "darksky", "here", "conflicted", "shiny"
+      "tidyverse", "darksky", "here", "conflicted", "shiny", "leaflet", "plotly"
     ))
     ```
 
