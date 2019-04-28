@@ -1,4 +1,4 @@
-# Data Processing, Visualisation and Reporting using R
+# Programming in the tidyverse
 
 RStudio project and supporting files for a quick start of the workshop.
 
@@ -43,7 +43,7 @@ Required software:
 
     ```r
     install.packages(c(
-      "tidyverse", "nycflights13", "shiny", "here", "xaringan", "rticles", "conflicted"
+      "tidyverse", "darksky", "here", "conflicted", "shiny"
     ))
     ```
 
