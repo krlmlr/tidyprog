@@ -24,6 +24,10 @@ weather_data %>%
 # Summary
 weather_data %>%
   ggplot(aes(x = city_code)) +
+  geom_bar(aes(fill = summary))
+
+weather_data %>%
+  ggplot(aes(x = city_code)) +
   geom_bar(aes(fill = summary), position = position_dodge2("dodge", preserve = "single"))
 
 # Temperature and apparent temperature
