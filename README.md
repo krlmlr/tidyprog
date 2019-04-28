@@ -2,11 +2,17 @@
 
 RStudio project and supporting files for a quick start of the workshop.
 
+## Requirements
 
-**NOTE**: Unfortunately we cannot help you troubleshoot problems with your system setup during the workshop.  The cloud instance is an RStudio IDE that works from your browser, with R and all packages preinstalled.  It should work reasonably well in a modern browser (Chrome or Firefox) on any operating system.  Please make sure that you have access to the cloud instance before the workshop.  Ideally you can install and use R on your local machine, but we have experienced various problems in the past, and we recommend to make sure the cloud instance is available as backup.
+1. A working rstudio.cloud setup
+
+2. (Optional) A local installation
 
 
-## Cloud instance
+**NOTE**: Unfortunately we cannot help you troubleshoot problems with your system setup during the workshop.  The cloud instance is an RStudio IDE that works from your browser, with R and all packages preinstalled.  It should work reasonably well in a modern browser (Chrome or Firefox) on any operating system.  Please make sure that you have access to the cloud instance before the workshop.  Ideally you can install and use R on your local machine, but we have experienced various problems in the past.
+
+
+### rstudio.cloud
 
 Navigate to https://rstudio.cloud/project/329883. (Please use a modern browser, Firefox or Chrome should work reasonably well.) A login page appears. To create an account, please click the "Sign up" link at the bottom right of the sign in page. You can also sign in with a GitHub or Google account.
 
@@ -25,7 +31,7 @@ After signing in, please wait for a few seconds for the project to open. In the 
 ```
 
 
-## Alternative: Local installation
+### Alternative: Local installation
 
 Required software:
 
@@ -61,6 +67,6 @@ Required software:
     ✖ dplyr::lag()    masks stats::lag()
     ```
 
-## Workshop material
+## Material
 
 To be announced.
