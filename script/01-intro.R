@@ -2,10 +2,10 @@ library(tidyverse)
 library(here)
 
 # Read all files
-berlin <- readxl::read_excel(here("data/weather/berlin.xlsx"))
-toronto <- readxl::read_excel(here("data/weather/toronto.xlsx"))
-tel_aviv <- readxl::read_excel(here("data/weather/tel_aviv.xlsx"))
-zurich <- readxl::read_excel(here("data/weather/zurich.xlsx"))
+berlin <- readxl::read_excel(here("data/weather", "berlin.xlsx"))
+toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+zurich <- readxl::read_excel(here("data/weather", "zurich.xlsx"))
 
 # Create ensemble dataset
 weather_data <- bind_rows(
