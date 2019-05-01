@@ -5,6 +5,11 @@ documentclass: "book"
 site: bookdown::bookdown_site
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+
 # Preface {-}
 
 Start writing your book here. If you are in RStudio,
