@@ -14,8 +14,9 @@ process_file <- function(path) {
     mutate(comment = gsub("^# ", "", header)) %>%
     mutate(chunk_name = snakecase::to_snake_case(header, sep_out = "-")) %>%
     mutate(code = map_chr(map(data, tail, -1), ~ paste(.$lines, collapse = "\n"))) %>%
+    mutate(code = gsub("\n+$", "", code)) %>%
     select(id, comment, chunk_name, code) %>%
-    mutate(chunk = paste0("<!-- ",  comment, " -->\n", "```{r ", chunk_name, "}\n", code, "```")) %>%
+    mutate(chunk = paste0("<!-- ",  comment, " -->\n", "```{r ", chunk_name, "}\n", code, "\n```")) %>%
     pull() %>%
     glue::glue_collapse(sep = "\n\n\n") %>%
     writeLines(rmd_path)

@@ -7,11 +7,13 @@ library(here)
 
 <!-- Important! Please reset the R session before running this script. -->
 ```{r important-please-reset-the-r-session-before-running-this-script}
+
 ```
 
 
 <!-- (In RStudio: Session/Restart R) -->
 ```{r in-r-studio-session-restart-r}
+
 ```
 
 
@@ -53,6 +55,7 @@ read_weather_data()
 
 <!-- Variables are local, execution doesn't change global variables. -->
 ```{r variables-are-local-execution-doesn-t-change-global-variables}
+
 ```
 
 
@@ -127,4 +130,5 @@ read_weather_data <- function() {
   weather_data
 }
 
-read_weather_data()```
+read_weather_data()
+```

@@ -2,7 +2,6 @@
 ```{r setup-41-function-if-r}
 library(tidyverse)
 library(here)
-
 ```
 
 
@@ -42,6 +41,7 @@ read_weather_data(omit_toronto = TRUE, omit_zurich = TRUE) %>%
 
 <!-- Useful with an early return() -->
 ```{r useful-with-an-early-return}
+
 ```
 
 
@@ -83,6 +83,7 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 
 <!-- else if/else: branching -->
 ```{r else-if-else-branching}
+
 ```
 
 
@@ -118,4 +119,5 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 read_weather_data(omit_toronto = TRUE) %>%
   count(city_code)
 read_weather_data(omit_zurich = TRUE) %>%
-  count(city_code)```
+  count(city_code)
+```

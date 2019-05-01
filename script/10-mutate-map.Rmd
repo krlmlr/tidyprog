@@ -47,4 +47,5 @@ dict %>%
   mutate(
     data = map(weather_filename, ~ readxl::read_excel(here(.)))
   ) %>%
-  select(city_code, name, data)```
+  select(city_code, name, data)
+```

@@ -83,6 +83,7 @@ weather_data %>%
 
 <!-- How to compute temperature difference to previous hour? -->
 ```{r how-to-compute-temperature-difference-to-previous-hour}
+
 ```
 
 
@@ -114,4 +115,5 @@ weather_data %>%
   gather(key, value, -city_code) %>%
   separate(key, into = c("indicator", "fun")) %>%
   xtabs(value ~ city_code + indicator + fun, .) %>%
-  ftable()```
+  ftable()
+```

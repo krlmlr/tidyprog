@@ -1,10 +1,12 @@
 <!-- Setup 34-function-purity.R -->
 ```{r setup-34-function-purity-r}
+
 ```
 
 
 <!-- Functions should do one thing, and do it well. -->
 ```{r functions-should-do-one-thing-and-do-it-well}
+
 ```
 
 
@@ -20,6 +22,7 @@ pure_function(1)
 
 <!-- Function with side effect: called for its side effect, returns input -->
 ```{r function-with-side-effect-called-for-its-side-effect-returns-input}
+
 ```
 
 
@@ -39,11 +42,13 @@ side_effect_function(2)
 
 <!-- Separation helps isolate the side effects. -->
 ```{r separation-helps-isolate-the-side-effects}
+
 ```
 
 
 <!-- If side effect functions return the, they remain composable with -->
 ```{r if-side-effect-functions-return-the-they-remain-composable-with}
+
 ```
 
 
@@ -52,4 +57,5 @@ side_effect_function(2)
 5 %>%
   pure_function() %>%
   side_effect_function() %>%
-  pure_function()```
+  pure_function()
+```

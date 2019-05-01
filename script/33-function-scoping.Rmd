@@ -28,9 +28,11 @@ a
 
 <!-- Global variables are a (hidden) part of a function's interface! -->
 ```{r global-variables-are-a-hidden-part-of-a-function-s-interface}
+
 ```
 
 
 <!-- Best practice: self-contained functions, independent of global variables -->
 ```{r best-practice-self-contained-functions-independent-of-global-variables}
+
 ```

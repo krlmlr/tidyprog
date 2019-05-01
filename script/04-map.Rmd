@@ -59,7 +59,6 @@ input_files %>%
 manipulated_data <-
   input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
-
 ```
 
 
@@ -77,4 +76,5 @@ map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 
 <!-- We don't really need the output -->
 ```{r we-don-t-really-need-the-output}
-walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))```
+walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
+```

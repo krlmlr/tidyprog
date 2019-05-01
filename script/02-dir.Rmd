@@ -14,6 +14,7 @@ files
 
 <!-- see also fs::dir_ls() -->
 ```{r see-also-fs-dir-ls}
+
 ```
 
 
@@ -53,4 +54,5 @@ files_df %>%
 <!-- Extract a specific column as a vector -->
 ```{r extract-a-specific-column-as-a-vector}
 files_df %>%
-  pull(name)```
+  pull(name)
+```
