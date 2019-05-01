@@ -1,25 +1,25 @@
 <!-- Setup 02-dir.R -->
-```{r setup-02-dir-r}
+```{r 02-setup-02-dir-r}
 library(tidyverse)
 library(here)
 ```
 
 
 <!-- Show all files -->
-```{r show-all-files}
+```{r 02-show-all-files}
 files <- dir(here("data/weather"), full.names = TRUE)
 files
 ```
 
 
 <!-- see also fs::dir_ls() -->
-```{r see-also-fs-dir-ls}
+```{r 02-see-also-fs-dir-ls}
 
 ```
 
 
 <!-- Convert to tibble -->
-```{r convert-to-tibble}
+```{r 02-convert-to-tibble}
 files_df <-
   files %>%
   enframe()
@@ -29,7 +29,7 @@ files_df
 
 
 <!-- Remove the name column -->
-```{r remove-the-name-column}
+```{r 02-remove-the-name-column}
 files_df_1 <-
   files %>%
   enframe(name = NULL)
@@ -39,20 +39,20 @@ files_df_1
 
 
 <!-- Construct tibble from a vector -->
-```{r construct-tibble-from-a-vector}
+```{r 02-construct-tibble-from-a-vector}
 tibble(filename = files)
 ```
 
 
 <!-- Extract a column as a vector -->
-```{r extract-a-column-as-a-vector}
+```{r 02-extract-a-column-as-a-vector}
 files_df %>%
   pull()
 ```
 
 
 <!-- Extract a specific column as a vector -->
-```{r extract-a-specific-column-as-a-vector}
+```{r 02-extract-a-specific-column-as-a-vector}
 files_df %>%
   pull(name)
 ```

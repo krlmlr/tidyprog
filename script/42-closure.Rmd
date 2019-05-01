@@ -1,5 +1,5 @@
 <!-- Setup 42-closure.R -->
-```{r setup-42-closure-r}
+```{r 42-setup-42-closure-r}
 library(tidyverse)
 library(here)
 
@@ -11,7 +11,7 @@ read_weather_file <- function(filename) {
 
 
 <!-- Create a function that loads a particular dataset -->
-```{r create-a-function-that-loads-a-particular-dataset}
+```{r 42-create-a-function-that-loads-a-particular-dataset}
 make_read_weather_file <- function(filename) {
   # Avoid odd effects due to lazy evaluation
   force(filename)
@@ -34,7 +34,7 @@ read_berlin()
 
 
 <!-- Use case: adverbs -- wrappers for other verbs -->
-```{r use-case-adverbs-wrappers-for-other-verbs}
+```{r 42-use-case-adverbs-wrappers-for-other-verbs}
 loudly <- function(f) {
   force(f)
 

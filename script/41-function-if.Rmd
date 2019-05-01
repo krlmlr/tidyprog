@@ -1,12 +1,12 @@
 <!-- Setup 41-function-if.R -->
-```{r setup-41-function-if-r}
+```{r 41-setup-41-function-if-r}
 library(tidyverse)
 library(here)
 ```
 
 
 <!-- if () executes code conditionally -->
-```{r if-executes-code-conditionally}
+```{r 41-if-executes-code-conditionally}
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
   # Create ensemble dataset from files on disk
   weather_data <- bind_rows(
@@ -40,13 +40,13 @@ read_weather_data(omit_toronto = TRUE, omit_zurich = TRUE) %>%
 
 
 <!-- Useful with an early return() -->
-```{r useful-with-an-early-return}
+```{r 41-useful-with-an-early-return}
 
 ```
 
 
 <!-- && and ||: shortcut operators for scalar logical -->
-```{r and-shortcut-operators-for-scalar-logical}
+```{r 41-and-shortcut-operators-for-scalar-logical}
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
   # Create ensemble dataset from files on disk
   weather_data <- bind_rows(
@@ -82,13 +82,13 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 
 
 <!-- else if/else: branching -->
-```{r else-if-else-branching}
+```{r 41-else-if-else-branching}
 
 ```
 
 
 <!-- (Just for illustration, do not implement code like this!) -->
-```{r just-for-illustration-do-not-implement-code-like-this}
+```{r 41-just-for-illustration-do-not-implement-code-like-this}
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
   # Create ensemble dataset from files on disk
   weather_data <- bind_rows(

@@ -1,17 +1,17 @@
 <!-- Setup 34-function-purity.R -->
-```{r setup-34-function-purity-r}
+```{r 34-setup-34-function-purity-r}
 
 ```
 
 
 <!-- Functions should do one thing, and do it well. -->
-```{r functions-should-do-one-thing-and-do-it-well}
+```{r 34-functions-should-do-one-thing-and-do-it-well}
 
 ```
 
 
 <!-- Pure function: called for its return value, no side effects! -->
-```{r pure-function-called-for-its-return-value-no-side-effects}
+```{r 34-pure-function-called-for-its-return-value-no-side-effects}
 pure_function <- function(x) {
   x + 1
 }
@@ -21,13 +21,13 @@ pure_function(1)
 
 
 <!-- Function with side effect: called for its side effect, returns input -->
-```{r function-with-side-effect-called-for-its-side-effect-returns-input}
+```{r 34-function-with-side-effect-called-for-its-side-effect-returns-input}
 
 ```
 
 
 <!-- invisibly (=no changes to return value). -->
-```{r invisibly-no-changes-to-return-value}
+```{r 34-invisibly-no-changes-to-return-value}
 side_effect_function <- function(x) {
   file <- tempfile()
   writeLines(format(x), tempfile())
@@ -41,19 +41,19 @@ side_effect_function(2)
 
 
 <!-- Separation helps isolate the side effects. -->
-```{r separation-helps-isolate-the-side-effects}
+```{r 34-separation-helps-isolate-the-side-effects}
 
 ```
 
 
 <!-- If side effect functions return the, they remain composable with -->
-```{r if-side-effect-functions-return-the-they-remain-composable-with}
+```{r 34-if-side-effect-functions-return-the-they-remain-composable-with}
 
 ```
 
 
 <!-- pure functions. -->
-```{r pure-functions}
+```{r 34-pure-functions}
 5 %>%
   pure_function() %>%
   side_effect_function() %>%

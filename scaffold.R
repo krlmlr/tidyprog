@@ -4,6 +4,7 @@ library(here)
 process_file <- function(path) {
   rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
 
+  file_id <- gsub("^([^-]+)-.*$", "\\1", basename(path))
   lines <- c(paste0("# Setup ", basename(path)), readLines(path))
   comment <- grepl("^#", lines)
   tibble(lines, comment) %>%
@@ -12,7 +13,7 @@ process_file <- function(path) {
     nest(-id) %>%
     mutate(header = map_chr(data, list("lines", 1L))) %>%
     mutate(comment = gsub("^# ", "", header)) %>%
-    mutate(chunk_name = snakecase::to_snake_case(header, sep_out = "-")) %>%
+    mutate(chunk_name = paste0(file_id, "-", snakecase::to_snake_case(header, sep_out = "-"))) %>%
     mutate(code = map_chr(map(data, tail, -1), ~ paste(.$lines, collapse = "\n"))) %>%
     mutate(code = gsub("\n+$", "", code)) %>%
     select(id, comment, chunk_name, code) %>%

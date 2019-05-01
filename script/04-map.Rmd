@@ -1,19 +1,19 @@
 <!-- Setup 04-map.R -->
-```{r setup-04-map-r}
+```{r 04-setup-04-map-r}
 library(tidyverse)
 library(here)
 ```
 
 
 <!-- Load dictionary from file -->
-```{r load-dictionary-from-file}
-dict <- readxl::read_excel("data/cities.xlsx")
+```{r 04-load-dictionary-from-file}
+dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
 ```
 
 
 <!-- Collect input files as a named vector -->
-```{r collect-input-files-as-a-named-vector}
+```{r 04-collect-input-files-as-a-named-vector}
 input_files <-
   dict %>%
   select(city_code, weather_filename) %>%
@@ -24,7 +24,7 @@ names(input_files)
 
 
 <!-- Access individual input files -->
-```{r access-individual-input-files}
+```{r 04-access-individual-input-files}
 input_files[1]
 input_files[[1]]
 input_files[["berlin"]]
@@ -32,13 +32,13 @@ input_files[["berlin"]]
 
 
 <!-- Read a single input file -->
-```{r read-a-single-input-file}
+```{r 04-read-a-single-input-file}
 readxl::read_excel(here(input_files[[1]]))
 ```
 
 
 <!-- Read all input files -->
-```{r read-all-input-files}
+```{r 04-read-all-input-files}
 input_data <-
   map(input_files, ~ readxl::read_excel(here(.)))
 input_data
@@ -48,14 +48,14 @@ names(input_data)
 
 
 <!-- Pipe notation -->
-```{r pipe-notation}
+```{r 04-pipe-notation}
 input_files %>%
   map(~ readxl::read_excel(here(.)))
 ```
 
 
 <!-- Manipulate results -->
-```{r manipulate-results}
+```{r 04-manipulate-results}
 manipulated_data <-
   input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
@@ -63,18 +63,18 @@ manipulated_data <-
 
 
 <!-- Write back results: new file names -->
-```{r write-back-results-new-file-names}
+```{r 04-write-back-results-new-file-names}
 output_filenames <- tempfile(names(input_data), fileext = ".csv")
 ```
 
 
 <!-- Iterate over pairs -->
-```{r iterate-over-pairs}
+```{r 04-iterate-over-pairs}
 map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
 
 <!-- We don't really need the output -->
-```{r we-don-t-really-need-the-output}
+```{r 04-we-don-t-really-need-the-output}
 walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```

@@ -1,11 +1,11 @@
 <!-- Setup 33-function-scoping.R -->
-```{r setup-33-function-scoping-r}
+```{r 33-setup-33-function-scoping-r}
 a <- 5
 ```
 
 
 <!-- A function can access global variables: -->
-```{r a-function-can-access-global-variables}
+```{r 33-a-function-can-access-global-variables}
 f <- function() {
   a
 }
@@ -15,7 +15,7 @@ f()
 
 
 <!-- When a function writes to a variable, it always writes in scope -->
-```{r when-a-function-writes-to-a-variable-it-always-writes-in-scope}
+```{r 33-when-a-function-writes-to-a-variable-it-always-writes-in-scope}
 f <- function() {
   a <- 2
   a
@@ -27,12 +27,12 @@ a
 
 
 <!-- Global variables are a (hidden) part of a function's interface! -->
-```{r global-variables-are-a-hidden-part-of-a-function-s-interface}
+```{r 33-global-variables-are-a-hidden-part-of-a-function-s-interface}
 
 ```
 
 
 <!-- Best practice: self-contained functions, independent of global variables -->
-```{r best-practice-self-contained-functions-independent-of-global-variables}
+```{r 33-best-practice-self-contained-functions-independent-of-global-variables}
 
 ```
