@@ -21,7 +21,7 @@ process_file <- function(path) {
     writeLines(rmd_path)
 }
 
-files <- dir("../tidyprog-proj/script", full.names = TRUE)
+files <- dir("proj/script", full.names = TRUE)
 
 walk(files, process_file)
 
