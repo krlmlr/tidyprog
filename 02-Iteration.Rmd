@@ -1,3 +1,11 @@
 # Iteration
 
 > Processing multiple files that contain different parts of the same dataset
+
+```{r 01-setup, include = FALSE}
+library(here)
+```
+
+
+```{r child = here("script", "0.Rmd")}
+```
