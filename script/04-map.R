@@ -31,18 +31,3 @@ names(input_data)
 # Pipe notation
 input_files %>%
   map(~ readxl::read_excel(here(.)))
-
-# Manipulate results
-manipulated_data <-
-  input_data %>%
-  map(~ select(., time, contains("emperature"))) %>%
-
-
-# Write back results: new file names
-output_filenames <- tempfile(names(input_data), fileext = ".csv")
-
-# Iterate over pairs
-map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
-
-# We don't really need the output
-walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
