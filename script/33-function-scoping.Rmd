@@ -1,10 +1,10 @@
-<!--Setup 33-function-scoping.R -->
+<!-- Setup 33-function-scoping.R -->
 ```{r setup-33-function-scoping-r}
 a <- 5
 ```
 
 
-<!--A function can access global variables: -->
+<!-- A function can access global variables: -->
 ```{r a-function-can-access-global-variables}
 f <- function() {
   a
@@ -14,7 +14,7 @@ f()
 ```
 
 
-<!--When a function writes to a variable, it always writes in scope -->
+<!-- When a function writes to a variable, it always writes in scope -->
 ```{r when-a-function-writes-to-a-variable-it-always-writes-in-scope}
 f <- function() {
   a <- 2
@@ -26,11 +26,11 @@ a
 ```
 
 
-<!--Global variables are a (hidden) part of a function's interface! -->
+<!-- Global variables are a (hidden) part of a function's interface! -->
 ```{r global-variables-are-a-hidden-part-of-a-function-s-interface}
 ```
 
 
-<!--Best practice: self-contained functions, independent of global variables -->
+<!-- Best practice: self-contained functions, independent of global variables -->
 ```{r best-practice-self-contained-functions-independent-of-global-variables}
 ```

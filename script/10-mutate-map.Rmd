@@ -1,18 +1,18 @@
-<!--Setup 10-mutate-map.R -->
+<!-- Setup 10-mutate-map.R -->
 ```{r setup-10-mutate-map-r}
 library(tidyverse)
 library(here)
 ```
 
 
-<!--Load dictionary from file -->
+<!-- Load dictionary from file -->
 ```{r load-dictionary-from-file}
 dict <- readxl::read_excel("data/cities.xlsx")
 dict
 ```
 
 
-<!--map() on a vector -->
+<!-- map() on a vector -->
 ```{r map-on-a-vector}
 input_data <-
   dict %>%
@@ -24,14 +24,14 @@ input_data
 ```
 
 
-<!--Lists are also vectors, enframe() returns a nested tibble! -->
+<!-- Lists are also vectors, enframe() returns a nested tibble! -->
 ```{r lists-are-also-vectors-enframe-returns-a-nested-tibble}
 input_data %>%
   enframe()
 ```
 
 
-<!--Operate in "tibble-land": columns are vectors -->
+<!-- Operate in "tibble-land": columns are vectors -->
 ```{r operate-in-tibble-land-columns-are-vectors}
 dict %>%
   select(city_code, weather_filename) %>%
@@ -41,7 +41,7 @@ dict %>%
 ```
 
 
-<!--Keep auxiliary columns -->
+<!-- Keep auxiliary columns -->
 ```{r keep-auxiliary-columns}
 dict %>%
   mutate(

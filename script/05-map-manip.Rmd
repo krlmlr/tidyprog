@@ -1,18 +1,18 @@
-<!--Setup 05-map-manip.R -->
+<!-- Setup 05-map-manip.R -->
 ```{r setup-05-map-manip-r}
 library(tidyverse)
 library(here)
 ```
 
 
-<!--Load dictionary from file -->
+<!-- Load dictionary from file -->
 ```{r load-dictionary-from-file}
 dict <- readxl::read_excel("data/cities.xlsx")
 dict
 ```
 
 
-<!--Collect input data -->
+<!-- Collect input data -->
 ```{r collect-input-data}
 input_data <-
   dict %>%
@@ -22,14 +22,14 @@ input_data <-
 ```
 
 
-<!--Manipulate results -->
+<!-- Manipulate results -->
 ```{r manipulate-results}
 input_data %>%
   map(~ select(., time, contains("emperature")))
 ```
 
 
-<!--Manipulate results more -->
+<!-- Manipulate results more -->
 ```{r manipulate-results-more}
 input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
@@ -37,7 +37,7 @@ input_data %>%
 ```
 
 
-<!--Create a function to manipulate -->
+<!-- Create a function to manipulate -->
 ```{r create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
@@ -47,42 +47,42 @@ manipulator <- function(data) {
 ```
 
 
-<!--Functions are first-class objects! -->
+<!-- Functions are first-class objects! -->
 ```{r functions-are-first-class-objects}
 manipulator
 ```
 
 
-<!--Test the function -->
+<!-- Test the function -->
 ```{r test-the-function}
 manipulator(input_data[[4]])
 ```
 
 
-<!--Run the function on the entire dataset -->
+<!-- Run the function on the entire dataset -->
 ```{r run-the-function-on-the-entire-dataset}
 map(input_data, ~ manipulator(.))
 ```
 
 
-<!--Shortcut -->
+<!-- Shortcut -->
 ```{r shortcut}
 map(input_data, manipulator)
 ```
 
 
-<!--Write back results: new file names -->
+<!-- Write back results: new file names -->
 ```{r write-back-results-new-file-names}
 output_filenames <- tempfile(names(input_data), fileext = ".csv")
 ```
 
 
-<!--Iterate over pairs -->
+<!-- Iterate over pairs -->
 ```{r iterate-over-pairs}
 map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
 
-<!--We don't really need the output -->
+<!-- We don't really need the output -->
 ```{r we-don-t-really-need-the-output}
 walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))```

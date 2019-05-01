@@ -1,25 +1,25 @@
-<!--Setup 03-names.R -->
+<!-- Setup 03-names.R -->
 ```{r setup-03-names-r}
 library(tidyverse)
 library(here)
 ```
 
 
-<!--Load dictionary from file -->
+<!-- Load dictionary from file -->
 ```{r load-dictionary-from-file}
 dict <- readxl::read_excel("data/cities.xlsx")
 dict
 ```
 
 
-<!--Acquire file names -->
+<!-- Acquire file names -->
 ```{r acquire-file-names}
 dict %>%
   pull(weather_filename)
 ```
 
 
-<!--Use here() to create absolute paths -->
+<!-- Use here() to create absolute paths -->
 ```{r use-here-to-create-absolute-paths}
 dict %>%
   pull(weather_filename) %>%
@@ -27,7 +27,7 @@ dict %>%
 ```
 
 
-<!--Acquire file names as a named vector -->
+<!-- Acquire file names as a named vector -->
 ```{r acquire-file-names-as-a-named-vector}
 dict %>%
   select(city_code, weather_filename) %>%
@@ -35,7 +35,7 @@ dict %>%
 ```
 
 
-<!--Not all operations maintain vector names! -->
+<!-- Not all operations maintain vector names! -->
 ```{r not-all-operations-maintain-vector-names}
 dict %>%
   select(city_code, weather_filename) %>%
@@ -44,7 +44,7 @@ dict %>%
 ```
 
 
-<!--Move the here() call into "tibble-land" -->
+<!-- Move the here() call into "tibble-land" -->
 ```{r move-the-here-call-into-tibble-land}
 dict %>%
   mutate(weather_filename_here = here(weather_filename)) %>%
