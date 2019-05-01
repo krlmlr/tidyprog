@@ -35,7 +35,8 @@ manipulator
 manipulator(input_data[[4]])
 
 # Run the function on the entire dataset
-map(input_data, ~ manipulator(.))
+manipulated_data <- map(input_data, ~ manipulator(.))
+manipulated_data
 
 # Shortcut
 map(input_data, manipulator)
