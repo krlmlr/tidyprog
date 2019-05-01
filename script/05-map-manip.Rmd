@@ -61,7 +61,8 @@ manipulator(input_data[[4]])
 
 <!-- Run the function on the entire dataset -->
 ```{r 05-run-the-function-on-the-entire-dataset}
-map(input_data, ~ manipulator(.))
+manipulated_data <- map(input_data, ~ manipulator(.))
+manipulated_data
 ```
 
 
