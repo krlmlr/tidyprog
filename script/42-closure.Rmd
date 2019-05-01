@@ -1,0 +1,52 @@
+<!--Setup 42-closure.R -->
+```{r setup-42-closure-r}
+library(tidyverse)
+library(here)
+
+
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+```
+
+
+<!--Create a function that loads a particular dataset -->
+```{r create-a-function-that-loads-a-particular-dataset}
+make_read_weather_file <- function(filename) {
+  # Avoid odd effects due to lazy evaluation
+  force(filename)
+
+  # This function (closure) accesses the filename from the
+  # outer function
+  function() {
+    read_weather_file(filename)
+  }
+}
+
+read_berlin <- make_read_weather_file("berlin.xlsx")
+read_toronto <- make_read_weather_file("toronto.xlsx")
+read_tel_aviv <- make_read_weather_file("tel_aviv.xlsx")
+read_zurich <- make_read_weather_file("zurich.xlsx")
+
+read_berlin
+read_berlin()
+```
+
+
+<!--Use case: adverbs -- wrappers for other verbs -->
+```{r use-case-adverbs-wrappers-for-other-verbs}
+loudly <- function(f) {
+  force(f)
+
+  function(...) {
+    args <- list(...)
+    msg <- paste0(length(args), " argument(s)")
+    message(msg)
+
+    f(...)
+  }
+}
+
+read_loudly <- loudly(read_weather_file)
+read_loudly
+read_loudly("berlin.xlsx")```

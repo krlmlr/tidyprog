@@ -1,0 +1,130 @@
+<!--Setup 31-function.R -->
+```{r setup-31-function-r}
+library(tidyverse)
+library(here)
+```
+
+
+<!--Important! Please reset the R session before running this script. -->
+```{r important-please-reset-the-r-session-before-running-this-script}
+```
+
+
+<!--(In RStudio: Session/Restart R) -->
+```{r in-r-studio-session-restart-r}
+```
+
+
+<!--Declare a function to hide implementation details -->
+```{r declare-a-function-to-hide-implementation-details}
+read_weather_data <- function() {
+  # Read all files
+  berlin <- readxl::read_excel(here("data/weather", "berlin.xlsx"))
+  toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+  tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+  zurich <- readxl::read_excel(here("data/weather", "zurich.xlsx"))
+
+  # Create ensemble dataset
+  weather_data <- bind_rows(
+    berlin = berlin,
+    toronto = toronto,
+    tel_aviv = tel_aviv,
+    zurich = zurich,
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+```
+
+
+<!--Functions are first-class objects -->
+```{r functions-are-first-class-objects}
+read_weather_data
+```
+
+
+<!--Execute like functions exported from packages -->
+```{r execute-like-functions-exported-from-packages}
+read_weather_data()
+```
+
+
+<!--Variables are local, execution doesn't change global variables. -->
+```{r variables-are-local-execution-doesn-t-change-global-variables}
+```
+
+
+<!--(The effect is only seen when starting R in a fresh session.) -->
+```{r the-effect-is-only-seen-when-starting-r-in-a-fresh-session}
+ls()
+```
+
+
+<!--Assign result to use in further operations -->
+```{r assign-result-to-use-in-further-operations}
+weather_data <- read_weather_data()
+```
+
+
+<!--Functions can have arguments -->
+```{r functions-can-have-arguments}
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+```
+
+
+<!--Functions can be called by other functions -->
+```{r functions-can-be-called-by-other-functions}
+read_weather_data <- function() {
+  # Read all files
+  berlin <- readxl::read_excel(weather_path("berlin.xlsx"))
+  toronto <- readxl::read_excel(weather_path("toronto.xlsx"))
+  tel_aviv <- readxl::read_excel(weather_path("tel_aviv.xlsx"))
+  zurich <- readxl::read_excel(weather_path("zurich.xlsx"))
+
+  # Create ensemble dataset
+  weather_data <- bind_rows(
+    berlin = berlin,
+    toronto = toronto,
+    tel_aviv = tel_aviv,
+    zurich = zurich,
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+```
+
+
+<!--Still need to run a function -->
+```{r still-need-to-run-a-function}
+read_weather_data()
+```
+
+
+<!--Functions can help eliminate intermediate variables -->
+```{r functions-can-help-eliminate-intermediate-variables}
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+
+read_weather_data <- function() {
+  # Create ensemble dataset from files on disk
+  weather_data <- bind_rows(
+    berlin = read_weather_file("berlin.xlsx"),
+    toronto = read_weather_file("toronto.xlsx"),
+    tel_aviv = read_weather_file("tel_aviv.xlsx"),
+    zurich = read_weather_file("zurich.xlsx"),
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+
+read_weather_data()```
