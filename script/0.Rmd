@@ -1,0 +1,17 @@
+```{r child = here("script", "01-intro.Rmd")}
+```
+
+```{r child = here("script", "02-dir.Rmd")}
+```
+
+```{r child = here("script", "03-names.Rmd")}
+```
+
+```{r child = here("script", "04-map.Rmd")}
+```
+
+```{r child = here("script", "05-map-manip.Rmd")}
+```
+
+```{r child = here("script", "06-map2.Rmd")}
+```

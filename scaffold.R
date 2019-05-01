@@ -1,8 +1,6 @@
 library(tidyverse)
 library(here)
 
-path <- dir("../tidyprog-proj/script", full.names = TRUE)[[1]]
-
 process_file <- function(path) {
   rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
 
@@ -26,3 +24,14 @@ process_file <- function(path) {
 files <- dir("../tidyprog-proj/script", full.names = TRUE)
 
 walk(files, process_file)
+
+tibble(files) %>%
+  mutate(basename = basename(files)) %>%
+  mutate(group = substr(basename, 1, 1)) %>%
+  mutate(rmd_path_code = paste0('here("script", "', basename, 'md")')) %>%
+  mutate(chunk = paste0('```{r child = ', rmd_path_code, '}\n```')) %>%
+  nest(-group) %>%
+  mutate(chunks = map_chr(data, ~ glue::glue_collapse(.$chunk, sep = "\n\n"))) %>%
+  mutate(file = paste0("script/", group, ".Rmd")) %>%
+  select(text = chunks, con = file) %>%
+  pwalk(writeLines)
