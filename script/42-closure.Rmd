@@ -1,3 +1,5 @@
+## <No caption defined>
+
 <!-- Setup 42-closure.R -->
 ```{r 42-setup-42-closure-r}
 library(tidyverse)

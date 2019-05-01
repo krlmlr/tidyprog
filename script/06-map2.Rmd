@@ -1,3 +1,5 @@
+## Manipulating pairwise
+
 <!-- Setup 06-map2.R -->
 ```{r 06-setup-06-map-2-r}
 library(tidyverse)

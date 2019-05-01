@@ -5,8 +5,22 @@ process_file <- function(path) {
   rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
 
   file_id <- gsub("^([^-]+)-.*$", "\\1", basename(path))
-  lines <- c(paste0("# Setup ", basename(path)), readLines(path))
+  lines <- readLines(path)
+
+  if (grepl("^### ", lines[[1]])) {
+    caption <- gsub("^### ", "", lines[[1]])
+    lines <- lines[-1:-2]
+  } else {
+    caption <- "<No caption defined>"
+  }
+
+  caption <- paste0("## ", caption)
+
+  lines <- c(paste0("# Setup ", basename(path)), lines)
+
   comment <- grepl("^#", lines)
+
+
   tibble(lines, comment) %>%
     mutate(id = cumsum(comment)) %>%
     select(-comment) %>%
@@ -20,6 +34,7 @@ process_file <- function(path) {
     mutate(chunk = paste0("<!-- ",  comment, " -->\n", "```{r ", chunk_name, "}\n", code, "\n```")) %>%
     pull() %>%
     glue::glue_collapse(sep = "\n\n\n") %>%
+    c(caption, "", .) %>%
     writeLines(rmd_path)
 }
 

@@ -1,3 +1,5 @@
+## Named vectors and two-column tibbles
+
 <!-- Setup 03-names.R -->
 ```{r 03-setup-03-names-r}
 library(tidyverse)

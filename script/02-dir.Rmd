@@ -1,3 +1,5 @@
+## Vectors and columns
+
 <!-- Setup 02-dir.R -->
 ```{r 02-setup-02-dir-r}
 library(tidyverse)

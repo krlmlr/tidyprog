@@ -1,3 +1,5 @@
+## <No caption defined>
+
 <!-- Setup 32-function-details.R -->
 ```{r 32-setup-32-function-details-r}
 library(tidyverse)
