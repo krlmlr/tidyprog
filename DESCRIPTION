@@ -15,4 +15,12 @@ URL: https://github.com/krlmlr/tidyprog,
 BugReports: https://github.com/krlmlr/tidyprog/issues
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    conflicted,
+    darksky,
+    here,
+    leaflet,
+    plotly,
+    shiny,
+    tidyverse
 Roxygen: list(markdown = TRUE)
