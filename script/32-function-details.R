@@ -3,6 +3,10 @@
 library(tidyverse)
 library(here)
 
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+
 
 # Function arguments can have default values
 read_weather_data <- function(omit_zurich = FALSE) {
@@ -18,10 +22,6 @@ read_weather_data <- function(omit_zurich = FALSE) {
   # Return it (filtered)
   weather_data %>%
     filter( !(city_code == "zurich" & omit_zurich) )
-}
-
-read_weather_file <- function(filename) {
-  readxl::read_excel(weather_path(filename))
 }
 
 # Function arguments can be called by name or by position,
