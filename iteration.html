@@ -130,7 +130,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>2</b> Iteration</a><ul>
-<li class="chapter" data-level="2.1" data-path="iteration.html"><a href="iteration.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>2.1</b> Review of visualization and data transformation</a></li>
+<li class="chapter" data-level="2.1" data-path="iteration.html"><a href="iteration.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>2.1</b> Review of visualization and data transformation</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="iteration.html"><a href="iteration.html#loading-necessary-libraries"><i class="fa fa-check"></i><b>2.1.1</b> Loading necessary libraries</a></li>
+<li class="chapter" data-level="2.1.2" data-path="iteration.html"><a href="iteration.html#short-description-of-and-reading-in-the-data"><i class="fa fa-check"></i><b>2.1.2</b> Short description of and reading in the data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="iteration.html"><a href="iteration.html#exploring-the-data-visualisations"><i class="fa fa-check"></i><b>2.1.3</b> Exploring the data, visualisations</a></li>
+<li class="chapter" data-level="2.1.4" data-path="iteration.html"><a href="iteration.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>2.1.4</b> Further possibilities of using {dplyr} to transform data</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="iteration.html"><a href="iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
 <li class="chapter" data-level="2.3" data-path="iteration.html"><a href="iteration.html#named-vectors-and-two-column-tibbles"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
 <li class="chapter" data-level="2.4" data-path="iteration.html"><a href="iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.4</b> Processing all files</a></li>
@@ -165,6 +170,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <div id="review-of-visualization-and-data-transformation" class="section level2">
 <h2><span class="header-section-number">2.1</span> Review of visualization and data transformation</h2>
+<div id="loading-necessary-libraries" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Loading necessary libraries</h3>
 <!-- Setup 01-intro.R -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 <pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
@@ -184,14 +191,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(here)</code></pre>
-<p>We will be working with hourly measurements of weather data in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm (Link to the data source documentation: <a href="https://darksky.net/dev/docs" class="uri">https://darksky.net/dev/docs</a>).
-Thus we have 49 observations to deal with in each city.
-The available variables are: <code>time</code>, <code>summary</code> (how to describe the weather in one word), <code>icon</code> (mix of description of weather plus time of day), <code>precipIntensity</code> (intensity of precipitation), <code>precipProbability</code>, <code>temperature</code>, <code>apparentTemperature</code>, <code>dewPoint</code>, <code>humidity</code>, <code>pressure</code>, <code>windSpeed</code>, <code>windGust</code>, <code>windBearing</code>, <code>cloudCover</code>, <code>uvIndex</code>, <code>visibility</code>, <code>ozone</code>, <code>precipType</code></p>
+</div>
+<div id="short-description-of-and-reading-in-the-data" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Short description of and reading in the data</h3>
+<p>We will be working with hourly measurements of weather data (<a href="https://darksky.net/dev/docs">link to data documentation</a>) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
+Thus we have 49 observations in each city.
+The available variables are: <code>time</code>, <code>summary</code> (how to describe the weather in one word), <code>icon</code> (mix of description of weather plus time of day), <code>precipIntensity</code> (intensity of precipitation [mm/h]), <code>precipProbability</code>, <code>temperature</code>, <code>apparentTemperature</code>, <code>dewPoint</code>, <code>humidity</code>, <code>pressure</code>, <code>windSpeed</code>, <code>windGust</code>, <code>windBearing</code> (direction in degrees), <code>cloudCover</code>, <code>uvIndex</code>, <code>visibility</code>, <code>ozone</code>, <code>precipType</code></p>
+<p>Reading in the data, which is stored in MS Excel-Files:</p>
 <!-- Read all files -->
 <pre class="sourceCode r"><code class="sourceCode r">berlin &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;berlin.xlsx&quot;</span>))
 toronto &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;toronto.xlsx&quot;</span>))
 tel_aviv &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;tel_aviv.xlsx&quot;</span>))
 zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;zurich.xlsx&quot;</span>))</code></pre>
+<p>Create one larger tibble from the four smaller ones:</p>
 <!-- Create ensemble dataset -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
   <span class="dt">berlin =</span> berlin,
@@ -200,6 +212,9 @@ zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class
   <span class="dt">zurich =</span> zurich,
   <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
 )</code></pre>
+</div>
+<div id="exploring-the-data-visualisations" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Exploring the data, visualisations</h3>
 <!-- Show the data -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data</code></pre>
 <pre><code>## # A tibble: 196 x 19
@@ -220,11 +235,13 @@ zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class
 ## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
 ## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
 ## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<p>Example plot of humidity vs. pressure (<code>geom_path()</code> ensures that points are connected according to their order in the tibble):</p>
 <!-- Visibility vs. humitidy -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> pressure, <span class="dt">y =</span> humidity, <span class="dt">color =</span> city_code)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_path</span>()</code></pre>
 <p><img src="tidyprog_files/figure-html/01-visibility-vs-humitidy-1.png" width="672" /></p>
+<p>Barplots of number of occurences of <code>summary</code> for each city:</p>
 <!-- Summary -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> city_code)) <span class="op">+</span>
@@ -234,6 +251,7 @@ zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> city_code)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> summary), <span class="dt">position =</span> <span class="kw">position_dodge2</span>(<span class="st">&quot;dodge&quot;</span>, <span class="dt">preserve =</span> <span class="st">&quot;single&quot;</span>))</code></pre>
 <p><img src="tidyprog_files/figure-html/01-summary-2.png" width="672" /></p>
+<p>Lineplot with different line types and an additional visualisation of the line range (here, difference between apparent and actual temperature):</p>
 <!-- Temperature and apparent temperature -->
 <pre class="sourceCode r"><code class="sourceCode r">temperature_data &lt;-
 <span class="st">  </span>weather_data <span class="op">%&gt;%</span>
@@ -247,6 +265,7 @@ temperature_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_linerange</span>(<span class="dt">data =</span> weather_data, <span class="kw">aes</span>(<span class="dt">ymin =</span> temperature, <span class="dt">ymax =</span> apparentTemperature)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> apparent, <span class="dt">y =</span> temperature))</code></pre>
 <p><img src="tidyprog_files/figure-html/01-temperature-and-apparent-temperature-1.png" width="672" /></p>
+<p>Relation of temperature difference between actual and apparent temperature (cf. line range in last plot) with wind speed, shown as scatter plot.</p>
 <!-- Compute and plot temperature difference -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">apparentTemperatureReduction =</span> temperature <span class="op">-</span><span class="st"> </span>apparentTemperature) <span class="op">%&gt;%</span>
@@ -254,6 +273,10 @@ temperature_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> windSpeed, <span class="dt">y =</span> apparentTemperatureReduction)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> city_code))</code></pre>
 <p><img src="tidyprog_files/figure-html/01-compute-and-plot-temperature-difference-1.png" width="672" /></p>
+</div>
+<div id="further-possibilities-of-using-dplyr-to-transform-data" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Further possibilities of using {dplyr} to transform data</h3>
+<p>If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:</p>
 <!-- Compute lag for temperature, pressure and humidity -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
@@ -279,6 +302,7 @@ temperature_data <span class="op">%&gt;%</span>
 ## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;, temperature_lag &lt;dbl&gt;,
 ## #   pressure_lag &lt;dbl&gt;, humidity_lag &lt;dbl&gt;</code></pre>
 <!-- How to compute temperature difference to previous hour? -->
+<p>Count observations and combinations of specific observations:</p>
 <!-- Count observations -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
@@ -309,6 +333,7 @@ temperature_data <span class="op">%&gt;%</span>
 ## 13 zurich    Mostly Cloudy    30
 ## 14 zurich    Overcast         14
 ## 15 zurich    Partly Cloudy     5</code></pre>
+<p>Use <code>summarize()</code> to create tibble with mean and maximum temperature for each city:</p>
 <!-- Compute mean and max temperature -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
@@ -321,6 +346,7 @@ temperature_data <span class="op">%&gt;%</span>
 ## 2 tel_aviv             22.6            28.8 
 ## 3 toronto               6.39            9.99
 ## 4 zurich                7.15           14.3</code></pre>
+<p>Compute and display summary data for all numeric variables:</p>
 <!-- Compute and display summary data for all numeric variables -->
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
@@ -388,6 +414,7 @@ temperature_data <span class="op">%&gt;%</span>
 ##           windBearing              357.00000000  147.61224490   20.00000000  102.66182679
 ##           windGust                   4.76000000    1.98428571    1.07000000    0.95327506
 ##           windSpeed                  4.76000000    1.31244898    0.13000000    0.91823774</code></pre>
+</div>
 </div>
 <div id="vectors-and-columns" class="section level2">
 <h2><span class="header-section-number">2.2</span> Vectors and columns</h2>
@@ -899,7 +926,7 @@ dict</code></pre>
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x266ad98&gt;</code></pre>
+## &lt;environment: 0x1c73cf0&gt;</code></pre>
 <!-- Test the function -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <pre><code>## # A tibble: 1 x 3
@@ -1090,10 +1117,10 @@ dict</code></pre>
 <!-- Write back results: new file names -->
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpusXLrO/berlin2b9d3a323f23.csv&quot;  
-## [2] &quot;/tmp/RtmpusXLrO/toronto2b9d1509a928.csv&quot; 
-## [3] &quot;/tmp/RtmpusXLrO/tel_aviv2b9d24451ee1.csv&quot;
-## [4] &quot;/tmp/RtmpusXLrO/zurich2b9d177283eb.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpKno1wo/berlin2b943202df34.csv&quot;  
+## [2] &quot;/tmp/RtmpKno1wo/toronto2b9429c625e1.csv&quot; 
+## [3] &quot;/tmp/RtmpKno1wo/tel_aviv2b945670009a.csv&quot;
+## [4] &quot;/tmp/RtmpKno1wo/zurich2b947afa53f4.csv&quot;</code></pre>
 <!-- Iterate over pairs -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <pre><code>## $berlin
