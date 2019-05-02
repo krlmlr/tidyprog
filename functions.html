@@ -142,7 +142,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="iteration.html"><a href="iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.5</b> Manipulating all datasets</a></li>
 <li class="chapter" data-level="2.6" data-path="iteration.html"><a href="iteration.html#manipulating-pairwise"><i class="fa fa-check"></i><b>2.6</b> Manipulating pairwise</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a></li>
+<li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="functions.html"><a href="functions.html#basics"><i class="fa fa-check"></i><b>3.1</b> Basics</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="functions.html"><a href="functions.html#loading-necessary-libraries-1"><i class="fa fa-check"></i><b>3.1.1</b> Loading necessary libraries</a></li>
+<li class="chapter" data-level="3.1.2" data-path="functions.html"><a href="functions.html#designing-functions"><i class="fa fa-check"></i><b>3.1.2</b> Designing functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="functions.html"><a href="functions.html#arguments"><i class="fa fa-check"></i><b>3.2</b> Arguments</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="functions.html"><a href="functions.html#further-options-when-creating-functions"><i class="fa fa-check"></i><b>3.2.1</b> Further options when creating functions</a></li>
+<li class="chapter" data-level="3.2.2" data-path="functions.html"><a href="functions.html#exercise"><i class="fa fa-check"></i><b>3.2.2</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="functions.html"><a href="functions.html#scope"><i class="fa fa-check"></i><b>3.3</b> Scope</a></li>
+<li class="chapter" data-level="3.4" data-path="functions.html"><a href="functions.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>3.4</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="3.5" data-path="functions.html"><a href="functions.html#control-flow"><i class="fa fa-check"></i><b>3.5</b> Control flow</a></li>
+<li class="chapter" data-level="3.6" data-path="functions.html"><a href="functions.html#closures"><i class="fa fa-check"></i><b>3.6</b> Closures</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>4</b> Non-rectangular data</a></li>
 <li class="chapter" data-level="5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>5</b> Tidy evaluation</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
@@ -168,7 +181,655 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Structuring the code to avoid too much copy-pasting</p>
 </blockquote>
+<div id="basics" class="section level2">
+<h2><span class="header-section-number">3.1</span> Basics</h2>
+<div id="loading-necessary-libraries-1" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Loading necessary libraries</h3>
+<!-- Setup 31-function.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- Important! Please reset the R session before running this script. -->
+<!-- (In RStudio: Session/Restart R) -->
+</div>
+<div id="designing-functions" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Designing functions</h3>
+<p>Create functions for tasks that need to be executed frequently.</p>
+<!-- Declare a function to hide implementation details -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  <span class="co"># Read all files</span>
+  berlin &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;berlin.xlsx&quot;</span>))
+  toronto &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;toronto.xlsx&quot;</span>))
+  tel_aviv &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;tel_aviv.xlsx&quot;</span>))
+  zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;zurich.xlsx&quot;</span>))
 
+  <span class="co"># Create ensemble dataset</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> berlin,
+    <span class="dt">toronto =</span> toronto,
+    <span class="dt">tel_aviv =</span> tel_aviv,
+    <span class="dt">zurich =</span> zurich,
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Return it</span>
+  weather_data
+}</code></pre>
+<p>Display the code of any function by writing its name without the subsequent brackets:</p>
+<!-- Functions are first-class objects -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data</code></pre>
+<pre><code>## function() {
+##   # Read all files
+##   berlin &lt;- readxl::read_excel(here(&quot;data/weather&quot;, &quot;berlin.xlsx&quot;))
+##   toronto &lt;- readxl::read_excel(here(&quot;data/weather&quot;, &quot;toronto.xlsx&quot;))
+##   tel_aviv &lt;- readxl::read_excel(here(&quot;data/weather&quot;, &quot;tel_aviv.xlsx&quot;))
+##   zurich &lt;- readxl::read_excel(here(&quot;data/weather&quot;, &quot;zurich.xlsx&quot;))
+## 
+##   # Create ensemble dataset
+##   weather_data &lt;- bind_rows(
+##     berlin = berlin,
+##     toronto = toronto,
+##     tel_aviv = tel_aviv,
+##     zurich = zurich,
+##     .id = &quot;city_code&quot;
+##   )
+## 
+##   # Return it
+##   weather_data
+## }
+## &lt;environment: 0x20adcf0&gt;</code></pre>
+<p>Execute the function by adding the brackets:</p>
+<!-- Execute like functions exported from packages -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<!-- Variables are local, execution doesn't change global variables. -->
+<p>List <code>R</code>-objects in an environment:</p>
+<!-- (The effect is only seen when starting R in a fresh session.) -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<pre><code>##  [1] &quot;berlin&quot;            &quot;dict&quot;              &quot;files&quot;            
+##  [4] &quot;files_df&quot;          &quot;files_df_1&quot;        &quot;input_data&quot;       
+##  [7] &quot;input_files&quot;       &quot;manipulated_data&quot;  &quot;manipulator&quot;      
+## [10] &quot;output_filenames&quot;  &quot;read_weather_data&quot; &quot;tel_aviv&quot;         
+## [13] &quot;temperature_data&quot;  &quot;toronto&quot;           &quot;weather_data&quot;     
+## [16] &quot;zurich&quot;</code></pre>
+<p>Assign function values to a variable:</p>
+<!-- Assign result to use in further operations -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data &lt;-<span class="st"> </span><span class="kw">read_weather_data</span>()</code></pre>
+<p>Functions with arguments:</p>
+<!-- Functions can have arguments -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Returned value</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
+}</code></pre>
+<p>Call functions from within functions:</p>
+<!-- Functions can be called by other functions -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  <span class="co"># Read all files</span>
+  berlin &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(<span class="st">&quot;berlin.xlsx&quot;</span>))
+  toronto &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(<span class="st">&quot;toronto.xlsx&quot;</span>))
+  tel_aviv &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>))
+  zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(<span class="st">&quot;zurich.xlsx&quot;</span>))
+
+  <span class="co"># Create ensemble dataset</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> berlin,
+    <span class="dt">toronto =</span> toronto,
+    <span class="dt">tel_aviv =</span> tel_aviv,
+    <span class="dt">zurich =</span> zurich,
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Return it</span>
+  weather_data
+}</code></pre>
+<!-- Still need to run a function -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<p>Functions can help to avoid using intermediate variables:</p>
+<!-- Functions can help eliminate intermediate variables -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}
+
+read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Return it</span>
+  weather_data
+}
+
+<span class="kw">read_weather_data</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div id="arguments" class="section level2">
+<h2><span class="header-section-number">3.2</span> Arguments</h2>
+<!-- Setup 32-function-details.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Returned value</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
+}
+read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}</code></pre>
+<div id="further-options-when-creating-functions" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Further options when creating functions</h3>
+<p>Provide default values for parameters:</p>
+<!-- Function arguments can have default values -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Return it (filtered)</span>
+  weather_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>( <span class="op">!</span>(city_code <span class="op">==</span><span class="st"> &quot;zurich&quot;</span> <span class="op">&amp;</span><span class="st"> </span>omit_zurich) )
+}</code></pre>
+<!-- Function arguments can be called by name or by position, -->
+<p>Set arguments with default values explicitly with or without using the name or leave them out to use the default value:</p>
+<!-- optional arguments are omitted -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="ot">TRUE</span>)</code></pre>
+<pre><code>## # A tibble: 147 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 137 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## # A tibble: 147 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 137 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<p>Multiple function arguments:</p>
+<!-- Multiple function arguments are separated by comma: -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Return it (filtered)</span>
+  weather_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>( <span class="op">!</span>(city_code <span class="op">==</span><span class="st"> &quot;zurich&quot;</span> <span class="op">&amp;</span><span class="st"> </span>omit_zurich) ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>( <span class="op">!</span>(city_code <span class="op">==</span><span class="st"> &quot;toronto&quot;</span> <span class="op">&amp;</span><span class="st"> </span>omit_toronto) )
+}</code></pre>
+<p>Ellipsis (<code>...</code>) for list of arguments of unspecified length. Useful for passing arguments downstream:</p>
+<!-- Ellipsis: variable argument list, useful for passing arguments downstream -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
+  <span class="co"># All arguments are passed on</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, ...)
+}
+
+<span class="kw">weather_path</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">weather_path</span>(<span class="st">&quot;some&quot;</span>, <span class="st">&quot;subdir&quot;</span>, <span class="st">&quot;with&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;file.csv&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/some/subdir/with/a/file.csv&quot;</code></pre>
+<!-- Note: despite many changes and new features, -->
+<!-- the original call still works! -->
+<p>Mind, that despite altering the original function and adding new features to it, the original call still works as before:</p>
+<!-- (This can be tested automatically!) -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 19
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<p>The ellipsis can be used to enfore the user to name the function parameters when setting them:</p>
+<!-- The ellipsis is useful to enforce naming of arguments -->
+<pre class="sourceCode r"><code class="sourceCode r">enforce_names &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) {
+  <span class="kw">list</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b)
+}
+
+<span class="kw">enforce_names</span>(<span class="dv">3</span>, <span class="dv">4</span>)</code></pre>
+<pre><code>## $a
+## [1] 1
+## 
+## $b
+## [1] 2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">enforce_names</span>(<span class="dt">a =</span> <span class="dv">3</span>, <span class="dv">4</span>)</code></pre>
+<pre><code>## $a
+## [1] 3
+## 
+## $b
+## [1] 2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">enforce_names</span>(<span class="dt">a =</span> <span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">4</span>)</code></pre>
+<pre><code>## $a
+## [1] 3
+## 
+## $b
+## [1] 4</code></pre>
+<p>Inside a function with an ellipsis as a parameter, you can capture the ellipsis with <code>list()</code>:</p>
+<!-- Arguments in ellipsis can be captured via list() -->
+<pre class="sourceCode r"><code class="sourceCode r">ellipsis_test &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
+  args &lt;-<span class="st"> </span><span class="kw">list</span>(...)
+  <span class="kw">names</span>(args)
+}
+
+<span class="kw">ellipsis_test</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dt">c =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">5</span>)</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;&quot;  &quot;c&quot;</code></pre>
+<!-- ## Exercise: call matching -->
+</div>
+<div id="exercise" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Exercise</h3>
+<p>Naming, not naming or partly naming parameters in functions calls? What does the following return and why?</p>
+<!-- ## What does the following return? Why? -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="ot">TRUE</span>, <span class="dt">omit_z =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 zurich       49</code></pre>
+<!-- ## How do you avoid this behavior? -->
+</div>
+</div>
+<div id="scope" class="section level2">
+<h2><span class="header-section-number">3.3</span> Scope</h2>
+<p>When working with functions, it is important to be aware of the scope of objects, i.e. what is known in which context?</p>
+<!-- Setup 33-function-scoping.R -->
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+<p><code>a</code> is now an object of the global environemnt. A function can access global variables:</p>
+<!-- A function can access global variables: -->
+<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a
+}
+
+<span class="kw">f</span>()</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>On the other hand, a variable which is defined inside a function, will not be known outside of that function. Respectively, it won’t overwrite the value of global variables.</p>
+<!-- When a function writes to a variable, it always writes in scope -->
+<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a &lt;-<span class="st"> </span><span class="dv">2</span>
+  a
+}
+
+<span class="kw">f</span>()</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">a</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Global variables are a (hidden) part of a function’s interface.</p>
+<!-- Global variables are a (hidden) part of a function's interface! -->
+<p>Best practice: functions should be self-contained, independent of global variables.</p>
+<!-- Best practice: self-contained functions, independent of global variables -->
+</div>
+<div id="pure-functions-and-side-effects" class="section level2">
+<h2><span class="header-section-number">3.4</span> Pure functions and side effects</h2>
+<!-- Setup 34-function-purity.R -->
+<!-- Functions should do one thing, and do it well. -->
+<!-- Pure function: called for its return value, no side effects! -->
+<pre class="sourceCode r"><code class="sourceCode r">pure_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}
+
+<span class="kw">pure_function</span>(<span class="dv">1</span>)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<!-- Function with side effect: called for its side effect, returns input -->
+<!-- invisibly (=no changes to return value). -->
+<pre class="sourceCode r"><code class="sourceCode r">side_effect_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  file &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+  <span class="kw">writeLines</span>(<span class="kw">format</span>(x), <span class="kw">tempfile</span>())
+  <span class="kw">print</span>(x)
+  <span class="kw">message</span>(x, <span class="st">&quot; written to &quot;</span>, file)
+  <span class="kw">invisible</span>(x)
+}
+
+<span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre><code>## 2 written to /tmp/RtmpiOlDR9/file2b9047b5cffd</code></pre>
+<!-- Separation helps isolate the side effects. -->
+<!-- If side effect functions return the, they remain composable with -->
+<!-- pure functions. -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pure_function</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre><code>## 6 written to /tmp/RtmpiOlDR9/file2b90766332ef</code></pre>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="control-flow" class="section level2">
+<h2><span class="header-section-number">3.5</span> Control flow</h2>
+<!-- Setup 41-function-if.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- if () executes code conditionally -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Filter, conditionally</span>
+  <span class="cf">if</span> (omit_zurich) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  }
+
+  <span class="cf">if</span> (omit_toronto) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+
+  <span class="co"># Return result</span>
+  weather_data
+}
+
+<span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>, <span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49</code></pre>
+<!-- Useful with an early return() -->
+<!-- && and ||: shortcut operators for scalar logical -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Can keep original data?</span>
+  <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    <span class="kw">return</span>(weather_data)
+  }
+
+  <span class="co"># Filter, conditionally</span>
+  <span class="cf">if</span> (omit_zurich) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  }
+
+  <span class="cf">if</span> (omit_toronto) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+
+  <span class="co"># Return result</span>
+  weather_data
+}</code></pre>
+<!-- else if/else: branching -->
+<!-- (Just for illustration, do not implement code like this!) -->
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Filter, conditionally, and return</span>
+  <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    weather_data
+  } <span class="cf">else</span> <span class="cf">if</span> (omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  } <span class="cf">else</span> <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span>omit_toronto) {
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  } <span class="cf">else</span> {
+    <span class="co"># Filter both</span>
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+}
+
+<span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 zurich       49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 toronto      49</code></pre>
+</div>
+<div id="closures" class="section level2">
+<h2><span class="header-section-number">3.6</span> Closures</h2>
+<!-- Setup 42-closure.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+
+read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}</code></pre>
+<!-- Create a function that loads a particular dataset -->
+<pre class="sourceCode r"><code class="sourceCode r">make_read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Avoid odd effects due to lazy evaluation</span>
+  <span class="kw">force</span>(filename)
+
+  <span class="co"># This function (closure) accesses the filename from the</span>
+  <span class="co"># outer function</span>
+  <span class="cf">function</span>() {
+    <span class="kw">read_weather_file</span>(filename)
+  }
+}
+
+read_berlin &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)
+read_toronto &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>)
+read_tel_aviv &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>)
+read_zurich &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>)
+
+read_berlin</code></pre>
+<pre><code>## function() {
+##     read_weather_file(filename)
+##   }
+## &lt;environment: 0x7a606e8&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
+<pre><code>## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;</code></pre>
+<!-- Use case: adverbs -- wrappers for other verbs -->
+<pre class="sourceCode r"><code class="sourceCode r">loudly &lt;-<span class="st"> </span><span class="cf">function</span>(f) {
+  <span class="kw">force</span>(f)
+
+  <span class="cf">function</span>(...) {
+    args &lt;-<span class="st"> </span><span class="kw">list</span>(...)
+    msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">length</span>(args), <span class="st">&quot; argument(s)&quot;</span>)
+    <span class="kw">message</span>(msg)
+
+    <span class="kw">f</span>(...)
+  }
+}
+
+read_loudly &lt;-<span class="st"> </span><span class="kw">loudly</span>(read_weather_file)
+read_loudly</code></pre>
+<pre><code>## function(...) {
+##     args &lt;- list(...)
+##     msg &lt;- paste0(length(args), &quot; argument(s)&quot;)
+##     message(msg)
+## 
+##     f(...)
+##   }
+## &lt;environment: 0x9a03bc0&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
+<pre><code>## 1 argument(s)</code></pre>
+<pre><code>## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;</code></pre>
+
+</div>
 </div>
             </section>
 
