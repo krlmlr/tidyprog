@@ -34,7 +34,7 @@ process_file <- function(path) {
     mutate(chunk = paste0("<!-- ",  comment, " -->\n", "```{r ", chunk_name, "}\n", code, "\n```")) %>%
     pull() %>%
     glue::glue_collapse(sep = "\n\n\n") %>%
-    c(caption, "", .) %>%
+    c(paste0("```{r ", file_id, "-remove-all, include = FALSE}\nrm(list = ls())\n```\n\n"), caption, "", .) %>%
     writeLines(rmd_path)
 }
 
