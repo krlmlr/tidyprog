@@ -1,3 +1,8 @@
+```{r 10-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## <No caption defined>
 
 <!-- Setup 10-mutate-map.R -->

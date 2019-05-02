@@ -1,3 +1,8 @@
+```{r 34-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## Pure functions and side effects
 
 <!-- Setup 34-function-purity.R -->

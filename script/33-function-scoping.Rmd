@@ -1,3 +1,8 @@
+```{r 33-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## Scope
 
 When working with functions, it is important to be aware of the scope of objects, i.e. what is known in which context?

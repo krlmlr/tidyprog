@@ -1,3 +1,8 @@
+```{r 01-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## Review of visualization and data transformation
 
 ### Loading necessary libraries
@@ -66,7 +71,6 @@ weather_data %>%
   geom_bar(aes(fill = summary), position = position_dodge2("dodge", preserve = "single"))
 ```
 
-Lineplot with different line types and an additional visualisation of the line range (here, difference between apparent and actual temperature):
 
 <!-- Temperature and apparent temperature -->
 ```{r 01-temperature-and-apparent-temperature}
@@ -83,7 +87,6 @@ temperature_data %>%
   geom_line(aes(linetype = apparent, y = temperature))
 ```
 
-Relation of temperature difference between actual and apparent temperature (cf. line range in last plot) with wind speed, shown as scatter plot.
 
 <!-- Compute and plot temperature difference -->
 ```{r 01-compute-and-plot-temperature-difference}
@@ -94,9 +97,6 @@ weather_data %>%
   geom_point(aes(color = city_code))
 ```
 
-### Further possibilities of using {dplyr} to transform data
-
-If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:
 
 <!-- Compute lag for temperature, pressure and humidity -->
 ```{r 01-compute-lag-for-temperature-pressure-and-humidity}
@@ -112,7 +112,6 @@ weather_data %>%
 
 ```
 
-Count observations and combinations of specific observations:
 
 <!-- Count observations -->
 ```{r 01-count-observations}
@@ -123,7 +122,6 @@ weather_data %>%
   count(city_code, summary)
 ```
 
-Use `summarize()` to create tibble with mean and maximum temperature for each city:
 
 <!-- Compute mean and max temperature -->
 ```{r 01-compute-mean-and-max-temperature}
@@ -133,7 +131,6 @@ weather_data %>%
   ungroup()
 ```
 
-Compute and display summary data for all numeric variables:
 
 <!-- Compute and display summary data for all numeric variables -->
 ```{r 01-compute-and-display-summary-data-for-all-numeric-variables}

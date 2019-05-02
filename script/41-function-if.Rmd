@@ -1,3 +1,8 @@
+```{r 41-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## Control flow
 
 <!-- Setup 41-function-if.R -->

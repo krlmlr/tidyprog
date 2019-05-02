@@ -1,3 +1,8 @@
+```{r 42-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## Closures
 
 <!-- Setup 42-closure.R -->

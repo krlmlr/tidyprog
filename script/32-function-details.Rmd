@@ -1,3 +1,7 @@
+```{r 32-remove-all, include = FALSE}
+rm(list = ls())
+```
+
 ## Arguments
 
 <!-- Setup 32-function-details.R -->

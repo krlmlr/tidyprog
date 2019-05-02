@@ -1,3 +1,8 @@
+```{r 06-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
 ## Manipulating pairwise
 
 <!-- Setup 06-map2.R -->
