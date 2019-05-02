@@ -1,3 +1,5 @@
+### Scope
+
 a <- 5
 
 # A function can access global variables:
