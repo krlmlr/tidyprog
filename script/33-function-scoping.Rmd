@@ -1,10 +1,13 @@
 ## Scope
 
+When working with functions, it is important to be aware of the scope of objects, i.e. what is known in which context?
+
 <!-- Setup 33-function-scoping.R -->
 ```{r 33-setup-33-function-scoping-r}
 a <- 5
 ```
 
+`a` is now an object of the global environemnt. A function can access global variables:
 
 <!-- A function can access global variables: -->
 ```{r 33-a-function-can-access-global-variables}
@@ -15,6 +18,7 @@ f <- function() {
 f()
 ```
 
+On the other hand, a variable which is defined inside a function, will not be known outside of that function. Respectively, it won't overwrite the value of global variables.
 
 <!-- When a function writes to a variable, it always writes in scope -->
 ```{r 33-when-a-function-writes-to-a-variable-it-always-writes-in-scope}
@@ -28,11 +32,14 @@ a
 ```
 
 
+Global variables are a (hidden) part of a function's interface.
+
 <!-- Global variables are a (hidden) part of a function's interface! -->
 ```{r 33-global-variables-are-a-hidden-part-of-a-function-s-interface}
 
 ```
 
+Best practice: functions should be self-contained, independent of global variables.
 
 <!-- Best practice: self-contained functions, independent of global variables -->
 ```{r 33-best-practice-self-contained-functions-independent-of-global-variables}
