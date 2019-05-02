@@ -4,8 +4,19 @@
 ```{r 32-setup-32-function-details-r}
 library(tidyverse)
 library(here)
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
 ```
 
+
+### Further options when creating functions
+
+Provide default values for parameters:
 
 <!-- Function arguments can have default values -->
 ```{r 32-function-arguments-can-have-default-values}
@@ -26,11 +37,13 @@ read_weather_data <- function(omit_zurich = FALSE) {
 ```
 
 
+
 <!-- Function arguments can be called by name or by position, -->
 ```{r 32-function-arguments-can-be-called-by-name-or-by-position}
 
 ```
 
+Set arguments with default values explicitly with or without using the name or leave them out to use the default value:
 
 <!-- optional arguments are omitted -->
 ```{r 32-optional-arguments-are-omitted}
@@ -39,6 +52,7 @@ read_weather_data(omit_zurich = TRUE)
 read_weather_data()
 ```
 
+Multiple function arguments:
 
 <!-- Multiple function arguments are separated by comma: -->
 ```{r 32-multiple-function-arguments-are-separated-by-comma}
@@ -59,6 +73,7 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 }
 ```
 
+Ellipsis (`...`) for list of arguments of unspecified length. Useful for passing arguments downstream:
 
 <!-- Ellipsis: variable argument list, useful for passing arguments downstream -->
 ```{r 32-ellipsis-variable-argument-list-useful-for-passing-arguments-downstream}
@@ -84,12 +99,14 @@ weather_path("some", "subdir", "with", "a", "file.csv")
 
 ```
 
+Mind, that despite altering the original function and adding new features to it, the original call still works as before:
 
 <!-- (This can be tested automatically!) -->
 ```{r 32-this-can-be-tested-automatically}
 read_weather_data()
 ```
 
+The ellipsis can be used to enfore the user to name the function parameters when setting them:
 
 <!-- The ellipsis is useful to enforce naming of arguments -->
 ```{r 32-the-ellipsis-is-useful-to-enforce-naming-of-arguments}
@@ -102,6 +119,7 @@ enforce_names(a = 3, 4)
 enforce_names(a = 3, b = 4)
 ```
 
+Inside a function with an ellipsis as a parameter, you can capture the ellipsis with `list()`:
 
 <!-- Arguments in ellipsis can be captured via list() -->
 ```{r 32-arguments-in-ellipsis-can-be-captured-via-list}
@@ -119,6 +137,9 @@ ellipsis_test(a = 1, 2, c = 3:5)
 
 ```
 
+### Exercise
+
+Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
 
 <!-- ## What does the following return? Why? -->
 ```{r 32-what-does-the-following-return-why}
