@@ -1,3 +1,5 @@
+### Pure functions and side effects
+
 # Functions should do one thing, and do it well.
 
 # Pure function: called for its return value, no side effects!
