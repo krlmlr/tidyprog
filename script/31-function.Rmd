@@ -1,11 +1,12 @@
 ## Basics
 
+### Loading necessary libraries
+
 <!-- Setup 31-function.R -->
 ```{r 31-setup-31-function-r}
 library(tidyverse)
 library(here)
 ```
-
 
 <!-- Important! Please reset the R session before running this script. -->
 ```{r 31-important-please-reset-the-r-session-before-running-this-script}
@@ -18,6 +19,9 @@ library(here)
 
 ```
 
+### Designing functions
+
+Create functions for tasks that need to be executed frequently.
 
 <!-- Declare a function to hide implementation details -->
 ```{r 31-declare-a-function-to-hide-implementation-details}
@@ -42,12 +46,14 @@ read_weather_data <- function() {
 }
 ```
 
+Display the code of any function by writing its name without the subsequent brackets:
 
 <!-- Functions are first-class objects -->
 ```{r 31-functions-are-first-class-objects}
 read_weather_data
 ```
 
+Execute the function by adding the brackets:
 
 <!-- Execute like functions exported from packages -->
 ```{r 31-execute-like-functions-exported-from-packages}
@@ -60,18 +66,21 @@ read_weather_data()
 
 ```
 
+List `R`-objects in an environment:
 
 <!-- (The effect is only seen when starting R in a fresh session.) -->
 ```{r 31-the-effect-is-only-seen-when-starting-r-in-a-fresh-session}
 ls()
 ```
 
+Assign function values to a variable:
 
 <!-- Assign result to use in further operations -->
 ```{r 31-assign-result-to-use-in-further-operations}
 weather_data <- read_weather_data()
 ```
 
+Functions with arguments:
 
 <!-- Functions can have arguments -->
 ```{r 31-functions-can-have-arguments}
@@ -81,6 +90,7 @@ weather_path <- function(filename) {
 }
 ```
 
+Call functions from within functions:
 
 <!-- Functions can be called by other functions -->
 ```{r 31-functions-can-be-called-by-other-functions}
@@ -111,6 +121,7 @@ read_weather_data <- function() {
 read_weather_data()
 ```
 
+Functions can help to avoid using intermediate variables:
 
 <!-- Functions can help eliminate intermediate variables -->
 ```{r 31-functions-can-help-eliminate-intermediate-variables}
