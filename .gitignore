@@ -1,3 +1,5 @@
 .Rproj.user
 _book/
 *_files/
+script/*.html
+.~lock.*.xlsx#
