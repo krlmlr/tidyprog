@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x2cf3cf0&gt;</code></pre>
+## &lt;environment: 0x324bcf0&gt;</code></pre>
 <p>Execute the function by adding the brackets:</p>
 <!-- Execute like functions exported from packages -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
@@ -572,6 +572,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 <div id="pure-functions-and-side-effects" class="section level2">
 <h2><span class="header-section-number">3.4</span> Pure functions and side effects</h2>
 <!-- Setup 34-function-purity.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 <p>Functions should do one thing, and do it well.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <!-- Functions should do one thing, and do it well. -->
 <p>Pure function: called for its return value, no side effects:</p>
@@ -595,9 +596,9 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmplwsSxi/file2b5d2187e29</code></pre>
+<pre><code>## 2 written to /tmp/RtmpmVHFXX/file2b931ccd5e57</code></pre>
 <!-- Separation helps isolate the side effects. -->
-<!-- If side effect functions return the, they remain composable with -->
+<!-- If side effect functions return the input, they remain composable with -->
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <!-- pure functions. -->
@@ -606,7 +607,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmplwsSxi/file2b5d577fa958</code></pre>
+<pre><code>## 6 written to /tmp/RtmpmVHFXX/file2b93747f7d73</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -776,7 +777,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8b9be88&gt;</code></pre>
+## &lt;environment: 0x92dda70&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -819,7 +820,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0xb79f718&gt;</code></pre>
+## &lt;environment: 0x987d8b0&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18
