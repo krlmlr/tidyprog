@@ -4,6 +4,7 @@
 ```{r 32-setup-32-function-details-r}
 library(tidyverse)
 library(here)
+
 weather_path <- function(filename) {
   # Returned value
   here("data/weather", filename)
@@ -35,7 +36,6 @@ read_weather_data <- function(omit_zurich = FALSE) {
     filter( !(city_code == "zurich" & omit_zurich) )
 }
 ```
-
 
 
 <!-- Function arguments can be called by name or by position, -->
