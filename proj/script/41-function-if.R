@@ -3,6 +3,13 @@
 library(tidyverse)
 library(here)
 
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
 
 # if () executes code conditionally
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
