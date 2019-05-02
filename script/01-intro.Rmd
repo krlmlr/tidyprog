@@ -1,10 +1,14 @@
 ## Review of visualization and data transformation
 
+### Loading necessary libraries
+
 <!-- Setup 01-intro.R -->
 ```{r 01-setup-01-intro-r}
 library(tidyverse)
 library(here)
 ```
+
+### Short description and reading in of data
 
 We will be working with hourly measurements of weather data ([link to data documentation](https://darksky.net/dev/docs)) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
 Thus we have 49 observations in each city.
@@ -20,7 +24,7 @@ tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
 zurich <- readxl::read_excel(here("data/weather", "zurich.xlsx"))
 ```
 
-
+Create one larger tibble from the four smaller ones:
 
 <!-- Create ensemble dataset -->
 ```{r 01-create-ensemble-dataset}
@@ -33,12 +37,14 @@ weather_data <- bind_rows(
 )
 ```
 
+### Exploring the data, visualisations
 
 <!-- Show the data -->
 ```{r 01-show-the-data}
 weather_data
 ```
 
+Example plot of humidity vs. pressure (`geom_path` ensures that points are connected according to their order in the tibble):
 
 <!-- Visibility vs. humitidy -->
 ```{r 01-visibility-vs-humitidy}
@@ -47,6 +53,7 @@ weather_data %>%
   geom_path()
 ```
 
+Barplots of number of occurences of `summary` for each city:
 
 <!-- Summary -->
 ```{r 01-summary}
@@ -59,6 +66,7 @@ weather_data %>%
   geom_bar(aes(fill = summary), position = position_dodge2("dodge", preserve = "single"))
 ```
 
+Lineplot with different line types and an additional visualisation of the line range (here, difference between apparent and actual temperature):
 
 <!-- Temperature and apparent temperature -->
 ```{r 01-temperature-and-apparent-temperature}
@@ -75,6 +83,7 @@ temperature_data %>%
   geom_line(aes(linetype = apparent, y = temperature))
 ```
 
+Relation of temperature difference between actual and apparent temperature (cf. line range in last plot) with wind speed, shown as scatter plot.
 
 <!-- Compute and plot temperature difference -->
 ```{r 01-compute-and-plot-temperature-difference}
@@ -84,6 +93,7 @@ weather_data %>%
   ggplot(aes(x = windSpeed, y = apparentTemperatureReduction)) +
   geom_point(aes(color = city_code))
 ```
+
 
 
 <!-- Compute lag for temperature, pressure and humidity -->
