@@ -24,7 +24,7 @@ side_effect_function <- function(x) {
 side_effect_function(2)
 
 # Separation helps isolate the side effects.
-# If side effect functions return the, they remain composable with
+# If side effect functions return the input, they remain composable with
 # pure functions.
 5 %>%
   pure_function() %>%
