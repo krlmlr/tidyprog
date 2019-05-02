@@ -5,6 +5,8 @@ rm(list = ls())
 
 ## Control flow
 
+
+
 <!-- Setup 41-function-if.R -->
 ```{r 41-setup-41-function-if-r}
 library(tidyverse)
@@ -19,6 +21,7 @@ read_weather_file <- function(filename) {
 }
 ```
 
+A way to regulate the control flow is by using `if ()`:
 
 <!-- if () executes code conditionally -->
 ```{r 41-if-executes-code-conditionally}
@@ -59,6 +62,7 @@ read_weather_data(omit_toronto = TRUE, omit_zurich = TRUE) %>%
 
 ```
 
+This can be useful if aiming at a possible early return:
 
 <!-- && and ||: shortcut operators for scalar logical -->
 ```{r 41-and-shortcut-operators-for-scalar-logical}
@@ -101,6 +105,8 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 
 ```
 
+Conditional branching with if-else-logic. 
+(This is just for illustration, you should not implement code like this!)
 
 <!-- (Just for illustration, do not implement code like this!) -->
 ```{r 41-just-for-illustration-do-not-implement-code-like-this}
