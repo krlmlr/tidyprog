@@ -1,3 +1,14 @@
 # Functions
 
 > Structuring the code to avoid too much copy-pasting
+
+```{r 03-setup, include = FALSE}
+library(here)
+```
+
+
+```{r child = here("script", "3.Rmd")}
+```
+
+```{r child = here("script", "4.Rmd")}
+```
