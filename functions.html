@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x26aecf0&gt;</code></pre>
+## &lt;environment: 0x2cf3cf0&gt;</code></pre>
 <p>Execute the function by adding the brackets:</p>
 <!-- Execute like functions exported from packages -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
@@ -595,16 +595,18 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmp1Y6GeN/file2ae847c0d4e1</code></pre>
+<pre><code>## 2 written to /tmp/RtmplwsSxi/file2b5d2187e29</code></pre>
 <!-- Separation helps isolate the side effects. -->
 <!-- If side effect functions return the, they remain composable with -->
+<p>Separation helps isolate the side effects.
+If side effect functions return the input, they remain composable with pure functions:</p>
 <!-- pure functions. -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmp1Y6GeN/file2ae85ab74dc2</code></pre>
+<pre><code>## 6 written to /tmp/RtmplwsSxi/file2b5d577fa958</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -620,6 +622,7 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
+<p>A way to regulate the control flow is by using <code>if ()</code>:</p>
 <!-- if () executes code conditionally -->
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -656,6 +659,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 ## 1 berlin       49
 ## 2 tel_aviv     49</code></pre>
 <!-- Useful with an early return() -->
+<p>This can be useful if aiming at a possible early return:</p>
 <!-- && and ||: shortcut operators for scalar logical -->
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -689,6 +693,8 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
   weather_data
 }</code></pre>
 <!-- else if/else: branching -->
+<p>Conditional branching with if-else-logic.
+(This is just for illustration, you should not implement code like this!)</p>
 <!-- (Just for illustration, do not implement code like this!) -->
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -747,6 +753,8 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
+<p>Closures can e.g. be used for the creation of functions.
+Here we create a function that loads a particular dataset:</p>
 <!-- Create a function that loads a particular dataset -->
 <pre class="sourceCode r"><code class="sourceCode r">make_read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   <span class="co"># Avoid odd effects due to lazy evaluation</span>
@@ -768,7 +776,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8544ec8&gt;</code></pre>
+## &lt;environment: 0x8b9be88&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -788,6 +796,7 @@ read_berlin</code></pre>
 ## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
 ## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
 ## #   precipType &lt;chr&gt;</code></pre>
+<p>Use closures as wrappers for other verbs/functions (such functions are also called “adverbs”):</p>
 <!-- Use case: adverbs -- wrappers for other verbs -->
 <pre class="sourceCode r"><code class="sourceCode r">loudly &lt;-<span class="st"> </span><span class="cf">function</span>(f) {
   <span class="kw">force</span>(f)
@@ -810,7 +819,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x7d2f698&gt;</code></pre>
+## &lt;environment: 0xb79f718&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18
