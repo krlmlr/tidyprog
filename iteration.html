@@ -49,6 +49,71 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 </head>
 
@@ -64,7 +129,14 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>2</b> Iteration</a></li>
+<li class="chapter" data-level="2" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>2</b> Iteration</a><ul>
+<li class="chapter" data-level="2.1" data-path="iteration.html"><a href="iteration.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>2.1</b> Review of visualization and data transformation</a></li>
+<li class="chapter" data-level="2.2" data-path="iteration.html"><a href="iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
+<li class="chapter" data-level="2.3" data-path="iteration.html"><a href="iteration.html#named-vectors-and-two-column-tibbles"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
+<li class="chapter" data-level="2.4" data-path="iteration.html"><a href="iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.4</b> Processing all files</a></li>
+<li class="chapter" data-level="2.5" data-path="iteration.html"><a href="iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.5</b> Manipulating all datasets</a></li>
+<li class="chapter" data-level="2.6" data-path="iteration.html"><a href="iteration.html#manipulating-pairwise"><i class="fa fa-check"></i><b>2.6</b> Manipulating pairwise</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a></li>
 <li class="chapter" data-level="4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>4</b> Non-rectangular data</a></li>
 <li class="chapter" data-level="5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>5</b> Tidy evaluation</a></li>
@@ -91,7 +163,967 @@
 <blockquote>
 <p>Processing multiple files that contain different parts of the same dataset</p>
 </blockquote>
+<div id="review-of-visualization-and-data-transformation" class="section level2">
+<h2><span class="header-section-number">2.1</span> Review of visualization and data transformation</h2>
+<!-- Setup 01-intro.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;rvest&#39;:
+##   method            from
+##   read_xml.response xml2</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+## ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+## ✔ tidyr   0.8.3       ✔ stringr 1.4.0  
+## ✔ readr   1.3.1       ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(here)</code></pre>
+<!-- Read all files -->
+<pre class="sourceCode r"><code class="sourceCode r">berlin &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;berlin.xlsx&quot;</span>))
+toronto &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;toronto.xlsx&quot;</span>))
+tel_aviv &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;tel_aviv.xlsx&quot;</span>))
+zurich &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;zurich.xlsx&quot;</span>))</code></pre>
+<!-- Create ensemble dataset -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+  <span class="dt">berlin =</span> berlin,
+  <span class="dt">toronto =</span> toronto,
+  <span class="dt">tel_aviv =</span> tel_aviv,
+  <span class="dt">zurich =</span> zurich,
+  <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+)</code></pre>
+<!-- Visibility vs. humitidy -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> pressure, <span class="dt">y =</span> humidity, <span class="dt">color =</span> city_code)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_path</span>()</code></pre>
+<p><img src="tidyprog_files/figure-html/01-visibility-vs-humitidy-1.png" width="672" /></p>
+<!-- Summary -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> city_code)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> summary))</code></pre>
+<p><img src="tidyprog_files/figure-html/01-summary-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> city_code)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> summary), <span class="dt">position =</span> <span class="kw">position_dodge2</span>(<span class="st">&quot;dodge&quot;</span>, <span class="dt">preserve =</span> <span class="st">&quot;single&quot;</span>))</code></pre>
+<p><img src="tidyprog_files/figure-html/01-summary-2.png" width="672" /></p>
+<!-- Temperature and apparent temperature -->
+<pre class="sourceCode r"><code class="sourceCode r">temperature_data &lt;-
+<span class="st">  </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, time, temperature, apparentTemperature) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(kind, temperature, <span class="op">-</span>city_code, <span class="op">-</span>time) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">apparent =</span> (kind <span class="op">==</span><span class="st"> &quot;apparentTemperature&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>kind)
 
+temperature_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">color =</span> city_code)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_linerange</span>(<span class="dt">data =</span> weather_data, <span class="kw">aes</span>(<span class="dt">ymin =</span> temperature, <span class="dt">ymax =</span> apparentTemperature)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> apparent, <span class="dt">y =</span> temperature))</code></pre>
+<p><img src="tidyprog_files/figure-html/01-temperature-and-apparent-temperature-1.png" width="672" /></p>
+<!-- Compute and plot temperature difference -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">apparentTemperatureReduction =</span> temperature <span class="op">-</span><span class="st"> </span>apparentTemperature) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;tel_aviv&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> windSpeed, <span class="dt">y =</span> apparentTemperatureReduction)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> city_code))</code></pre>
+<p><img src="tidyprog_files/figure-html/01-compute-and-plot-temperature-difference-1.png" width="672" /></p>
+<!-- Compute lag for temperature, pressure and humidity -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(temperature, pressure, humidity), <span class="kw">list</span>(<span class="dt">lag =</span> lag)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 22
+##    city_code time                summary icon  precipIntensity
+##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
+##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
+##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
+##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
+##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
+##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
+##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
+##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
+##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
+## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
+## # … with 186 more rows, and 17 more variables: precipProbability &lt;dbl&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;, temperature_lag &lt;dbl&gt;,
+## #   pressure_lag &lt;dbl&gt;, humidity_lag &lt;dbl&gt;</code></pre>
+<!-- How to compute temperature difference to previous hour? -->
+<!-- Count observations -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 toronto      49
+## 4 zurich       49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code, summary)</code></pre>
+<pre><code>## # A tibble: 15 x 3
+##    city_code summary           n
+##    &lt;chr&gt;     &lt;chr&gt;         &lt;int&gt;
+##  1 berlin    Clear            17
+##  2 berlin    Mostly Cloudy    11
+##  3 berlin    Overcast         18
+##  4 berlin    Partly Cloudy     3
+##  5 tel_aviv  Clear            34
+##  6 tel_aviv  Mostly Cloudy     5
+##  7 tel_aviv  Partly Cloudy    10
+##  8 toronto   Clear            18
+##  9 toronto   Light Rain        1
+## 10 toronto   Mostly Cloudy     5
+## 11 toronto   Overcast         21
+## 12 toronto   Partly Cloudy     4
+## 13 zurich    Mostly Cloudy    30
+## 14 zurich    Overcast         14
+## 15 zurich    Partly Cloudy     5</code></pre>
+<!-- Compute mean and max temperature -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">temperature_mean =</span> <span class="kw">mean</span>(temperature), <span class="dt">temperature_max =</span> <span class="kw">max</span>(temperature)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   city_code temperature_mean temperature_max
+##   &lt;chr&gt;                &lt;dbl&gt;           &lt;dbl&gt;
+## 1 berlin               12.5            20.0 
+## 2 tel_aviv             22.6            28.8 
+## 3 toronto               6.39            9.99
+## 4 zurich                7.15           14.3</code></pre>
+<!-- Compute and display summary data for all numeric variables -->
+<pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize_if</span>(is.numeric, <span class="kw">list</span>(<span class="dt">mean =</span> mean, <span class="dt">sd =</span> sd, <span class="dt">min =</span> min, <span class="dt">max =</span> max)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(key, value, <span class="op">-</span>city_code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(key, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;indicator&quot;</span>, <span class="st">&quot;fun&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xtabs</span>(value <span class="op">~</span><span class="st"> </span>city_code <span class="op">+</span><span class="st"> </span>indicator <span class="op">+</span><span class="st"> </span>fun, .) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ftable</span>()</code></pre>
+<pre><code>##                               fun           max          mean           min            sd
+## city_code indicator                                                                      
+## berlin    apparentTemperature       19.98000000   11.62836735    3.45000000    5.07360997
+##           cloudCover                 1.00000000    0.59734694    0.00000000    0.42339292
+##           dewPoint                  10.18000000    5.23632653    1.88000000    2.45837742
+##           humidity                   0.88000000    0.63448980    0.35000000    0.15571156
+##           ozone                    378.04000000  343.34571429  319.68000000   21.60874350
+##           precipIntensity            0.34800000    0.03084286    0.00000000    0.07902264
+##           precipProbability          0.54000000    0.06000000    0.00000000    0.13913423
+##           pressure                1020.48000000 1018.71714286 1016.10000000    1.19202733
+##           temperature               19.98000000   12.49795918    6.14000000    4.10004115
+##           uvIndex                    5.00000000    1.24489796    0.00000000    1.61413821
+##           visibility                16.09000000   15.77102041   10.01000000    1.13380672
+##           windBearing              358.00000000  151.59183673    4.00000000  152.79205891
+##           windGust                  11.14000000    7.59591837    3.67000000    2.18713275
+##           windSpeed                  5.89000000    4.49326531    3.51000000    0.81341458
+## tel_aviv  apparentTemperature       28.77000000   22.64591837   17.15000000    3.15235885
+##           cloudCover                 0.81000000    0.19693878    0.00000000    0.24908335
+##           dewPoint                  14.43000000   12.18244898    9.51000000    1.29219376
+##           humidity                   0.74000000    0.52612245    0.34000000    0.09347050
+##           ozone                    339.37000000  318.31836735  307.16000000   10.05895835
+##           precipIntensity            0.00000000    0.00000000    0.00000000    0.00000000
+##           precipProbability          0.00000000    0.00000000    0.00000000    0.00000000
+##           pressure                1015.88000000 1013.66265306 1011.73000000    1.12583076
+##           temperature               28.77000000   22.64591837   17.15000000    3.15235885
+##           uvIndex                   10.00000000    2.40816327    0.00000000    3.56439784
+##           visibility                16.09000000   15.87163265   10.01000000    1.07987528
+##           windBearing              355.00000000  188.36734694    0.00000000  123.84965581
+##           windGust                   5.53000000    3.47775510    1.66000000    1.19411101
+##           windSpeed                  4.90000000    2.49285714    0.57000000    1.04899754
+## toronto   apparentTemperature        7.88000000    3.27306122    0.49000000    2.24842464
+##           cloudCover                 1.00000000    0.59510204    0.00000000    0.43183293
+##           dewPoint                   3.05000000   -1.26653061   -5.17000000    2.69193359
+##           humidity                   0.82000000    0.59734694    0.37000000    0.14628419
+##           ozone                    401.89000000  362.02632653  327.57000000   23.42483179
+##           precipIntensity            0.84070000    0.08387551    0.00000000    0.16627247
+##           precipProbability          0.51000000    0.06653061    0.00000000    0.11739447
+##           pressure                1030.07000000 1025.14918367 1019.55000000    3.22083053
+##           temperature                9.99000000    6.38795918    3.03000000    2.02387621
+##           uvIndex                    6.00000000    1.40816327    0.00000000    1.84750245
+##           visibility                16.09000000   15.14673469    5.13000000    2.83815256
+##           windBearing              357.00000000  140.32653061    2.00000000  129.30831820
+##           windGust                  11.51000000    7.51020408    2.66000000    2.33711939
+##           windSpeed                  7.64000000    4.87510204    1.91000000    1.62389080
+## zurich    apparentTemperature       14.30000000    6.88551020    2.01000000    3.14469133
+##           cloudCover                 1.00000000    0.80877551    0.37000000    0.15734295
+##           dewPoint                   7.23000000    3.38367347   -0.27000000    1.90397030
+##           humidity                   0.88000000    0.77551020    0.59000000    0.08304269
+##           ozone                    377.57000000  359.81510204  340.69000000   11.33226737
+##           precipIntensity            0.26670000    0.07106939    0.00000000    0.05976032
+##           precipProbability          0.29000000    0.13326531    0.00000000    0.07816616
+##           pressure                1023.55000000 1021.37612245 1017.40000000    1.62120174
+##           temperature               14.30000000    7.14510204    2.01000000    3.07049475
+##           uvIndex                    4.00000000    1.10204082    0.00000000    1.44690615
+##           visibility                16.09000000   12.90938776    3.89000000    4.47872769
+##           windBearing              357.00000000  147.61224490   20.00000000  102.66182679
+##           windGust                   4.76000000    1.98428571    1.07000000    0.95327506
+##           windSpeed                  4.76000000    1.31244898    0.13000000    0.91823774</code></pre>
+</div>
+<div id="vectors-and-columns" class="section level2">
+<h2><span class="header-section-number">2.2</span> Vectors and columns</h2>
+<!-- Setup 02-dir.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- Show all files -->
+<pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>), <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+files</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<!-- see also fs::dir_ls() -->
+<!-- Convert to tibble -->
+<pre class="sourceCode r"><code class="sourceCode r">files_df &lt;-
+<span class="st">  </span>files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>()
+
+files_df</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##    name value                                                        
+##   &lt;int&gt; &lt;chr&gt;                                                        
+## 1     1 /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## 2     2 /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## 3     3 /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## 4     4 /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx</code></pre>
+<!-- Remove the name column -->
+<pre class="sourceCode r"><code class="sourceCode r">files_df_<span class="dv">1</span> &lt;-
+<span class="st">  </span>files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>(<span class="dt">name =</span> <span class="ot">NULL</span>)
+
+files_df_<span class="dv">1</span></code></pre>
+<pre><code>## # A tibble: 4 x 1
+##   value                                                        
+##   &lt;chr&gt;                                                        
+## 1 /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## 2 /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## 3 /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## 4 /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx</code></pre>
+<!-- Construct tibble from a vector -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(<span class="dt">filename =</span> files)</code></pre>
+<pre><code>## # A tibble: 4 x 1
+##   filename                                                     
+##   &lt;chr&gt;                                                        
+## 1 /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## 2 /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## 3 /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## 4 /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx</code></pre>
+<!-- Extract a column as a vector -->
+<pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>()</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<!-- Extract a specific column as a vector -->
+<pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(name)</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+</div>
+<div id="named-vectors-and-two-column-tibbles" class="section level2">
+<h2><span class="header-section-number">2.3</span> Named vectors and two-column tibbles</h2>
+<!-- Setup 03-names.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- Load dictionary from file -->
+<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+dict</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   city_code weather_filename           name        lng   lat
+##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
+## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
+## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
+## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
+<!-- Acquire file names -->
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(weather_filename)</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;   &quot;data/weather/toronto.xlsx&quot; 
+## [3] &quot;data/weather/tel_aviv.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<!-- Use here() to create absolute paths -->
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">here</span>()</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<!-- Acquire file names as a named vector -->
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()</code></pre>
+<pre><code>##                       berlin                      toronto 
+##   &quot;data/weather/berlin.xlsx&quot;  &quot;data/weather/toronto.xlsx&quot; 
+##                     tel_aviv                       zurich 
+## &quot;data/weather/tel_aviv.xlsx&quot;   &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<!-- Not all operations maintain vector names! -->
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">here</span>()</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<!-- Move the here() call into "tibble-land" -->
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_filename_here =</span> <span class="kw">here</span>(weather_filename)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename_here) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()</code></pre>
+<pre><code>##                                                          berlin 
+##   &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot; 
+##                                                         toronto 
+##  &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+##                                                        tel_aviv 
+## &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot; 
+##                                                          zurich 
+##   &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+</div>
+<div id="processing-all-files" class="section level2">
+<h2><span class="header-section-number">2.4</span> Processing all files</h2>
+<!-- Setup 04-map.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- Load dictionary from file -->
+<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+dict</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   city_code weather_filename           name        lng   lat
+##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
+## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
+## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
+## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
+<!-- Collect input files as a named vector -->
+<pre class="sourceCode r"><code class="sourceCode r">input_files &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()
+input_files</code></pre>
+<pre><code>##                       berlin                      toronto 
+##   &quot;data/weather/berlin.xlsx&quot;  &quot;data/weather/toronto.xlsx&quot; 
+##                     tel_aviv                       zurich 
+## &quot;data/weather/tel_aviv.xlsx&quot;   &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(input_files)</code></pre>
+<pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<!-- Access individual input files -->
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="dv">1</span>]</code></pre>
+<pre><code>##                     berlin 
+## &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="st">&quot;berlin&quot;</span>]]</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<!-- Read a single input file -->
+<pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">1</span>]]))</code></pre>
+<pre><code>## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;</code></pre>
+<!-- Read all input files -->
+<pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
+<span class="st">  </span><span class="kw">map</span>(input_files, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
+input_data</code></pre>
+<pre><code>## $berlin
+## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;
+## 
+## $toronto
+## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Partly… part…          0                  0   
+##  2 2019-04-28 16:00:00 Clear   clea…          0                  0   
+##  3 2019-04-28 17:00:00 Clear   clea…          0                  0   
+##  4 2019-04-28 18:00:00 Clear   clea…          0.0508             0.04
+##  5 2019-04-28 19:00:00 Clear   clea…          0.0483             0.03
+##  6 2019-04-28 20:00:00 Clear   clea…          0.0203             0.02
+##  7 2019-04-28 21:00:00 Clear   clea…          0.0102             0.02
+##  8 2019-04-28 22:00:00 Clear   clea…          0                  0   
+##  9 2019-04-28 23:00:00 Clear   clea…          0.0356             0.02
+## 10 2019-04-29 00:00:00 Partly… part…          0.0381             0.02
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 17
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Partly… part…               0                0
+##  2 2019-04-28 16:00:00 Clear   clea…               0                0
+##  3 2019-04-28 17:00:00 Clear   clea…               0                0
+##  4 2019-04-28 18:00:00 Clear   clea…               0                0
+##  5 2019-04-28 19:00:00 Clear   clea…               0                0
+##  6 2019-04-28 20:00:00 Clear   clea…               0                0
+##  7 2019-04-28 21:00:00 Clear   clea…               0                0
+##  8 2019-04-28 22:00:00 Clear   clea…               0                0
+##  9 2019-04-28 23:00:00 Clear   clea…               0                0
+## 10 2019-04-29 00:00:00 Clear   clea…               0                0
+## # … with 39 more rows, and 12 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;
+## 
+## $zurich
+## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…          0.267              0.28
+##  2 2019-04-28 16:00:00 Mostly… part…          0.198              0.27
+##  3 2019-04-28 17:00:00 Mostly… part…          0.137              0.25
+##  4 2019-04-28 18:00:00 Mostly… part…          0.0889             0.2 
+##  5 2019-04-28 19:00:00 Mostly… part…          0.0406             0.14
+##  6 2019-04-28 20:00:00 Partly… part…          0.0076             0.09
+##  7 2019-04-28 21:00:00 Partly… part…          0                  0   
+##  8 2019-04-28 22:00:00 Partly… part…          0                  0   
+##  9 2019-04-28 23:00:00 Partly… part…          0.0076             0.04
+## 10 2019-04-29 00:00:00 Mostly… part…          0.0127             0.05
+## # … with 39 more rows, and 13 more variables: precipType &lt;chr&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_data[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(input_data)</code></pre>
+<pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<!-- Pipe notation -->
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<pre><code>## $berlin
+## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;
+## 
+## $toronto
+## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Partly… part…          0                  0   
+##  2 2019-04-28 16:00:00 Clear   clea…          0                  0   
+##  3 2019-04-28 17:00:00 Clear   clea…          0                  0   
+##  4 2019-04-28 18:00:00 Clear   clea…          0.0508             0.04
+##  5 2019-04-28 19:00:00 Clear   clea…          0.0483             0.03
+##  6 2019-04-28 20:00:00 Clear   clea…          0.0203             0.02
+##  7 2019-04-28 21:00:00 Clear   clea…          0.0102             0.02
+##  8 2019-04-28 22:00:00 Clear   clea…          0                  0   
+##  9 2019-04-28 23:00:00 Clear   clea…          0.0356             0.02
+## 10 2019-04-29 00:00:00 Partly… part…          0.0381             0.02
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 17
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Partly… part…               0                0
+##  2 2019-04-28 16:00:00 Clear   clea…               0                0
+##  3 2019-04-28 17:00:00 Clear   clea…               0                0
+##  4 2019-04-28 18:00:00 Clear   clea…               0                0
+##  5 2019-04-28 19:00:00 Clear   clea…               0                0
+##  6 2019-04-28 20:00:00 Clear   clea…               0                0
+##  7 2019-04-28 21:00:00 Clear   clea…               0                0
+##  8 2019-04-28 22:00:00 Clear   clea…               0                0
+##  9 2019-04-28 23:00:00 Clear   clea…               0                0
+## 10 2019-04-29 00:00:00 Clear   clea…               0                0
+## # … with 39 more rows, and 12 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;
+## 
+## $zurich
+## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…          0.267              0.28
+##  2 2019-04-28 16:00:00 Mostly… part…          0.198              0.27
+##  3 2019-04-28 17:00:00 Mostly… part…          0.137              0.25
+##  4 2019-04-28 18:00:00 Mostly… part…          0.0889             0.2 
+##  5 2019-04-28 19:00:00 Mostly… part…          0.0406             0.14
+##  6 2019-04-28 20:00:00 Partly… part…          0.0076             0.09
+##  7 2019-04-28 21:00:00 Partly… part…          0                  0   
+##  8 2019-04-28 22:00:00 Partly… part…          0                  0   
+##  9 2019-04-28 23:00:00 Partly… part…          0.0076             0.04
+## 10 2019-04-29 00:00:00 Mostly… part…          0.0127             0.05
+## # … with 39 more rows, and 13 more variables: precipType &lt;chr&gt;,
+## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
+## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
+## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
+## #   ozone &lt;dbl&gt;</code></pre>
+</div>
+<div id="manipulating-all-datasets" class="section level2">
+<h2><span class="header-section-number">2.5</span> Manipulating all datasets</h2>
+<!-- Setup 05-map-manip.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- Load dictionary from file -->
+<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+dict</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   city_code weather_filename           name        lng   lat
+##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
+## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
+## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
+## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
+<!-- Collect input data -->
+<pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<!-- Manipulate results -->
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)))</code></pre>
+<pre><code>## $berlin
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00       13.4                13.4 
+##  2 2019-04-28 16:00:00       13.6                13.6 
+##  3 2019-04-28 17:00:00       14.1                14.1 
+##  4 2019-04-28 18:00:00       13.7                13.7 
+##  5 2019-04-28 19:00:00       12.6                12.6 
+##  6 2019-04-28 20:00:00       11.6                11.6 
+##  7 2019-04-28 21:00:00       10.7                10.7 
+##  8 2019-04-28 22:00:00       10.2                10.2 
+##  9 2019-04-28 23:00:00        9.78                7.73
+## 10 2019-04-29 00:00:00        9.48                7.31
+## # … with 39 more rows
+## 
+## $toronto
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00        7.46                3.96
+##  2 2019-04-28 16:00:00        8.17                5.04
+##  3 2019-04-28 17:00:00        8.82                6.52
+##  4 2019-04-28 18:00:00        9.37                7.57
+##  5 2019-04-28 19:00:00        9.79                7.88
+##  6 2019-04-28 20:00:00        9.99                7.79
+##  7 2019-04-28 21:00:00        9.74                7.32
+##  8 2019-04-28 22:00:00        9.14                6.57
+##  9 2019-04-28 23:00:00        8.17                5.46
+## 10 2019-04-29 00:00:00        7.23                4.42
+## # … with 39 more rows
+## 
+## $tel_aviv
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00        23.9                23.9
+##  2 2019-04-28 16:00:00        23.1                23.1
+##  3 2019-04-28 17:00:00        22.4                22.4
+##  4 2019-04-28 18:00:00        22.0                22.0
+##  5 2019-04-28 19:00:00        21.6                21.6
+##  6 2019-04-28 20:00:00        21.5                21.5
+##  7 2019-04-28 21:00:00        21.2                21.2
+##  8 2019-04-28 22:00:00        20.8                20.8
+##  9 2019-04-28 23:00:00        20.2                20.2
+## 10 2019-04-29 00:00:00        19.8                19.8
+## # … with 39 more rows
+## 
+## $zurich
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00        6.96                3.89
+##  2 2019-04-28 16:00:00        7.14                4.33
+##  3 2019-04-28 17:00:00        7.32                5.41
+##  4 2019-04-28 18:00:00        7.08                6.02
+##  5 2019-04-28 19:00:00        6.37                5.49
+##  6 2019-04-28 20:00:00        5.49                5.49
+##  7 2019-04-28 21:00:00        4.48                4.48
+##  8 2019-04-28 22:00:00        3.87                3.87
+##  9 2019-04-28 23:00:00        3.52                3.52
+## 10 2019-04-29 00:00:00        3.29                3.29
+## # … with 39 more rows</code></pre>
+<!-- Manipulate results more -->
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">filter</span>(., temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>))</code></pre>
+<pre><code>## $berlin
+## # A tibble: 16 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 17:00:00        14.1                14.1
+##  2 2019-04-29 12:00:00        15.6                15.6
+##  3 2019-04-29 13:00:00        17.4                17.4
+##  4 2019-04-29 14:00:00        19.0                19.0
+##  5 2019-04-29 15:00:00        20.0                20.0
+##  6 2019-04-29 16:00:00        19.8                19.8
+##  7 2019-04-29 17:00:00        18.6                18.6
+##  8 2019-04-29 18:00:00        16.7                16.7
+##  9 2019-04-29 19:00:00        14.8                14.8
+## 10 2019-04-30 09:00:00        14.9                14.9
+## 11 2019-04-30 10:00:00        16.5                16.5
+## 12 2019-04-30 11:00:00        18.0                18.0
+## 13 2019-04-30 12:00:00        18.8                18.8
+## 14 2019-04-30 13:00:00        19.0                19.0
+## 15 2019-04-30 14:00:00        18.7                18.7
+## 16 2019-04-30 15:00:00        18.3                18.3
+## 
+## $toronto
+## # A tibble: 0 x 3
+## # … with 3 variables: time &lt;dttm&gt;, temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00        23.9                23.9
+##  2 2019-04-28 16:00:00        23.1                23.1
+##  3 2019-04-28 17:00:00        22.4                22.4
+##  4 2019-04-28 18:00:00        22.0                22.0
+##  5 2019-04-28 19:00:00        21.6                21.6
+##  6 2019-04-28 20:00:00        21.5                21.5
+##  7 2019-04-28 21:00:00        21.2                21.2
+##  8 2019-04-28 22:00:00        20.8                20.8
+##  9 2019-04-28 23:00:00        20.2                20.2
+## 10 2019-04-29 00:00:00        19.8                19.8
+## # … with 39 more rows
+## 
+## $zurich
+## # A tibble: 1 x 3
+##   time                temperature apparentTemperature
+##   &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+## 1 2019-04-30 15:00:00        14.3                14.3</code></pre>
+<!-- Create a function to manipulate -->
+<pre class="sourceCode r"><code class="sourceCode r">manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
+}</code></pre>
+<!-- Functions are first-class objects! -->
+<pre class="sourceCode r"><code class="sourceCode r">manipulator</code></pre>
+<pre><code>## function(data) {
+##   data %&gt;%
+##     select(time, contains(&quot;emperature&quot;)) %&gt;%
+##     filter(temperature &gt;= 14)
+## }
+## &lt;environment: 0x2a4bd98&gt;</code></pre>
+<!-- Test the function -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   time                temperature apparentTemperature
+##   &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+## 1 2019-04-30 15:00:00        14.3                14.3</code></pre>
+<!-- Run the function on the entire dataset -->
+<pre class="sourceCode r"><code class="sourceCode r">manipulated_data &lt;-<span class="st"> </span><span class="kw">map</span>(input_data, <span class="op">~</span><span class="st"> </span><span class="kw">manipulator</span>(.))
+manipulated_data</code></pre>
+<pre><code>## $berlin
+## # A tibble: 16 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 17:00:00        14.1                14.1
+##  2 2019-04-29 12:00:00        15.6                15.6
+##  3 2019-04-29 13:00:00        17.4                17.4
+##  4 2019-04-29 14:00:00        19.0                19.0
+##  5 2019-04-29 15:00:00        20.0                20.0
+##  6 2019-04-29 16:00:00        19.8                19.8
+##  7 2019-04-29 17:00:00        18.6                18.6
+##  8 2019-04-29 18:00:00        16.7                16.7
+##  9 2019-04-29 19:00:00        14.8                14.8
+## 10 2019-04-30 09:00:00        14.9                14.9
+## 11 2019-04-30 10:00:00        16.5                16.5
+## 12 2019-04-30 11:00:00        18.0                18.0
+## 13 2019-04-30 12:00:00        18.8                18.8
+## 14 2019-04-30 13:00:00        19.0                19.0
+## 15 2019-04-30 14:00:00        18.7                18.7
+## 16 2019-04-30 15:00:00        18.3                18.3
+## 
+## $toronto
+## # A tibble: 0 x 3
+## # … with 3 variables: time &lt;dttm&gt;, temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00        23.9                23.9
+##  2 2019-04-28 16:00:00        23.1                23.1
+##  3 2019-04-28 17:00:00        22.4                22.4
+##  4 2019-04-28 18:00:00        22.0                22.0
+##  5 2019-04-28 19:00:00        21.6                21.6
+##  6 2019-04-28 20:00:00        21.5                21.5
+##  7 2019-04-28 21:00:00        21.2                21.2
+##  8 2019-04-28 22:00:00        20.8                20.8
+##  9 2019-04-28 23:00:00        20.2                20.2
+## 10 2019-04-29 00:00:00        19.8                19.8
+## # … with 39 more rows
+## 
+## $zurich
+## # A tibble: 1 x 3
+##   time                temperature apparentTemperature
+##   &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+## 1 2019-04-30 15:00:00        14.3                14.3</code></pre>
+<!-- Shortcut -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(input_data, manipulator)</code></pre>
+<pre><code>## $berlin
+## # A tibble: 16 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 17:00:00        14.1                14.1
+##  2 2019-04-29 12:00:00        15.6                15.6
+##  3 2019-04-29 13:00:00        17.4                17.4
+##  4 2019-04-29 14:00:00        19.0                19.0
+##  5 2019-04-29 15:00:00        20.0                20.0
+##  6 2019-04-29 16:00:00        19.8                19.8
+##  7 2019-04-29 17:00:00        18.6                18.6
+##  8 2019-04-29 18:00:00        16.7                16.7
+##  9 2019-04-29 19:00:00        14.8                14.8
+## 10 2019-04-30 09:00:00        14.9                14.9
+## 11 2019-04-30 10:00:00        16.5                16.5
+## 12 2019-04-30 11:00:00        18.0                18.0
+## 13 2019-04-30 12:00:00        18.8                18.8
+## 14 2019-04-30 13:00:00        19.0                19.0
+## 15 2019-04-30 14:00:00        18.7                18.7
+## 16 2019-04-30 15:00:00        18.3                18.3
+## 
+## $toronto
+## # A tibble: 0 x 3
+## # … with 3 variables: time &lt;dttm&gt;, temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 3
+##    time                temperature apparentTemperature
+##    &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28 15:00:00        23.9                23.9
+##  2 2019-04-28 16:00:00        23.1                23.1
+##  3 2019-04-28 17:00:00        22.4                22.4
+##  4 2019-04-28 18:00:00        22.0                22.0
+##  5 2019-04-28 19:00:00        21.6                21.6
+##  6 2019-04-28 20:00:00        21.5                21.5
+##  7 2019-04-28 21:00:00        21.2                21.2
+##  8 2019-04-28 22:00:00        20.8                20.8
+##  9 2019-04-28 23:00:00        20.2                20.2
+## 10 2019-04-29 00:00:00        19.8                19.8
+## # … with 39 more rows
+## 
+## $zurich
+## # A tibble: 1 x 3
+##   time                temperature apparentTemperature
+##   &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
+## 1 2019-04-30 15:00:00        14.3                14.3</code></pre>
+<!-- Write back results: new file names -->
+<pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(input_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)</code></pre>
+<!-- Iterate over pairs -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+<pre><code>## $berlin
+## # A tibble: 16 x 3
+##    time                 temperature apparentTemperature
+##    &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28T17:00:00Z        14.1                14.1
+##  2 2019-04-29T12:00:00Z        15.6                15.6
+##  3 2019-04-29T13:00:00Z        17.4                17.4
+##  4 2019-04-29T14:00:00Z        19.0                19.0
+##  5 2019-04-29T15:00:00Z        20.0                20.0
+##  6 2019-04-29T16:00:00Z        19.8                19.8
+##  7 2019-04-29T17:00:00Z        18.6                18.6
+##  8 2019-04-29T18:00:00Z        16.7                16.7
+##  9 2019-04-29T19:00:00Z        14.8                14.8
+## 10 2019-04-30T09:00:00Z        14.9                14.9
+## 11 2019-04-30T10:00:00Z        16.5                16.5
+## 12 2019-04-30T11:00:00Z        18.0                18.0
+## 13 2019-04-30T12:00:00Z        18.8                18.8
+## 14 2019-04-30T13:00:00Z        19.0                19.0
+## 15 2019-04-30T14:00:00Z        18.7                18.7
+## 16 2019-04-30T15:00:00Z        18.3                18.3
+## 
+## $toronto
+## # A tibble: 0 x 3
+## # … with 3 variables: time &lt;chr&gt;, temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 3
+##    time                 temperature apparentTemperature
+##    &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28T15:00:00Z        23.9                23.9
+##  2 2019-04-28T16:00:00Z        23.1                23.1
+##  3 2019-04-28T17:00:00Z        22.4                22.4
+##  4 2019-04-28T18:00:00Z        22.0                22.0
+##  5 2019-04-28T19:00:00Z        21.6                21.6
+##  6 2019-04-28T20:00:00Z        21.5                21.5
+##  7 2019-04-28T21:00:00Z        21.2                21.2
+##  8 2019-04-28T22:00:00Z        20.8                20.8
+##  9 2019-04-28T23:00:00Z        20.2                20.2
+## 10 2019-04-29T00:00:00Z        19.8                19.8
+## # … with 39 more rows
+## 
+## $zurich
+## # A tibble: 1 x 3
+##   time                 temperature apparentTemperature
+##   &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
+## 1 2019-04-30T15:00:00Z        14.3                14.3</code></pre>
+<!-- We don't really need the output -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+</div>
+<div id="manipulating-pairwise" class="section level2">
+<h2><span class="header-section-number">2.6</span> Manipulating pairwise</h2>
+<!-- Setup 06-map2.R -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+<!-- Load dictionary from file -->
+<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+dict</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   city_code weather_filename           name        lng   lat
+##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
+## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
+## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
+## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
+<!-- Create a function to manipulate -->
+<pre class="sourceCode r"><code class="sourceCode r">manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
+}</code></pre>
+<!-- Collect and manipulate input data -->
+<pre class="sourceCode r"><code class="sourceCode r">manipulated_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(manipulator)</code></pre>
+<!-- Write back results: new file names -->
+<pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
+output_filenames</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpaQwC0X/berlinb1e174b2641.csv&quot;  
+## [2] &quot;/tmp/RtmpaQwC0X/torontob1e57465586.csv&quot; 
+## [3] &quot;/tmp/RtmpaQwC0X/tel_avivb1e4ddfae32.csv&quot;
+## [4] &quot;/tmp/RtmpaQwC0X/zurichb1e7541d3ae.csv&quot;</code></pre>
+<!-- Iterate over pairs -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+<pre><code>## $berlin
+## # A tibble: 16 x 3
+##    time                 temperature apparentTemperature
+##    &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28T17:00:00Z        14.1                14.1
+##  2 2019-04-29T12:00:00Z        15.6                15.6
+##  3 2019-04-29T13:00:00Z        17.4                17.4
+##  4 2019-04-29T14:00:00Z        19.0                19.0
+##  5 2019-04-29T15:00:00Z        20.0                20.0
+##  6 2019-04-29T16:00:00Z        19.8                19.8
+##  7 2019-04-29T17:00:00Z        18.6                18.6
+##  8 2019-04-29T18:00:00Z        16.7                16.7
+##  9 2019-04-29T19:00:00Z        14.8                14.8
+## 10 2019-04-30T09:00:00Z        14.9                14.9
+## 11 2019-04-30T10:00:00Z        16.5                16.5
+## 12 2019-04-30T11:00:00Z        18.0                18.0
+## 13 2019-04-30T12:00:00Z        18.8                18.8
+## 14 2019-04-30T13:00:00Z        19.0                19.0
+## 15 2019-04-30T14:00:00Z        18.7                18.7
+## 16 2019-04-30T15:00:00Z        18.3                18.3
+## 
+## $toronto
+## # A tibble: 0 x 3
+## # … with 3 variables: time &lt;chr&gt;, temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;
+## 
+## $tel_aviv
+## # A tibble: 49 x 3
+##    time                 temperature apparentTemperature
+##    &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
+##  1 2019-04-28T15:00:00Z        23.9                23.9
+##  2 2019-04-28T16:00:00Z        23.1                23.1
+##  3 2019-04-28T17:00:00Z        22.4                22.4
+##  4 2019-04-28T18:00:00Z        22.0                22.0
+##  5 2019-04-28T19:00:00Z        21.6                21.6
+##  6 2019-04-28T20:00:00Z        21.5                21.5
+##  7 2019-04-28T21:00:00Z        21.2                21.2
+##  8 2019-04-28T22:00:00Z        20.8                20.8
+##  9 2019-04-28T23:00:00Z        20.2                20.2
+## 10 2019-04-29T00:00:00Z        19.8                19.8
+## # … with 39 more rows
+## 
+## $zurich
+## # A tibble: 1 x 3
+##   time                 temperature apparentTemperature
+##   &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
+## 1 2019-04-30T15:00:00Z        14.3                14.3</code></pre>
+<!-- We don't really need the output -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+
+</div>
 </div>
             </section>
 
