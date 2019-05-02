@@ -20,6 +20,10 @@ read_weather_data <- function(omit_zurich = FALSE) {
     filter( !(city_code == "zurich" & omit_zurich) )
 }
 
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+
 # Function arguments can be called by name or by position,
 # optional arguments are omitted
 read_weather_data(TRUE)
