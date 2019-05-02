@@ -19,6 +19,8 @@ read_weather_file <- function(filename) {
 }
 ```
 
+Closures can e.g. be used for the creation of functions. 
+Here we create a function that loads a particular dataset:
 
 <!-- Create a function that loads a particular dataset -->
 ```{r 42-create-a-function-that-loads-a-particular-dataset}
@@ -42,6 +44,7 @@ read_berlin
 read_berlin()
 ```
 
+Use closures as wrappers for other verbs/functions (such functions are also called "adverbs"):
 
 <!-- Use case: adverbs -- wrappers for other verbs -->
 ```{r 42-use-case-adverbs-wrappers-for-other-verbs}
