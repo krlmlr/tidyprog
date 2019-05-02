@@ -1,5 +1,7 @@
 ### Pure functions and side effects
 
+library(tidyverse)
+
 # Functions should do one thing, and do it well.
 
 # Pure function: called for its return value, no side effects!
@@ -22,7 +24,7 @@ side_effect_function <- function(x) {
 side_effect_function(2)
 
 # Separation helps isolate the side effects.
-# If side effect functions return the, they remain composable with
+# If side effect functions return the input, they remain composable with
 # pure functions.
 5 %>%
   pure_function() %>%
