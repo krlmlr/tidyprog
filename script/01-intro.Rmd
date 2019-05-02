@@ -8,7 +8,7 @@ library(tidyverse)
 library(here)
 ```
 
-### Short description and reading in of data
+### Short description of and reading in the data
 
 We will be working with hourly measurements of weather data ([link to data documentation](https://darksky.net/dev/docs)) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
 Thus we have 49 observations in each city.
@@ -44,7 +44,7 @@ weather_data <- bind_rows(
 weather_data
 ```
 
-Example plot of humidity vs. pressure (`geom_path` ensures that points are connected according to their order in the tibble):
+Example plot of humidity vs. pressure (`geom_path()` ensures that points are connected according to their order in the tibble):
 
 <!-- Visibility vs. humitidy -->
 ```{r 01-visibility-vs-humitidy}
@@ -94,7 +94,9 @@ weather_data %>%
   geom_point(aes(color = city_code))
 ```
 
+### Further possibilities of using {dplyr} to transform data
 
+If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:
 
 <!-- Compute lag for temperature, pressure and humidity -->
 ```{r 01-compute-lag-for-temperature-pressure-and-humidity}
@@ -110,6 +112,7 @@ weather_data %>%
 
 ```
 
+Count observations and combinations of specific observations:
 
 <!-- Count observations -->
 ```{r 01-count-observations}
@@ -120,6 +123,7 @@ weather_data %>%
   count(city_code, summary)
 ```
 
+Use `summarize()` to create tibble with mean and maximum temperature for each city:
 
 <!-- Compute mean and max temperature -->
 ```{r 01-compute-mean-and-max-temperature}
@@ -129,6 +133,7 @@ weather_data %>%
   ungroup()
 ```
 
+Compute and display summary data for all numeric variables:
 
 <!-- Compute and display summary data for all numeric variables -->
 ```{r 01-compute-and-display-summary-data-for-all-numeric-variables}
