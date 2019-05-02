@@ -33,6 +33,12 @@ weather_data <- bind_rows(
 ```
 
 
+<!-- Show the data -->
+```{r 01-show-the-data}
+weather_data
+```
+
+
 <!-- Visibility vs. humitidy -->
 ```{r 01-visibility-vs-humitidy}
 weather_data %>%

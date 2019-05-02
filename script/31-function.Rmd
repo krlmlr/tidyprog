@@ -1,4 +1,4 @@
-## <No caption defined>
+## Basics
 
 <!-- Setup 31-function.R -->
 ```{r 31-setup-31-function-r}

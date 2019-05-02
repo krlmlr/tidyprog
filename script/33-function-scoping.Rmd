@@ -1,4 +1,4 @@
-## <No caption defined>
+## Scope
 
 <!-- Setup 33-function-scoping.R -->
 ```{r 33-setup-33-function-scoping-r}

@@ -1,4 +1,4 @@
-## <No caption defined>
+## Pure functions and side effects
 
 <!-- Setup 34-function-purity.R -->
 ```{r 34-setup-34-function-purity-r}
