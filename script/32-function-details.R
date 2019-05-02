@@ -3,6 +3,10 @@
 library(tidyverse)
 library(here)
 
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
 read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
