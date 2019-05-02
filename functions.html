@@ -236,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x20adcf0&gt;</code></pre>
+## &lt;environment: 0x31cccf0&gt;</code></pre>
 <p>Execute the function by adding the brackets:</p>
 <!-- Execute like functions exported from packages -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
@@ -583,7 +583,9 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 <div id="pure-functions-and-side-effects" class="section level2">
 <h2><span class="header-section-number">3.4</span> Pure functions and side effects</h2>
 <!-- Setup 34-function-purity.R -->
+<p>Functions should do one thing, and do it well.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <!-- Functions should do one thing, and do it well. -->
+<p>Pure function: called for its return value, no side effects:</p>
 <!-- Pure function: called for its return value, no side effects! -->
 <pre class="sourceCode r"><code class="sourceCode r">pure_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
@@ -592,6 +594,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 <span class="kw">pure_function</span>(<span class="dv">1</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
 <!-- Function with side effect: called for its side effect, returns input -->
+<p>Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):</p>
 <!-- invisibly (=no changes to return value). -->
 <pre class="sourceCode r"><code class="sourceCode r">side_effect_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   file &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
@@ -603,7 +606,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpiOlDR9/file2b9047b5cffd</code></pre>
+<pre><code>## 2 written to /tmp/Rtmp3HWC3x/file2b9a1f8afacb</code></pre>
 <!-- Separation helps isolate the side effects. -->
 <!-- If side effect functions return the, they remain composable with -->
 <!-- pure functions. -->
@@ -612,7 +615,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpiOlDR9/file2b90766332ef</code></pre>
+<pre><code>## 6 written to /tmp/Rtmp3HWC3x/file2b9a5a7f00f2</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -765,7 +768,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x7a606e8&gt;</code></pre>
+## &lt;environment: 0x88c5948&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -807,7 +810,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x9a03bc0&gt;</code></pre>
+## &lt;environment: 0xaaf8c80&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18
@@ -830,6 +833,12 @@ read_loudly</code></pre>
 ## #   precipType &lt;chr&gt;</code></pre>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Unix philosophy, originated by Ken Thompson<a href="functions.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
