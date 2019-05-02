@@ -1,5 +1,7 @@
 ### Pure functions and side effects
 
+library(tidyverse)
+
 # Functions should do one thing, and do it well.
 
 # Pure function: called for its return value, no side effects!
