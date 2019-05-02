@@ -6,10 +6,11 @@ library(tidyverse)
 library(here)
 ```
 
-We will be working with hourly measurements of weather data in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm (Link to the data source documentation: https://darksky.net/dev/docs).
-Thus we have 49 observations to deal with in each city.
-The available variables are: `time`,	`summary` (how to describe the weather in one word),	`icon`	(mix of description of weather plus time of day), `precipIntensity` (intensity of precipitation),	`precipProbability`,	`temperature`,	`apparentTemperature`,	`dewPoint`,	`humidity`,	`pressure`,	`windSpeed`,	`windGust`,	`windBearing`,	`cloudCover`,	`uvIndex`,	`visibility`,	`ozone`,	`precipType`
+We will be working with hourly measurements of weather data ([link to data documentation](https://darksky.net/dev/docs)) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
+Thus we have 49 observations in each city.
+The available variables are: `time`,	`summary` (how to describe the weather in one word),	`icon`	(mix of description of weather plus time of day), `precipIntensity` (intensity of precipitation [mm/h]),	`precipProbability`,	`temperature`,	`apparentTemperature`,	`dewPoint`,	`humidity`,	`pressure`,	`windSpeed`,	`windGust`,	`windBearing` (direction in degrees),	`cloudCover`,	`uvIndex`,	`visibility`,	`ozone`,	`precipType`
 
+Reading in the data, which is stored in MS Excel-Files:
 
 <!-- Read all files -->
 ```{r 01-read-all-files}
