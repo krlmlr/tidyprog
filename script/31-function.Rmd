@@ -60,7 +60,7 @@ read_weather_data <- function() {
 }
 ```
 
-Display the code of any function by writing its name without the subsequent brackets:
+Display the code of any function by writing its name without the subsequent parentheses:
 
 ```{r include = FALSE}
 # Functions are first-class objects
@@ -69,7 +69,7 @@ Display the code of any function by writing its name without the subsequent brac
 read_weather_data
 ```
 
-Execute the function by adding the brackets:
+Execute the function by adding the parentheses:
 
 ```{r include = FALSE}
 # Execute like functions exported from packages
