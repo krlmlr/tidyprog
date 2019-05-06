@@ -176,23 +176,16 @@ use_some_names(b = 4, 3)
 ```
 ```{r 36-program-defensively}
 
-use_always_names <- function(a = 1, ..., b = 2) {
+use_always_names <- function(..., a = 1, b = 2) {
   extra_args <- list(...)
   stopifnot(length(extra_args) == 0)
 
   list(a = a, b = b)
 }
 
-use_always_names(3, 4)
-use_always_names(a = 3, 4)
-use_always_names(3, a = 4)
+try(use_always_names(3, 4))
+try(use_always_names(a = 3, 4))
+try(use_always_names(3, a = 4))
+try(use_always_names(b = 4, 3))
 use_always_names(a = 3, b = 4)
-use_always_names(b = 4, 3)
-
-use_always_names <- function(a = 1, ..., b = 2) {
-  extra_args <- list(...)
-  stopifnot(length(extra_args) == 0)
-
-  list(a = a, b = b)
-}
 ```
