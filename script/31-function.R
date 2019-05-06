@@ -85,7 +85,6 @@ read_weather_data <- function() {
     toronto = read_weather_file("toronto.xlsx"),
     tel_aviv = read_weather_file("tel_aviv.xlsx"),
     zurich = read_weather_file("zurich.xlsx"),
-    madrid = read_weather_file("madrid.xlsx"),
     .id = "city_code"
   )
 
