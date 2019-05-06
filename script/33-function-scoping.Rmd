@@ -8,7 +8,8 @@ rm(list = ls())
 When working with functions, it is important to be aware of the scope of objects, i.e. what is known in which context?
 
 ```{r include = FALSE}
-# Setup 33-function-scoping.R
+### Scope
+
 ```
 ```{r 33-setup-33-function-scoping-r}
 a <- 5

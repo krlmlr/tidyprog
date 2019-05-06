@@ -39,7 +39,7 @@ process_file <- function(path, rmd_path) {
 
   split %>%
     mutate(data = map_chr(data, ~ glue::glue_collapse(., "\n"))) %>%
-    mutate(data = gsub("\n+$", "", data)) %>%
+    mutate(data = if_else(row_number() == 1, paste0("#", caption, "\n"), gsub("\n+$", "", data))) %>%
     mutate(comment = if_else(comment, "comment", "code")) %>%
     spread(comment, data) %>%
     left_join(headers, by = "id") %>%
@@ -65,7 +65,7 @@ files_df %>%
   pwalk(process_file)
 
 files_df %>%
-  mutate(basename = basename(files)) %>%
+  mutate(basename = basename(r)) %>%
   mutate(group = substr(basename, 1, 1)) %>%
   mutate(rmd_path_code = paste0('here("script", "', basename, 'md")')) %>%
   mutate(chunk = paste0('```{r child = ', rmd_path_code, '}\n```')) %>%

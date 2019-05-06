@@ -5,10 +5,9 @@ rm(list = ls())
 
 ## Review of visualization and data transformation
 
-### Loading necessary libraries
-
 ```{r include = FALSE}
-# Setup 01-intro.R
+### Review of visualization and data transformation
+
 ```
 ```{r 01-setup-01-intro-r}
 library(tidyverse)
