@@ -1,9 +1,7 @@
 library(tidyverse)
 library(here)
 
-process_file <- function(path) {
-  rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
-
+process_file <- function(path, rmd_path) {
   file_id <- gsub("^([^-]+)-.*$", "\\1", basename(path))
   lines <- readLines(path)
 
@@ -41,10 +39,18 @@ process_file <- function(path) {
 }
 
 files <- dir("proj/script", full.names = TRUE)
+rmd_files <- here("script", gsub("R$", "Rmd", basename(files)))
 
-walk(files, process_file)
+files_df <-
+  tibble(r = files, rmd = rmd_files) %>%
+  mutate_all(list(mtime = ~ file.info(.)$mtime))
 
-tibble(files) %>%
+files_df %>%
+  filter(r_mtime > rmd_mtime) %>%
+  select(path = r, rmd_path = rmd) %>%
+  pwalk(process_file)
+
+files_df %>%
   mutate(basename = basename(files)) %>%
   mutate(group = substr(basename, 1, 1)) %>%
   mutate(rmd_path_code = paste0('here("script", "', basename, 'md")')) %>%
