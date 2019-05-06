@@ -1,10 +1,9 @@
 ### Basics
 
-## TODO: Split script, don't overwrite!
-
 library(tidyverse)
 library(here)
 
+## TODO: Split script, don't overwrite!
 
 # Important! Please reset the R session before running this script.
 # (In RStudio: Session/Restart R)
