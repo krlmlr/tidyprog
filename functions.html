@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <span class="co"># Return it</span>
   weather_data
 }</code></pre>
-<p>Display the code of any function by writing its name without the subsequent brackets:</p>
+<p>Display the code of any function by writing its name without the subsequent parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data</code></pre>
 <pre><code>## function() {
 ##   # Read all files
@@ -231,8 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x2288d98&gt;</code></pre>
-<p>Execute the function by adding the brackets:</p>
+## &lt;environment: 0x1c74d98&gt;</code></pre>
+<p>Execute the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <pre><code>## # A tibble: 196 x 19
 ##    city_code time                summary icon  precipIntensity
@@ -288,6 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <span class="co"># Return it</span>
   weather_data
 }</code></pre>
+<p>Testing the new function by running it:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <pre><code>## # A tibble: 196 x 19
 ##    city_code time                summary icon  precipIntensity
@@ -739,7 +740,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpAJn3ql/file2b4ab966625</code></pre>
+<pre><code>## 2 written to /tmp/RtmpQLpfgY/file2b9c164dd2dc</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -747,7 +748,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpAJn3ql/file2b4a6a7e2a40</code></pre>
+<pre><code>## 6 written to /tmp/RtmpQLpfgY/file2b9c6258229e</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -919,7 +920,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x6e8f658&gt;</code></pre>
+## &lt;environment: 0x6161e08&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -961,7 +962,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x8e982f8&gt;</code></pre>
+## &lt;environment: 0x87f74d8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18

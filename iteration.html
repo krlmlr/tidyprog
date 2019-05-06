@@ -914,7 +914,7 @@ dict</code></pre>
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x2288d98&gt;</code></pre>
+## &lt;environment: 0x1c74d98&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##   time                temperature apparentTemperature
@@ -1094,10 +1094,10 @@ dict</code></pre>
 <span class="st">  </span><span class="kw">map</span>(manipulator)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpAJn3ql/berlin2b4a7ffc9189.csv&quot;  
-## [2] &quot;/tmp/RtmpAJn3ql/toronto2b4a7b8a5145.csv&quot; 
-## [3] &quot;/tmp/RtmpAJn3ql/tel_aviv2b4a7b0be73c.csv&quot;
-## [4] &quot;/tmp/RtmpAJn3ql/zurich2b4a61326bfd.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpQLpfgY/berlin2b9c218f8026.csv&quot; 
+## [2] &quot;/tmp/RtmpQLpfgY/toronto2b9c28a75780.csv&quot;
+## [3] &quot;/tmp/RtmpQLpfgY/tel_aviv2b9c71c74f3.csv&quot;
+## [4] &quot;/tmp/RtmpQLpfgY/zurich2b9c84e8f85.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <pre><code>## $berlin
 ## # A tibble: 16 x 3
