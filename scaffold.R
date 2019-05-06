@@ -1,6 +1,11 @@
 library(tidyverse)
 library(here)
 
+# Overwritten further below
+path <- dir("proj/script", full.names = TRUE)
+path <- path[[1]]
+rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
+
 process_file <- function(path, rmd_path) {
   file_id <- gsub("^([^-]+)-.*$", "\\1", basename(path))
   lines <- readLines(path)
@@ -16,21 +21,31 @@ process_file <- function(path, rmd_path) {
 
   lines <- c(paste0("# Setup ", basename(path)), lines)
 
-  comment <- grepl("^#", lines)
+  split <-
+    tibble(lines) %>%
+    mutate(comment = grepl("^#", lines)) %>%
+    mutate(flip = coalesce(comment != lag(comment), TRUE)) %>%
+    mutate(id = (cumsum(flip) + 1) %/% 2) %>%
+    select(-flip) %>%
+    nest(-id, -comment) %>%
+    mutate(data = map(data, pull))
 
-
-  tibble(lines, comment) %>%
-    mutate(id = cumsum(comment)) %>%
+  headers <-
+    split %>%
+    filter(comment) %>%
     select(-comment) %>%
-    nest(-id) %>%
-    mutate(header = map_chr(data, list("lines", 1L))) %>%
-    mutate(comment = gsub("^# ", "", header)) %>%
-    mutate(chunk_name = paste0(file_id, "-", snakecase::to_snake_case(header, sep_out = "-"))) %>%
-    mutate(code = map_chr(map(data, tail, -1), ~ paste(.$lines, collapse = "\n"))) %>%
-    mutate(code = gsub("\n+$", "", code)) %>%
-    mutate(has_code = nchar(code) > 0) %>%
-    select(id, comment, chunk_name, code, has_code) %>%
-    mutate(chunk = paste0("<!-- ",  comment, " -->\n", if_else(has_code, paste0("```{r ", chunk_name, "}\n", code, "\n```\n\n\n"), ""))) %>%
+    mutate(chunk_name = paste0(file_id, "-", snakecase::to_snake_case(map_chr(data, 1), sep_out = "-"))) %>%
+    mutate(orig_header = map_chr(data, ~ paste0("<!-- ", gsub("^# ", "", .), " -->", collapse = "\n"))) %>%
+    select(-data)
+
+  split %>%
+    mutate(data = map_chr(data, ~ glue::glue_collapse(., "\n"))) %>%
+    mutate(data = gsub("\n+$", "", data)) %>%
+    mutate(comment = if_else(comment, "comment", "code")) %>%
+    spread(comment, data) %>%
+    left_join(headers, by = "id") %>%
+    select(id, orig_header, comment, chunk_name, code) %>%
+    mutate(chunk = paste0(orig_header, "\n", "```{r include = FALSE}\n", comment, "\n```\n", "```{r ", chunk_name, "}\n", code, "\n```\n\n\n")) %>%
     pull() %>%
     glue::glue_collapse(sep = "") %>%
     gsub("\n+$", "", .) %>%
@@ -38,11 +53,11 @@ process_file <- function(path, rmd_path) {
     writeLines(rmd_path)
 }
 
-files <- dir("proj/script", full.names = TRUE)
-rmd_files <- here("script", gsub("R$", "Rmd", basename(files)))
+path <- dir("proj/script", full.names = TRUE)
+rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
 
 files_df <-
-  tibble(r = files, rmd = rmd_files) %>%
+  tibble(r = path, rmd = rmd_path) %>%
   mutate_all(list(mtime = ~ file.info(.)$mtime))
 
 files_df %>%

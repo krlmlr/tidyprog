@@ -6,6 +6,9 @@ rm(list = ls())
 ## Manipulating pairwise
 
 <!-- Setup 06-map2.R -->
+```{r include = FALSE}
+# Setup 06-map2.R
+```
 ```{r 06-setup-06-map-2-r}
 library(tidyverse)
 library(here)
@@ -13,6 +16,9 @@ library(here)
 
 
 <!-- Load dictionary from file -->
+```{r include = FALSE}
+# Load dictionary from file
+```
 ```{r 06-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
@@ -20,6 +26,9 @@ dict
 
 
 <!-- Create a function to manipulate -->
+```{r include = FALSE}
+# Create a function to manipulate
+```
 ```{r 06-create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
@@ -30,6 +39,9 @@ manipulator <- function(data) {
 
 
 <!-- Collect and manipulate input data -->
+```{r include = FALSE}
+# Collect and manipulate input data
+```
 ```{r 06-collect-and-manipulate-input-data}
 manipulated_data <-
   dict %>%
@@ -41,6 +53,9 @@ manipulated_data <-
 
 
 <!-- Write back results: new file names -->
+```{r include = FALSE}
+# Write back results: new file names
+```
 ```{r 06-write-back-results-new-file-names}
 output_filenames <- tempfile(names(manipulated_data), fileext = ".csv")
 output_filenames
@@ -48,12 +63,18 @@ output_filenames
 
 
 <!-- Iterate over pairs -->
+```{r include = FALSE}
+# Iterate over pairs
+```
 ```{r 06-iterate-over-pairs}
 map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
 
 <!-- We don't really need the output -->
+```{r include = FALSE}
+# We don't really need the output
+```
 ```{r 06-we-don-t-really-need-the-output}
 walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```

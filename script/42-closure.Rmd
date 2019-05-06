@@ -6,6 +6,9 @@ rm(list = ls())
 ## Closures
 
 <!-- Setup 42-closure.R -->
+```{r include = FALSE}
+# Setup 42-closure.R
+```
 ```{r 42-setup-42-closure-r}
 library(tidyverse)
 library(here)
@@ -23,6 +26,9 @@ Closures can e.g. be used for the creation of functions.
 Here we create a function that loads a particular dataset:
 
 <!-- Create a function that loads a particular dataset -->
+```{r include = FALSE}
+# Create a function that loads a particular dataset
+```
 ```{r 42-create-a-function-that-loads-a-particular-dataset}
 make_read_weather_file <- function(filename) {
   # Avoid odd effects due to lazy evaluation
@@ -49,6 +55,9 @@ read_berlin()
 Use closures as wrappers for other verbs/functions (such functions are also called "adverbs"):
 
 <!-- Use case: adverbs -- wrappers for other verbs -->
+```{r include = FALSE}
+# Use case: adverbs -- wrappers for other verbs
+```
 ```{r 42-use-case-adverbs-wrappers-for-other-verbs}
 loudly <- function(f) {
   force(f)

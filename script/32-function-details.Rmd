@@ -6,6 +6,9 @@ rm(list = ls())
 ## Arguments
 
 <!-- Setup 32-function-details.R -->
+```{r include = FALSE}
+# Setup 32-function-details.R
+```
 ```{r 32-setup-32-function-details-r}
 library(tidyverse)
 library(here)
@@ -29,6 +32,9 @@ read_weather_file <- function(filename) {
 Provide default values for parameters:
 
 <!-- Function arguments can have default values -->
+```{r include = FALSE}
+# Function arguments can have default values
+```
 ```{r 32-function-arguments-can-have-default-values}
 read_weather_data <- function(omit_zurich = FALSE) {
   # Create ensemble dataset from files on disk
@@ -51,7 +57,11 @@ Set arguments with default values explicitly with or without using the name or l
 
 <!-- Function arguments can be called by name or by position, -->
 <!-- optional arguments are omitted -->
-```{r 32-optional-arguments-are-omitted}
+```{r include = FALSE}
+# Function arguments can be called by name or by position,
+# optional arguments are omitted
+```
+```{r 32-function-arguments-can-be-called-by-name-or-by-position}
 read_weather_data(TRUE)
 read_weather_data(omit_zurich = TRUE)
 read_weather_data()
@@ -60,6 +70,9 @@ read_weather_data()
 Multiple function arguments:
 
 <!-- Multiple function arguments are separated by comma: -->
+```{r include = FALSE}
+# Multiple function arguments are separated by comma:
+```
 ```{r 32-multiple-function-arguments-are-separated-by-comma}
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
   # Create ensemble dataset from files on disk
@@ -81,6 +94,9 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 Ellipsis (`...`) for list of arguments of unspecified length. Useful for passing arguments downstream:
 
 <!-- Ellipsis: variable argument list, useful for passing arguments downstream -->
+```{r include = FALSE}
+# Ellipsis: variable argument list, useful for passing arguments downstream
+```
 ```{r 32-ellipsis-variable-argument-list-useful-for-passing-arguments-downstream}
 weather_path <- function(...) {
   # All arguments are passed on
@@ -98,13 +114,21 @@ Mind, that despite altering the original function and adding new features to it,
 <!-- Note: despite many changes and new features, -->
 <!-- the original call still works! -->
 <!-- (This can be tested automatically!) -->
-```{r 32-this-can-be-tested-automatically}
+```{r include = FALSE}
+# Note: despite many changes and new features,
+# the original call still works!
+# (This can be tested automatically!)
+```
+```{r 32-note-despite-many-changes-and-new-features}
 read_weather_data()
 ```
 
 Argument matching: named arguments are assigned first, after that remaining slots are filled from left to right.
 
 <!-- Call matching -->
+```{r include = FALSE}
+# Call matching
+```
 ```{r 32-call-matching}
 use_names <- function(a = 1, b = 2) {
   list(a = a, b = b)
@@ -119,6 +143,9 @@ use_names(a = 3, b = 4)
 The ellipsis can be used to enfore the user to name the function parameters when setting them:
 
 <!-- The ellipsis is useful to enforce naming of arguments -->
+```{r include = FALSE}
+# The ellipsis is useful to enforce naming of arguments
+```
 ```{r 32-the-ellipsis-is-useful-to-enforce-naming-of-arguments}
 enforce_names <- function(..., a = 1, b = 2) {
   list(a = a, b = b)
@@ -132,6 +159,9 @@ enforce_names(a = 3, b = 4)
 Inside a function with an ellipsis as a parameter, you can capture the ellipsis with `list()`:
 
 <!-- Arguments in ellipsis can be captured via list() -->
+```{r include = FALSE}
+# Arguments in ellipsis can be captured via list()
+```
 ```{r 32-arguments-in-ellipsis-can-be-captured-via-list}
 ellipsis_test <- function(...) {
   args <- list(...)
@@ -147,7 +177,18 @@ ellipsis_test(a = 1, 2, c = 3:5)
 Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
 
 <!-- ## Exercise: call matching -->
+```{r include = FALSE}
+## Exercise: call matching
+```
+```{r 32-exercise-call-matching}
+
+```
+
+
 <!-- ## What does the following return? Why? -->
+```{r include = FALSE}
+## What does the following return? Why?
+```
 ```{r 32-what-does-the-following-return-why}
 read_weather_data(TRUE, omit_z = FALSE) %>%
   count(city_code)
@@ -155,7 +196,18 @@ read_weather_data(TRUE, omit_z = FALSE) %>%
 
 
 <!-- ## How do you avoid this behavior? -->
+```{r include = FALSE}
+## How do you avoid this behavior?
+```
+```{r 32-how-do-you-avoid-this-behavior}
+
+```
+
+
 <!-- ## Ellipsis inbetween -->
+```{r include = FALSE}
+## Ellipsis inbetween
+```
 ```{r 32-ellipsis-inbetween}
 
 
@@ -172,6 +224,9 @@ use_some_names(b = 4, 3)
 
 
 <!-- ## Program defensively! -->
+```{r include = FALSE}
+## Program defensively!
+```
 ```{r 32-program-defensively}
 
 use_always_names <- function(a = 1, ..., b = 2) {

@@ -6,6 +6,9 @@ rm(list = ls())
 ## Manipulating all datasets
 
 <!-- Setup 05-map-manip.R -->
+```{r include = FALSE}
+# Setup 05-map-manip.R
+```
 ```{r 05-setup-05-map-manip-r}
 library(tidyverse)
 library(here)
@@ -13,6 +16,9 @@ library(here)
 
 
 <!-- Load dictionary from file -->
+```{r include = FALSE}
+# Load dictionary from file
+```
 ```{r 05-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
@@ -20,6 +26,9 @@ dict
 
 
 <!-- Collect input data -->
+```{r include = FALSE}
+# Collect input data
+```
 ```{r 05-collect-input-data}
 input_data <-
   dict %>%
@@ -30,6 +39,9 @@ input_data <-
 
 
 <!-- Manipulate results -->
+```{r include = FALSE}
+# Manipulate results
+```
 ```{r 05-manipulate-results}
 input_data %>%
   map(~ select(., time, contains("emperature")))
@@ -37,6 +49,9 @@ input_data %>%
 
 
 <!-- Manipulate results more -->
+```{r include = FALSE}
+# Manipulate results more
+```
 ```{r 05-manipulate-results-more}
 input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
@@ -45,6 +60,9 @@ input_data %>%
 
 
 <!-- Create a function to manipulate -->
+```{r include = FALSE}
+# Create a function to manipulate
+```
 ```{r 05-create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
@@ -55,18 +73,27 @@ manipulator <- function(data) {
 
 
 <!-- Functions are first-class objects! -->
+```{r include = FALSE}
+# Functions are first-class objects!
+```
 ```{r 05-functions-are-first-class-objects}
 manipulator
 ```
 
 
 <!-- Test the function -->
+```{r include = FALSE}
+# Test the function
+```
 ```{r 05-test-the-function}
 manipulator(input_data[[4]])
 ```
 
 
 <!-- Run the function on the entire dataset -->
+```{r include = FALSE}
+# Run the function on the entire dataset
+```
 ```{r 05-run-the-function-on-the-entire-dataset}
 manipulated_data <- map(input_data, ~ manipulator(.))
 manipulated_data
@@ -74,24 +101,36 @@ manipulated_data
 
 
 <!-- Shortcut -->
+```{r include = FALSE}
+# Shortcut
+```
 ```{r 05-shortcut}
 map(input_data, manipulator)
 ```
 
 
 <!-- Write back results: new file names -->
+```{r include = FALSE}
+# Write back results: new file names
+```
 ```{r 05-write-back-results-new-file-names}
 output_filenames <- tempfile(names(input_data), fileext = ".csv")
 ```
 
 
 <!-- Iterate over pairs -->
+```{r include = FALSE}
+# Iterate over pairs
+```
 ```{r 05-iterate-over-pairs}
 map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
 
 <!-- We don't really need the output -->
+```{r include = FALSE}
+# We don't really need the output
+```
 ```{r 05-we-don-t-really-need-the-output}
 walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```

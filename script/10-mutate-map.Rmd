@@ -6,6 +6,9 @@ rm(list = ls())
 ## <No caption defined>
 
 <!-- Setup 10-mutate-map.R -->
+```{r include = FALSE}
+# Setup 10-mutate-map.R
+```
 ```{r 10-setup-10-mutate-map-r}
 library(tidyverse)
 library(here)
@@ -13,6 +16,9 @@ library(here)
 
 
 <!-- Load dictionary from file -->
+```{r include = FALSE}
+# Load dictionary from file
+```
 ```{r 10-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
@@ -20,6 +26,9 @@ dict
 
 
 <!-- map() on a vector -->
+```{r include = FALSE}
+# map() on a vector
+```
 ```{r 10-map-on-a-vector}
 input_data <-
   dict %>%
@@ -32,6 +41,9 @@ input_data
 
 
 <!-- Lists are also vectors, enframe() returns a nested tibble! -->
+```{r include = FALSE}
+# Lists are also vectors, enframe() returns a nested tibble!
+```
 ```{r 10-lists-are-also-vectors-enframe-returns-a-nested-tibble}
 input_data %>%
   enframe()
@@ -39,6 +51,9 @@ input_data %>%
 
 
 <!-- Operate in "tibble-land": columns are vectors -->
+```{r include = FALSE}
+# Operate in "tibble-land": columns are vectors
+```
 ```{r 10-operate-in-tibble-land-columns-are-vectors}
 dict %>%
   select(city_code, weather_filename) %>%
@@ -49,6 +64,9 @@ dict %>%
 
 
 <!-- Keep auxiliary columns -->
+```{r include = FALSE}
+# Keep auxiliary columns
+```
 ```{r 10-keep-auxiliary-columns}
 dict %>%
   mutate(
