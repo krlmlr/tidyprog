@@ -7,5 +7,8 @@
 ```{r child = here("script", "33-intermediate.Rmd")}
 ```
 
+```{r child = here("script", "34-args-default.Rmd")}
+```
+
 ```{r child = here("script", "36-function-details.Rmd")}
 ```
