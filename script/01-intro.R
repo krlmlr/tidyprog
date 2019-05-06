@@ -55,13 +55,12 @@ weather_data %>%
   ggplot(aes(x = windSpeed, y = apparentTemperatureReduction)) +
   geom_point(aes(color = city_code))
 
-# Compute lag for temperature, pressure and humidity
+# Compute lag for temperature, pressure and humidity.
+# How to compute temperature difference to previous hour?
 weather_data %>%
   group_by(city_code) %>%
   mutate_at(vars(temperature, pressure, humidity), list(lag = lag)) %>%
   ungroup()
-
-# How to compute temperature difference to previous hour?
 
 # Count observations
 weather_data %>%
