@@ -18,9 +18,11 @@ make_read_weather_file <- function(filename) {
 
   # This function (closure) accesses the filename from the
   # outer function
-  function() {
+  f <- function() {
     read_weather_file(filename)
   }
+
+  f
 }
 
 read_berlin <- make_read_weather_file("berlin.xlsx")

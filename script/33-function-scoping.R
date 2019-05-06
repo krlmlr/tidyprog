@@ -20,3 +20,6 @@ a
 
 # Global variables are a (hidden) part of a function's interface!
 # Best practice: self-contained functions, independent of global variables
+
+
+## Exercises:

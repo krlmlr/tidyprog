@@ -18,6 +18,7 @@ side_effect_function <- function(x) {
   writeLines(format(x), tempfile())
   print(x)
   message(x, " written to ", file)
+
   invisible(x)
 }
 
