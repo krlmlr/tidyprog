@@ -19,7 +19,7 @@ We will be working with hourly measurements of weather data ([link to data docum
 Thus we have 49 observations in each city.
 - `time`
 - `summary` (how to describe the weather in one word)
-- `icon`(mix of description of weather plus time of day)
+- `icon` (mix of description of weather plus time of day)
 - `precipIntensity` (intensity of precipitation [mm/h])
 - `precipProbability`
 - `temperature`
