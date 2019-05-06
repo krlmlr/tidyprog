@@ -2,6 +2,10 @@
 
 library(tidyverse)
 library(here)
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+
 
 weather_path <- function(filename) {
   # Returned value
@@ -75,6 +79,15 @@ enforce_names(3, 4)
 enforce_names(a = 3, 4)
 enforce_names(a = 3, b = 4)
 
+use_names <- function(a = 1, b = 2) {
+  list(a = a, b = b)
+}
+
+use_names(3, 4)
+use_names(a = 3, 4)
+use_names(3, a = 4)
+use_names(a = 3, b = 4)
+
 # Arguments in ellipsis can be captured via list()
 ellipsis_test <- function(...) {
   args <- list(...)
@@ -91,3 +104,41 @@ read_weather_data(TRUE, omit_z = FALSE) %>%
   count(city_code)
 
 ## How do you avoid this behavior?
+
+
+## Ellipsis inbetween
+
+
+use_some_names <- function(a = 1, ..., b = 2) {
+  list(a = a, b = b)
+}
+
+use_some_names(3, 4)
+use_some_names(a = 3, 4)
+use_some_names(3, a = 4)
+use_some_names(a = 3, b = 4)
+use_some_names(b = 4, 3)
+
+
+## Program defensively!
+
+use_always_names <- function(a = 1, ..., b = 2) {
+  extra_args <- list(...)
+  stopifnot(length(extra_args) == 0)
+
+  list(a = a, b = b)
+}
+
+use_always_names(3, 4)
+use_always_names(a = 3, 4)
+use_always_names(3, a = 4)
+use_always_names(a = 3, b = 4)
+use_always_names(b = 4, 3)
+
+use_always_names <- function(a = 1, ..., b = 2) {
+  extra_args <- list(...)
+  stopifnot(length(extra_args) == 0)
+
+  list(a = a, b = b)
+}
+

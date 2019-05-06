@@ -42,6 +42,9 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 read_weather_data(omit_toronto = TRUE, omit_zurich = TRUE) %>%
   count(city_code)
 
+read_weather_data(omit_toronto = TRUE, omit_zurich = FALSE) %>%
+  count(city_code)
+
 # Useful with an early return()
 # && and ||: shortcut operators for scalar logical
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
