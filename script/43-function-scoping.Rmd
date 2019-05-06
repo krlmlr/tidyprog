@@ -60,4 +60,5 @@ Best practice: functions should be self-contained, independent of global variabl
 ## Exercises:
 ```
 ```{r 43-exercises}
+invisible()
 ```
