@@ -135,7 +135,7 @@ weather_data %>%
 
 ```
 
-Count observations and combinations of specific observations:
+Count observations per category or combinations of categories:
 
 <!-- Count observations -->
 ```{r 01-count-observations}
@@ -146,7 +146,7 @@ weather_data %>%
   count(city_code, summary)
 ```
 
-Use `summarize()` to create tibble with mean and maximum temperature for each city:
+Use `summarize()` to create a tibble with mean and maximum temperature for each city:
 
 <!-- Compute mean and max temperature -->
 ```{r 01-compute-mean-and-max-temperature}
