@@ -6,14 +6,18 @@ path <- "script/01-intro.Rmd"
 safe_copy <- function(source, target) {
   if (!file.exists(target) || !identical(readLines(source), readLines(target))) {
     file.copy(source, target, overwrite = TRUE)
+    TRUE
+  } else {
+    FALSE
   }
-  invisible()
 }
 
-safe_purl <- function(text, output) {
+safe_purl <- function(text, output, rmd) {
   tmp <- tempfile("purl", fileext = ".R")
   knitr::purl(text = text, output = tmp, documentation = 0L)
-  safe_copy(tmp, output)
+  if (safe_copy(tmp, output)) {
+    system2("touch", rmd)
+  }
 }
 
 process_file <- function(path) {
@@ -21,7 +25,7 @@ process_file <- function(path) {
 
   input <- readLines(here(path))
   header <- input[[6]]
-  safe_purl(text = input[-(1:6)], output = r_path)
+  safe_purl(text = input[-(1:6)], output = r_path, rmd = path)
   r_path
 }
 
