@@ -4,6 +4,7 @@ library(tidyverse)
 
 # Functions should do one thing, and do it well.
 
+
 # Pure function: called for its return value, no side effects!
 pure_function <- function(x) {
   x + 1

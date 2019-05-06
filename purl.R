@@ -11,6 +11,6 @@ process_file <- function(path) {
   knitr::purl(text = input[-(1:6)], output = r_path, documentation = 0L)
 }
 
-files <- dir("script", pattern = "[.]Rmd$", full.names = TRUE)
+files <- dir("script", pattern = "^[0-9][0-9].*[.]Rmd$", full.names = TRUE)
 
 walk(files, process_file)

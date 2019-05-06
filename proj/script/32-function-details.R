@@ -15,7 +15,6 @@ read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
 
-
 # Function arguments can have default values
 read_weather_data <- function(omit_zurich = FALSE) {
   # Create ensemble dataset from files on disk
@@ -97,8 +96,8 @@ ellipsis_test <- function(...) {
 
 ellipsis_test(a = 1, 2, c = 3:5)
 
-
 ## Exercise: call matching
+
 
 ## What does the following return? Why?
 read_weather_data(TRUE, omit_z = FALSE) %>%
@@ -119,7 +118,6 @@ use_some_names(a = 3, 4)
 use_some_names(3, a = 4)
 use_some_names(a = 3, b = 4)
 use_some_names(b = 4, 3)
-
 
 ## Program defensively!
 
@@ -142,4 +140,3 @@ use_always_names <- function(a = 1, ..., b = 2) {
 
   list(a = a, b = b)
 }
-

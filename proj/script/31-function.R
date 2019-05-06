@@ -5,8 +5,10 @@ library(here)
 
 ## TODO: Split script, don't overwrite!
 
+
 # Important! Please reset the R session before running this script.
 # (In RStudio: Session/Restart R)
+
 
 # Declare a function to hide implementation details
 read_weather_data <- function() {
@@ -95,7 +97,9 @@ read_weather_data()
 
 ### Exercise
 
+
 # Simplify more?
+
 
 # Get rid of repeated .xlsx?
 

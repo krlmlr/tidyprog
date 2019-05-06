@@ -60,5 +60,4 @@ Best practice: functions should be self-contained, independent of global variabl
 ## Exercises:
 ```
 ```{r 33-exercises}
-NA
 ```
