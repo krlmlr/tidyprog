@@ -72,23 +72,6 @@ Naming, not naming or partly naming parameters in functions calls? What does the
 
 
 ```{r include = FALSE}
-## What does the following return? Why?
-```
-```{r 36-what-does-the-following-return-why}
-read_weather_data(TRUE, omit_z = FALSE) %>%
-  count(city_code)
-```
-
-
-```{r include = FALSE}
-## How do you avoid this behavior?
-```
-```{r 36-how-do-you-avoid-this-behavior}
-
-```
-
-
-```{r include = FALSE}
 ## Ellipsis inbetween
 ```
 ```{r 36-ellipsis-inbetween}

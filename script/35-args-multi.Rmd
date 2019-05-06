@@ -74,3 +74,17 @@ Mind, that despite altering the original function and adding new features to it,
 ```{r 35-note-despite-many-changes-and-new-features}
 read_weather_data()
 ```
+
+
+### Exercise
+
+```{r include = FALSE}
+## What does the following return? Why?
+```
+```{r 35-what-does-the-following-return-why}
+read_weather_data(TRUE, omit_z = FALSE) %>%
+  count(city_code)
+```
+
+
+See the next section for ideas on avoiding this behavior.

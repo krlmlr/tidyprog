@@ -32,13 +32,6 @@ ellipsis_test(a = 1, 2, c = 3:5)
 ## Exercise: call matching
 
 
-## What does the following return? Why?
-read_weather_data(TRUE, omit_z = FALSE) %>%
-  count(city_code)
-
-## How do you avoid this behavior?
-
-
 ## Ellipsis inbetween
 
 

@@ -43,3 +43,7 @@ weather_path("some", "subdir", "with", "a", "file.csv")
 # the original call still works!
 # (This can be tested automatically!)
 read_weather_data()
+
+## What does the following return? Why?
+read_weather_data(TRUE, omit_z = FALSE) %>%
+  count(city_code)
