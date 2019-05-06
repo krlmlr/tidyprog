@@ -10,5 +10,8 @@
 ```{r child = here("script", "34-args-default.Rmd")}
 ```
 
-```{r child = here("script", "36-function-details.Rmd")}
+```{r child = here("script", "35-args-multi.Rmd")}
+```
+
+```{r child = here("script", "36-args-matching.Rmd")}
 ```
