@@ -54,6 +54,7 @@ read_weather_data <- function() {
 }
 ```
 
+Testing the new function by running it:
 
 ```{r include = FALSE}
 # Still need to run a function
