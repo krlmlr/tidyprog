@@ -9,6 +9,10 @@ rm(list = ls())
 ```{r 32-setup-32-function-details-r}
 library(tidyverse)
 library(here)
+library(conflicted)
+
+conflict_prefer("filter", "dplyr")
+
 
 weather_path <- function(filename) {
   # Returned value
@@ -111,6 +115,20 @@ Mind, that despite altering the original function and adding new features to it,
 read_weather_data()
 ```
 
+Argument matching: named arguments are assigned first, after that remaining slots are filled from left to right.
+
+<!-- Call matching -->
+```{r 32-call-matching}
+use_names <- function(a = 1, b = 2) {
+  list(a = a, b = b)
+}
+
+use_names(3, 4)
+use_names(a = 3, 4)
+use_names(3, a = 4)
+use_names(a = 3, b = 4)
+```
+
 The ellipsis can be used to enfore the user to name the function parameters when setting them:
 
 <!-- The ellipsis is useful to enforce naming of arguments -->
@@ -156,4 +174,45 @@ read_weather_data(TRUE, omit_z = FALSE) %>%
 <!-- ## How do you avoid this behavior? -->
 ```{r 32-how-do-you-avoid-this-behavior}
 
+```
+
+
+<!-- ## Ellipsis inbetween -->
+```{r 32-ellipsis-inbetween}
+
+
+use_some_names <- function(a = 1, ..., b = 2) {
+  list(a = a, b = b)
+}
+
+use_some_names(3, 4)
+use_some_names(a = 3, 4)
+use_some_names(3, a = 4)
+use_some_names(a = 3, b = 4)
+use_some_names(b = 4, 3)
+```
+
+
+<!-- ## Program defensively! -->
+```{r 32-program-defensively}
+
+use_always_names <- function(a = 1, ..., b = 2) {
+  extra_args <- list(...)
+  stopifnot(length(extra_args) == 0)
+
+  list(a = a, b = b)
+}
+
+use_always_names(3, 4)
+use_always_names(a = 3, 4)
+use_always_names(3, a = 4)
+use_always_names(a = 3, b = 4)
+use_always_names(b = 4, 3)
+
+use_always_names <- function(a = 1, ..., b = 2) {
+  extra_args <- list(...)
+  stopifnot(length(extra_args) == 0)
+
+  list(a = a, b = b)
+}
 ```

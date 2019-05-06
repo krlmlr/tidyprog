@@ -70,15 +70,7 @@ weather_path("some", "subdir", "with", "a", "file.csv")
 # (This can be tested automatically!)
 read_weather_data()
 
-# The ellipsis is useful to enforce naming of arguments
-enforce_names <- function(..., a = 1, b = 2) {
-  list(a = a, b = b)
-}
-
-enforce_names(3, 4)
-enforce_names(a = 3, 4)
-enforce_names(a = 3, b = 4)
-
+# Call matching
 use_names <- function(a = 1, b = 2) {
   list(a = a, b = b)
 }
@@ -87,6 +79,15 @@ use_names(3, 4)
 use_names(a = 3, 4)
 use_names(3, a = 4)
 use_names(a = 3, b = 4)
+
+# The ellipsis is useful to enforce naming of arguments
+enforce_names <- function(..., a = 1, b = 2) {
+  list(a = a, b = b)
+}
+
+enforce_names(3, 4)
+enforce_names(a = 3, 4)
+enforce_names(a = 3, b = 4)
 
 # Arguments in ellipsis can be captured via list()
 ellipsis_test <- function(...) {
