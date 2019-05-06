@@ -13,9 +13,7 @@ library(tidyverse)
 Functions should do one thing, and do it well.^[Unix philosophy, originated by Ken Thompson]
 
 <!-- Functions should do one thing, and do it well. -->
-```{r 34-functions-should-do-one-thing-and-do-it-well}
 
-```
 
 Pure function: called for its return value, no side effects:
 
@@ -30,9 +28,7 @@ pure_function(1)
 
 
 <!-- Function with side effect: called for its side effect, returns input -->
-```{r 34-function-with-side-effect-called-for-its-side-effect-returns-input}
 
-```
 
 Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):
 
@@ -51,20 +47,13 @@ side_effect_function(2)
 ```
 
 
-<!-- Separation helps isolate the side effects. -->
-```{r 34-separation-helps-isolate-the-side-effects}
-
-```
-
-
-<!-- If side effect functions return the input, they remain composable with -->
-```{r 34-if-side-effect-functions-return-the-input-they-remain-composable-with}
-
-```
-
 Separation helps isolate the side effects. 
 If side effect functions return the input, they remain composable with pure functions:
 
+
+
+<!-- Separation helps isolate the side effects. -->
+<!-- If side effect functions return the input, they remain composable with -->
 <!-- pure functions. -->
 ```{r 34-pure-functions}
 5 %>%

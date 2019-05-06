@@ -30,8 +30,9 @@ process_file <- function(path) {
     mutate(chunk_name = paste0(file_id, "-", snakecase::to_snake_case(header, sep_out = "-"))) %>%
     mutate(code = map_chr(map(data, tail, -1), ~ paste(.$lines, collapse = "\n"))) %>%
     mutate(code = gsub("\n+$", "", code)) %>%
-    select(id, comment, chunk_name, code) %>%
-    mutate(chunk = paste0("<!-- ",  comment, " -->\n", "```{r ", chunk_name, "}\n", code, "\n```")) %>%
+    mutate(has_code = nchar(code) > 0) %>%
+    select(id, comment, chunk_name, code, has_code) %>%
+    mutate(chunk = paste0("<!-- ",  comment, " -->\n", if_else(has_code, paste0("```{r ", chunk_name, "}\n", code, "\n```"), ""))) %>%
     pull() %>%
     glue::glue_collapse(sep = "\n\n\n") %>%
     c(paste0("```{r ", file_id, "-remove-all, include = FALSE}\nrm(list = ls())\n```\n\n"), caption, "", .) %>%

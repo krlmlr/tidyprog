@@ -40,19 +40,13 @@ a
 Global variables are a (hidden) part of a function's interface.
 
 <!-- Global variables are a (hidden) part of a function's interface! -->
-```{r 33-global-variables-are-a-hidden-part-of-a-function-s-interface}
 
-```
 
 Best practice: functions should be self-contained, independent of global variables.
 
 <!-- Best practice: self-contained functions, independent of global variables -->
-```{r 33-best-practice-self-contained-functions-independent-of-global-variables}
 
-```
 
 
 <!-- ## Exercises: -->
-```{r 33-exercises}
 
-```

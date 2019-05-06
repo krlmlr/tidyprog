@@ -122,6 +122,7 @@ weather_data %>%
 If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:
 
 <!-- Compute lag for temperature, pressure and humidity -->
+<!-- How to compute temperature difference to previous hour? -->
 ```{r 01-compute-lag-for-temperature-pressure-and-humidity}
 weather_data %>%
   group_by(city_code) %>%
@@ -129,11 +130,6 @@ weather_data %>%
   ungroup()
 ```
 
-
-<!-- How to compute temperature difference to previous hour? -->
-```{r 01-how-to-compute-temperature-difference-to-previous-hour}
-
-```
 
 Count observations per category or combinations of categories:
 

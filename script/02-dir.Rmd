@@ -20,9 +20,7 @@ files
 
 
 <!-- see also fs::dir_ls() -->
-```{r 02-see-also-fs-dir-ls}
 
-```
 
 
 <!-- Convert to tibble -->

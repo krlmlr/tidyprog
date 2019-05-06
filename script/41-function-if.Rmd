@@ -5,8 +5,6 @@ rm(list = ls())
 
 ## Control flow
 
-
-
 <!-- Setup 41-function-if.R -->
 ```{r 41-setup-41-function-if-r}
 library(tidyverse)
@@ -54,13 +52,14 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 
 read_weather_data(omit_toronto = TRUE, omit_zurich = TRUE) %>%
   count(city_code)
+
+read_weather_data(omit_toronto = TRUE, omit_zurich = FALSE) %>%
+  count(city_code)
 ```
 
 
 <!-- Useful with an early return() -->
-```{r 41-useful-with-an-early-return}
 
-```
 
 This can be useful if aiming at a possible early return:
 
@@ -100,14 +99,10 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 ```
 
 
-<!-- else if/else: branching -->
-```{r 41-else-if-else-branching}
-
-```
-
 Conditional branching with if-else-logic. 
 (This is just for illustration, you should not implement code like this!)
 
+<!-- else if/else: branching -->
 <!-- (Just for illustration, do not implement code like this!) -->
 ```{r 41-just-for-illustration-do-not-implement-code-like-this}
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {

@@ -47,13 +47,9 @@ read_weather_data <- function(omit_zurich = FALSE) {
 ```
 
 
-<!-- Function arguments can be called by name or by position, -->
-```{r 32-function-arguments-can-be-called-by-name-or-by-position}
-
-```
-
 Set arguments with default values explicitly with or without using the name or leave them out to use the default value:
 
+<!-- Function arguments can be called by name or by position, -->
 <!-- optional arguments are omitted -->
 ```{r 32-optional-arguments-are-omitted}
 read_weather_data(TRUE)
@@ -97,19 +93,10 @@ weather_path("some", "subdir", "with", "a", "file.csv")
 ```
 
 
-<!-- Note: despite many changes and new features, -->
-```{r 32-note-despite-many-changes-and-new-features}
-
-```
-
-
-<!-- the original call still works! -->
-```{r 32-the-original-call-still-works}
-
-```
-
 Mind, that despite altering the original function and adding new features to it, the original call still works as before:
 
+<!-- Note: despite many changes and new features, -->
+<!-- the original call still works! -->
 <!-- (This can be tested automatically!) -->
 ```{r 32-this-can-be-tested-automatically}
 read_weather_data()
@@ -155,14 +142,13 @@ ellipsis_test(a = 1, 2, c = 3:5)
 ```
 
 
-<!-- ## Exercise: call matching -->
-```{r 32-exercise-call-matching}
-
-```
-
 ### Exercise
 
 Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
+
+<!-- ## Exercise: call matching -->
+
+
 
 <!-- ## What does the following return? Why? -->
 ```{r 32-what-does-the-following-return-why}
@@ -172,9 +158,7 @@ read_weather_data(TRUE, omit_z = FALSE) %>%
 
 
 <!-- ## How do you avoid this behavior? -->
-```{r 32-how-do-you-avoid-this-behavior}
 
-```
 
 
 <!-- ## Ellipsis inbetween -->
