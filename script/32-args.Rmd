@@ -1,0 +1,63 @@
+```{r 32-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Arguments
+
+```{r include = FALSE}
+### Arguments
+
+```
+```{r 32-setup-32-args-r}
+library(tidyverse)
+library(here)
+```
+
+
+Functions with arguments:
+
+```{r include = FALSE}
+# Functions can have arguments
+```
+```{r 32-functions-can-have-arguments}
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+```
+
+Call functions from within functions:
+
+```{r include = FALSE}
+# Functions can be called by other functions
+```
+```{r 32-functions-can-be-called-by-other-functions}
+read_weather_data <- function() {
+  # Read all files
+  berlin <- readxl::read_excel(weather_path("berlin.xlsx"))
+  toronto <- readxl::read_excel(weather_path("toronto.xlsx"))
+  tel_aviv <- readxl::read_excel(weather_path("tel_aviv.xlsx"))
+  zurich <- readxl::read_excel(weather_path("zurich.xlsx"))
+
+  # Create ensemble dataset
+  weather_data <- bind_rows(
+    berlin = berlin,
+    toronto = toronto,
+    tel_aviv = tel_aviv,
+    zurich = zurich,
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+```
+
+
+```{r include = FALSE}
+# Still need to run a function
+```
+```{r 32-still-need-to-run-a-function}
+read_weather_data()
+```
