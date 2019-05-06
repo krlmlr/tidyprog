@@ -147,9 +147,6 @@ ellipsis_test(a = 1, 2, c = 3:5)
 Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
 
 <!-- ## Exercise: call matching -->
-
-
-
 <!-- ## What does the following return? Why? -->
 ```{r 32-what-does-the-following-return-why}
 read_weather_data(TRUE, omit_z = FALSE) %>%
@@ -158,9 +155,6 @@ read_weather_data(TRUE, omit_z = FALSE) %>%
 
 
 <!-- ## How do you avoid this behavior? -->
-
-
-
 <!-- ## Ellipsis inbetween -->
 ```{r 32-ellipsis-inbetween}
 

@@ -13,13 +13,7 @@ library(here)
 
 
 <!-- ## TODO: Split script, don't overwrite! -->
-
-
-
 <!-- Important! Please reset the R session before running this script. -->
-
-
-
 <!-- (In RStudio: Session/Restart R) -->
 
 
@@ -148,13 +142,7 @@ read_weather_data()
 
 
 <!-- ### Exercise -->
-
-
-
 <!-- Simplify more? -->
-
-
-
 <!-- Get rid of repeated .xlsx? -->
 ```{r 31-get-rid-of-repeated-xlsx}
 

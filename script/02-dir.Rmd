@@ -12,15 +12,11 @@ library(here)
 ```
 
 
-<!-- Show all files -->
-```{r 02-show-all-files}
+<!-- Show all files, see also fs::dir_ls() -->
+```{r 02-show-all-files-see-also-fs-dir-ls}
 files <- dir(here("data/weather"), full.names = TRUE)
 files
 ```
-
-
-<!-- see also fs::dir_ls() -->
-
 
 
 <!-- Convert to tibble -->

@@ -3,11 +3,9 @@
 library(tidyverse)
 library(here)
 
-# Show all files
+# Show all files, see also fs::dir_ls()
 files <- dir(here("data/weather"), full.names = TRUE)
 files
-
-# see also fs::dir_ls()
 
 # Convert to tibble
 files_df <-
