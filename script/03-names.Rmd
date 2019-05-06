@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Named vectors and two-column tibbles
 
-<!-- Setup 03-names.R -->
 ```{r include = FALSE}
 # Setup 03-names.R
 ```
@@ -15,7 +14,6 @@ library(here)
 ```
 
 
-<!-- Load dictionary from file -->
 ```{r include = FALSE}
 # Load dictionary from file
 ```
@@ -25,7 +23,6 @@ dict
 ```
 
 
-<!-- Acquire file names -->
 ```{r include = FALSE}
 # Acquire file names
 ```
@@ -35,7 +32,6 @@ dict %>%
 ```
 
 
-<!-- Use here() to create absolute paths -->
 ```{r include = FALSE}
 # Use here() to create absolute paths
 ```
@@ -46,7 +42,6 @@ dict %>%
 ```
 
 
-<!-- Acquire file names as a named vector -->
 ```{r include = FALSE}
 # Acquire file names as a named vector
 ```
@@ -57,7 +52,6 @@ dict %>%
 ```
 
 
-<!-- Not all operations maintain vector names! -->
 ```{r include = FALSE}
 # Not all operations maintain vector names!
 ```
@@ -69,7 +63,6 @@ dict %>%
 ```
 
 
-<!-- Move the here() call into "tibble-land" -->
 ```{r include = FALSE}
 # Move the here() call into "tibble-land"
 ```

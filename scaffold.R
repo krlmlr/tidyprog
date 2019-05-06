@@ -35,7 +35,6 @@ process_file <- function(path, rmd_path) {
     filter(comment) %>%
     select(-comment) %>%
     mutate(chunk_name = paste0(file_id, "-", snakecase::to_snake_case(map_chr(data, 1), sep_out = "-"))) %>%
-    mutate(orig_header = map_chr(data, ~ paste0("<!-- ", gsub("^# ", "", .), " -->", collapse = "\n"))) %>%
     select(-data)
 
   split %>%
@@ -44,8 +43,8 @@ process_file <- function(path, rmd_path) {
     mutate(comment = if_else(comment, "comment", "code")) %>%
     spread(comment, data) %>%
     left_join(headers, by = "id") %>%
-    select(id, orig_header, comment, chunk_name, code) %>%
-    mutate(chunk = paste0(orig_header, "\n", "```{r include = FALSE}\n", comment, "\n```\n", "```{r ", chunk_name, "}\n", code, "\n```\n\n\n")) %>%
+    select(id, comment, chunk_name, code) %>%
+    mutate(chunk = paste0("```{r include = FALSE}\n", comment, "\n```\n", "```{r ", chunk_name, "}\n", code, "\n```\n\n\n")) %>%
     pull() %>%
     glue::glue_collapse(sep = "") %>%
     gsub("\n+$", "", .) %>%

@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Pure functions and side effects
 
-<!-- Setup 34-function-purity.R -->
 ```{r include = FALSE}
 # Setup 34-function-purity.R
 ```
@@ -15,7 +14,6 @@ library(tidyverse)
 
 Functions should do one thing, and do it well.^[Unix philosophy, originated by Ken Thompson]
 
-<!-- Functions should do one thing, and do it well. -->
 ```{r include = FALSE}
 # Functions should do one thing, and do it well.
 ```
@@ -25,7 +23,6 @@ Functions should do one thing, and do it well.^[Unix philosophy, originated by K
 
 Pure function: called for its return value, no side effects:
 
-<!-- Pure function: called for its return value, no side effects! -->
 ```{r include = FALSE}
 # Pure function: called for its return value, no side effects!
 ```
@@ -38,12 +35,10 @@ pure_function(1)
 ```
 
 
-<!-- Function with side effect: called for its side effect, returns input -->
 
 
 Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):
 
-<!-- invisibly (=no changes to return value). -->
 ```{r include = FALSE}
 # Function with side effect: called for its side effect, returns input
 # invisibly (=no changes to return value).
@@ -67,9 +62,6 @@ If side effect functions return the input, they remain composable with pure func
 
 
 
-<!-- Separation helps isolate the side effects. -->
-<!-- If side effect functions return the input, they remain composable with -->
-<!-- pure functions. -->
 ```{r include = FALSE}
 # Separation helps isolate the side effects.
 # If side effect functions return the input, they remain composable with

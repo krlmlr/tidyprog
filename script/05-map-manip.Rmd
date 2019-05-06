@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Manipulating all datasets
 
-<!-- Setup 05-map-manip.R -->
 ```{r include = FALSE}
 # Setup 05-map-manip.R
 ```
@@ -15,7 +14,6 @@ library(here)
 ```
 
 
-<!-- Load dictionary from file -->
 ```{r include = FALSE}
 # Load dictionary from file
 ```
@@ -25,7 +23,6 @@ dict
 ```
 
 
-<!-- Collect input data -->
 ```{r include = FALSE}
 # Collect input data
 ```
@@ -38,7 +35,6 @@ input_data <-
 ```
 
 
-<!-- Manipulate results -->
 ```{r include = FALSE}
 # Manipulate results
 ```
@@ -48,7 +44,6 @@ input_data %>%
 ```
 
 
-<!-- Manipulate results more -->
 ```{r include = FALSE}
 # Manipulate results more
 ```
@@ -59,7 +54,6 @@ input_data %>%
 ```
 
 
-<!-- Create a function to manipulate -->
 ```{r include = FALSE}
 # Create a function to manipulate
 ```
@@ -72,7 +66,6 @@ manipulator <- function(data) {
 ```
 
 
-<!-- Functions are first-class objects! -->
 ```{r include = FALSE}
 # Functions are first-class objects!
 ```
@@ -81,7 +74,6 @@ manipulator
 ```
 
 
-<!-- Test the function -->
 ```{r include = FALSE}
 # Test the function
 ```
@@ -90,7 +82,6 @@ manipulator(input_data[[4]])
 ```
 
 
-<!-- Run the function on the entire dataset -->
 ```{r include = FALSE}
 # Run the function on the entire dataset
 ```
@@ -100,7 +91,6 @@ manipulated_data
 ```
 
 
-<!-- Shortcut -->
 ```{r include = FALSE}
 # Shortcut
 ```
@@ -109,7 +99,6 @@ map(input_data, manipulator)
 ```
 
 
-<!-- Write back results: new file names -->
 ```{r include = FALSE}
 # Write back results: new file names
 ```
@@ -118,7 +107,6 @@ output_filenames <- tempfile(names(input_data), fileext = ".csv")
 ```
 
 
-<!-- Iterate over pairs -->
 ```{r include = FALSE}
 # Iterate over pairs
 ```
@@ -127,7 +115,6 @@ map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
 
-<!-- We don't really need the output -->
 ```{r include = FALSE}
 # We don't really need the output
 ```

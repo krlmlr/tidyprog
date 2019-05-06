@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Basics
 
-<!-- Setup 31-function.R -->
 ```{r include = FALSE}
 # Setup 31-function.R
 ```
@@ -15,7 +14,6 @@ library(here)
 ```
 
 
-<!-- ## TODO: Split script, don't overwrite! -->
 ```{r include = FALSE}
 ## TODO: Split script, don't overwrite!
 ```
@@ -24,8 +22,6 @@ library(here)
 ```
 
 
-<!-- Important! Please reset the R session before running this script. -->
-<!-- (In RStudio: Session/Restart R) -->
 ```{r include = FALSE}
 # Important! Please reset the R session before running this script.
 # (In RStudio: Session/Restart R)
@@ -38,7 +34,6 @@ library(here)
 
 Create functions for tasks that need to be executed frequently.
 
-<!-- Declare a function to hide implementation details -->
 ```{r include = FALSE}
 # Declare a function to hide implementation details
 ```
@@ -66,7 +61,6 @@ read_weather_data <- function() {
 
 Display the code of any function by writing its name without the subsequent brackets:
 
-<!-- Functions are first-class objects -->
 ```{r include = FALSE}
 # Functions are first-class objects
 ```
@@ -76,7 +70,6 @@ read_weather_data
 
 Execute the function by adding the brackets:
 
-<!-- Execute like functions exported from packages -->
 ```{r include = FALSE}
 # Execute like functions exported from packages
 ```
@@ -87,8 +80,6 @@ read_weather_data()
 
 List `R`-objects in an environment:
 
-<!-- Variables are local, execution doesn't change global variables. -->
-<!-- (The effect is only seen when starting R in a fresh session.) -->
 ```{r include = FALSE}
 # Variables are local, execution doesn't change global variables.
 # (The effect is only seen when starting R in a fresh session.)
@@ -99,7 +90,6 @@ ls()
 
 Assign function values to a variable:
 
-<!-- Assign result to use in further operations -->
 ```{r include = FALSE}
 # Assign result to use in further operations
 ```
@@ -109,7 +99,6 @@ weather_data <- read_weather_data()
 
 Functions with arguments:
 
-<!-- Functions can have arguments -->
 ```{r include = FALSE}
 # Functions can have arguments
 ```
@@ -122,7 +111,6 @@ weather_path <- function(filename) {
 
 Call functions from within functions:
 
-<!-- Functions can be called by other functions -->
 ```{r include = FALSE}
 # Functions can be called by other functions
 ```
@@ -149,7 +137,6 @@ read_weather_data <- function() {
 ```
 
 
-<!-- Still need to run a function -->
 ```{r include = FALSE}
 # Still need to run a function
 ```
@@ -159,7 +146,6 @@ read_weather_data()
 
 Functions can help to avoid using intermediate variables:
 
-<!-- Functions can help eliminate intermediate variables -->
 ```{r include = FALSE}
 # Functions can help eliminate intermediate variables
 ```
@@ -186,7 +172,6 @@ read_weather_data()
 ```
 
 
-<!-- ### Exercise -->
 ```{r include = FALSE}
 ### Exercise
 ```
@@ -195,7 +180,6 @@ read_weather_data()
 ```
 
 
-<!-- Simplify more? -->
 ```{r include = FALSE}
 # Simplify more?
 ```
@@ -204,7 +188,6 @@ read_weather_data()
 ```
 
 
-<!-- Get rid of repeated .xlsx? -->
 ```{r include = FALSE}
 # Get rid of repeated .xlsx?
 ```

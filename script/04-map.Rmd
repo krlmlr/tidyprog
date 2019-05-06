@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Processing all files
 
-<!-- Setup 04-map.R -->
 ```{r include = FALSE}
 # Setup 04-map.R
 ```
@@ -15,7 +14,6 @@ library(here)
 ```
 
 
-<!-- Load dictionary from file -->
 ```{r include = FALSE}
 # Load dictionary from file
 ```
@@ -25,7 +23,6 @@ dict
 ```
 
 
-<!-- Collect input files as a named vector -->
 ```{r include = FALSE}
 # Collect input files as a named vector
 ```
@@ -39,7 +36,6 @@ names(input_files)
 ```
 
 
-<!-- Access individual input files -->
 ```{r include = FALSE}
 # Access individual input files
 ```
@@ -50,7 +46,6 @@ input_files[["berlin"]]
 ```
 
 
-<!-- Read a single input file -->
 ```{r include = FALSE}
 # Read a single input file
 ```
@@ -59,7 +54,6 @@ readxl::read_excel(here(input_files[[1]]))
 ```
 
 
-<!-- Read all input files -->
 ```{r include = FALSE}
 # Read all input files
 ```
@@ -72,7 +66,6 @@ names(input_data)
 ```
 
 
-<!-- Pipe notation -->
 ```{r include = FALSE}
 # Pipe notation
 ```

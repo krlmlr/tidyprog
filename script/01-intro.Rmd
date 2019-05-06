@@ -7,7 +7,6 @@ rm(list = ls())
 
 ### Loading necessary libraries
 
-<!-- Setup 01-intro.R -->
 ```{r include = FALSE}
 # Setup 01-intro.R
 ```
@@ -42,7 +41,6 @@ Thus we have 49 observations in each city.
 
 Reading in the data, which is stored in MS Excel-Files:
 
-<!-- Read all files -->
 ```{r include = FALSE}
 # Read all files
 ```
@@ -55,7 +53,6 @@ zurich <- readxl::read_excel(here("data/weather", "zurich.xlsx"))
 
 Create one larger tibble from the four smaller ones:
 
-<!-- Create ensemble dataset -->
 ```{r include = FALSE}
 # Create ensemble dataset
 ```
@@ -71,7 +68,6 @@ weather_data <- bind_rows(
 
 ### Exploration
 
-<!-- Show the data -->
 ```{r include = FALSE}
 # Show the data
 ```
@@ -81,7 +77,6 @@ weather_data
 
 Example plot of humidity vs. pressure (`geom_path()` ensures that points are connected according to their order in the tibble):
 
-<!-- Visibility vs. humitidy -->
 ```{r include = FALSE}
 # Visibility vs. humitidy
 ```
@@ -93,7 +88,6 @@ weather_data %>%
 
 Barplots of number of occurences of each kind of weather per city:
 
-<!-- Summary -->
 ```{r include = FALSE}
 # Summary
 ```
@@ -109,7 +103,6 @@ weather_data %>%
 
 Lineplot with different line types and an additional visualisation of the line range (here, difference between apparent and actual temperature):
 
-<!-- Temperature and apparent temperature -->
 ```{r include = FALSE}
 # Temperature and apparent temperature
 ```
@@ -129,7 +122,6 @@ temperature_data %>%
 
 Relation of temperature difference between actual and apparent temperature (cf. line range in last plot) with wind speed, shown as scatter plot.
 
-<!-- Compute and plot temperature difference -->
 ```{r include = FALSE}
 # Compute and plot temperature difference
 ```
@@ -145,8 +137,6 @@ weather_data %>%
 
 If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:
 
-<!-- Compute lag for temperature, pressure and humidity. -->
-<!-- How to compute temperature difference to previous hour? -->
 ```{r include = FALSE}
 # Compute lag for temperature, pressure and humidity.
 # How to compute temperature difference to previous hour?
@@ -161,7 +151,6 @@ weather_data %>%
 
 Count observations per category or combinations of categories:
 
-<!-- Count observations -->
 ```{r include = FALSE}
 # Count observations
 ```
@@ -175,7 +164,6 @@ weather_data %>%
 
 Use `summarize()` to create a tibble with mean and maximum temperature for each city:
 
-<!-- Compute mean and max temperature -->
 ```{r include = FALSE}
 # Compute mean and max temperature
 ```
@@ -188,7 +176,6 @@ weather_data %>%
 
 Compute and display summary data for all numeric variables:
 
-<!-- Compute and display summary data for all numeric variables -->
 ```{r include = FALSE}
 # Compute and display summary data for all numeric variables
 ```

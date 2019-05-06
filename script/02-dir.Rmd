@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Vectors and columns
 
-<!-- Setup 02-dir.R -->
 ```{r include = FALSE}
 # Setup 02-dir.R
 ```
@@ -15,7 +14,6 @@ library(here)
 ```
 
 
-<!-- Show all files, see also fs::dir_ls() -->
 ```{r include = FALSE}
 # Show all files, see also fs::dir_ls()
 ```
@@ -25,7 +23,6 @@ files
 ```
 
 
-<!-- Convert to tibble -->
 ```{r include = FALSE}
 # Convert to tibble
 ```
@@ -38,7 +35,6 @@ files_df
 ```
 
 
-<!-- Remove the name column -->
 ```{r include = FALSE}
 # Remove the name column
 ```
@@ -51,7 +47,6 @@ files_df_1
 ```
 
 
-<!-- Construct tibble from a vector -->
 ```{r include = FALSE}
 # Construct tibble from a vector
 ```
@@ -60,7 +55,6 @@ tibble(filename = files)
 ```
 
 
-<!-- Extract a column as a vector -->
 ```{r include = FALSE}
 # Extract a column as a vector
 ```
@@ -70,7 +64,6 @@ files_df %>%
 ```
 
 
-<!-- Extract a specific column as a vector -->
 ```{r include = FALSE}
 # Extract a specific column as a vector
 ```

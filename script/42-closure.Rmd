@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Closures
 
-<!-- Setup 42-closure.R -->
 ```{r include = FALSE}
 # Setup 42-closure.R
 ```
@@ -25,7 +24,6 @@ read_weather_file <- function(filename) {
 Closures can e.g. be used for the creation of functions. 
 Here we create a function that loads a particular dataset:
 
-<!-- Create a function that loads a particular dataset -->
 ```{r include = FALSE}
 # Create a function that loads a particular dataset
 ```
@@ -54,7 +52,6 @@ read_berlin()
 
 Use closures as wrappers for other verbs/functions (such functions are also called "adverbs"):
 
-<!-- Use case: adverbs -- wrappers for other verbs -->
 ```{r include = FALSE}
 # Use case: adverbs -- wrappers for other verbs
 ```

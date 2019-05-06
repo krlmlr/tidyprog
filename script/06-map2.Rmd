@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Manipulating pairwise
 
-<!-- Setup 06-map2.R -->
 ```{r include = FALSE}
 # Setup 06-map2.R
 ```
@@ -15,7 +14,6 @@ library(here)
 ```
 
 
-<!-- Load dictionary from file -->
 ```{r include = FALSE}
 # Load dictionary from file
 ```
@@ -25,7 +23,6 @@ dict
 ```
 
 
-<!-- Create a function to manipulate -->
 ```{r include = FALSE}
 # Create a function to manipulate
 ```
@@ -38,7 +35,6 @@ manipulator <- function(data) {
 ```
 
 
-<!-- Collect and manipulate input data -->
 ```{r include = FALSE}
 # Collect and manipulate input data
 ```
@@ -52,7 +48,6 @@ manipulated_data <-
 ```
 
 
-<!-- Write back results: new file names -->
 ```{r include = FALSE}
 # Write back results: new file names
 ```
@@ -62,7 +57,6 @@ output_filenames
 ```
 
 
-<!-- Iterate over pairs -->
 ```{r include = FALSE}
 # Iterate over pairs
 ```
@@ -71,7 +65,6 @@ map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
 
-<!-- We don't really need the output -->
 ```{r include = FALSE}
 # We don't really need the output
 ```

@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Control flow
 
-<!-- Setup 41-function-if.R -->
 ```{r include = FALSE}
 # Setup 41-function-if.R
 ```
@@ -24,7 +23,6 @@ read_weather_file <- function(filename) {
 
 A way to regulate the control flow is by using `if ()`:
 
-<!-- if () executes code conditionally -->
 ```{r include = FALSE}
 # if () executes code conditionally
 ```
@@ -64,12 +62,10 @@ read_weather_data(omit_toronto = TRUE, omit_zurich = FALSE) %>%
 ```
 
 
-<!-- Useful with an early return() -->
 
 
 This can be useful if aiming at a possible early return:
 
-<!-- && and ||: shortcut operators for scalar logical -->
 ```{r include = FALSE}
 # Useful with an early return()
 # && and ||: shortcut operators for scalar logical
@@ -112,8 +108,6 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 Conditional branching with if-else-logic. 
 (This is just for illustration, you should not implement code like this!)
 
-<!-- else if/else: branching -->
-<!-- (Just for illustration, do not implement code like this!) -->
 ```{r include = FALSE}
 # else if/else: branching
 # (Just for illustration, do not implement code like this!)
