@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x1a50d98&gt;</code></pre>
+## &lt;environment: 0x1bc7d98&gt;</code></pre>
 <p>Execute the function by adding the brackets:</p>
 <!-- Execute like functions exported from packages -->
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
@@ -596,7 +596,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmpkclbvh/file3b356127bf35</code></pre>
+<pre><code>## 2 written to /tmp/RtmpWEzJJj/file2b4f15e6a957</code></pre>
 <!-- Separation helps isolate the side effects. -->
 <!-- If side effect functions return the input, they remain composable with -->
 <p>Separation helps isolate the side effects.
@@ -607,7 +607,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmpkclbvh/file3b35765cd927</code></pre>
+<pre><code>## 6 written to /tmp/RtmpWEzJJj/file2b4f6b1e9f91</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -777,7 +777,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x7a3a1d8&gt;</code></pre>
+## &lt;environment: 0x7bfb480&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -820,7 +820,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0xab7ea28&gt;</code></pre>
+## &lt;environment: 0x8e4f0d8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18
