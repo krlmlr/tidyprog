@@ -50,3 +50,9 @@ Best practice: functions should be self-contained, independent of global variabl
 ```{r 33-best-practice-self-contained-functions-independent-of-global-variables}
 
 ```
+
+
+<!-- ## Exercises: -->
+```{r 33-exercises}
+
+```
