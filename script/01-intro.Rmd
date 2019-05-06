@@ -13,11 +13,29 @@ library(tidyverse)
 library(here)
 ```
 
-### Short description of and reading in the data
+### Data
 
 We will be working with hourly measurements of weather data ([link to data documentation](https://darksky.net/dev/docs)) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
 Thus we have 49 observations in each city.
-The available variables are: `time`,	`summary` (how to describe the weather in one word),	`icon`	(mix of description of weather plus time of day), `precipIntensity` (intensity of precipitation [mm/h]),	`precipProbability`,	`temperature`,	`apparentTemperature`,	`dewPoint`,	`humidity`,	`pressure`,	`windSpeed`,	`windGust`,	`windBearing` (direction in degrees),	`cloudCover`,	`uvIndex`,	`visibility`,	`ozone`,	`precipType`
+- `time`
+- `summary` (how to describe the weather in one word)
+- `icon`(mix of description of weather plus time of day)
+- `precipIntensity` (intensity of precipitation [mm/h])
+- `precipProbability`
+- `temperature`
+- `apparentTemperature`
+- `dewPoint`
+- `humidity`
+- `pressure`
+- `windSpeed`
+- `windGust`
+- `windBearing` (direction in degrees)
+- `cloudCover`
+- `uvIndex`
+- `visibility`
+- `ozone`
+- `precipType`
+
 
 Reading in the data, which is stored in MS Excel-Files:
 
@@ -42,7 +60,7 @@ weather_data <- bind_rows(
 )
 ```
 
-### Exploring the data, visualisations
+### Exploration
 
 <!-- Show the data -->
 ```{r 01-show-the-data}
@@ -58,7 +76,7 @@ weather_data %>%
   geom_path()
 ```
 
-Barplots of number of occurences of `summary` for each city:
+Barplots of number of occurences of each kind of weather per city:
 
 <!-- Summary -->
 ```{r 01-summary}
