@@ -1,6 +1,7 @@
-all: sync
+all: scaffold
 
-sync:
-	git subtree pull --prefix proj ../tidyprog-proj HEAD < /dev/null && \
+scaffold:
 	R -q -f scaffold.R
 
+sync:
+	git subtree push --prefix proj ../tidyprog-proj website
