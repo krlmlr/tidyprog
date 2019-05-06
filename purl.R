@@ -9,9 +9,13 @@ process_file <- function(path) {
   input <- readLines(here(path))
   header <- input[[6]]
   knitr::purl(text = input[-(1:6)], output = r_path, documentation = 0L)
+  r_path
 }
 
 files <- dir("script", pattern = "^[0-9][0-9].*[.]Rmd$", full.names = TRUE)
 
-unlink(dir(here("proj", "script"), full.names = TRUE))
-walk(files, process_file)
+paths <- map_chr(files, process_file)
+
+all_files <- dir(here("proj", "script"), full.names = TRUE)
+to_remove <- setdiff(all_files, paths)
+unlink(to_remove)
