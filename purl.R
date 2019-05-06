@@ -13,4 +13,5 @@ process_file <- function(path) {
 
 files <- dir("script", pattern = "^[0-9][0-9].*[.]Rmd$", full.names = TRUE)
 
+unlink(dir(here("proj", "script"), full.names = TRUE))
 walk(files, process_file)

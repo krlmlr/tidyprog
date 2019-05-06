@@ -1,0 +1,5 @@
+```{r child = here("script", "51-function-if.Rmd")}
+```
+
+```{r child = here("script", "52-closure.Rmd")}
+```

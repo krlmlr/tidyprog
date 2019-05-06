@@ -1,4 +1,4 @@
-```{r 33-remove-all, include = FALSE}
+```{r 43-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -11,7 +11,7 @@ When working with functions, it is important to be aware of the scope of objects
 ### Scope
 
 ```
-```{r 33-setup-33-function-scoping-r}
+```{r 43-setup-43-function-scoping-r}
 a <- 5
 ```
 
@@ -20,7 +20,7 @@ a <- 5
 ```{r include = FALSE}
 # A function can access global variables:
 ```
-```{r 33-a-function-can-access-global-variables}
+```{r 43-a-function-can-access-global-variables}
 f <- function() {
   a
 }
@@ -33,7 +33,7 @@ On the other hand, a variable which is defined inside a function, will not be kn
 ```{r include = FALSE}
 # When a function writes to a variable, it always writes in scope
 ```
-```{r 33-when-a-function-writes-to-a-variable-it-always-writes-in-scope}
+```{r 43-when-a-function-writes-to-a-variable-it-always-writes-in-scope}
 f <- function() {
   a <- 2
   a
@@ -51,7 +51,7 @@ Best practice: functions should be self-contained, independent of global variabl
 # Global variables are a (hidden) part of a function's interface!
 # Best practice: self-contained functions, independent of global variables
 ```
-```{r 33-global-variables-are-a-hidden-part-of-a-function-s-interface}
+```{r 43-global-variables-are-a-hidden-part-of-a-function-s-interface}
 
 ```
 
@@ -59,5 +59,5 @@ Best practice: functions should be self-contained, independent of global variabl
 ```{r include = FALSE}
 ## Exercises:
 ```
-```{r 33-exercises}
+```{r 43-exercises}
 ```

@@ -1,5 +1,5 @@
-```{r child = here("script", "41-function-if.Rmd")}
+```{r child = here("script", "43-function-scoping.Rmd")}
 ```
 
-```{r child = here("script", "42-closure.Rmd")}
+```{r child = here("script", "44-function-purity.Rmd")}
 ```

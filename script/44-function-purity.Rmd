@@ -1,4 +1,4 @@
-```{r 34-remove-all, include = FALSE}
+```{r 44-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -9,7 +9,7 @@ rm(list = ls())
 ### Pure functions and side effects
 
 ```
-```{r 34-setup-34-function-purity-r}
+```{r 44-setup-44-function-purity-r}
 library(tidyverse)
 ```
 
@@ -18,7 +18,7 @@ Functions should do one thing, and do it well.^[Unix philosophy, originated by K
 ```{r include = FALSE}
 # Functions should do one thing, and do it well.
 ```
-```{r 34-functions-should-do-one-thing-and-do-it-well}
+```{r 44-functions-should-do-one-thing-and-do-it-well}
 
 ```
 
@@ -27,7 +27,7 @@ Pure function: called for its return value, no side effects:
 ```{r include = FALSE}
 # Pure function: called for its return value, no side effects!
 ```
-```{r 34-pure-function-called-for-its-return-value-no-side-effects}
+```{r 44-pure-function-called-for-its-return-value-no-side-effects}
 pure_function <- function(x) {
   x + 1
 }
@@ -44,7 +44,7 @@ Function with side effect: called for its side effect, returns input (here invis
 # Function with side effect: called for its side effect, returns input
 # invisibly (=no changes to return value).
 ```
-```{r 34-function-with-side-effect-called-for-its-side-effect-returns-input}
+```{r 44-function-with-side-effect-called-for-its-side-effect-returns-input}
 side_effect_function <- function(x) {
   file <- tempfile()
   writeLines(format(x), tempfile())
@@ -68,7 +68,7 @@ If side effect functions return the input, they remain composable with pure func
 # If side effect functions return the input, they remain composable with
 # pure functions.
 ```
-```{r 34-separation-helps-isolate-the-side-effects}
+```{r 44-separation-helps-isolate-the-side-effects}
 5 %>%
   pure_function() %>%
   side_effect_function() %>%

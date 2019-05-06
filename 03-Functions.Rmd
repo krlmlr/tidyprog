@@ -12,3 +12,6 @@ library(here)
 
 ```{r child = here("script", "4.Rmd")}
 ```
+
+```{r child = here("script", "5.Rmd")}
+```

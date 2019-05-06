@@ -1,4 +1,4 @@
-```{r 42-remove-all, include = FALSE}
+```{r 52-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -9,7 +9,7 @@ rm(list = ls())
 ### Closures
 
 ```
-```{r 42-setup-42-closure-r}
+```{r 52-setup-52-closure-r}
 library(tidyverse)
 library(here)
 
@@ -28,7 +28,7 @@ Here we create a function that loads a particular dataset:
 ```{r include = FALSE}
 # Create a function that loads a particular dataset
 ```
-```{r 42-create-a-function-that-loads-a-particular-dataset}
+```{r 52-create-a-function-that-loads-a-particular-dataset}
 make_read_weather_file <- function(filename) {
   # Avoid odd effects due to lazy evaluation
   force(filename)
@@ -56,7 +56,7 @@ Use closures as wrappers for other verbs/functions (such functions are also call
 ```{r include = FALSE}
 # Use case: adverbs -- wrappers for other verbs
 ```
-```{r 42-use-case-adverbs-wrappers-for-other-verbs}
+```{r 52-use-case-adverbs-wrappers-for-other-verbs}
 loudly <- function(f) {
   force(f)
 

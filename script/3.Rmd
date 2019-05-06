@@ -1,11 +1,5 @@
 ```{r child = here("script", "31-function.Rmd")}
 ```
 
-```{r child = here("script", "32-function-details.Rmd")}
-```
-
-```{r child = here("script", "33-function-scoping.Rmd")}
-```
-
-```{r child = here("script", "34-function-purity.Rmd")}
+```{r child = here("script", "36-function-details.Rmd")}
 ```
