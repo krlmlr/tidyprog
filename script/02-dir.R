@@ -7,7 +7,7 @@ library(here)
 files <- dir(here("data/weather"), full.names = TRUE)
 files
 
-# Convert to tibble
+# Convert to a tibble
 files_df <-
   files %>%
   enframe()

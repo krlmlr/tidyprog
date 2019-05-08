@@ -42,12 +42,3 @@ manipulated_data
 
 # Shortcut
 map(input_data, manipulator)
-
-# Write back results: new file names
-output_filenames <- tempfile(names(input_data), fileext = ".csv")
-
-# Iterate over pairs
-map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
-
-# We don't really need the output
-walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
