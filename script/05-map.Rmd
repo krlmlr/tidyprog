@@ -21,6 +21,7 @@ input_files <-
   select(city_code, weather_filename) %>%
   deframe()
 ```
+</details>
 
 
 ```{r include = FALSE}
