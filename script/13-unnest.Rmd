@@ -3,14 +3,14 @@ rm(list = ls())
 ```
 
 
-## <No caption defined>
+## Nesting and unnesting
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
-### <No caption defined>
+### Nesting and unnesting
 
 ```
-```{r 13-setup-11-unnest-r}
+```{r 13-setup-13-unnest-r}
 library(tidyverse)
 library(here)
 
