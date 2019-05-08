@@ -3,11 +3,8 @@
 library(tidyverse)
 library(here)
 
-# Load dictionary from file
 dict <- readxl::read_excel(here("data/cities.xlsx"))
-dict
 
-# Collect input data
 input_data <-
   dict %>%
   select(city_code, weather_filename) %>%
