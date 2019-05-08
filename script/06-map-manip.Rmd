@@ -10,7 +10,7 @@ rm(list = ls())
 ### Manipulating all datasets
 
 ```
-```{r 05-setup-05-map-manip-r}
+```{r 06-setup-05-map-manip-r}
 library(tidyverse)
 library(here)
 
@@ -28,7 +28,7 @@ input_data <-
 ```{r include = FALSE}
 # Manipulate results
 ```
-```{r 05-manipulate-results}
+```{r 06-manipulate-results}
 input_data %>%
   map(~ select(., time, contains("emperature")))
 ```
@@ -37,7 +37,7 @@ input_data %>%
 ```{r include = FALSE}
 # Manipulate results more
 ```
-```{r 05-manipulate-results-more}
+```{r 06-manipulate-results-more}
 input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
   map(~ filter(., temperature >= 14))
@@ -47,7 +47,7 @@ input_data %>%
 ```{r include = FALSE}
 # Create a function to manipulate
 ```
-```{r 05-create-a-function-to-manipulate}
+```{r 06-create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
@@ -59,7 +59,7 @@ manipulator <- function(data) {
 ```{r include = FALSE}
 # Functions are first-class objects!
 ```
-```{r 05-functions-are-first-class-objects}
+```{r 06-functions-are-first-class-objects}
 manipulator
 ```
 
@@ -67,7 +67,7 @@ manipulator
 ```{r include = FALSE}
 # Test the function
 ```
-```{r 05-test-the-function}
+```{r 06-test-the-function}
 manipulator(input_data[[4]])
 ```
 
@@ -75,7 +75,7 @@ manipulator(input_data[[4]])
 ```{r include = FALSE}
 # Run the function on the entire dataset
 ```
-```{r 05-run-the-function-on-the-entire-dataset}
+```{r 06-run-the-function-on-the-entire-dataset}
 manipulated_data <- map(input_data, ~ manipulator(.))
 manipulated_data
 ```
@@ -84,6 +84,6 @@ manipulated_data
 ```{r include = FALSE}
 # Shortcut
 ```
-```{r 05-shortcut}
+```{r 06-shortcut}
 map(input_data, manipulator)
 ```

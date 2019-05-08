@@ -1,4 +1,4 @@
-```{r 07-remove-all, include = FALSE}
+```{r 11-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Manipulating pairwise
 
 ```
-```{r 06-setup-06-map-2-r}
+```{r 11-setup-06-map-2-r}
 library(tidyverse)
 library(here)
 
@@ -35,7 +35,7 @@ manipulated_data <-
 ```{r include = FALSE}
 # Write back results: new file names
 ```
-```{r 06-write-back-results-new-file-names}
+```{r 11-write-back-results-new-file-names}
 output_filenames <- tempfile(names(manipulated_data), fileext = ".csv")
 output_filenames
 ```
@@ -44,7 +44,7 @@ output_filenames
 ```{r include = FALSE}
 # Iterate over pairs
 ```
-```{r 06-iterate-over-pairs}
+```{r 11-iterate-over-pairs}
 map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
@@ -52,6 +52,6 @@ map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```{r include = FALSE}
 # We don't really need the output
 ```
-```{r 06-we-don-t-really-need-the-output}
+```{r 11-we-don-t-really-need-the-output}
 walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```

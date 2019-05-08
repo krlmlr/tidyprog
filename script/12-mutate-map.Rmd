@@ -1,4 +1,4 @@
-```{r 10-remove-all, include = FALSE}
+```{r 12-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### <No caption defined>
 
 ```
-```{r 10-setup-10-mutate-map-r}
+```{r 12-setup-10-mutate-map-r}
 library(tidyverse)
 library(here)
 
@@ -28,7 +28,7 @@ input_data <-
 ```{r include = FALSE}
 # Lists are also vectors, enframe() returns a nested tibble!
 ```
-```{r 10-lists-are-also-vectors-enframe-returns-a-nested-tibble}
+```{r 12-lists-are-also-vectors-enframe-returns-a-nested-tibble}
 input_data %>%
   enframe()
 ```
@@ -37,7 +37,7 @@ input_data %>%
 ```{r include = FALSE}
 # Operate in "tibble-land" right away: columns are vectors
 ```
-```{r 10-operate-in-tibble-land-right-away-columns-are-vectors}
+```{r 12-operate-in-tibble-land-right-away-columns-are-vectors}
 dict %>%
   select(city_code, weather_filename) %>%
   mutate(
@@ -49,7 +49,7 @@ dict %>%
 ```{r include = FALSE}
 # Keep important columns
 ```
-```{r 10-keep-important-columns}
+```{r 12-keep-important-columns}
 dict_data <-
   dict %>%
   mutate(

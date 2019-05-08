@@ -1,4 +1,4 @@
-```{r 11-remove-all, include = FALSE}
+```{r 13-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### <No caption defined>
 
 ```
-```{r 11-setup-11-unnest-r}
+```{r 13-setup-11-unnest-r}
 library(tidyverse)
 library(here)
 
@@ -27,7 +27,7 @@ dict_data <-
 ```{r include = FALSE}
 # Flatten a nested tibble with unnest():
 ```
-```{r 11-flatten-a-nested-tibble-with-unnest}
+```{r 13-flatten-a-nested-tibble-with-unnest}
 dict_data %>%
   unnest()
 
@@ -40,7 +40,7 @@ dict_data %>%
 ```{r include = FALSE}
 # Inverse operation: nest()
 ```
-```{r 11-inverse-operation-nest}
+```{r 13-inverse-operation-nest}
 dict_data %>%
   unnest() %>%
   nest(-city_code, -name, -lng, -lat)
@@ -50,7 +50,7 @@ dict_data %>%
 ```{r include = FALSE}
 # Split into daily data:
 ```
-```{r 11-split-into-daily-data}
+```{r 13-split-into-daily-data}
 dict_data %>%
   unnest() %>%
   mutate(date = as.Date(time)) %>%
