@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## Processing all files
+## Indexing
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
-### Processing all files
+### Indexing
 
 ```
 ```{r 04-setup-04-index-r}

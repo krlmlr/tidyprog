@@ -1,6 +1,4 @@
-# Function arguments and scoping
-
-> Structuring the code to avoid too much copy-pasting
+# Scoping and flow control
 
 ```{r 05-setup, include = FALSE}
 library(here)
