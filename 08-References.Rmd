@@ -1,2 +1,9 @@
 # `r if (knitr::is_html_output()) '# References {-}'`
 
+- Advanced R: http://adv-r.had.co.nz/
+
+- Tidy evaluation: https://tidyeval.tidyverse.org/
+
+- R packages: http://r-pkgs.had.co.nz/
+
+- How R searches and finds stuff: http://blog.obeautifulcode.com/R/How-R-Searches-And-Finds-Stuff/
