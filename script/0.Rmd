@@ -7,11 +7,14 @@
 ```{r child = here("script", "03-names.Rmd")}
 ```
 
-```{r child = here("script", "04-map.Rmd")}
+```{r child = here("script", "04-index.Rmd")}
 ```
 
-```{r child = here("script", "05-map-manip.Rmd")}
+```{r child = here("script", "05-map.Rmd")}
 ```
 
-```{r child = here("script", "06-map2.Rmd")}
+```{r child = here("script", "06-map-manip.Rmd")}
+```
+
+```{r child = here("script", "07-map2.Rmd")}
 ```
