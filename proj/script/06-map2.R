@@ -3,18 +3,14 @@
 library(tidyverse)
 library(here)
 
-# Load dictionary from file
 dict <- readxl::read_excel(here("data/cities.xlsx"))
-dict
 
-# Create a function to manipulate
 manipulator <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
     filter(temperature >= 14)
 }
 
-# Collect and manipulate input data
 manipulated_data <-
   dict %>%
   select(city_code, weather_filename) %>%

@@ -12,15 +12,8 @@ rm(list = ls())
 ```{r 04-setup-04-map-r}
 library(tidyverse)
 library(here)
-```
 
-
-```{r include = FALSE}
-# Load dictionary from file
-```
-```{r 04-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
-dict
 ```
 
 

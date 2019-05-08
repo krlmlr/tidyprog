@@ -12,34 +12,15 @@ rm(list = ls())
 ```{r 06-setup-06-map-2-r}
 library(tidyverse)
 library(here)
-```
 
-
-```{r include = FALSE}
-# Load dictionary from file
-```
-```{r 06-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
-dict
-```
 
-
-```{r include = FALSE}
-# Create a function to manipulate
-```
-```{r 06-create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
     filter(temperature >= 14)
 }
-```
 
-
-```{r include = FALSE}
-# Collect and manipulate input data
-```
-```{r 06-collect-and-manipulate-input-data}
 manipulated_data <-
   dict %>%
   select(city_code, weather_filename) %>%

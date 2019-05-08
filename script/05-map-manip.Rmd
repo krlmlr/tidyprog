@@ -12,22 +12,9 @@ rm(list = ls())
 ```{r 05-setup-05-map-manip-r}
 library(tidyverse)
 library(here)
-```
 
-
-```{r include = FALSE}
-# Load dictionary from file
-```
-```{r 05-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
-dict
-```
 
-
-```{r include = FALSE}
-# Collect input data
-```
-```{r 05-collect-input-data}
 input_data <-
   dict %>%
   select(city_code, weather_filename) %>%
