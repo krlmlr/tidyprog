@@ -186,15 +186,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <div id="review-of-visualization-and-data-transformation" class="section level2">
 <h2><span class="header-section-number">2.1</span> Review of visualization and data transformation</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
-<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;rvest&#39;:
-##   method            from
-##   read_xml.response xml2</code></pre>
 <pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ## ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
@@ -204,6 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(here)</code></pre>
+</details>
 <div id="data" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Data</h3>
 <p>We will be working with hourly measurements of weather data (<a href="https://darksky.net/dev/docs">link to data documentation</a>) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
@@ -435,8 +430,11 @@ temperature_data <span class="op">%&gt;%</span>
 </div>
 <div id="vectors-and-columns" class="section level2">
 <h2><span class="header-section-number">2.2</span> Vectors and columns</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
+</details>
 <pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>), <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 files</code></pre>
 <pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
@@ -487,8 +485,11 @@ files_df_<span class="dv">1</span></code></pre>
 </div>
 <div id="named-vectors-and-two-column-tibbles" class="section level2">
 <h2><span class="header-section-number">2.3</span> Named vectors and two-column tibbles</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
+</details>
 <pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
 dict</code></pre>
 <pre><code>## # A tibble: 4 x 5
@@ -539,17 +540,13 @@ dict</code></pre>
 </div>
 <div id="processing-all-files" class="section level2">
 <h2><span class="header-section-number">2.4</span> Processing all files</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(here)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
-dict</code></pre>
-<pre><code>## # A tibble: 4 x 5
-##   city_code weather_filename           name        lng   lat
-##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
-## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
-## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
-## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))</code></pre>
+</details>
 <pre class="sourceCode r"><code class="sourceCode r">input_files &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
@@ -568,6 +565,12 @@ input_files</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="st">&quot;berlin&quot;</span>]]</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre>
+<pre><code>##                      berlin                     toronto 
+##  &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/toronto.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="kw">c</span>(<span class="st">&quot;berlin&quot;</span>, <span class="st">&quot;zurich&quot;</span>)]</code></pre>
+<pre><code>##                     berlin                     zurich 
+## &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">1</span>]]))</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -588,8 +591,8 @@ input_files</code></pre>
 ## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
 ## #   precipType &lt;chr&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
-<span class="st">  </span><span class="kw">map</span>(input_files, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
-input_data</code></pre>
+<span class="st">  </span><span class="kw">map</span>(input_files, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_data</code></pre>
 <pre><code>## $berlin
 ## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -772,22 +775,19 @@ input_data</code></pre>
 </div>
 <div id="manipulating-all-datasets" class="section level2">
 <h2><span class="header-section-number">2.5</span> Manipulating all datasets</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(here)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
-dict</code></pre>
-<pre><code>## # A tibble: 4 x 5
-##   city_code weather_filename           name        lng   lat
-##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
-## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
-## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
-## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+input_data &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+</details>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)))</code></pre>
 <pre><code>## $berlin
@@ -914,7 +914,7 @@ dict</code></pre>
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x1c74d98&gt;</code></pre>
+## &lt;environment: 0x1c31f48&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##   time                temperature apparentTemperature
@@ -1017,87 +1017,35 @@ manipulated_data</code></pre>
 ##   time                temperature apparentTemperature
 ##   &lt;dttm&gt;                    &lt;dbl&gt;               &lt;dbl&gt;
 ## 1 2019-04-30 15:00:00        14.3                14.3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(input_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
-<pre><code>## $berlin
-## # A tibble: 16 x 3
-##    time                 temperature apparentTemperature
-##    &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
-##  1 2019-04-28T17:00:00Z        14.1                14.1
-##  2 2019-04-29T12:00:00Z        15.6                15.6
-##  3 2019-04-29T13:00:00Z        17.4                17.4
-##  4 2019-04-29T14:00:00Z        19.0                19.0
-##  5 2019-04-29T15:00:00Z        20.0                20.0
-##  6 2019-04-29T16:00:00Z        19.8                19.8
-##  7 2019-04-29T17:00:00Z        18.6                18.6
-##  8 2019-04-29T18:00:00Z        16.7                16.7
-##  9 2019-04-29T19:00:00Z        14.8                14.8
-## 10 2019-04-30T09:00:00Z        14.9                14.9
-## 11 2019-04-30T10:00:00Z        16.5                16.5
-## 12 2019-04-30T11:00:00Z        18.0                18.0
-## 13 2019-04-30T12:00:00Z        18.8                18.8
-## 14 2019-04-30T13:00:00Z        19.0                19.0
-## 15 2019-04-30T14:00:00Z        18.7                18.7
-## 16 2019-04-30T15:00:00Z        18.3                18.3
-## 
-## $toronto
-## # A tibble: 0 x 3
-## # … with 3 variables: time &lt;chr&gt;, temperature &lt;dbl&gt;,
-## #   apparentTemperature &lt;dbl&gt;
-## 
-## $tel_aviv
-## # A tibble: 49 x 3
-##    time                 temperature apparentTemperature
-##    &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
-##  1 2019-04-28T15:00:00Z        23.9                23.9
-##  2 2019-04-28T16:00:00Z        23.1                23.1
-##  3 2019-04-28T17:00:00Z        22.4                22.4
-##  4 2019-04-28T18:00:00Z        22.0                22.0
-##  5 2019-04-28T19:00:00Z        21.6                21.6
-##  6 2019-04-28T20:00:00Z        21.5                21.5
-##  7 2019-04-28T21:00:00Z        21.2                21.2
-##  8 2019-04-28T22:00:00Z        20.8                20.8
-##  9 2019-04-28T23:00:00Z        20.2                20.2
-## 10 2019-04-29T00:00:00Z        19.8                19.8
-## # … with 39 more rows
-## 
-## $zurich
-## # A tibble: 1 x 3
-##   time                 temperature apparentTemperature
-##   &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
-## 1 2019-04-30T15:00:00Z        14.3                14.3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 </div>
 <div id="manipulating-pairwise" class="section level2">
 <h2><span class="header-section-number">2.6</span> Manipulating pairwise</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(here)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
-dict</code></pre>
-<pre><code>## # A tibble: 4 x 5
-##   city_code weather_filename           name        lng   lat
-##   &lt;chr&gt;     &lt;chr&gt;                      &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1 berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
-## 2 toronto   data/weather/toronto.xlsx  Toronto  -79.4   43.7
-## 3 tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
-## 4 zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
   data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">manipulated_data &lt;-
+}
+
+manipulated_data &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(manipulator)</code></pre>
+</details>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpQLpfgY/berlin2b9c218f8026.csv&quot; 
-## [2] &quot;/tmp/RtmpQLpfgY/toronto2b9c28a75780.csv&quot;
-## [3] &quot;/tmp/RtmpQLpfgY/tel_aviv2b9c71c74f3.csv&quot;
-## [4] &quot;/tmp/RtmpQLpfgY/zurich2b9c84e8f85.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpgaroF3/berlin3bf07700774c.csv&quot;  
+## [2] &quot;/tmp/RtmpgaroF3/toronto3bf0795fe53d.csv&quot; 
+## [3] &quot;/tmp/RtmpgaroF3/tel_aviv3bf028687f79.csv&quot;
+## [4] &quot;/tmp/RtmpgaroF3/zurich3bf0423b50d3.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <pre><code>## $berlin
 ## # A tibble: 16 x 3

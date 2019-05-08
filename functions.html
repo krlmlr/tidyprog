@@ -186,8 +186,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <div id="basics" class="section level2">
 <h2><span class="header-section-number">3.1</span> Basics</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
+</details>
 <div id="designing-functions" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Designing functions</h3>
 <p>Create functions for tasks that need to be executed frequently.</p>
@@ -231,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x1c74d98&gt;</code></pre>
+## &lt;environment: 0x1c31f48&gt;</code></pre>
 <p>Execute the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <pre><code>## # A tibble: 196 x 19
@@ -261,8 +264,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="arguments" class="section level2">
 <h2><span class="header-section-number">3.2</span> Arguments</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
+</details>
 <p>Functions with arguments:</p>
 <pre class="sourceCode r"><code class="sourceCode r">weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   <span class="co"># Returned value</span>
@@ -311,6 +317,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="use-case-intermediate-variables" class="section level2">
 <h2><span class="header-section-number">3.3</span> Use case: Intermediate variables</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -318,6 +326,7 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
   <span class="co"># Returned value</span>
   <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
 }</code></pre>
+</details>
 <p>Functions can help to avoid using intermediate variables:</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
@@ -411,6 +420,8 @@ read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>
 </div>
 <div id="default-values" class="section level2">
 <h2><span class="header-section-number">3.4</span> Default values</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 <span class="kw">library</span>(conflicted)
@@ -424,6 +435,7 @@ read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
+</details>
 <p>Provide default values for parameters:</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -500,6 +512,8 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 </div>
 <div id="multiple-arguments" class="section level2">
 <h2><span class="header-section-number">3.5</span> Multiple arguments</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -511,6 +525,7 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
+</details>
 <p>Multiple function arguments:</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -572,6 +587,9 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 </div>
 <div id="argument-matching" class="section level2">
 <h2><span class="header-section-number">3.6</span> Argument matching</h2>
+<details>
+<p><summary>Setup code</summary></p>
+</details>
 <p>Named arguments are assigned first, after that remaining slots are filled from left to right.</p>
 <pre class="sourceCode r"><code class="sourceCode r">use_names &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) {
   <span class="kw">list</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b)
@@ -694,8 +712,10 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 </div>
 <div id="scope" class="section level2">
 <h2><span class="header-section-number">3.7</span> Scope</h2>
-<p>When working with functions, it is important to be aware of the scope of objects, i.e. what is known in which context?</p>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+</details>
 <p><code>a</code> is now an object of the global environemnt. A function can access global variables:</p>
 <pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
   a
@@ -719,7 +739,10 @@ Best practice: functions should be self-contained, independent of global variabl
 </div>
 <div id="pure-functions-and-side-effects" class="section level2">
 <h2><span class="header-section-number">3.8</span> Pure functions and side effects</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+</details>
 <p>Functions should do one thing, and do it well.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>Pure function: called for its return value, no side effects:</p>
 <pre class="sourceCode r"><code class="sourceCode r">pure_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
@@ -740,7 +763,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpQLpfgY/file2b9c164dd2dc</code></pre>
+<pre><code>## 2 written to /tmp/RtmpgaroF3/file3bf0622c3356</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -748,11 +771,13 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpQLpfgY/file2b9c6258229e</code></pre>
+<pre><code>## 6 written to /tmp/RtmpgaroF3/file3bf076d4c585</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
 <h2><span class="header-section-number">3.9</span> Control flow</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -763,6 +788,7 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
+</details>
 <p>A way to regulate the control flow is by using <code>if ()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -886,6 +912,8 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 </div>
 <div id="closures" class="section level2">
 <h2><span class="header-section-number">3.10</span> Closures</h2>
+<details>
+<p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -896,6 +924,7 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
+</details>
 <p>Closures can e.g. be used for the creation of functions.
 Here we create a function that loads a particular dataset:</p>
 <pre class="sourceCode r"><code class="sourceCode r">make_read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
@@ -920,7 +949,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x6161e08&gt;</code></pre>
+## &lt;environment: 0x6857218&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -962,7 +991,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x87f74d8&gt;</code></pre>
+## &lt;environment: 0x5ccbd88&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18
