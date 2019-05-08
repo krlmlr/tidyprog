@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>5 Function arguments and scoping | Programming in the tidyverse</title>
+  <meta name="description" content="5 Function arguments and scoping | Programming in the tidyverse">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="5 Function arguments and scoping | Programming in the tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Function arguments and scoping | Programming in the tidyverse" />
+  
+  
+  
+
+<meta name="author" content="Kirill Müller">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="pairwise-iteration-and-nesting.html">
+<link rel="next" href="non-rectangular-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="simple-iteration.html"><a href="simple-iteration.html"><i class="fa fa-check"></i><b>2</b> Simple iteration</a><ul>
+<li class="chapter" data-level="2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>2.1</b> Review of visualization and data transformation</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-iteration.html"><a href="simple-iteration.html#data"><i class="fa fa-check"></i><b>2.1.1</b> Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-iteration.html"><a href="simple-iteration.html#exploration"><i class="fa fa-check"></i><b>2.1.2</b> Exploration</a></li>
+<li class="chapter" data-level="2.1.3" data-path="simple-iteration.html"><a href="simple-iteration.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>2.1.3</b> Further possibilities of using {dplyr} to transform data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#named-vectors-and-two-column-tibbles"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
+<li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.4</b> Processing all files</a></li>
+<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files-1"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
+<li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>3</b> Function basics</a><ul>
+<li class="chapter" data-level="3.1" data-path="function-basics.html"><a href="function-basics.html#basics"><i class="fa fa-check"></i><b>3.1</b> Basics</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>3.1.1</b> Designing functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="function-basics.html"><a href="function-basics.html#arguments"><i class="fa fa-check"></i><b>3.2</b> Arguments</a></li>
+<li class="chapter" data-level="3.3" data-path="function-basics.html"><a href="function-basics.html#use-case-intermediate-variables"><i class="fa fa-check"></i><b>3.3</b> Use case: Intermediate variables</a></li>
+<li class="chapter" data-level="3.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>3.4</b> Default values</a></li>
+<li class="chapter" data-level="3.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>3.5</b> Multiple arguments</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>3.5.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="function-basics.html"><a href="function-basics.html#argument-matching"><i class="fa fa-check"></i><b>3.6</b> Argument matching</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="function-basics.html"><a href="function-basics.html#exercise-1"><i class="fa fa-check"></i><b>3.6.1</b> Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
+<li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#section"><i class="fa fa-check"></i><b>4.2</b> <No caption defined></a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#section-1"><i class="fa fa-check"></i><b>4.3</b> <No caption defined></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html"><i class="fa fa-check"></i><b>5</b> Function arguments and scoping</a><ul>
+<li class="chapter" data-level="5.1" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
+<li class="chapter" data-level="5.2" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.3" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
+<li class="chapter" data-level="5.4" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a></li>
+<li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Programming in the tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="function-arguments-and-scoping" class="section level1">
+<h1><span class="header-section-number">5</span> Function arguments and scoping</h1>
+<blockquote>
+<p>Structuring the code to avoid too much copy-pasting</p>
+</blockquote>
+<div id="scope" class="section level2">
+<h2><span class="header-section-number">5.1</span> Scope</h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+</details>
+<p><code>a</code> is now an object of the global environemnt. A function can access global variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a
+}
+
+<span class="kw">f</span>()</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>On the other hand, a variable which is defined inside a function, will not be known outside of that function. Respectively, it won’t overwrite the value of global variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a &lt;-<span class="st"> </span><span class="dv">2</span>
+  a
+}
+
+<span class="kw">f</span>()</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">a</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Global variables are a (hidden) part of a function’s interface.
+Best practice: functions should be self-contained, independent of global variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>()</code></pre>
+</div>
+<div id="pure-functions-and-side-effects" class="section level2">
+<h2><span class="header-section-number">5.2</span> Pure functions and side effects</h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+</details>
+<p>Functions should do one thing, and do it well.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Pure function: called for its return value, no side effects:</p>
+<pre class="sourceCode r"><code class="sourceCode r">pure_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}
+
+<span class="kw">pure_function</span>(<span class="dv">1</span>)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):</p>
+<pre class="sourceCode r"><code class="sourceCode r">side_effect_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  file &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+  <span class="kw">writeLines</span>(<span class="kw">format</span>(x), <span class="kw">tempfile</span>())
+  <span class="kw">print</span>(x)
+  <span class="kw">message</span>(x, <span class="st">&quot; written to &quot;</span>, file)
+
+  <span class="kw">invisible</span>(x)
+}
+
+<span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre><code>## 2 written to /tmp/RtmpoRMiok/file2c554549d506</code></pre>
+<p>Separation helps isolate the side effects.
+If side effect functions return the input, they remain composable with pure functions:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pure_function</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre><code>## 6 written to /tmp/RtmpoRMiok/file2c55310f3b6c</code></pre>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="control-flow" class="section level2">
+<h2><span class="header-section-number">5.3</span> Control flow</h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Returned value</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
+}
+read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}</code></pre>
+</details>
+<p>A way to regulate the control flow is by using <code>if ()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Filter, conditionally</span>
+  <span class="cf">if</span> (omit_zurich) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  }
+
+  <span class="cf">if</span> (omit_toronto) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+
+  <span class="co"># Return result</span>
+  weather_data
+}
+
+<span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>, <span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>, <span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 zurich       49</code></pre>
+<p>This can be useful if aiming at a possible early return:</p>
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Can keep original data?</span>
+  <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    <span class="kw">return</span>(weather_data)
+  }
+
+  <span class="co"># Filter, conditionally</span>
+  <span class="cf">if</span> (omit_zurich) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  }
+
+  <span class="cf">if</span> (omit_toronto) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+
+  <span class="co"># Return result</span>
+  weather_data
+}</code></pre>
+<p>Conditional branching with if-else-logic.
+(This is just for illustration, you should not implement code like this!)</p>
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Filter, conditionally, and return</span>
+  <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    weather_data
+  } <span class="cf">else</span> <span class="cf">if</span> (omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  } <span class="cf">else</span> <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span>omit_toronto) {
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  } <span class="cf">else</span> {
+    <span class="co"># Filter both</span>
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+}
+
+<span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 zurich       49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   city_code     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 berlin       49
+## 2 tel_aviv     49
+## 3 toronto      49</code></pre>
+</div>
+<div id="closures" class="section level2">
+<h2><span class="header-section-number">5.4</span> Closures</h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Returned value</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
+}
+read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}</code></pre>
+</details>
+<p>Closures can e.g. be used for the creation of functions.
+Here we create a function that loads a particular dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">make_read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Avoid odd effects due to lazy evaluation</span>
+  <span class="kw">force</span>(filename)
+
+  <span class="co"># This function (closure) accesses the filename from the</span>
+  <span class="co"># outer function</span>
+  f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+    <span class="kw">read_weather_file</span>(filename)
+  }
+
+  f
+}
+
+read_berlin &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)
+read_toronto &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>)
+read_tel_aviv &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>)
+read_zurich &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>)
+
+read_berlin</code></pre>
+<pre><code>## function() {
+##     read_weather_file(filename)
+##   }
+## &lt;environment: 0x9d39cd8&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
+<pre><code>## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;</code></pre>
+<p>Use closures as wrappers for other verbs/functions (such functions are also called “adverbs”):</p>
+<pre class="sourceCode r"><code class="sourceCode r">loudly &lt;-<span class="st"> </span><span class="cf">function</span>(f) {
+  <span class="kw">force</span>(f)
+
+  <span class="cf">function</span>(...) {
+    args &lt;-<span class="st"> </span><span class="kw">list</span>(...)
+    msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">length</span>(args), <span class="st">&quot; argument(s)&quot;</span>)
+    <span class="kw">message</span>(msg)
+
+    <span class="kw">f</span>(...)
+  }
+}
+
+read_loudly &lt;-<span class="st"> </span><span class="kw">loudly</span>(read_weather_file)
+read_loudly</code></pre>
+<pre><code>## function(...) {
+##     args &lt;- list(...)
+##     msg &lt;- paste0(length(args), &quot; argument(s)&quot;)
+##     message(msg)
+## 
+##     f(...)
+##   }
+## &lt;environment: 0xba9fcc8&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
+<pre><code>## 1 argument(s)</code></pre>
+<pre><code>## # A tibble: 49 x 18
+##    time                summary icon  precipIntensity precipProbabili…
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;
+##  1 2019-04-28 15:00:00 Mostly… part…               0                0
+##  2 2019-04-28 16:00:00 Mostly… part…               0                0
+##  3 2019-04-28 17:00:00 Mostly… part…               0                0
+##  4 2019-04-28 18:00:00 Overca… clou…               0                0
+##  5 2019-04-28 19:00:00 Overca… clou…               0                0
+##  6 2019-04-28 20:00:00 Mostly… part…               0                0
+##  7 2019-04-28 21:00:00 Mostly… part…               0                0
+##  8 2019-04-28 22:00:00 Mostly… part…               0                0
+##  9 2019-04-28 23:00:00 Mostly… part…               0                0
+## 10 2019-04-29 00:00:00 Mostly… part…               0                0
+## # … with 39 more rows, and 13 more variables: temperature &lt;dbl&gt;,
+## #   apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;,
+## #   pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;,
+## #   cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;, ozone &lt;dbl&gt;,
+## #   precipType &lt;chr&gt;</code></pre>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Unix philosophy, originated by Ken Thompson<a href="function-arguments-and-scoping.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pairwise-iteration-and-nesting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="non-rectangular-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
