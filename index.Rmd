@@ -5,11 +5,7 @@ documentclass: "book"
 site: bookdown::bookdown_site
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(cache = TRUE)
-options(tibble.print_min = 3, tibble.print_max = 5)
-library(here)
-```
-
-
 # Preface {-}
+
+Start writing your book here. If you are in RStudio,
+Click the Build button to build the book.

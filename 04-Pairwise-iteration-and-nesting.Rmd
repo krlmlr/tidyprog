@@ -1,0 +1,10 @@
+# Pairwise iteration and nesting
+
+
+```{r 04-setup, include = FALSE}
+library(here)
+```
+
+
+```{r child = here("script", "1.Rmd")}
+```
