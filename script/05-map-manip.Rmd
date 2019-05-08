@@ -98,27 +98,3 @@ manipulated_data
 ```{r 05-shortcut}
 map(input_data, manipulator)
 ```
-
-
-```{r include = FALSE}
-# Write back results: new file names
-```
-```{r 05-write-back-results-new-file-names}
-output_filenames <- tempfile(names(input_data), fileext = ".csv")
-```
-
-
-```{r include = FALSE}
-# Iterate over pairs
-```
-```{r 05-iterate-over-pairs}
-map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
-```
-
-
-```{r include = FALSE}
-# We don't really need the output
-```
-```{r 05-we-don-t-really-need-the-output}
-walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
-```

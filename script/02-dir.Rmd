@@ -25,9 +25,9 @@ files
 
 
 ```{r include = FALSE}
-# Convert to tibble
+# Convert to a tibble
 ```
-```{r 02-convert-to-tibble}
+```{r 02-convert-to-a-tibble}
 files_df <-
   files %>%
   enframe()

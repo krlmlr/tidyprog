@@ -48,6 +48,15 @@ input_files[["berlin"]]
 
 
 ```{r include = FALSE}
+# Access multiple input files
+```
+```{r 04-access-multiple-input-files}
+input_files[1:2]
+input_files[c("berlin", "zurich")]
+```
+
+
+```{r include = FALSE}
 # Read a single input file
 ```
 ```{r 04-read-a-single-input-file}
@@ -61,6 +70,13 @@ readxl::read_excel(here(input_files[[1]]))
 ```{r 04-read-all-input-files}
 input_data <-
   map(input_files, ~ readxl::read_excel(here(.)))
+```
+
+
+```{r include = FALSE}
+# Analyze the results
+```
+```{r 04-analyze-the-results}
 input_data
 input_data[[1]]
 names(input_data)
