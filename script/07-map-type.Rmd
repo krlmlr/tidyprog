@@ -1,0 +1,52 @@
+```{r 07-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Typed output
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### Typed output
+
+```
+```{r 07-setup-07-map-type-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+
+input_data <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe() %>%
+  map(~ readxl::read_excel(here(.)))
+```
+</details>
+
+
+```{r include = FALSE}
+# map() returns a list
+```
+```{r 07-map-returns-a-list}
+input_data %>%
+  map(~ nrow(.))
+```
+
+
+```{r include = FALSE}
+# Return an integer vector with map_int()
+```
+```{r 07-return-an-integer-vector-with-map-int}
+input_data %>%
+  map_int(~ nrow(.))
+```
+
+
+```{r include = FALSE}
+# ... or a character vector?
+```
+```{r 07-or-a-character-vector}
+input_data %>%
+  map_chr(~ as.character(nrow(.)))
+```
