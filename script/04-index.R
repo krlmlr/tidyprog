@@ -21,19 +21,3 @@ input_files[["berlin"]]
 # Access multiple input files
 input_files[1:2]
 input_files[c("berlin", "zurich")]
-
-# Read a single input file
-readxl::read_excel(here(input_files[[1]]))
-
-# Read all input files
-input_data <-
-  map(input_files, ~ readxl::read_excel(here(.)))
-
-# Analyze the results
-input_data
-input_data[[1]]
-names(input_data)
-
-# Pipe notation
-input_files %>%
-  map(~ readxl::read_excel(here(.)))
