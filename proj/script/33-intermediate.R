@@ -1,4 +1,4 @@
-### Intermediate variables
+### Use case: Intermediate variables
 
 library(tidyverse)
 library(here)

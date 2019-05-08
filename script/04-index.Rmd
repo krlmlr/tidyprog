@@ -1,0 +1,51 @@
+```{r 04-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Processing all files
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### Processing all files
+
+```
+```{r 04-setup-04-map-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+```
+</details>
+
+
+```{r include = FALSE}
+# Collect input files as a named vector
+```
+```{r 04-collect-input-files-as-a-named-vector}
+input_files <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe()
+input_files
+names(input_files)
+```
+
+
+```{r include = FALSE}
+# Access individual input files
+```
+```{r 04-access-individual-input-files}
+input_files[1]
+input_files[[1]]
+input_files[["berlin"]]
+```
+
+
+```{r include = FALSE}
+# Access multiple input files
+```
+```{r 04-access-multiple-input-files}
+input_files[1:2]
+input_files[c("berlin", "zurich")]
+```

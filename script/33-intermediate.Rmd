@@ -7,7 +7,7 @@ rm(list = ls())
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
-### Arguments
+### Use case: Intermediate variables
 
 ```
 ```{r 33-setup-33-intermediate-r}
