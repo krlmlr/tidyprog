@@ -4,7 +4,6 @@ library(tidyverse)
 library(here)
 
 dict <- readxl::read_excel(here("data/cities.xlsx"))
-dict
 
 input_data <-
   dict %>%
@@ -24,8 +23,10 @@ dict %>%
   )
 
 # Keep important columns
-dict %>%
+dict_data <-
+  dict %>%
   mutate(
     data = map(weather_filename, ~ readxl::read_excel(here(.)))
   ) %>%
   select(-weather_filename)
+dict_data
