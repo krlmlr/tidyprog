@@ -157,8 +157,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
 <li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
-<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#section"><i class="fa fa-check"></i><b>4.2</b> <No caption defined></a></li>
-<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#section-1"><i class="fa fa-check"></i><b>4.3</b> <No caption defined></a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#moving-to-tibble-land"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#nesting-and-unnesting"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html"><i class="fa fa-check"></i><b>5</b> Function arguments and scoping</a><ul>
 <li class="chapter" data-level="5.1" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
@@ -212,10 +212,10 @@ manipulated_data &lt;-
 </details>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpoRMiok/berlin2c55104f17a2.csv&quot;  
-## [2] &quot;/tmp/RtmpoRMiok/toronto2c5575455151.csv&quot; 
-## [3] &quot;/tmp/RtmpoRMiok/tel_aviv2c5541c4b78f.csv&quot;
-## [4] &quot;/tmp/RtmpoRMiok/zurich2c557d7c3624.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpQ33oka/berlin2be5aca5893.csv&quot;   
+## [2] &quot;/tmp/RtmpQ33oka/toronto2be547a47720.csv&quot; 
+## [3] &quot;/tmp/RtmpQ33oka/tel_aviv2be5139e447b.csv&quot;
+## [4] &quot;/tmp/RtmpQ33oka/zurich2be575644357.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <pre><code>## $berlin
 ## # A tibble: 16 x 3
@@ -266,8 +266,8 @@ output_filenames</code></pre>
 ## 1 2019-04-30T15:00:00Z        14.3                14.3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 </div>
-<div id="section" class="section level2">
-<h2><span class="header-section-number">4.2</span> <No caption defined></h2>
+<div id="moving-to-tibble-land" class="section level2">
+<h2><span class="header-section-number">4.2</span> Moving to tibble-land</h2>
 <details>
 <p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -317,8 +317,8 @@ dict_data</code></pre>
 ## 3 tel_aviv  Tel Aviv  34.8   32.1 &lt;tibble [49 × 17]&gt;
 ## 4 zurich    Zürich     8.54  47.4 &lt;tibble [49 × 18]&gt;</code></pre>
 </div>
-<div id="section-1" class="section level2">
-<h2><span class="header-section-number">4.3</span> <No caption defined></h2>
+<div id="nesting-and-unnesting" class="section level2">
+<h2><span class="header-section-number">4.3</span> Nesting and unnesting</h2>
 <details>
 <p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)

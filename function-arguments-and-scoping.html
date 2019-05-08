@@ -157,8 +157,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
 <li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
-<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#section"><i class="fa fa-check"></i><b>4.2</b> <No caption defined></a></li>
-<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#section-1"><i class="fa fa-check"></i><b>4.3</b> <No caption defined></a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#moving-to-tibble-land"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#nesting-and-unnesting"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html"><i class="fa fa-check"></i><b>5</b> Function arguments and scoping</a><ul>
 <li class="chapter" data-level="5.1" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
@@ -244,7 +244,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpoRMiok/file2c554549d506</code></pre>
+<pre><code>## 2 written to /tmp/RtmpQ33oka/file2be522ceed62</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -252,7 +252,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpoRMiok/file2c55310f3b6c</code></pre>
+<pre><code>## 6 written to /tmp/RtmpQ33oka/file2be566dafcd0</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -430,7 +430,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x9d39cd8&gt;</code></pre>
+## &lt;environment: 0x8da0150&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##    time                summary icon  precipIntensity precipProbabili…
@@ -472,7 +472,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0xba9fcc8&gt;</code></pre>
+## &lt;environment: 0xada4530&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18
