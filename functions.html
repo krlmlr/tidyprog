@@ -141,6 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="iteration.html"><a href="iteration.html#processing-all-files-1"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
 <li class="chapter" data-level="2.6" data-path="iteration.html"><a href="iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
 <li class="chapter" data-level="2.7" data-path="iteration.html"><a href="iteration.html#manipulating-pairwise"><i class="fa fa-check"></i><b>2.7</b> Manipulating pairwise</a></li>
+<li class="chapter" data-level="2.8" data-path="iteration.html"><a href="iteration.html#section"><i class="fa fa-check"></i><b>2.8</b> <No caption defined></a></li>
+<li class="chapter" data-level="2.9" data-path="iteration.html"><a href="iteration.html#section-1"><i class="fa fa-check"></i><b>2.9</b> <No caption defined></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
 <li class="chapter" data-level="3.1" data-path="functions.html"><a href="functions.html#basics"><i class="fa fa-check"></i><b>3.1</b> Basics</a><ul>
@@ -235,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x243bf48&gt;</code></pre>
+## &lt;environment: 0x2c26f48&gt;</code></pre>
 <p>Execute the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <pre><code>## # A tibble: 196 x 19
@@ -708,7 +710,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmpk1tPWK/file2c603b8e4fe9</code></pre>
+<pre><code>## 2 written to /tmp/Rtmpr26VKs/file2bf94588abc9</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -716,7 +718,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmpk1tPWK/file2c602b28163d</code></pre>
+<pre><code>## 6 written to /tmp/Rtmpr26VKs/file2bf9f0e02a4</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -894,7 +896,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0xa5095b0&gt;</code></pre>
+## &lt;environment: 0xa136d28&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <pre><code>## # A tibble: 49 x 18
 ##   time                summary icon  precipIntensity precipProbabili…
@@ -929,7 +931,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x86989e8&gt;</code></pre>
+## &lt;environment: 0xa39db80&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <pre><code>## # A tibble: 49 x 18

@@ -141,6 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="iteration.html"><a href="iteration.html#processing-all-files-1"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
 <li class="chapter" data-level="2.6" data-path="iteration.html"><a href="iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
 <li class="chapter" data-level="2.7" data-path="iteration.html"><a href="iteration.html#manipulating-pairwise"><i class="fa fa-check"></i><b>2.7</b> Manipulating pairwise</a></li>
+<li class="chapter" data-level="2.8" data-path="iteration.html"><a href="iteration.html#section"><i class="fa fa-check"></i><b>2.8</b> <No caption defined></a></li>
+<li class="chapter" data-level="2.9" data-path="iteration.html"><a href="iteration.html#section-1"><i class="fa fa-check"></i><b>2.9</b> <No caption defined></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>3</b> Functions</a><ul>
 <li class="chapter" data-level="3.1" data-path="functions.html"><a href="functions.html#basics"><i class="fa fa-check"></i><b>3.1</b> Basics</a><ul>
@@ -787,7 +789,7 @@ input_data &lt;-
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x243bf48&gt;</code></pre>
+## &lt;environment: 0x2c26f48&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##   time                temperature apparentTemperature
@@ -877,10 +879,10 @@ manipulated_data &lt;-
 </details>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/Rtmpk1tPWK/berlin2c604946dcce.csv&quot;  
-## [2] &quot;/tmp/Rtmpk1tPWK/toronto2c6043ac441c.csv&quot; 
-## [3] &quot;/tmp/Rtmpk1tPWK/tel_aviv2c6050a7d8d1.csv&quot;
-## [4] &quot;/tmp/Rtmpk1tPWK/zurich2c6045454116.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/Rtmpr26VKs/berlin2bf96f1c10f7.csv&quot;  
+## [2] &quot;/tmp/Rtmpr26VKs/toronto2bf98cb50f9.csv&quot;  
+## [3] &quot;/tmp/Rtmpr26VKs/tel_aviv2bf935e8d6f2.csv&quot;
+## [4] &quot;/tmp/Rtmpr26VKs/zurich2bf95165ffbe.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <pre><code>## $berlin
 ## # A tibble: 16 x 3
@@ -911,6 +913,115 @@ output_filenames</code></pre>
 ##   &lt;chr&gt;                      &lt;dbl&gt;               &lt;dbl&gt;
 ## 1 2019-04-30T15:00:00Z        14.3                14.3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+</div>
+<div id="section" class="section level2">
+<h2><span class="header-section-number">2.8</span> <No caption defined></h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+input_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>()</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   name     value             
+##   &lt;chr&gt;    &lt;list&gt;            
+## 1 berlin   &lt;tibble [49 × 18]&gt;
+## 2 toronto  &lt;tibble [49 × 18]&gt;
+## 3 tel_aviv &lt;tibble [49 × 17]&gt;
+## 4 zurich   &lt;tibble [49 × 18]&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">data =</span> <span class="kw">map</span>(weather_filename, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
+  )</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   city_code weather_filename           data              
+##   &lt;chr&gt;     &lt;chr&gt;                      &lt;list&gt;            
+## 1 berlin    data/weather/berlin.xlsx   &lt;tibble [49 × 18]&gt;
+## 2 toronto   data/weather/toronto.xlsx  &lt;tibble [49 × 18]&gt;
+## 3 tel_aviv  data/weather/tel_aviv.xlsx &lt;tibble [49 × 17]&gt;
+## 4 zurich    data/weather/zurich.xlsx   &lt;tibble [49 × 18]&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">data =</span> <span class="kw">map</span>(weather_filename, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>weather_filename)
+dict_data</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   city_code name        lng   lat data              
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;            
+## 1 berlin    Berlin    13.4   52.5 &lt;tibble [49 × 18]&gt;
+## 2 toronto   Toronto  -79.4   43.7 &lt;tibble [49 × 18]&gt;
+## 3 tel_aviv  Tel Aviv  34.8   32.1 &lt;tibble [49 × 17]&gt;
+## 4 zurich    Zürich     8.54  47.4 &lt;tibble [49 × 18]&gt;</code></pre>
+</div>
+<div id="section-1" class="section level2">
+<h2><span class="header-section-number">2.9</span> <No caption defined></h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+dict_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">map</span>(weather_filename, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>weather_filename)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>()</code></pre>
+<pre><code>## # A tibble: 196 x 22
+##   city_code name    lng   lat time                summary icon 
+##   &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;
+## 1 berlin    Berl…  13.4  52.5 2019-04-28 15:00:00 Mostly… part…
+## 2 berlin    Berl…  13.4  52.5 2019-04-28 16:00:00 Mostly… part…
+## 3 berlin    Berl…  13.4  52.5 2019-04-28 17:00:00 Mostly… part…
+## # … with 193 more rows, and 15 more variables: precipIntensity &lt;dbl&gt;,
+## #   precipProbability &lt;dbl&gt;, temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;,
+## #   dewPoint &lt;dbl&gt;, humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;,
+## #   windGust &lt;dbl&gt;, windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;,
+## #   visibility &lt;dbl&gt;, ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(name)</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   name         n
+##   &lt;chr&gt;    &lt;int&gt;
+## 1 Berlin      49
+## 2 Tel Aviv    49
+## 3 Toronto     49
+## 4 Zürich      49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>city_code, <span class="op">-</span>name, <span class="op">-</span>lng, <span class="op">-</span>lat)</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   city_code name        lng   lat data              
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;list&gt;            
+## 1 berlin    Berlin    13.4   52.5 &lt;tibble [49 × 18]&gt;
+## 2 toronto   Toronto  -79.4   43.7 &lt;tibble [49 × 18]&gt;
+## 3 tel_aviv  Tel Aviv  34.8   32.1 &lt;tibble [49 × 18]&gt;
+## 4 zurich    Zürich     8.54  47.4 &lt;tibble [49 × 18]&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(time)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>date)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   date       data              
+##   &lt;date&gt;     &lt;list&gt;            
+## 1 2019-04-28 &lt;tibble [36 × 22]&gt;
+## 2 2019-04-29 &lt;tibble [96 × 22]&gt;
+## 3 2019-04-30 &lt;tibble [64 × 22]&gt;</code></pre>
 
 </div>
 </div>
