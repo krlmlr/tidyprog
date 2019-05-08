@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## Basics
+## Definition and execution
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
-### Basics
+### Definition and execution
 
 ```
 ```{r 31-setup-31-function-r}

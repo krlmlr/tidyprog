@@ -1,9 +1,7 @@
-### Basics
+### Definition and execution
 
 library(tidyverse)
 library(here)
-
-## TODO: Split script, don't overwrite!
 
 
 # Important! Please reset the R session before running this script.
