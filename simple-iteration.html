@@ -140,6 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing</a></li>
 <li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
 <li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
+<li class="chapter" data-level="2.7" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>2.7</b> Typed output</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>3</b> Function basics</a><ul>
 <li class="chapter" data-level="3.1" data-path="function-basics.html"><a href="function-basics.html#basics"><i class="fa fa-check"></i><b>3.1</b> Basics</a><ul>
@@ -809,7 +810,7 @@ input_data &lt;-
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x3680f48&gt;</code></pre>
+## &lt;environment: 0x2264f48&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 1 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
@@ -877,6 +878,43 @@ manipulated_data</code></pre>
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
+</div>
+<div id="typed-output" class="section level2">
+<h2><span class="header-section-number">2.7</span> Typed output</h2>
+<details>
+<p><summary>Setup code</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+input_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
+<pre><code>## $berlin
+## [1] 49
+## 
+## $toronto
+## [1] 49
+## 
+## $tel_aviv
+## [1] 49
+## 
+## $zurich
+## [1] 49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##       49       49       49       49</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="kw">nrow</span>(.)))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;</code></pre>
 
 </div>
 </div>
