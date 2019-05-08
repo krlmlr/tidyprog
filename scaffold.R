@@ -65,7 +65,7 @@ files_df <-
   mutate_all(list(mtime = ~ file.info(.)$mtime))
 
 files_df %>%
-  filter(r_mtime > rmd_mtime) %>%
+  filter(is.na(rmd_mtime) | r_mtime > rmd_mtime) %>%
   select(path = r, rmd_path = rmd) %>%
   pwalk(process_file)
 

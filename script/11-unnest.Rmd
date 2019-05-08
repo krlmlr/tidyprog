@@ -1,0 +1,58 @@
+```{r 11-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## <No caption defined>
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### <No caption defined>
+
+```
+```{r 11-setup-11-unnest-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+
+dict_data <-
+  dict %>%
+  mutate(data = map(weather_filename, ~ readxl::read_excel(here(.)))) %>%
+  select(-weather_filename)
+```
+</details>
+
+
+```{r include = FALSE}
+# Flatten a nested tibble with unnest():
+```
+```{r 11-flatten-a-nested-tibble-with-unnest}
+dict_data %>%
+  unnest()
+
+dict_data %>%
+  unnest() %>%
+  count(name)
+```
+
+
+```{r include = FALSE}
+# Inverse operation: nest()
+```
+```{r 11-inverse-operation-nest}
+dict_data %>%
+  unnest() %>%
+  nest(-city_code, -name, -lng, -lat)
+```
+
+
+```{r include = FALSE}
+# Split into daily data:
+```
+```{r 11-split-into-daily-data}
+dict_data %>%
+  unnest() %>%
+  mutate(date = as.Date(time)) %>%
+  nest(-date)
+```
