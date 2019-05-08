@@ -13,31 +13,17 @@ rm(list = ls())
 ```{r 10-setup-10-mutate-map-r}
 library(tidyverse)
 library(here)
-```
-</details>
 
-
-```{r include = FALSE}
-# Load dictionary from file
-```
-```{r 10-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
-```
 
-
-```{r include = FALSE}
-# map() on a vector
-```
-```{r 10-map-on-a-vector}
 input_data <-
   dict %>%
   select(city_code, weather_filename) %>%
   deframe() %>%
   map(~ readxl::read_excel(here(.)))
-
-input_data
 ```
+</details>
 
 
 ```{r include = FALSE}
@@ -50,9 +36,9 @@ input_data %>%
 
 
 ```{r include = FALSE}
-# Operate in "tibble-land": columns are vectors
+# Operate in "tibble-land" right away: columns are vectors
 ```
-```{r 10-operate-in-tibble-land-columns-are-vectors}
+```{r 10-operate-in-tibble-land-right-away-columns-are-vectors}
 dict %>%
   select(city_code, weather_filename) %>%
   mutate(
@@ -62,12 +48,12 @@ dict %>%
 
 
 ```{r include = FALSE}
-# Keep auxiliary columns
+# Keep important columns
 ```
-```{r 10-keep-auxiliary-columns}
+```{r 10-keep-important-columns}
 dict %>%
   mutate(
     data = map(weather_filename, ~ readxl::read_excel(here(.)))
   ) %>%
-  select(city_code, name, data)
+  select(-weather_filename)
 ```
