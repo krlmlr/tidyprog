@@ -8,6 +8,8 @@ site: bookdown::bookdown_site
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE)
 options(tibble.print_min = 3, tibble.print_max = 5)
+options(crayon.enabled = TRUE)
+fansi::set_knit_hooks(knitr::knit_hooks)
 library(here)
 ```
 
