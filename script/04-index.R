@@ -1,4 +1,4 @@
-### Processing all files
+### Indexing
 
 library(tidyverse)
 library(here)
