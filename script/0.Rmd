@@ -15,6 +15,3 @@
 
 ```{r child = here("script", "06-map-manip.Rmd")}
 ```
-
-```{r child = here("script", "07-map2.Rmd")}
-```
