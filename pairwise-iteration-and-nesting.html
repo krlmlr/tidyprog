@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="function-basics.html">
-<link rel="next" href="function-arguments-and-scoping.html">
+<link rel="next" href="scoping-and-flow-control.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -137,8 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
 <li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#named-vectors-and-two-column-tibbles"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
-<li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.4</b> Processing all files</a></li>
-<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files-1"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
+<li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing</a></li>
+<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
 <li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>3</b> Function basics</a><ul>
@@ -160,11 +160,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#moving-to-tibble-land"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
 <li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#nesting-and-unnesting"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html"><i class="fa fa-check"></i><b>5</b> Function arguments and scoping</a><ul>
-<li class="chapter" data-level="5.1" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
-<li class="chapter" data-level="5.2" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
-<li class="chapter" data-level="5.3" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
-<li class="chapter" data-level="5.4" data-path="function-arguments-and-scoping.html"><a href="function-arguments-and-scoping.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
+<li class="chapter" data-level="5" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
+<li class="chapter" data-level="5.1" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
+<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.3" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
+<li class="chapter" data-level="5.4" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
@@ -212,10 +212,10 @@ manipulated_data &lt;-
 </details>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpmKsLNq/berlin2be1697207f1.csv&quot;  
-## [2] &quot;/tmp/RtmpmKsLNq/toronto2be15654be70.csv&quot; 
-## [3] &quot;/tmp/RtmpmKsLNq/tel_aviv2be15d07efff.csv&quot;
-## [4] &quot;/tmp/RtmpmKsLNq/zurich2be16dd31af2.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpxalNZd/berlin2c13ca514a6.csv&quot;   
+## [2] &quot;/tmp/RtmpxalNZd/toronto2c135da7c7e8.csv&quot; 
+## [3] &quot;/tmp/RtmpxalNZd/tel_aviv2c137d1ef27d.csv&quot;
+## [4] &quot;/tmp/RtmpxalNZd/zurich2c136305d9bb.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
@@ -372,7 +372,7 @@ dict_data &lt;-
         </div>
       </div>
 <a href="function-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="function-arguments-and-scoping.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scoping-and-flow-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
