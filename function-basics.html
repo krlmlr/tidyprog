@@ -241,27 +241,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x2188f48&gt;</code></pre>
+## &lt;environment: 0x1918f48&gt;</code></pre>
 <p>Execute the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
-<pre><code>## # A tibble: 196 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 193 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 <p>List <code>R</code>-objects in an environment:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
 <pre><code>## [1] &quot;read_weather_data&quot;</code></pre>
@@ -303,24 +297,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</code></pre>
 <p>Testing the new function by running it:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
-<pre><code>## # A tibble: 196 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 193 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 </div>
 <div id="use-case-intermediate-variables" class="section level2">
 <h2><span class="header-section-number">3.3</span> Use case: Intermediate variables</h2>
@@ -354,24 +342,18 @@ read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>
 }
 
 <span class="kw">read_weather_data</span>()</code></pre>
-<pre><code>## # A tibble: 196 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 193 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">get_weather_for &lt;-<span class="st"> </span><span class="cf">function</span>(city) {
   filename &lt;-<span class="st"> </span><span class="kw">paste0</span>(city, <span class="st">&quot;.xlsx&quot;</span>)
 
@@ -406,24 +388,18 @@ read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>
 }
 
 <span class="kw">read_weather_data</span>()</code></pre>
-<pre><code>## # A tibble: 196 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 193 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 </div>
 <div id="default-values" class="section level2">
 <h2><span class="header-section-number">3.4</span> Default values</h2>
@@ -434,7 +410,7 @@ read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>
 <span class="kw">library</span>(conflicted)
 
 <span class="kw">conflict_prefer</span>(<span class="st">&quot;filter&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</code></pre>
-<pre><code>## [conflicted] Will prefer dplyr::filter over any other package</code></pre>
+<pre><code>## [conflicted] Will prefer [34mdplyr::filter[39m over any other package</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   <span class="co"># Returned value</span>
   <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
@@ -460,62 +436,44 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 }</code></pre>
 <p>Set arguments with default values explicitly with or without using the name or leave them out to use the default value:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="ot">TRUE</span>)</code></pre>
-<pre><code>## # A tibble: 147 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 137 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 147 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 144 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## # A tibble: 147 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 137 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 147 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 144 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
-<pre><code>## # A tibble: 196 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 193 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 </div>
 <div id="multiple-arguments" class="section level2">
 <h2><span class="header-section-number">3.5</span> Multiple arguments</h2>
@@ -561,34 +519,29 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 <pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/some/subdir/with/a/file.csv&quot;</code></pre>
 <p>Mind, that despite altering the original function and adding new features to it, the original call still works as before:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
-<pre><code>## # A tibble: 196 x 19
-##    city_code time                summary icon  precipIntensity
-##    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
-##  1 berlin    2019-04-28 15:00:00 Mostly… part…               0
-##  2 berlin    2019-04-28 16:00:00 Mostly… part…               0
-##  3 berlin    2019-04-28 17:00:00 Mostly… part…               0
-##  4 berlin    2019-04-28 18:00:00 Overca… clou…               0
-##  5 berlin    2019-04-28 19:00:00 Overca… clou…               0
-##  6 berlin    2019-04-28 20:00:00 Mostly… part…               0
-##  7 berlin    2019-04-28 21:00:00 Mostly… part…               0
-##  8 berlin    2019-04-28 22:00:00 Mostly… part…               0
-##  9 berlin    2019-04-28 23:00:00 Mostly… part…               0
-## 10 berlin    2019-04-29 00:00:00 Mostly… part…               0
-## # … with 186 more rows, and 14 more variables: precipProbability &lt;dbl&gt;,
-## #   temperature &lt;dbl&gt;, apparentTemperature &lt;dbl&gt;, dewPoint &lt;dbl&gt;,
-## #   humidity &lt;dbl&gt;, pressure &lt;dbl&gt;, windSpeed &lt;dbl&gt;, windGust &lt;dbl&gt;,
-## #   windBearing &lt;dbl&gt;, cloudCover &lt;dbl&gt;, uvIndex &lt;dbl&gt;, visibility &lt;dbl&gt;,
-## #   ozone &lt;dbl&gt;, precipType &lt;chr&gt;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
+##   city_code time                summary icon  precipIntensity
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>2</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'>3</span><span> berlin    2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0
+## </span><span style='color: #555555;'># … with 193 more rows, and 14 more variables: precipProbability </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   temperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, apparentTemperature </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dewPoint </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   humidity </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, pressure </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windSpeed </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, windGust </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   windBearing </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cloudCover </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, uvIndex </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, visibility </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   ozone </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, precipType </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
 <div id="exercise" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Exercise</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="ot">TRUE</span>, <span class="dt">omit_z =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
-<pre><code>## # A tibble: 3 x 2
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 2</span><span>
 ##   city_code     n
-##   &lt;chr&gt;     &lt;int&gt;
-## 1 berlin       49
-## 2 tel_aviv     49
-## 3 zurich       49</code></pre>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin       49
+## </span><span style='color: #555555;'>2</span><span> tel_aviv     49
+## </span><span style='color: #555555;'>3</span><span> zurich       49
+</span></CODE></PRE>
 <p>See the next section for ideas on avoiding this behavior.</p>
 </div>
 </div>
