@@ -1,4 +1,4 @@
-### Arguments
+### Intermediate variables
 
 library(tidyverse)
 library(here)

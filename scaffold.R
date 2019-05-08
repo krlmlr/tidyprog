@@ -6,6 +6,11 @@ path <- dir("proj/script", full.names = TRUE)
 path <- path[[1]]
 rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
 
+setup_first <- function(x) {
+  x[[1]] <- paste0("<details><summary>Setup code</summary>\n", gsub("\n+$", "\n", x[[1]]), "</details>\n\n\n")
+  x
+}
+
 process_file <- function(path, rmd_path) {
   file_id <- gsub("^([^-]+)-.*$", "\\1", basename(path))
   lines <- readLines(path)
@@ -44,7 +49,7 @@ process_file <- function(path, rmd_path) {
     spread(comment, data) %>%
     left_join(headers, by = "id") %>%
     select(id, comment, chunk_name, code) %>%
-    mutate(chunk = paste0("```{r include = FALSE}\n", comment, "\n```\n", "```{r ", chunk_name, "}\n", code, "\n```\n\n\n")) %>%
+    mutate(chunk = setup_first(paste0("```{r include = FALSE}\n", comment, "\n```\n", "```{r ", chunk_name, "}\n", code, "\n```\n\n\n"))) %>%
     pull() %>%
     glue::glue_collapse(sep = "") %>%
     gsub("\n+$", "", .) %>%

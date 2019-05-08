@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Manipulating all datasets
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Manipulating all datasets
 
@@ -21,6 +22,7 @@ input_data <-
   deframe() %>%
   map(~ readxl::read_excel(here(.)))
 ```
+</details>
 
 
 ```{r include = FALSE}

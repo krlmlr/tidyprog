@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Review of visualization and data transformation
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Review of visualization and data transformation
 
@@ -13,6 +14,7 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
+</details>
 
 ### Data
 

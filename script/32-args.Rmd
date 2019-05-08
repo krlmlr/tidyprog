@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Arguments
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Arguments
 
@@ -13,6 +14,7 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
+</details>
 
 
 Functions with arguments:

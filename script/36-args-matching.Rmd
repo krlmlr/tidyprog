@@ -5,12 +5,15 @@ rm(list = ls())
 
 ## Argument matching
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Argument matching
 
 ```
-```{r 36-setup-36-function-details-r}
+```{r 36-setup-36-args-matching-r}
+
 ```
+</details>
 
 
 Named arguments are assigned first, after that remaining slots are filled from left to right.

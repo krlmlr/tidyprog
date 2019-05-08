@@ -5,8 +5,7 @@ rm(list = ls())
 
 ## Scope
 
-When working with functions, it is important to be aware of the scope of objects, i.e. what is known in which context?
-
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Scope
 
@@ -14,6 +13,7 @@ When working with functions, it is important to be aware of the scope of objects
 ```{r 43-setup-43-function-scoping-r}
 a <- 5
 ```
+</details>
 
 `a` is now an object of the global environemnt. A function can access global variables:
 

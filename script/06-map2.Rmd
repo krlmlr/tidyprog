@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Manipulating pairwise
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Manipulating pairwise
 
@@ -28,6 +29,7 @@ manipulated_data <-
   map(~ readxl::read_excel(here(.))) %>%
   map(manipulator)
 ```
+</details>
 
 
 ```{r include = FALSE}

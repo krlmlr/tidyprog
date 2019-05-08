@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Control flow
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Control flow
 
@@ -21,6 +22,7 @@ read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
 ```
+</details>
 
 A way to regulate the control flow is by using `if ()`:
 

@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Processing all files
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Processing all files
 
@@ -15,6 +16,7 @@ library(here)
 
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 ```
+</details>
 
 
 ```{r include = FALSE}

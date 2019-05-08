@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Closures
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Closures
 
@@ -21,6 +22,7 @@ read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
 ```
+</details>
 
 Closures can e.g. be used for the creation of functions. 
 Here we create a function that loads a particular dataset:

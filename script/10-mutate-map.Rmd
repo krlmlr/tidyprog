@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## <No caption defined>
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### <No caption defined>
 
@@ -13,6 +14,7 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
+</details>
 
 
 ```{r include = FALSE}

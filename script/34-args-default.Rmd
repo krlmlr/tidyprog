@@ -5,11 +5,12 @@ rm(list = ls())
 
 ## Default values
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Default values
 
 ```
-```{r 34-setup-34-function-details-r}
+```{r 34-setup-34-args-default-r}
 library(tidyverse)
 library(here)
 library(conflicted)
@@ -25,6 +26,7 @@ read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
 ```
+</details>
 
 
 Provide default values for parameters:

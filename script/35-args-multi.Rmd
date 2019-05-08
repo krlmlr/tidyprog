@@ -5,11 +5,12 @@ rm(list = ls())
 
 ## Multiple arguments
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Multiple arguments
 
 ```
-```{r 35-setup-35-function-details-r}
+```{r 35-setup-35-args-multi-r}
 library(tidyverse)
 library(here)
 
@@ -22,6 +23,7 @@ read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
 ```
+</details>
 
 
 Multiple function arguments:

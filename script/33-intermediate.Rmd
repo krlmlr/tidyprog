@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Use case: Intermediate variables
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Arguments
 
@@ -18,6 +19,7 @@ weather_path <- function(filename) {
   here("data/weather", filename)
 }
 ```
+</details>
 
 
 Functions can help to avoid using intermediate variables:

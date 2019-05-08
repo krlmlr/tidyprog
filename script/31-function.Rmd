@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Basics
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Basics
 
@@ -13,6 +14,7 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
+</details>
 
 
 ```{r include = FALSE}

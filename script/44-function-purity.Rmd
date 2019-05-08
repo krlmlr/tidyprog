@@ -5,6 +5,7 @@ rm(list = ls())
 
 ## Pure functions and side effects
 
+<details><summary>Setup code</summary>
 ```{r include = FALSE}
 ### Pure functions and side effects
 
@@ -12,6 +13,7 @@ rm(list = ls())
 ```{r 44-setup-44-function-purity-r}
 library(tidyverse)
 ```
+</details>
 
 Functions should do one thing, and do it well.^[Unix philosophy, originated by Ken Thompson]
 
@@ -58,7 +60,7 @@ side_effect_function(2)
 ```
 
 
-Separation helps isolate the side effects. 
+Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:
 
 
