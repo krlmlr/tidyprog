@@ -84,4 +84,4 @@ read_weather_data()
     }
     ```
     
-    Hint: Define this function with a different name and check its output values, before running `read_weather()` data again.
+    Hint: Define this function with a different name and check its output values, before running `read_weather_data()` again.

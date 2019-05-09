@@ -48,7 +48,7 @@ weather_data <- read_weather_data()
 # Exercises
 
 read_weather_data_non_europe <- function() {
-  # Read all files
+  # Read non-Europe files
   toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
   tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
 
@@ -65,5 +65,5 @@ read_weather_data_non_europe <- function() {
 
 read_weather_data_non_europe()
 
-setdiff(read_weather_data(), read_weather_data_non_europe()) %>% 
-  count(city_code)
+# Double-check:
+nrow(read_weather_data()) - nrow(read_weather_data_non_europe())
