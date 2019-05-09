@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Named vectors and two-column tibbles
+## Named vectors and two-column tibbles {#names}
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}

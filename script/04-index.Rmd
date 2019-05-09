@@ -19,6 +19,7 @@ dict <- readxl::read_excel(here("data/cities.xlsx"))
 
 Here we look at the indexing of a named vector.
 
+We start with the data frame `dict` from section ["Named vectors and two-column tibbles"](#names).
 Create named vector of the -- future -- input files:
 
 ```{r include = FALSE}

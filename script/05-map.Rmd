@@ -26,7 +26,6 @@ input_files <-
 Here we look at how to act on each entry of a list or a vector using `purrr::map()`:
 
 We start with the named vector `input_files` from section ["Indexing"](#indexing).
-
 As just seen, manually choosing just one entry of a vector works like so:
 
 ```{r include = FALSE}
