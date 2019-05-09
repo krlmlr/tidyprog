@@ -280,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x1c92f80&gt;</code></pre>
+## &lt;environment: 0x2ff8f80&gt;</code></pre>
 <p>Call the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
@@ -565,30 +565,25 @@ get_weather_data_for &lt;-<span class="st"> </span><span class="cf">function</sp
 <pre class="sourceCode r"><code class="sourceCode r">get_weather_data_for &lt;-<span class="st"> </span>_____ {
   _____
 }</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_weather_data_for</span>()</code></pre>
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
- ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
- ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…           0.267             0.28
- ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…           0.198             0.27
- ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…           0.137             0.25
- ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_weather_data_for</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(temperature)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 1</span><span>
+ ##   </span><span style='font-weight: bold;'>temperature</span><span>
+ ##         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span>        6.96
+ ## </span><span style='color: #555555;'>2</span><span>        7.14
+ ## </span><span style='color: #555555;'>3</span><span>        7.32
+ ## </span><span style='color: #555555;'># … with 46 more rows</span><span>
  </span></CODE></PRE>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_weather_data_for</span>(<span class="st">&quot;tel_aviv&quot;</span>)</code></pre>
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 17</span><span>
- ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
- ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
- ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
- ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
- ## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
- ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_weather_data_for</span>(<span class="st">&quot;tel_aviv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(temperature)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 1</span><span>
+ ##   </span><span style='font-weight: bold;'>temperature</span><span>
+ ##         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span>        23.9
+ ## </span><span style='color: #555555;'>2</span><span>        23.1
+ ## </span><span style='color: #555555;'>3</span><span>        22.4
+ ## </span><span style='color: #555555;'># … with 46 more rows</span><span>
  </span></CODE></PRE></li>
 </ol>
 </div>
@@ -799,13 +794,7 @@ This can be e.g. useful for passing arguments downstream:</p>
   <span class="kw">stopifnot</span>(<span class="kw">length</span>(_____) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)
 
   <span class="kw">list</span>(_____)
-}
-
-<span class="kw">enforce_names</span>(<span class="dv">3</span>, <span class="dv">4</span>)<span class="er">)</span>
-<span class="kw">enforce_names</span>(<span class="dt">one =</span> <span class="dv">3</span>, <span class="dv">4</span>)
-<span class="kw">enforce_names</span>(<span class="dv">3</span>, <span class="dt">one =</span> <span class="dv">4</span>)
-<span class="kw">enforce_names</span>(<span class="dt">two =</span> <span class="dv">4</span>, <span class="dv">3</span>)
-<span class="kw">enforce_names</span>(<span class="dt">one =</span> <span class="dv">3</span>, <span class="dt">two =</span> <span class="dv">4</span>)</code></pre>
+}</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">enforce_names</span>(<span class="dv">3</span>, <span class="dv">4</span>))</code></pre>
 <pre><code>## Error in enforce_names(3, 4) : length(extra_args) == 0 is not TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">enforce_names</span>(<span class="dt">one =</span> <span class="dv">3</span>, <span class="dv">4</span>))</code></pre>
@@ -814,6 +803,9 @@ This can be e.g. useful for passing arguments downstream:</p>
 <pre><code>## Error in enforce_names(3, one = 4) : length(extra_args) == 0 is not TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">enforce_names</span>(<span class="dt">two =</span> <span class="dv">4</span>, <span class="dv">3</span>))</code></pre>
 <pre><code>## Error in enforce_names(two = 4, 3) : length(extra_args) == 0 is not TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">enforce_names</span>(<span class="dt">o =</span> <span class="dv">3</span>, <span class="dt">t =</span> <span class="dv">4</span>))</code></pre>
+<pre><code>## Error in enforce_names(o = 3, t = 4) : 
+##   length(extra_args) == 0 is not TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">enforce_names</span>(<span class="dt">one =</span> <span class="dv">3</span>, <span class="dt">two =</span> <span class="dv">4</span>)</code></pre>
 <pre><code>## $one
 ## [1] 3
