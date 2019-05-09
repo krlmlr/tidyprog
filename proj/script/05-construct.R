@@ -1,9 +1,5 @@
 ### Construction
 
-library(tidyverse)
-library(here)
-
-# Use c() to construct a vector, all elements will be of the same type:
 c(1, 2, 3)
 c(1:3, 5)
 c(1:3, "5")
@@ -26,7 +22,18 @@ list(
 # Vectors and lists can have names:
 c(a = 1, b = 2, c = 3)
 list(a = 1:3, b = 5)
+set_names(1:3, letters[1:3])
 
 # Preview: vctrs::list_of() to construct typed lists
 #vctrs::list_of(1, 2, 3)
 #vctrs::list_of(letters[1:3], "e")
+
+# Exercises
+
+c(a = list(1:3), b = list(4:5))
+list(a = list(1:3), b = list(4:5))
+
+input_files %>%
+  enframe() %>% 
+  filter(name == "toronto") %>% 
+  deframe()
