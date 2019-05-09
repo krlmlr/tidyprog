@@ -23,7 +23,7 @@ tidyprog_repo <- function(...) {
 
 # Preface {-}
 
-Material for the zhRcourse workshop "Programming in the tidyverse" on May 10, 2019.
+Material for the [zhRcourse workshop "Programming in the tidyverse"](https://www.zhrcourses.uzh.ch/en/programm2019/tidyverse.html) on May 10, 2019.
 
 ## Links {-}
 
