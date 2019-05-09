@@ -29,45 +29,17 @@ read_weather_data <- function() {
 
 read_weather_data()
 
-### Exercise
+# Exercises
 
-
-# Simplify more?
-
-
-# Get rid of repeated .xlsx?
-
-get_weather_for <- function(city) {
-  filename <- paste0(city, ".xlsx")
-
-  readxl::read_excel(
-    paste0(
-      weather_path(filename)
-    )
-  )
+get_weather_file_for <- function(city_code) {
+  paste0(city_code, ".xlsx")
 }
 
-weather_path_for <- function(city) {
+get_weather_file_for("munich")
+get_weather_file_for("san_diego")
 
-  here("data/weather", paste0(city, ".xlsx"))
+get_weather_data_for <- function(city_code) {
+  read_weather_file(get_weather_file_for(city_code))
 }
 
-get_weather_for2 <- function(city) {
-  readxl::read_excel(weather_path_for(city))
-}
-
-read_weather_data <- function() {
-  # Create ensemble dataset from files on disk
-  weather_data <- bind_rows(
-    berlin = get_weather_for2("berlin"),
-    toronto = get_weather_for2("toronto"),
-    tel_aviv = get_weather_for2("tel_aviv"),
-    zurich = get_weather_for2("zurich"),
-    .id = "city_code"
-  )
-
-  # Return it
-  weather_data
-}
-
-read_weather_data()
+get_weather_data_for("toronto")
