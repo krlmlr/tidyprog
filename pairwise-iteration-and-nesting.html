@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="manipulating-pairwise" class="section level2">
 <h2><span class="header-section-number">4.1</span> Manipulating pairwise</h2>
 <details>
-<p><summary><em>Click here to make setup code visible</em></summary></p>
+<p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -237,10 +237,10 @@ manipulated_data &lt;-
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpyWU1oy/berlin2c0abe1d84c.csv&quot;   
-## [2] &quot;/tmp/RtmpyWU1oy/toronto2c0a511fb0e1.csv&quot; 
-## [3] &quot;/tmp/RtmpyWU1oy/tel_aviv2c0a2bfb13cf.csv&quot;
-## [4] &quot;/tmp/RtmpyWU1oy/zurich2c0a33e4c2f9.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpFAbiwz/berlin2c0fa3e3981.csv&quot;   
+## [2] &quot;/tmp/RtmpFAbiwz/toronto2c0f2fa2bb38.csv&quot; 
+## [3] &quot;/tmp/RtmpFAbiwz/tel_aviv2c0f1101f30a.csv&quot;
+## [4] &quot;/tmp/RtmpFAbiwz/zurich2c0f4be3ed6b.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>
@@ -280,7 +280,7 @@ We use <code>map2()</code> to handle this:</p>
 <div id="mut_map" class="section level2">
 <h2><span class="header-section-number">4.2</span> Moving to tibble-land</h2>
 <details>
-<p><summary><em>Click here to make setup code visible</em></summary></p>
+<p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -342,7 +342,7 @@ dict_data</code></pre>
 <div id="nest" class="section level2">
 <h2><span class="header-section-number">4.3</span> Nesting and unnesting</h2>
 <details>
-<p><summary><em>Click here to make setup code visible</em></summary></p>
+<p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
