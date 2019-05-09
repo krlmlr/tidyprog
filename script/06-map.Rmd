@@ -68,6 +68,10 @@ input_files %>%
   map(~ readxl::read_excel(here(.)))
 ```
 
+```{r include = FALSE}
+# Exercises
+```
+
 ### Exercises
 
 1. Read only the data for Toronto and Tel Aviv, using subsetting or `filter()`. Compare.
@@ -83,7 +87,7 @@ input_files %>%
       map(~ readxl::read_excel(here(.)))
     ```
     
-    ```{r}
+    ```{r echo = FALSE}
     input_files[c("toronto", "tel_aviv")] %>% 
       map(~ readxl::read_excel(here(.)))
 
@@ -104,7 +108,7 @@ input_files %>%
       map(~ readxl::read_excel(.))
     ```
 
-    ```{r}
+    ```{r echo = FALSE}
     input_files %>% 
       enframe() %>% 
       mutate(value = here(value)) %>% 

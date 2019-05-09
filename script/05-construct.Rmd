@@ -78,7 +78,7 @@ The new {vctrs} package defines a data type for lists where all elements have th
 
 1. Explain the differences between the outputs below.
 
-    ```{r}
+    ```{r echo = TRUE}
     c(a = list(1:3), b = list(4:5))
     list(a = list(1:3), b = list(4:5))
     ```

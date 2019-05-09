@@ -1,4 +1,4 @@
-# Function basics
+# Function basics {#function-basics}
 
 > Structuring the code to avoid too much copy-pasting
 

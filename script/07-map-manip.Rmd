@@ -27,7 +27,19 @@ input_data <-
 How to selectively manipulate specific parts of a list of datasets?
 
 We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map).
-Of each tibble we only want the column `time` and all the columns whose name contains "emperature":
+Of each tibble we only want the column `time` and all the columns whose name contains "emperature".
+We test with the first entry:
+
+```{r include = FALSE}
+# Manipulate first result
+```
+```{r 07-manipulate-first-result}
+input_data[[1]] %>%
+  select(time, contains("emperature"))
+```
+
+To apply this on all entries, we use `map()` again.
+Note that we need an explicit dot (`.`) in the `select()` call here, to indicate the position where each sub-dataset will be plugged in.
 
 ```{r include = FALSE}
 # Manipulate results
@@ -37,8 +49,7 @@ input_data %>%
   map(~ select(., time, contains("emperature")))
 ```
 
-But we don't want all of the observations, respectively. 
-We only want those with values in column `temperature` greater or equal than 14°C:
+We can extend this to preserve only the observations with `temperature` greater or equal than 14°C:
 
 ```{r include = FALSE}
 # Manipulate results more
@@ -71,6 +82,8 @@ Let's look at the object `manipulator`, that we created:
 manipulator
 ```
 
+See the ["Function basics"](#function-basics) chapter for a more extensive introduction to functions.
+
 Testing the function:
 
 ```{r include = FALSE}
@@ -90,7 +103,7 @@ manipulated_data <- map(input_data, ~ manipulator(.))
 manipulated_data
 ```
 
-`map()` also allows for other notations, e.g.:
+`map()` allows for the following shortcut notation for functions with one argument only:
 
 ```{r include = FALSE}
 # Shortcut
@@ -98,3 +111,63 @@ manipulated_data
 ```{r 07-shortcut}
 map(input_data, manipulator)
 ```
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Use `summarize()` to compute the mean temperature and humidity for each city during that period.
+
+    ```r
+    input_data %>% 
+      ___(~ ___(., mean(___), mean(___)))
+    ```
+    
+    ```{r echo = FALSE}
+    input_data %>% 
+      map(~ summarize(., mean(temperature), mean(humidity)))
+    ```
+
+1. Create a function to compute the daily mean of these values for each dataset:
+
+    ```r
+    compute_daily_mean <- ___(data) {
+      data %>%
+        ___(as.Date(time)) %>%
+        ___(_____) %>%
+        ungroup()
+    }
+    input_data %>% 
+      ___(___)
+    ```
+    
+    ```{r echo = FALSE}
+    compute_daily_mean <- function(data) {
+      data %>% 
+        group_by(as.Date(time)) %>% 
+        summarize(mean(temperature), mean(humidity)) %>% 
+        ungroup()
+    }
+    input_data %>% 
+      map(compute_daily_mean)
+    ```
+
+1. Use the `dim()` function to compute the dimensions of each sub-dataset. Then, use `prod()` to compute the number of cells. Discuss your observation.
+
+    ```r
+    input_data %>% 
+      _____
+    input_data %>% 
+      _____ %>% 
+      _____
+    ```
+    
+    ```{r echo = FALSE}
+    input_data %>% 
+      map(dim)
+    input_data %>% 
+      map(dim) %>% 
+      map(prod)
+    ```
