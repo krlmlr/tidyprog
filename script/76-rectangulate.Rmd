@@ -1,4 +1,4 @@
-```{r 75-remove-all, include = FALSE}
+```{r 76-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Rectangling
 
 ```
-```{r 75-setup-75-rectangulate-r}
+```{r 76-setup-75-rectangulate-r}
 library(tidyverse)
 library(here)
 
@@ -32,7 +32,7 @@ coordinates_transposed <-
 ```{r include = FALSE}
 # A tibble is internally a list of named vectors of equal length:
 ```
-```{r 75-a-tibble-is-internally-a-list-of-named-vectors-of-equal-length}
+```{r 76-a-tibble-is-internally-a-list-of-named-vectors-of-equal-length}
 coordinates_transposed %>%
   set_names(c("lon", "lat"))
 
@@ -45,7 +45,7 @@ coordinates_transposed %>%
 ```{r include = FALSE}
 # Name repair helps if you don't know the names yet
 ```
-```{r 75-name-repair-helps-if-you-don-t-know-the-names-yet}
+```{r 76-name-repair-helps-if-you-don-t-know-the-names-yet}
 coordinates_transposed %>%
   as_tibble(.name_repair = "universal")
 
