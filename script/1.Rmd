@@ -1,8 +1,0 @@
-```{r child = here::here("script", "11-map2.Rmd")}
-```
-
-```{r child = here::here("script", "12-mutate-map.Rmd")}
-```
-
-```{r child = here::here("script", "13-unnest.Rmd")}
-```
