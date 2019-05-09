@@ -1,5 +1,9 @@
 ### Construction
 
+library(tidyverse)
+library(here)
+
+# Use c() to construct a vector, all elements will be of the same type:
 c(1, 2, 3)
 c(1:3, 5)
 c(1:3, "5")
