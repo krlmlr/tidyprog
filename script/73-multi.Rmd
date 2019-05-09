@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## Iterating and traversing
+## Plucking multiple locations
 
 <details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
-### Iterating and traversing
+### Plucking multiple locations
 
 ```
 ```{r 73-setup-73-multi-r}

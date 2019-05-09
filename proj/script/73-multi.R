@@ -1,4 +1,4 @@
-### Iterating and traversing
+### Plucking multiple locations
 
 library(tidyverse)
 library(here)
