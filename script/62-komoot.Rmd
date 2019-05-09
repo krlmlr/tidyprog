@@ -1,4 +1,4 @@
-```{r 72-remove-all, include = FALSE}
+```{r 62-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Iterating and traversing
 
 ```
-```{r 72-setup-72-komoot-r}
+```{r 62-setup-72-komoot-r}
 library(tidyverse)
 library(here)
 ```
@@ -21,7 +21,7 @@ Now we are not only working with the geolocation data for Berlin, but we are add
 ```{r include = FALSE}
 # Results from downloading geolocation data for all cities from photon.komoot.de:
 ```
-```{r 72-results-from-downloading-geolocation-data-for-all-cities-from-photon-komoot-de}
+```{r 62-results-from-downloading-geolocation-data-for-all-cities-from-photon-komoot-de}
 komoot <- readRDS(here("data/komoot.rds"))
 
 komoot
@@ -34,7 +34,7 @@ By using `pull()` on `content`,  we can produce a list containing the informatio
 ```{r include = FALSE}
 # Results are stored in the "content" column:
 ```
-```{r 72-results-are-stored-in-the-content-column}
+```{r 62-results-are-stored-in-the-content-column}
 komoot_content <-
   komoot %>%
   pull(content)
@@ -59,7 +59,7 @@ With `map()` we can access the same element of the respective list for each city
 ```{r include = FALSE}
 # Apply same pluck() on all values with map():
 ```
-```{r 72-apply-same-pluck-on-all-values-with-map}
+```{r 62-apply-same-pluck-on-all-values-with-map}
 komoot_content %>%
   map(~ pluck(., "features", 1, "geometry", "coordinates"))
 ```
@@ -70,7 +70,7 @@ We can just give it a list of the arguments which we would normally use as argum
 ```{r include = FALSE}
 # Shortcut:
 ```
-```{r 72-shortcut}
+```{r 62-shortcut}
 komoot_content %>%
   map(list("features", 1, "geometry", "coordinates"))
 ```
@@ -81,7 +81,7 @@ The acces path can also be stored in a variable:
 ```{r include = FALSE}
 # Can also be stored in a variable:
 ```
-```{r 72-can-also-be-stored-in-a-variable}
+```{r 62-can-also-be-stored-in-a-variable}
 accessor <- list("features", 1, "geometry", "coordinates")
 coordinates <-
   komoot_content %>%

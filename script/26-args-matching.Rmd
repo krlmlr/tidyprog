@@ -1,4 +1,4 @@
-```{r 36-remove-all, include = FALSE}
+```{r 26-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Argument matching
 
 ```
-```{r 36-setup-36-args-matching-r}
+```{r 26-setup-36-args-matching-r}
 
 ```
 </details>
@@ -22,7 +22,7 @@ Named arguments are assigned first, after that remaining slots are filled from l
 ```{r include = FALSE}
 # Call matching
 ```
-```{r 36-call-matching}
+```{r 26-call-matching}
 use_names <- function(a = 1, b = 2) {
   list(a = a, b = b)
 }
@@ -38,7 +38,7 @@ The ellipsis can be used to enforce the user to name the function parameters whe
 ```{r include = FALSE}
 # The ellipsis is useful to enforce naming of arguments
 ```
-```{r 36-the-ellipsis-is-useful-to-enforce-naming-of-arguments}
+```{r 26-the-ellipsis-is-useful-to-enforce-naming-of-arguments}
 enforce_names <- function(..., a = 1, b = 2) {
   list(a = a, b = b)
 }
@@ -53,7 +53,7 @@ Inside a function with an ellipsis as a parameter, you can capture the ellipsis 
 ```{r include = FALSE}
 # Arguments in ellipsis can be captured via list()
 ```
-```{r 36-arguments-in-ellipsis-can-be-captured-via-list}
+```{r 26-arguments-in-ellipsis-can-be-captured-via-list}
 ellipsis_test <- function(...) {
   args <- list(...)
   names(args)
@@ -70,7 +70,7 @@ Naming, not naming or partly naming parameters in functions calls? What does the
 ```{r include = FALSE}
 ## Exercise: call matching
 ```
-```{r 36-exercise-call-matching}
+```{r 26-exercise-call-matching}
 
 ```
 
@@ -78,7 +78,7 @@ Naming, not naming or partly naming parameters in functions calls? What does the
 ```{r include = FALSE}
 ## Ellipsis inbetween
 ```
-```{r 36-ellipsis-inbetween}
+```{r 26-ellipsis-inbetween}
 
 
 use_some_names <- function(a = 1, ..., b = 2) {
@@ -96,7 +96,7 @@ use_some_names(b = 4, 3)
 ```{r include = FALSE}
 ## Program defensively!
 ```
-```{r 36-program-defensively}
+```{r 26-program-defensively}
 
 use_always_names <- function(..., a = 1, b = 2) {
   extra_args <- list(...)

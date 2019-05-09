@@ -1,4 +1,4 @@
-```{r 01-remove-all, include = FALSE}
+```{r 12-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -17,7 +17,7 @@ We will always load the following packages:
 ### Review of visualization and data transformation
 
 ```
-```{r 01-setup-01-intro-r}
+```{r 12-setup-01-intro-r}
 library(tidyverse)
 library(here)
 ```
@@ -56,7 +56,7 @@ Reading in the data, which is stored in MS Excel-Files:
 ```{r include = FALSE}
 # Read all files
 ```
-```{r 01-read-all-files}
+```{r 12-read-all-files}
 berlin <- readxl::read_excel(here("data/weather", "berlin.xlsx"))
 toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
 tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
@@ -68,7 +68,7 @@ Create one larger tibble from the four smaller ones:
 ```{r include = FALSE}
 # Create ensemble dataset
 ```
-```{r 01-create-ensemble-dataset}
+```{r 12-create-ensemble-dataset}
 weather_data <- bind_rows(
   berlin = berlin,
   toronto = toronto,
@@ -83,7 +83,7 @@ weather_data <- bind_rows(
 ```{r include = FALSE}
 # Show the data
 ```
-```{r 01-show-the-data}
+```{r 12-show-the-data}
 weather_data
 ```
 
@@ -92,7 +92,7 @@ Example plot of humidity vs. pressure (`geom_path()` ensures that points are con
 ```{r include = FALSE}
 # Visibility vs. humitidy
 ```
-```{r 01-visibility-vs-humitidy}
+```{r 12-visibility-vs-humitidy}
 weather_data %>%
   ggplot(aes(x = pressure, y = humidity, color = city_code)) +
   geom_path()
@@ -103,7 +103,7 @@ Barplots of number of occurences of each kind of weather per city:
 ```{r include = FALSE}
 # Summary
 ```
-```{r 01-summary}
+```{r 12-summary}
 weather_data %>%
   ggplot(aes(x = city_code)) +
   geom_bar(aes(fill = summary))
@@ -118,7 +118,7 @@ Lineplot with different line types and an additional visualisation of the line r
 ```{r include = FALSE}
 # Temperature and apparent temperature
 ```
-```{r 01-temperature-and-apparent-temperature}
+```{r 12-temperature-and-apparent-temperature}
 temperature_data <-
   weather_data %>%
   select(city_code, time, temperature, apparentTemperature) %>%
@@ -137,7 +137,7 @@ Relation of temperature difference between actual and apparent temperature (cf. 
 ```{r include = FALSE}
 # Compute and plot temperature difference
 ```
-```{r 01-compute-and-plot-temperature-difference}
+```{r 12-compute-and-plot-temperature-difference}
 weather_data %>%
   mutate(apparentTemperatureReduction = temperature - apparentTemperature) %>%
   filter(city_code != "tel_aviv") %>%
@@ -153,7 +153,7 @@ If you want to compare measurements of the same observable at two different poin
 # Compute lag for temperature, pressure and humidity.
 # How to compute temperature difference to previous hour?
 ```
-```{r 01-compute-lag-for-temperature-pressure-and-humidity}
+```{r 12-compute-lag-for-temperature-pressure-and-humidity}
 weather_data %>%
   group_by(city_code) %>%
   mutate_at(vars(temperature, pressure, humidity), list(lag = lag)) %>%
@@ -166,7 +166,7 @@ Count observations per category or combinations of categories:
 ```{r include = FALSE}
 # Count observations
 ```
-```{r 01-count-observations}
+```{r 12-count-observations}
 weather_data %>%
   count(city_code)
 
@@ -179,7 +179,7 @@ Use `summarize()` to create a tibble with mean and maximum temperature for each 
 ```{r include = FALSE}
 # Compute mean and max temperature
 ```
-```{r 01-compute-mean-and-max-temperature}
+```{r 12-compute-mean-and-max-temperature}
 weather_data %>%
   group_by(city_code) %>%
   summarize(temperature_mean = mean(temperature), temperature_max = max(temperature)) %>%
@@ -191,7 +191,7 @@ Compute and display summary data for all numeric variables:
 ```{r include = FALSE}
 # Compute and display summary data for all numeric variables
 ```
-```{r 01-compute-and-display-summary-data-for-all-numeric-variables}
+```{r 12-compute-and-display-summary-data-for-all-numeric-variables}
 weather_data %>%
   group_by(city_code) %>%
   summarize_if(is.numeric, list(mean = mean, sd = sd, min = min, max = max)) %>%

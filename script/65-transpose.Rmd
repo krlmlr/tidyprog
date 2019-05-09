@@ -1,4 +1,4 @@
-```{r 75-remove-all, include = FALSE}
+```{r 65-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Transposing
 
 ```
-```{r 75-setup-74-transpose-r}
+```{r 65-setup-74-transpose-r}
 library(tidyverse)
 library(here)
 
@@ -36,7 +36,7 @@ Let's apply `purrr::transpose()` to our list `coordinates`:
 ```{r include = FALSE}
 # Transposing inside out:
 ```
-```{r 75-transposing-inside-out}
+```{r 65-transposing-inside-out}
 coordinates %>%
   transpose()
 ```
@@ -48,7 +48,7 @@ The first vector contains the longitude and the second the latitude of our citie
 ```{r include = FALSE}
 # Flatten to simplify structure:
 ```
-```{r 75-flatten-to-simplify-structure}
+```{r 65-flatten-to-simplify-structure}
 coordinates_transposed <-
   coordinates %>%
   transpose() %>%

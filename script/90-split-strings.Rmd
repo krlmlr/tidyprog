@@ -1,4 +1,4 @@
-```{r 60-remove-all, include = FALSE}
+```{r 90-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### <No caption defined>
 
 ```
-```{r 60-setup-60-split-strings-r}
+```{r 90-setup-60-split-strings-r}
 
 
 library(tidyverse)
@@ -24,7 +24,7 @@ dict <- readxl::read_excel(here("data/cities.xlsx"))
 ```{r include = FALSE}
 # strsplit() or stringr functions
 ```
-```{r 60-strsplit-or-stringr-functions}
+```{r 90-strsplit-or-stringr-functions}
 dict %>%
   pull(name) %>%
   strsplit(" ")
@@ -34,7 +34,7 @@ dict %>%
 ```{r include = FALSE}
 # Back to tibble-land
 ```
-```{r 60-back-to-tibble-land}
+```{r 90-back-to-tibble-land}
 dict %>%
   mutate(split = strsplit(name, " "))
 ```
@@ -43,7 +43,7 @@ dict %>%
 ```{r include = FALSE}
 # Same result with map()?
 ```
-```{r 60-same-result-with-map}
+```{r 90-same-result-with-map}
 dict %>%
   mutate(split = map(name, ~ strsplit(., " ")))
 ```
@@ -52,7 +52,7 @@ dict %>%
 ```{r include = FALSE}
 # Need flatten:
 ```
-```{r 60-same-result-with-map-2}
+```{r 90-same-result-with-map-2}
 dict %>%
   mutate(split = flatten(map(name, ~ strsplit(., " "))))
 ```
@@ -61,7 +61,7 @@ dict %>%
 ```{r include = FALSE}
 # Unnesting works, but brittle:
 ```
-```{r 60-unnesting-works-but-brittle}
+```{r 90-unnesting-works-but-brittle}
 dict %>%
   mutate(split = strsplit(name, " ")) %>%
   select(city_code, split) %>%
@@ -72,7 +72,7 @@ dict %>%
 ```{r include = FALSE}
 # Create a nested data frame first
 ```
-```{r 60-create-a-nested-data-frame-first}
+```{r 90-create-a-nested-data-frame-first}
 dict %>%
   mutate(split = strsplit(name, " ")) %>%
   mutate(data = map(split, enframe)) %>%

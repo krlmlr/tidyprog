@@ -1,4 +1,4 @@
-```{r 33-remove-all, include = FALSE}
+```{r 23-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Use case: Intermediate variables
 
 ```
-```{r 33-setup-33-intermediate-r}
+```{r 23-setup-33-intermediate-r}
 library(tidyverse)
 library(here)
 
@@ -28,7 +28,7 @@ Functions can help to avoid having to use intermediate variables:
 ```{r include = FALSE}
 # Functions can help eliminate intermediate variables
 ```
-```{r 33-functions-can-help-eliminate-intermediate-variables}
+```{r 23-functions-can-help-eliminate-intermediate-variables}
 read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
@@ -54,7 +54,7 @@ read_weather_data()
 ```{r include = FALSE}
 ### Exercise
 ```
-```{r 33-exercise}
+```{r 23-exercise}
 
 ```
 
@@ -62,7 +62,7 @@ read_weather_data()
 ```{r include = FALSE}
 # Simplify more?
 ```
-```{r 33-simplify-more}
+```{r 23-simplify-more}
 
 ```
 
@@ -73,7 +73,7 @@ As a result, `get_weather_for2()` works the same way as `get_weather_for()` (bel
 ```{r include = FALSE}
 # Get rid of repeated .xlsx?
 ```
-```{r 33-get-rid-of-repeated-xlsx}
+```{r 23-get-rid-of-repeated-xlsx}
 
 get_weather_for <- function(city) {
   filename <- paste0(city, ".xlsx")

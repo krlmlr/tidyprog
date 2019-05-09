@@ -1,4 +1,4 @@
-```{r 12-remove-all, include = FALSE}
+```{r 42-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Moving to tibble-land
 
 ```
-```{r 12-setup-12-mutate-map-r}
+```{r 42-setup-12-mutate-map-r}
 library(tidyverse)
 library(here)
 
@@ -33,7 +33,7 @@ Produce a data frame from `input_data` with `enframe()` leads to a maybe at firs
 ```{r include = FALSE}
 # Lists are also vectors, enframe() returns a nested tibble!
 ```
-```{r 12-lists-are-also-vectors-enframe-returns-a-nested-tibble}
+```{r 42-lists-are-also-vectors-enframe-returns-a-nested-tibble}
 input_data %>%
   enframe()
 ```
@@ -46,7 +46,7 @@ Starting with the tibble `dict` we can see how `dpylr::mutate()` and `map()` can
 ```{r include = FALSE}
 # Operate in "tibble-land" right away: columns are vectors
 ```
-```{r 12-operate-in-tibble-land-right-away-columns-are-vectors}
+```{r 42-operate-in-tibble-land-right-away-columns-are-vectors}
 dict %>%
   select(city_code, weather_filename) %>%
   mutate(
@@ -61,7 +61,7 @@ Deselect i.e. drop columns using `select()` with `-`:
 ```{r include = FALSE}
 # Keep important columns
 ```
-```{r 12-keep-important-columns}
+```{r 42-keep-important-columns}
 dict_data <-
   dict %>%
   mutate(

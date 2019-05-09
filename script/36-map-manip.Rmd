@@ -1,4 +1,4 @@
-```{r 07-remove-all, include = FALSE}
+```{r 36-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Manipulating all datasets
 
 ```
-```{r 07-setup-07-map-manip-r}
+```{r 36-setup-07-map-manip-r}
 library(tidyverse)
 library(here)
 
@@ -33,7 +33,7 @@ We test with the first entry:
 ```{r include = FALSE}
 # Manipulate first result
 ```
-```{r 07-manipulate-first-result}
+```{r 36-manipulate-first-result}
 input_data[[1]] %>%
   select(time, contains("emperature"))
 ```
@@ -44,7 +44,7 @@ Note that we need an explicit dot (`.`) in the `select()` call here, to indicate
 ```{r include = FALSE}
 # Manipulate results
 ```
-```{r 07-manipulate-results}
+```{r 36-manipulate-results}
 input_data %>%
   map(~ select(., time, contains("emperature")))
 ```
@@ -54,7 +54,7 @@ We can extend this to preserve only the observations with `temperature` greater 
 ```{r include = FALSE}
 # Manipulate results more
 ```
-```{r 07-manipulate-results-more}
+```{r 36-manipulate-results-more}
 input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
   map(~ filter(., temperature >= 14))
@@ -65,7 +65,7 @@ Create a custom function for that specific purpose in a call to `map()`:
 ```{r include = FALSE}
 # Create a function to manipulate
 ```
-```{r 07-create-a-function-to-manipulate}
+```{r 36-create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
@@ -78,7 +78,7 @@ Let's look at the object `manipulator`, that we created:
 ```{r include = FALSE}
 # Functions are first-class objects!
 ```
-```{r 07-functions-are-first-class-objects}
+```{r 36-functions-are-first-class-objects}
 manipulator
 ```
 
@@ -89,7 +89,7 @@ Testing the function:
 ```{r include = FALSE}
 # Test the function
 ```
-```{r 07-test-the-function}
+```{r 36-test-the-function}
 manipulator(input_data[[4]])
 ```
 
@@ -98,7 +98,7 @@ Now let's use `map()` to let our function act on the entire dataset:
 ```{r include = FALSE}
 # Run the function on the entire dataset
 ```
-```{r 07-run-the-function-on-the-entire-dataset}
+```{r 36-run-the-function-on-the-entire-dataset}
 manipulated_data <- map(input_data, ~ manipulator(.))
 manipulated_data
 ```
@@ -108,7 +108,7 @@ manipulated_data
 ```{r include = FALSE}
 # Shortcut
 ```
-```{r 07-shortcut}
+```{r 36-shortcut}
 map(input_data, manipulator)
 ```
 

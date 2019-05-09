@@ -1,4 +1,4 @@
-```{r 35-remove-all, include = FALSE}
+```{r 25-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Multiple arguments
 
 ```
-```{r 35-setup-35-args-multi-r}
+```{r 25-setup-35-args-multi-r}
 library(tidyverse)
 library(here)
 
@@ -33,7 +33,7 @@ You can add new parameters in a very straightforward manner like this:
 ```{r include = FALSE}
 # Multiple function arguments are separated by comma:
 ```
-```{r 35-multiple-function-arguments-are-separated-by-comma}
+```{r 25-multiple-function-arguments-are-separated-by-comma}
 read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
   # Create ensemble dataset from files on disk
   weather_data <- bind_rows(
@@ -57,7 +57,7 @@ This can be e.g. useful for passing arguments downstream:
 ```{r include = FALSE}
 # Ellipsis: variable argument list, useful for passing arguments downstream
 ```
-```{r 35-ellipsis-variable-argument-list-useful-for-passing-arguments-downstream}
+```{r 25-ellipsis-variable-argument-list-useful-for-passing-arguments-downstream}
 weather_path <- function(...) {
   # All arguments are passed on
   here("data/weather", ...)
@@ -76,7 +76,7 @@ Mind, that despite altering the original function and adding new features to it,
 # the original call still works!
 # (This can be tested automatically!)
 ```
-```{r 35-note-despite-many-changes-and-new-features}
+```{r 25-note-despite-many-changes-and-new-features}
 read_weather_data()
 ```
 
@@ -86,7 +86,7 @@ read_weather_data()
 ```{r include = FALSE}
 ## What does the following return? Why?
 ```
-```{r 35-what-does-the-following-return-why}
+```{r 25-what-does-the-following-return-why}
 read_weather_data(TRUE, omit_z = FALSE) %>%
   count(city_code)
 ```

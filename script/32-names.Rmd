@@ -1,4 +1,4 @@
-```{r 03-remove-all, include = FALSE}
+```{r 32-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Named vectors and two-column tibbles
 
 ```
-```{r 03-setup-03-names-r}
+```{r 32-setup-03-names-r}
 library(tidyverse)
 library(here)
 ```
@@ -23,7 +23,7 @@ As seen in section ["Data"](#intro-data), load a table -- here a dictionary deta
 ```{r include = FALSE}
 # Load dictionary from file
 ```
-```{r 03-load-dictionary-from-file}
+```{r 32-load-dictionary-from-file}
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
 ```
@@ -33,7 +33,7 @@ Use `pull()` as seen in the last chapter:
 ```{r include = FALSE}
 # Acquire file names
 ```
-```{r 03-acquire-file-names}
+```{r 32-acquire-file-names}
 dict %>%
   pull(weather_filename)
 ```
@@ -43,7 +43,7 @@ Create absolute paths using `here::here()`:
 ```{r include = FALSE}
 # Use here() to create absolute paths
 ```
-```{r 03-use-here-to-create-absolute-paths}
+```{r 32-use-here-to-create-absolute-paths}
 dict %>%
   pull(weather_filename) %>%
   here()
@@ -57,7 +57,7 @@ When given a more-than-2-column tibble, it will use the first two columns as nam
 ```{r include = FALSE}
 # Acquire file names as a named vector
 ```
-```{r 03-acquire-file-names-as-a-named-vector}
+```{r 32-acquire-file-names-as-a-named-vector}
 weather_filenames <-
   dict %>%
   select(city_code, weather_filename) %>%
@@ -70,7 +70,7 @@ The `names()` function accesses the names of a vector:
 ```{r include = FALSE}
 # Use names() to access names
 ```
-```{r 03-use-names-to-access-names}
+```{r 32-use-names-to-access-names}
 weather_filenames %>%
   names()
 ```
@@ -81,7 +81,7 @@ Some operations producing vectors from vectors cause the names to be lost:
 ```{r include = FALSE}
 # Not all operations maintain vector names!
 ```
-```{r 03-not-all-operations-maintain-vector-names}
+```{r 32-not-all-operations-maintain-vector-names}
 weather_filenames %>%
   here()
 ```
@@ -91,7 +91,7 @@ A possible solution can be in many cases to change the order of the transformati
 ```{r include = FALSE}
 # Move the here() call into "tibble-land"
 ```
-```{r 03-move-the-here-call-into-tibble-land}
+```{r 32-move-the-here-call-into-tibble-land}
 dict %>%
   mutate(weather_filename_here = here(weather_filename)) %>%
   select(city_code, weather_filename_here) %>%

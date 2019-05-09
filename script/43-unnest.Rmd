@@ -1,4 +1,4 @@
-```{r 13-remove-all, include = FALSE}
+```{r 43-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Nesting and unnesting
 
 ```
-```{r 13-setup-13-unnest-r}
+```{r 43-setup-13-unnest-r}
 library(tidyverse)
 library(here)
 
@@ -33,7 +33,7 @@ This blows up our tibble by repeating the formerly unnested column entries as ma
 ```{r include = FALSE}
 # Flatten a nested tibble with unnest():
 ```
-```{r 13-flatten-a-nested-tibble-with-unnest}
+```{r 43-flatten-a-nested-tibble-with-unnest}
 dict_data %>%
   unnest()
 
@@ -49,7 +49,7 @@ Therefore it is often useful to tell it, which columns to ignore:
 ```{r include = FALSE}
 # Inverse operation: nest()
 ```
-```{r 13-inverse-operation-nest}
+```{r 43-inverse-operation-nest}
 dict_data %>%
   unnest() %>%
   nest(-city_code, -name, -lng, -lat)
@@ -61,7 +61,7 @@ Here, we create a new column `date`, by dropping the detailed information of the
 ```{r include = FALSE}
 # Split into daily data:
 ```
-```{r 13-split-into-daily-data}
+```{r 43-split-into-daily-data}
 dict_data %>%
   unnest() %>%
   mutate(date = as.Date(time)) %>%

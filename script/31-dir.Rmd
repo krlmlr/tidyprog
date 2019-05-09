@@ -1,4 +1,4 @@
-```{r 02-remove-all, include = FALSE}
+```{r 31-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Vectors and columns
 
 ```
-```{r 02-setup-02-dir-r}
+```{r 31-setup-02-dir-r}
 library(tidyverse)
 library(here)
 ```
@@ -23,7 +23,7 @@ We can e.g. get a vector with the files in a specific directory of our current p
 ```{r include = FALSE}
 # Show all files, see also fs::dir_ls()
 ```
-```{r 02-show-all-files-see-also-fs-dir-ls}
+```{r 31-show-all-files-see-also-fs-dir-ls}
 files <- dir(here("data/weather"), full.names = TRUE)
 files
 ```
@@ -33,7 +33,7 @@ You can create a tibble from it using `tibble::enframe()`:
 ```{r include = FALSE}
 # Convert to a tibble
 ```
-```{r 02-convert-to-a-tibble}
+```{r 31-convert-to-a-tibble}
 files_df <-
   files %>%
   enframe()
@@ -46,7 +46,7 @@ The `name` column might be unwanted in some cases. Suppress its creation by sett
 ```{r include = FALSE}
 # Remove the name column
 ```
-```{r 02-remove-the-name-column}
+```{r 31-remove-the-name-column}
 files_df_1 <-
   files %>%
   enframe(name = NULL)
@@ -60,7 +60,7 @@ You can name the newly created columns by assigning the vectors they are created
 ```{r include = FALSE}
 # Construct tibble from a vector
 ```
-```{r 02-construct-tibble-from-a-vector}
+```{r 31-construct-tibble-from-a-vector}
 tibble(filename = files)
 ```
 
@@ -70,7 +70,7 @@ By default `pull()` will turn the rightmost column into a vector and ignore the 
 ```{r include = FALSE}
 # Extract a column as a vector
 ```
-```{r 02-extract-a-column-as-a-vector}
+```{r 31-extract-a-column-as-a-vector}
 files_df %>%
   pull()
 ```
@@ -80,7 +80,7 @@ Turn a specific column into a vector by providing the desired column name to `pu
 ```{r include = FALSE}
 # Extract a specific column as a vector
 ```
-```{r 02-extract-a-specific-column-as-a-vector}
+```{r 31-extract-a-specific-column-as-a-vector}
 files_df %>%
   pull(name)
 ```

@@ -1,4 +1,4 @@
-```{r 34-remove-all, include = FALSE}
+```{r 24-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Default values
 
 ```
-```{r 34-setup-34-args-default-r}
+```{r 24-setup-34-args-default-r}
 library(tidyverse)
 library(here)
 
@@ -34,7 +34,7 @@ Here an example of a boolean argument which when `TRUE` leads to dropping the da
 ```{r include = FALSE}
 # Function arguments can have default values
 ```
-```{r 34-function-arguments-can-have-default-values}
+```{r 24-function-arguments-can-have-default-values}
 read_weather_data <- function(omit_zurich = FALSE) {
   # Create ensemble dataset from files on disk
   weather_data <- bind_rows(
@@ -58,7 +58,7 @@ Set arguments with default values explicitly with or without using the name or l
 # Function arguments can be called by name or by position,
 # optional arguments are omitted
 ```
-```{r 34-function-arguments-can-be-called-by-name-or-by-position}
+```{r 24-function-arguments-can-be-called-by-name-or-by-position}
 read_weather_data(TRUE)
 read_weather_data(omit_zurich = TRUE)
 read_weather_data()

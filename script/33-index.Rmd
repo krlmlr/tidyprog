@@ -1,4 +1,4 @@
-```{r 04-remove-all, include = FALSE}
+```{r 33-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -9,7 +9,7 @@ rm(list = ls())
 ### Indexing/subsetting
 
 ```
-```{r 04-setup-04-index-r}
+```{r 33-setup-04-index-r}
 library(tidyverse)
 library(here)
 
@@ -25,7 +25,7 @@ Create named vector of the -- future -- input files:
 ```{r include = FALSE}
 # Collect input files as a named vector
 ```
-```{r 04-collect-input-files-as-a-named-vector}
+```{r 33-collect-input-files-as-a-named-vector}
 input_files <-
   dict %>%
   select(city_code, weather_filename) %>%
@@ -39,7 +39,7 @@ There are different ways of accessing individual entries of the named vector:
 ```{r include = FALSE}
 # Access individual input files
 ```
-```{r 04-access-individual-input-files}
+```{r 33-access-individual-input-files}
 input_files[1]
 input_files[[1]]
 input_files[["berlin"]]
@@ -50,7 +50,7 @@ Choose multiple entries with:
 ```{r include = FALSE}
 # Access multiple input files
 ```
-```{r 04-access-multiple-input-files}
+```{r 33-access-multiple-input-files}
 input_files[1:2]
 input_files[c("berlin", "zurich")]
 ```
@@ -60,7 +60,7 @@ Consistent pipe-friendly access of single elements:
 ```{r include = FALSE}
 # Consistent pipe-friendly access of single elements
 ```
-```{r 04-consistent-pipe-friendly-access-of-single-elements}
+```{r 33-consistent-pipe-friendly-access-of-single-elements}
 input_files %>% 
   pluck(1)
 input_files %>% 

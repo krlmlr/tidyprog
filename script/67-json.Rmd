@@ -1,4 +1,4 @@
-```{r 77-remove-all, include = FALSE}
+```{r 67-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Accessing APIs
 
 ```
-```{r 77-setup-77-json-r}
+```{r 67-setup-77-json-r}
 library(tidyverse)
 library(here)
 ```
@@ -20,7 +20,7 @@ library(here)
 ```{r include = FALSE}
 # Use httr::GET() for GET requests:
 ```
-```{r 77-use-httr-get-for-get-requests}
+```{r 67-use-httr-get-for-get-requests}
 req <- httr::GET("https://photon.komoot.de/api/?q=Paradeplatz&limit=3")
 ```
 
@@ -28,7 +28,7 @@ req <- httr::GET("https://photon.komoot.de/api/?q=Paradeplatz&limit=3")
 ```{r include = FALSE}
 # Wait for the request to be processed:
 ```
-```{r 77-wait-for-the-request-to-be-processed}
+```{r 67-wait-for-the-request-to-be-processed}
 httr::stop_for_status(req)
 ```
 
@@ -36,7 +36,7 @@ httr::stop_for_status(req)
 ```{r include = FALSE}
 # Read the response:
 ```
-```{r 77-read-the-response}
+```{r 67-read-the-response}
 content <- httr::content(req)
 content
 ```
@@ -45,7 +45,7 @@ content
 ```{r include = FALSE}
 # Display the original response:
 ```
-```{r 77-display-the-original-response}
+```{r 67-display-the-original-response}
 text_content <- httr::content(req, as = "text")
 cat(text_content)
 ```
@@ -54,6 +54,6 @@ cat(text_content)
 ```{r include = FALSE}
 # Pretty-print the original response:
 ```
-```{r 77-pretty-print-the-original-response}
+```{r 67-pretty-print-the-original-response}
 cat(jsonlite::prettify(text_content))
 ```

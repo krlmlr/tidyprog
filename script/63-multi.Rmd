@@ -1,4 +1,4 @@
-```{r 73-remove-all, include = FALSE}
+```{r 63-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Plucking multiple locations
 
 ```
-```{r 73-setup-73-multi-r}
+```{r 63-setup-73-multi-r}
 library(tidyverse)
 library(here)
 
@@ -30,7 +30,7 @@ Let's define the two locations of the city-lists we would like to access:
 ```{r include = FALSE}
 # Use multiple accessors:
 ```
-```{r 73-use-multiple-accessors}
+```{r 63-use-multiple-accessors}
 accessor_coords <- list("features", 1, "geometry", "coordinates")
 
 komoot_content %>%
@@ -46,7 +46,7 @@ Combine them as a list of lists and hand it over to a `map()` inside a `map()`:
 ```{r include = FALSE}
 # All at once:
 ```
-```{r 73-all-at-once}
+```{r 63-all-at-once}
 accessors <- list(coords = accessor_coords, country = accessor_country)
 
 accessors %>%

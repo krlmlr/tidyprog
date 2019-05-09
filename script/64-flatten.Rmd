@@ -1,4 +1,4 @@
-```{r 74-remove-all, include = FALSE}
+```{r 64-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Flattening
 
 ```
-```{r 74-setup-73-flatten-r}
+```{r 64-setup-73-flatten-r}
 library(tidyverse)
 library(here)
 
@@ -35,7 +35,7 @@ An example for an list that seems a bit too deep is given here:
 ```{r include = FALSE}
 # Odd structure:
 ```
-```{r 74-odd-structure}
+```{r 64-odd-structure}
 coordinates %>%
   pluck(1)
 ```
@@ -46,7 +46,7 @@ In the `*` we need to specify what class the output will be:
 ```{r include = FALSE}
 # Flattening can chop off a layer, need to specify output type:
 ```
-```{r 74-flattening-can-chop-off-a-layer-need-to-specify-output-type}
+```{r 64-flattening-can-chop-off-a-layer-need-to-specify-output-type}
 coordinates %>%
   pluck(1) %>%
   flatten_dbl()
@@ -57,7 +57,7 @@ Let's use `map()` to apply this to the entire list of our cities' coordinates:
 ```{r include = FALSE}
 # Apply to entire list:
 ```
-```{r 74-apply-to-entire-list}
+```{r 64-apply-to-entire-list}
 coordinates %>%
   map(~ flatten_dbl(.))
 ```

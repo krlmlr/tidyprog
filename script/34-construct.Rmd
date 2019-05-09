@@ -1,4 +1,4 @@
-```{r 05-remove-all, include = FALSE}
+```{r 34-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -15,7 +15,7 @@ All elements of a vector must have the same type.
 ### Construction
 
 ```
-```{r 05-setup-05-construct-r}
+```{r 34-setup-05-construct-r}
 c(1, 2, 3)
 c(1:3, 5)
 c(1:3, "5")
@@ -27,7 +27,7 @@ They are a special type of vector -- they can contain elements of different type
 ```{r include = FALSE}
 # Use list() to construct a list, all elements can have different types and lengths:
 ```
-```{r 05-use-list-to-construct-a-list-all-elements-can-have-different-types-and-lengths}
+```{r 34-use-list-to-construct-a-list-all-elements-can-have-different-types-and-lengths}
 list(1, 2, 3)
 list(1:3, 5)
 list(1:3, "5")
@@ -38,7 +38,7 @@ Lists can also contain other lists.
 ```{r include = FALSE}
 # Lists can be nested:
 ```
-```{r 05-lists-can-be-nested}
+```{r 34-lists-can-be-nested}
 list(
   1:3,
   list(4, "5"),
@@ -54,7 +54,7 @@ Vectors (and also lists) can have names.
 ```{r include = FALSE}
 # Vectors and lists can have names:
 ```
-```{r 05-vectors-and-lists-can-have-names}
+```{r 34-vectors-and-lists-can-have-names}
 c(a = 1, b = 2, c = 3)
 list(a = 1:3, b = 5)
 set_names(1:3, letters[1:3])
@@ -65,7 +65,7 @@ The new {vctrs} package defines a data type for lists where all elements have th
 ```{r include = FALSE}
 # Preview: vctrs::list_of() to construct typed lists
 ```
-```{r 05-preview-vctrs-list-of-to-construct-typed-lists}
+```{r 34-preview-vctrs-list-of-to-construct-typed-lists}
 #vctrs::list_of(1, 2, 3)
 #vctrs::list_of(letters[1:3], "e")
 ```
