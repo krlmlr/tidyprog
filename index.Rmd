@@ -18,3 +18,20 @@ library(here)
 
 
 # Preface {-}
+
+Material for the zhRcourse workshop "Programming in the tidyverse" on May 10, 2019.
+
+## Links
+
+- This website: https://bit.ly/tidyprog
+    - Longer URL: https://krlmlr.github.io/tidyprog/
+
+- Scripts and installation instructions: https://github.com/krlmlr/tidyprog-proj/2019-05-zhr
+    - Prepared scripts: https://github.com/krlmlr/tidyprog-proj/2019-05-zhr/scripts
+    - Live code: https://github.com/krlmlr/tidyprog-proj/2019-05-zhr/live
+    - The code **will be updated live** with a delay of a few seconds during the workshop, it is **not necessary** to follow the instructor's typing
+
+- rstudio.cloud server: https://rstudio.cloud/project/329883
+    - Sign up, or log in with Google or GitHub
+    - Click the "Save a private copy" link next to the **TEMPORARY** label in red in the header
+    - All necessary packages are preinstalled
