@@ -229,9 +229,11 @@ Its first implementation as a collection of partly older packages was in the sec
 All its packages “share an underlying design philosophy, grammar, and data structures.”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
 It is for sure difficult to tell, if “learning the <code>tidyverse</code>” is a hard task, since the result of this assessment might differ from person to person.
 We do believe though, that there are concepts in its approach, which – when grasped – have the potential to increase one’s productivity, since code creation will seem more natural.
-While this might be true for all languages (once you speak it well enough, things go smoothly), in our opinion the <code>tidyverse</code> worth exploring in depth, since it is
-1. consistent: an especially well designed framework that aims at making data analysis and programming intuitive,
-2. evolving: constantly deepened understanding for challenges arising in modern data analysis leads to improving ergonomic user interfaces.</p>
+While this might be true for all languages (once you speak it well enough, things go smoothly), in our opinion the <code>tidyverse</code> worth exploring in depth, since it is</p>
+<ol style="list-style-type: decimal">
+<li>consistent: an especially well designed framework that aims at making data analysis and programming intuitive,</li>
+<li>evolving: constantly deepened understanding for challenges arising in modern data analysis leads to improving ergonomic user interfaces.</li>
+</ol>
 <p>This section gives a brief overview, introduces the data used for the course, and offers a refresher for tidy data manipulation and visualization.</p>
 <div id="overview" class="section level2">
 <h2><span class="header-section-number">1.1</span> Overview</h2>
@@ -302,11 +304,14 @@ While this might be true for all languages (once you speak it well enough, thing
 </div>
 <div id="review-of-visualization-and-data-transformation" class="section level2">
 <h2><span class="header-section-number">1.2</span> Review of visualization and data transformation</h2>
-<details>
-<p><summary><em>Click here to show setup code.</em></summary></p>
+<p>This section is a refresher for visualization and data transformation in the tidyverse.
+Readers familiar with the first half or <a href="https://r4ds.had.co.nz/">R for data science</a> will recognize the concepts repeated here.
+The data used throughout this course is presented, plotted and briefly analyzed.</p>
+<p>The code in each section is self-contained.
+We will always load the following packages:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
-</details>
+<p>Functions from other packages may be used with the <code>::</code> notation.</p>
 <div id="intro-data" class="section level3">
 <h3><span class="header-section-number">1.2.1</span> Data</h3>
 <p>We will be working with hourly measurements of weather data (<a href="https://darksky.net/dev/docs">link to data documentation</a>) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
