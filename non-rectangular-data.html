@@ -138,10 +138,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises"><i class="fa fa-check"></i><b>2.2.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
-<li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing</a></li>
-<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#construction"><i class="fa fa-check"></i><b>2.5</b> Construction</a></li>
-<li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#map"><i class="fa fa-check"></i><b>2.6</b> Processing all files</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing/subsetting</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-2"><i class="fa fa-check"></i><b>2.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#construction"><i class="fa fa-check"></i><b>2.5</b> Construction</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-3"><i class="fa fa-check"></i><b>2.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#map"><i class="fa fa-check"></i><b>2.6</b> Processing multiple files</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-4"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="2.7" data-path="simple-iteration.html"><a href="simple-iteration.html#map_manip"><i class="fa fa-check"></i><b>2.7</b> Manipulating all datasets</a></li>
 <li class="chapter" data-level="2.8" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>2.8</b> Typed output</a></li>
 </ul></li>
@@ -177,6 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
 <li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
 <li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
+<li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
@@ -602,6 +611,7 @@ We can just give it a list of the arguments which we would normally use as argum
 ## 
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
+<p>The acces path can also be stored in a variable:</p>
 <pre class="sourceCode r"><code class="sourceCode r">accessor &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
 coordinates &lt;-
 <span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
@@ -654,7 +664,6 @@ komoot_content &lt;-
 <p>We are again starting in the setup with the list <code>komoot_content</code> from <a href="non-rectangular-data.html#komoot">“Iterating and traversing”</a>.</p>
 <p>Let’s define the two locations of the city-lists we would like to access:</p>
 <pre class="sourceCode r"><code class="sourceCode r">accessor_coords &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
-accessor_country &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)
 
 komoot_content <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(accessor_coords)</code></pre>
@@ -688,7 +697,8 @@ komoot_content <span class="op">%&gt;%</span>
 ## 
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">komoot_content <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">accessor_country &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)
+komoot_content <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(accessor_country)</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;Germany&quot;
@@ -928,6 +938,275 @@ In two easy steps we can therefore make a tibble out of the unnamed list <code>c
 ## </span><span style='color: #555555;'>3</span><span>  34.8   32.1
 ## </span><span style='color: #555555;'>4</span><span>   8.54  47.4
 </span></CODE></PRE>
+</div>
+<div id="accessing-apis" class="section level2">
+<h2><span class="header-section-number">6.7</span> Accessing APIs</h2>
+<details>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;https://photon.komoot.de/api/?q=Paradeplatz&amp;limit=3&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">httr<span class="op">::</span><span class="kw">stop_for_status</span>(req)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">content &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(req)
+content</code></pre>
+<pre><code>## $features
+## $features[[1]]
+## $features[[1]]$geometry
+## $features[[1]]$geometry$coordinates
+## $features[[1]]$geometry$coordinates[[1]]
+## [1] 8.538948
+## 
+## $features[[1]]$geometry$coordinates[[2]]
+## [1] 47.36981
+## 
+## 
+## $features[[1]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[1]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[1]]$properties
+## $features[[1]]$properties$osm_id
+## [1] 905841
+## 
+## $features[[1]]$properties$osm_type
+## [1] &quot;R&quot;
+## 
+## $features[[1]]$properties$extent
+## $features[[1]]$properties$extent[[1]]
+## [1] 8.538163
+## 
+## $features[[1]]$properties$extent[[2]]
+## [1] 47.37027
+## 
+## $features[[1]]$properties$extent[[3]]
+## [1] 8.539516
+## 
+## $features[[1]]$properties$extent[[4]]
+## [1] 47.36935
+## 
+## 
+## $features[[1]]$properties$country
+## [1] &quot;Switzerland&quot;
+## 
+## $features[[1]]$properties$osm_key
+## [1] &quot;highway&quot;
+## 
+## $features[[1]]$properties$city
+## [1] &quot;Zurich&quot;
+## 
+## $features[[1]]$properties$osm_value
+## [1] &quot;pedestrian&quot;
+## 
+## $features[[1]]$properties$postcode
+## [1] &quot;8001&quot;
+## 
+## $features[[1]]$properties$name
+## [1] &quot;Paradeplatz&quot;
+## 
+## $features[[1]]$properties$state
+## [1] &quot;Zurich&quot;
+## 
+## 
+## 
+## $features[[2]]
+## $features[[2]]$geometry
+## $features[[2]]$geometry$coordinates
+## $features[[2]]$geometry$coordinates[[1]]
+## [1] 7.108249
+## 
+## $features[[2]]$geometry$coordinates[[2]]
+## [1] 50.88602
+## 
+## 
+## $features[[2]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[2]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[2]]$properties
+## $features[[2]]$properties$osm_id
+## [1] 389550464
+## 
+## $features[[2]]$properties$osm_type
+## [1] &quot;N&quot;
+## 
+## $features[[2]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## $features[[2]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $features[[2]]$properties$city
+## [1] &quot;Cologne&quot;
+## 
+## $features[[2]]$properties$osm_value
+## [1] &quot;locality&quot;
+## 
+## $features[[2]]$properties$postcode
+## [1] &quot;51147&quot;
+## 
+## $features[[2]]$properties$name
+## [1] &quot;Paradeplatz&quot;
+## 
+## $features[[2]]$properties$state
+## [1] &quot;North Rhine-Westphalia&quot;
+## 
+## 
+## 
+## $features[[3]]
+## $features[[3]]$geometry
+## $features[[3]]$geometry$coordinates
+## $features[[3]]$geometry$coordinates[[1]]
+## [1] 8.684258
+## 
+## $features[[3]]$geometry$coordinates[[2]]
+## [1] 49.38674
+## 
+## 
+## $features[[3]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[3]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[3]]$properties
+## $features[[3]]$properties$osm_id
+## [1] 391678888
+## 
+## $features[[3]]$properties$osm_type
+## [1] &quot;W&quot;
+## 
+## $features[[3]]$properties$extent
+## $features[[3]]$properties$extent[[1]]
+## [1] 8.683635
+## 
+## $features[[3]]$properties$extent[[2]]
+## [1] 49.38719
+## 
+## $features[[3]]$properties$extent[[3]]
+## [1] 8.68488
+## 
+## $features[[3]]$properties$extent[[4]]
+## [1] 49.3863
+## 
+## 
+## $features[[3]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## $features[[3]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $features[[3]]$properties$city
+## [1] &quot;Heidelberg&quot;
+## 
+## $features[[3]]$properties$osm_value
+## [1] &quot;locality&quot;
+## 
+## $features[[3]]$properties$postcode
+## [1] &quot;69120&quot;
+## 
+## $features[[3]]$properties$name
+## [1] &quot;Paradeplatz&quot;
+## 
+## $features[[3]]$properties$state
+## [1] &quot;Baden-Württemberg&quot;
+## 
+## 
+## 
+## 
+## $type
+## [1] &quot;FeatureCollection&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">text_content &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(req, <span class="dt">as =</span> <span class="st">&quot;text&quot;</span>)
+<span class="kw">cat</span>(text_content)</code></pre>
+<pre><code>## {&quot;features&quot;:[{&quot;geometry&quot;:{&quot;coordinates&quot;:[8.538948327037028,47.369806999999994],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:905841,&quot;osm_type&quot;:&quot;R&quot;,&quot;extent&quot;:[8.5381631,47.3702704,8.5395156,47.3693475],&quot;country&quot;:&quot;Switzerland&quot;,&quot;osm_key&quot;:&quot;highway&quot;,&quot;city&quot;:&quot;Zurich&quot;,&quot;osm_value&quot;:&quot;pedestrian&quot;,&quot;postcode&quot;:&quot;8001&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;Zurich&quot;}},{&quot;geometry&quot;:{&quot;coordinates&quot;:[7.1082488,50.8860177],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:389550464,&quot;osm_type&quot;:&quot;N&quot;,&quot;country&quot;:&quot;Germany&quot;,&quot;osm_key&quot;:&quot;place&quot;,&quot;city&quot;:&quot;Cologne&quot;,&quot;osm_value&quot;:&quot;locality&quot;,&quot;postcode&quot;:&quot;51147&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;North Rhine-Westphalia&quot;}},{&quot;geometry&quot;:{&quot;coordinates&quot;:[8.684257597277371,49.3867415],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:391678888,&quot;osm_type&quot;:&quot;W&quot;,&quot;extent&quot;:[8.6836355,49.3871856,8.6848797,49.3862973],&quot;country&quot;:&quot;Germany&quot;,&quot;osm_key&quot;:&quot;place&quot;,&quot;city&quot;:&quot;Heidelberg&quot;,&quot;osm_value&quot;:&quot;locality&quot;,&quot;postcode&quot;:&quot;69120&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;Baden-Württemberg&quot;}}],&quot;type&quot;:&quot;FeatureCollection&quot;}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(jsonlite<span class="op">::</span><span class="kw">prettify</span>(text_content))</code></pre>
+<pre><code>## {
+##     &quot;features&quot;: [
+##         {
+##             &quot;geometry&quot;: {
+##                 &quot;coordinates&quot;: [
+##                     8.538948327037028,
+##                     47.369806999999994
+##                 ],
+##                 &quot;type&quot;: &quot;Point&quot;
+##             },
+##             &quot;type&quot;: &quot;Feature&quot;,
+##             &quot;properties&quot;: {
+##                 &quot;osm_id&quot;: 905841,
+##                 &quot;osm_type&quot;: &quot;R&quot;,
+##                 &quot;extent&quot;: [
+##                     8.5381631,
+##                     47.3702704,
+##                     8.5395156,
+##                     47.3693475
+##                 ],
+##                 &quot;country&quot;: &quot;Switzerland&quot;,
+##                 &quot;osm_key&quot;: &quot;highway&quot;,
+##                 &quot;city&quot;: &quot;Zurich&quot;,
+##                 &quot;osm_value&quot;: &quot;pedestrian&quot;,
+##                 &quot;postcode&quot;: &quot;8001&quot;,
+##                 &quot;name&quot;: &quot;Paradeplatz&quot;,
+##                 &quot;state&quot;: &quot;Zurich&quot;
+##             }
+##         },
+##         {
+##             &quot;geometry&quot;: {
+##                 &quot;coordinates&quot;: [
+##                     7.1082488,
+##                     50.8860177
+##                 ],
+##                 &quot;type&quot;: &quot;Point&quot;
+##             },
+##             &quot;type&quot;: &quot;Feature&quot;,
+##             &quot;properties&quot;: {
+##                 &quot;osm_id&quot;: 389550464,
+##                 &quot;osm_type&quot;: &quot;N&quot;,
+##                 &quot;country&quot;: &quot;Germany&quot;,
+##                 &quot;osm_key&quot;: &quot;place&quot;,
+##                 &quot;city&quot;: &quot;Cologne&quot;,
+##                 &quot;osm_value&quot;: &quot;locality&quot;,
+##                 &quot;postcode&quot;: &quot;51147&quot;,
+##                 &quot;name&quot;: &quot;Paradeplatz&quot;,
+##                 &quot;state&quot;: &quot;North Rhine-Westphalia&quot;
+##             }
+##         },
+##         {
+##             &quot;geometry&quot;: {
+##                 &quot;coordinates&quot;: [
+##                     8.684257597277371,
+##                     49.3867415
+##                 ],
+##                 &quot;type&quot;: &quot;Point&quot;
+##             },
+##             &quot;type&quot;: &quot;Feature&quot;,
+##             &quot;properties&quot;: {
+##                 &quot;osm_id&quot;: 391678888,
+##                 &quot;osm_type&quot;: &quot;W&quot;,
+##                 &quot;extent&quot;: [
+##                     8.6836355,
+##                     49.3871856,
+##                     8.6848797,
+##                     49.3862973
+##                 ],
+##                 &quot;country&quot;: &quot;Germany&quot;,
+##                 &quot;osm_key&quot;: &quot;place&quot;,
+##                 &quot;city&quot;: &quot;Heidelberg&quot;,
+##                 &quot;osm_value&quot;: &quot;locality&quot;,
+##                 &quot;postcode&quot;: &quot;69120&quot;,
+##                 &quot;name&quot;: &quot;Paradeplatz&quot;,
+##                 &quot;state&quot;: &quot;Baden-Württemberg&quot;
+##             }
+##         }
+##     ],
+##     &quot;type&quot;: &quot;FeatureCollection&quot;
+## }</code></pre>
 
 </div>
 </div>
