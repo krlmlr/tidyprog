@@ -60,11 +60,15 @@ Consistent pipe-friendly access of single elements:
 ```{r include = FALSE}
 # Consistent pipe-friendly access of single elements
 ```
-```{r 04-consistent}
+```{r 04-consistent-pipe-friendly-access-of-single-elements}
 input_files %>% 
   pluck(1)
 input_files %>% 
   pluck("berlin")
+```
+
+```{r include = FALSE}
+# Exercises
 ```
 
 ### Exercises

@@ -73,7 +73,15 @@ We can just give it a list of the arguments which we would normally use as argum
 ```{r 72-shortcut}
 komoot_content %>%
   map(list("features", 1, "geometry", "coordinates"))
+```
 
+The acces path can also be stored in a variable:
+
+
+```{r include = FALSE}
+# Can also be stored in a variable:
+```
+```{r 72-can-also-be-stored-in-a-variable}
 accessor <- list("features", 1, "geometry", "coordinates")
 coordinates <-
   komoot_content %>%

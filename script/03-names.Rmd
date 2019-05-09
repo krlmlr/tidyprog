@@ -98,6 +98,10 @@ dict %>%
   deframe()
 ```
 
+```{r include = FALSE}
+# Exercises
+```
+
 ### Exercises
 
 1. Obtain a mapping between city code and city name as a named vector.

@@ -32,8 +32,3 @@ set_names(1:3, letters[1:3])
 
 c(a = list(1:3), b = list(4:5))
 list(a = list(1:3), b = list(4:5))
-
-input_files %>%
-  enframe() %>% 
-  filter(name == "toronto") %>% 
-  deframe()
