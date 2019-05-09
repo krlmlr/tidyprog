@@ -5,7 +5,13 @@ rm(list = ls())
 
 ## Review of visualization and data transformation
 
-<details><summary>*Click here to show setup code.*</summary>
+This section is a refresher for visualization and data transformation in the tidyverse.
+Readers familiar with the first half or [R for data science](https://r4ds.had.co.nz/) will recognize the concepts repeated here.
+The data used throughout this course is presented, plotted and briefly analyzed.
+
+The code in each section is self-contained.
+We will always load the following packages:
+
 ```{r include = FALSE}
 ### Review of visualization and data transformation
 
@@ -14,7 +20,9 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
-</details>
+
+Functions from other packages may be used with the `::` notation.
+
 
 ### Data {#intro-data}
 
