@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## Processing all files {#map}
+## Processing multiple files {#map}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
-### Processing all files
+### Processing multiple files
 
 ```
 ```{r 06-setup-06-map-r}
@@ -36,7 +36,8 @@ readxl::read_excel(here(input_files[[1]]))
 ```
 
 With `map()`, you can successively work through the whole vector and each time let the same function deal with the respective entry.
-The output of `map()` is a (named, if the input vector/list was named) list of the individual results:
+The output of `map()` is a list where each element contains one results.
+The list is named if the input is named:
 
 ```{r include = FALSE}
 # Read all input files
@@ -66,3 +67,56 @@ names(input_data)
 input_files %>%
   map(~ readxl::read_excel(here(.)))
 ```
+
+### Exercises
+
+1. Read only the data for Toronto and Tel Aviv, using subsetting or `filter()`. Compare.
+
+    ```r
+    input_files[_____] %>% 
+      map(~ readxl::read_excel(here(.)))
+
+    input_files %>%
+      ___() %>% 
+      filter(name %in% c(_____)) %>% 
+      ___() %>% 
+      map(~ readxl::read_excel(here(.)))
+    ```
+    
+    ```{r}
+    input_files[c("toronto", "tel_aviv")] %>% 
+      map(~ readxl::read_excel(here(.)))
+
+    input_files %>%
+      enframe() %>% 
+      filter(name %in% c("toronto", "tel_aviv")) %>% 
+      deframe() %>% 
+      map(~ readxl::read_excel(here(.)))
+    ```
+
+1. Compute the absolute file name with `here()` outside of the `map()` call.
+
+    ```r
+    input_files %>% 
+      enframe() %>% 
+      ___(_____) %>% 
+      deframe() %>% 
+      map(~ readxl::read_excel(.))
+    ```
+
+    ```{r}
+    input_files %>% 
+      enframe() %>% 
+      mutate(value = here(value)) %>% 
+      deframe() %>% 
+      map(~ readxl::read_excel(.))
+    ```
+
+1. Can you explain what happens when you call `enframe()` on the result? Can you explain?
+
+    ```r
+    input_files %>%
+      map(~ readxl::read_excel(here(.))) %>% 
+      enframe()
+    ```
+    
