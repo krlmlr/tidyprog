@@ -4,6 +4,9 @@
 ```{r child = here::here("script", "72-komoot.Rmd")}
 ```
 
+```{r child = here::here("script", "73-multi.Rmd")}
+```
+
 ```{r child = here::here("script", "74-flatten.Rmd")}
 ```
 
