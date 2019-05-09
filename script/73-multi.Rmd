@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## Iterating and traversing
+## Plucking multiple locations
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
-### Iterating and traversing
+### Plucking multiple locations
 
 ```
 ```{r 73-setup-73-multi-r}
@@ -45,52 +45,4 @@ accessors <- list(coords = accessor_coords, country = accessor_country)
 
 accessors %>%
   map(~ map(komoot_content, .))
-
-komoot_content %>%
-  map(accessors)
-
-coordinates
-
-
-komoot_content <-
-  komoot %>%
-  pull(content)
-
-berlin <-
-  komoot_content %>%
-  pluck(1)
-
-berlin %>%
-  pluck("features", 1, "geometry", "coordinates")
-
-toronto <-
-  komoot_content %>%
-  pluck(2)
-
-toronto %>%
-  pluck("features", 1, "geometry", "coordinates")
-```
-
-
-```{r include = FALSE}
-# Apply same pluck() on all values with map():
-```
-```{r 73-apply-same-pluck-on-all-values-with-map}
-komoot_content %>%
-  map(~ pluck(., "features", 1, "geometry", "coordinates"))
-```
-
-
-```{r include = FALSE}
-# Shortcut:
-```
-```{r 73-shortcut}
-komoot_content %>%
-  map(list("features", 1, "geometry", "coordinates"))
-
-accessor <- list("features", 1, "geometry", "coordinates")
-coordinates <-
-  komoot_content %>%
-  map(accessor)
-coordinates
 ```

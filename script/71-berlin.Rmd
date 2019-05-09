@@ -5,7 +5,6 @@ rm(list = ls())
 
 ## Traversing
 
-
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
 ### Traversing
@@ -57,4 +56,23 @@ berlin %>%
 
 berlin %>%
   pluck("features", 1, "geometry", "coordinates")
+```
+
+
+```{r include = FALSE}
+# Accessing different properties
+```
+```{r 71-accessing-different-properties}
+berlin %>%
+  pluck("features", 1, "properties", "country")
+```
+
+
+```{r include = FALSE}
+# Composable
+```
+```{r 71-composable}
+berlin %>%
+  pluck("features", 1) %>%
+  pluck("properties", "country")
 ```

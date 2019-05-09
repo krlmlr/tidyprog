@@ -1,4 +1,4 @@
-```{r 73-remove-all, include = FALSE}
+```{r 74-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Flattening
 
 ```
-```{r 73-setup-73-flatten-r}
+```{r 74-setup-73-flatten-r}
 library(tidyverse)
 library(here)
 
@@ -30,7 +30,7 @@ coordinates <-
 ```{r include = FALSE}
 # Odd structure:
 ```
-```{r 73-odd-structure}
+```{r 74-odd-structure}
 coordinates %>%
   pluck(1)
 ```
@@ -39,7 +39,7 @@ coordinates %>%
 ```{r include = FALSE}
 # Flattening can chop off a layer, need to specify output type:
 ```
-```{r 73-flattening-can-chop-off-a-layer-need-to-specify-output-type}
+```{r 74-flattening-can-chop-off-a-layer-need-to-specify-output-type}
 coordinates %>%
   pluck(1) %>%
   flatten_dbl()
@@ -49,7 +49,7 @@ coordinates %>%
 ```{r include = FALSE}
 # Apply to entire list:
 ```
-```{r 73-apply-to-entire-list}
+```{r 74-apply-to-entire-list}
 coordinates %>%
   map(~ flatten_dbl(.))
 ```

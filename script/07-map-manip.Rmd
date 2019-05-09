@@ -10,7 +10,7 @@ rm(list = ls())
 ### Manipulating all datasets
 
 ```
-```{r 07-setup-05-map-manip-r}
+```{r 07-setup-07-map-manip-r}
 library(tidyverse)
 library(here)
 

@@ -2,6 +2,7 @@
 rm(list = ls())
 ```
 
+
 ## Typed output
 
 
@@ -11,7 +12,7 @@ rm(list = ls())
 ### Typed output
 
 ```
-```{r 08-setup-07-map-type-r}
+```{r 08-setup-08-map-type-r}
 library(tidyverse)
 library(here)
 

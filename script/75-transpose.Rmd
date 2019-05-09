@@ -1,17 +1,16 @@
-```{r 74-remove-all, include = FALSE}
+```{r 75-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
 
 ## Transposing
 
-
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
 ### Transposing
 
 ```
-```{r 74-setup-74-transpose-r}
+```{r 75-setup-74-transpose-r}
 library(tidyverse)
 library(here)
 
@@ -31,7 +30,7 @@ coordinates <-
 ```{r include = FALSE}
 # Transposing inside out:
 ```
-```{r 74-transposing-inside-out}
+```{r 75-transposing-inside-out}
 coordinates %>%
   transpose()
 ```
@@ -40,7 +39,7 @@ coordinates %>%
 ```{r include = FALSE}
 # Flatten to simplify structure:
 ```
-```{r 74-flatten-to-simplify-structure}
+```{r 75-flatten-to-simplify-structure}
 coordinates_transposed <-
   coordinates %>%
   transpose() %>%
