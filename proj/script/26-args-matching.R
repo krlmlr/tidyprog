@@ -3,23 +3,32 @@
 
 
 # Call matching
-use_names <- function(a = 1, b = 2) {
-  list(a = a, b = b)
+use_names <- function(one = 1, two = 2) {
+  list(one = one, two = two)
 }
 
 use_names(3, 4)
-use_names(a = 3, 4)
-use_names(3, a = 4)
-use_names(a = 3, b = 4)
+use_names(one = 3, 4)
+use_names(3, one = 4)
+use_names(one = 3, two = 4)
+use_names(two = 3, one = 4)
+
+# Partial matching
+use_names(3, 4)
+use_names(o = 3, 4)
+use_names(3, o = 4)
+use_names(o = 3, t = 4)
+use_names(t = 3, o = 4)
 
 # The ellipsis is useful to enforce naming of arguments
-enforce_names <- function(..., a = 1, b = 2) {
-  list(a = a, b = b)
+only_names <- function(..., one = 1, two = 2) {
+  list(one = one, two = two)
 }
 
-enforce_names(3, 4)
-enforce_names(a = 3, 4)
-enforce_names(a = 3, b = 4)
+only_names(3, 4)
+only_names(one = 3, 4)
+only_names(one = 3, two = 4)
+only_names(o = 3, t = 4)
 
 # Arguments in ellipsis can be captured via list()
 ellipsis_test <- function(...) {
@@ -29,33 +38,29 @@ ellipsis_test <- function(...) {
 
 ellipsis_test(a = 1, 2, c = 3:5)
 
-## Exercise: call matching
+# Exercises
 
-
-## Ellipsis inbetween
-
-
-use_some_names <- function(a = 1, ..., b = 2) {
-  list(a = a, b = b)
+# Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
+use_some_names <- function(one = 1, ..., two = 2) {
+  list(one = one, two = two)
 }
 
 use_some_names(3, 4)
-use_some_names(a = 3, 4)
-use_some_names(3, a = 4)
-use_some_names(a = 3, b = 4)
-use_some_names(b = 4, 3)
+use_some_names(one = 3, 4)
+use_some_names(3, one = 4)
+use_some_names(one = 3, two = 4)
+use_some_names(two = 4, 3)
 
 ## Program defensively!
-
-use_always_names <- function(..., a = 1, b = 2) {
+enforce_names <- function(..., one = 1, two = 2) {
   extra_args <- list(...)
   stopifnot(length(extra_args) == 0)
 
-  list(a = a, b = b)
+  list(one = one, two = two)
 }
 
-try(use_always_names(3, 4))
-try(use_always_names(a = 3, 4))
-try(use_always_names(3, a = 4))
-try(use_always_names(b = 4, 3))
-use_always_names(a = 3, b = 4)
+try(enforce_names(3, 4))
+try(enforce_names(one = 3, 4))
+try(enforce_names(3, one = 4))
+try(enforce_names(two = 4, 3))
+enforce_names(one = 3, two = 4)

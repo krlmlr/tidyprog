@@ -23,29 +23,44 @@ Named arguments are assigned first, after that remaining slots are filled from l
 # Call matching
 ```
 ```{r 26-call-matching}
-use_names <- function(a = 1, b = 2) {
-  list(a = a, b = b)
+use_names <- function(one = 1, two = 2) {
+  list(one = one, two = two)
 }
 
 use_names(3, 4)
-use_names(a = 3, 4)
-use_names(3, a = 4)
-use_names(a = 3, b = 4)
+use_names(one = 3, 4)
+use_names(3, one = 4)
+use_names(one = 3, two = 4)
+use_names(two = 3, one = 4)
 ```
 
-The ellipsis can be used to enforce the user to name the function parameters when setting them:
+Arguments are matched partially, which can be convenient but is also a source of errors.
+
+```{r include = FALSE}
+# Partial matching
+```
+```{r 26-partial-matching}
+use_names(3, 4)
+use_names(o = 3, 4)
+use_names(3, o = 4)
+use_names(o = 3, t = 4)
+use_names(t = 3, o = 4)
+```
+
+The ellipsis can be used to enforce the user to fully name the function parameters when setting them:
 
 ```{r include = FALSE}
 # The ellipsis is useful to enforce naming of arguments
 ```
 ```{r 26-the-ellipsis-is-useful-to-enforce-naming-of-arguments}
-enforce_names <- function(..., a = 1, b = 2) {
-  list(a = a, b = b)
+only_names <- function(..., one = 1, two = 2) {
+  list(one = one, two = two)
 }
 
-enforce_names(3, 4)
-enforce_names(a = 3, 4)
-enforce_names(a = 3, b = 4)
+only_names(3, 4)
+only_names(one = 3, 4)
+only_names(one = 3, two = 4)
+only_names(o = 3, t = 4)
 ```
 
 Inside a function with an ellipsis as a parameter, you can capture the ellipsis with `list()`:
@@ -63,51 +78,62 @@ ellipsis_test(a = 1, 2, c = 3:5)
 ```
 
 
-### Exercise
-
-Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
-
 ```{r include = FALSE}
-## Exercise: call matching
-```
-```{r 26-exercise-call-matching}
-
+# Exercises
 ```
 
+### Exercises
 
-```{r include = FALSE}
-## Ellipsis inbetween
-```
-```{r 26-ellipsis-inbetween}
+1. Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
 
+    ```{r include = FALSE}
+    # Naming, not naming or partly naming parameters in functions calls? What does the following return and why?
+    ```
+    ```{r echo = TRUE, results = "hide"}
+    use_some_names <- function(one = 1, ..., two = 2) {
+      list(one = one, two = two)
+    }
+    
+    use_some_names(3, 4)
+    use_some_names(one = 3, 4)
+    use_some_names(3, one = 4)
+    use_some_names(one = 3, two = 4)
+    use_some_names(two = 4, 3)
+    ```
 
-use_some_names <- function(a = 1, ..., b = 2) {
-  list(a = a, b = b)
-}
+1. Model a new `enforce_names()` function after `only_names()` to check if any unnamed or misnamed arguments have been used. Test this function in various combinations.
 
-use_some_names(3, 4)
-use_some_names(a = 3, 4)
-use_some_names(3, a = 4)
-use_some_names(a = 3, b = 4)
-use_some_names(b = 4, 3)
-```
+    ```r
+    enforce_names <- function(..., one = 1, two = 2) {
+      extra_args <- _____
+      stopifnot(length(_____) == 0)
+    
+      list(_____)
+    }
+    
+    enforce_names(3, 4))
+    enforce_names(one = 3, 4)
+    enforce_names(3, one = 4)
+    enforce_names(two = 4, 3)
+    enforce_names(one = 3, two = 4)
+    ```
 
-
-```{r include = FALSE}
-## Program defensively!
-```
-```{r 26-program-defensively}
-
-use_always_names <- function(..., a = 1, b = 2) {
-  extra_args <- list(...)
-  stopifnot(length(extra_args) == 0)
-
-  list(a = a, b = b)
-}
-
-try(use_always_names(3, 4))
-try(use_always_names(a = 3, 4))
-try(use_always_names(3, a = 4))
-try(use_always_names(b = 4, 3))
-use_always_names(a = 3, b = 4)
-```
+    ```{r include = FALSE}
+    ## Program defensively!
+    ```
+    ```{r 26-program-defensively, echo = FALSE}
+    enforce_names <- function(..., one = 1, two = 2) {
+      extra_args <- list(...)
+      stopifnot(length(extra_args) == 0)
+    
+      list(one = one, two = two)
+    }
+    ```
+    
+    ```{r 26-program-defensively-res}
+    try(enforce_names(3, 4))
+    try(enforce_names(one = 3, 4))
+    try(enforce_names(3, one = 4))
+    try(enforce_names(two = 4, 3))
+    enforce_names(one = 3, two = 4)
+    ```
