@@ -33,3 +33,8 @@ berlin %>%
 # Accessing different properties
 berlin %>%
   pluck("features", 1, "properties", "country")
+
+# Composable
+berlin %>%
+  pluck("features", 1) %>%
+  pluck("properties", "country")
