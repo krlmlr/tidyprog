@@ -1,0 +1,81 @@
+```{r 60-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## <No caption defined>
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### <No caption defined>
+
+```
+```{r 60-setup-60-split-strings-r}
+
+
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+```
+</details>
+
+
+```{r include = FALSE}
+# strsplit() or stringr functions
+```
+```{r 60-strsplit-or-stringr-functions}
+dict %>%
+  pull(name) %>%
+  strsplit(" ")
+```
+
+
+```{r include = FALSE}
+# Back to tibble-land
+```
+```{r 60-back-to-tibble-land}
+dict %>%
+  mutate(split = strsplit(name, " "))
+```
+
+
+```{r include = FALSE}
+# Same result with map()?
+```
+```{r 60-same-result-with-map}
+dict %>%
+  mutate(split = map(name, ~ strsplit(., " ")))
+```
+
+
+```{r include = FALSE}
+# Need flatten:
+```
+```{r 60-same-result-with-map-2}
+dict %>%
+  mutate(split = flatten(map(name, ~ strsplit(., " "))))
+```
+
+
+```{r include = FALSE}
+# Unnesting works, but brittle:
+```
+```{r 60-unnesting-works-but-brittle}
+dict %>%
+  mutate(split = strsplit(name, " ")) %>%
+  select(city_code, split) %>%
+  unnest()
+```
+
+
+```{r include = FALSE}
+# Create a nested data frame first
+```
+```{r 60-create-a-nested-data-frame-first}
+dict %>%
+  mutate(split = strsplit(name, " ")) %>%
+  mutate(data = map(split, enframe)) %>%
+  select(city_code, data) %>%
+  unnest()
+```
