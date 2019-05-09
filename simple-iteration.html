@@ -153,7 +153,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="simple-iteration.html"><a href="simple-iteration.html#map_manip"><i class="fa fa-check"></i><b>2.7</b> Manipulating all datasets</a><ul>
 <li class="chapter" data-level="2.7.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-5"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>2.8</b> Typed output</a></li>
+<li class="chapter" data-level="2.8" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>2.8</b> Typed output</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-6"><i class="fa fa-check"></i><b>2.8.1</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>3</b> Function basics</a><ul>
 <li class="chapter" data-level="3.1" data-path="function-basics.html"><a href="function-basics.html#definition-and-execution"><i class="fa fa-check"></i><b>3.1</b> Definition and execution</a><ul>
@@ -614,9 +616,9 @@ fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 37 x 18</span><span>
  ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>0.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>17:08:59</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>01-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>17:08:59</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>02-dir.Rmd</span><span> file    2.41K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>17:08:59</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>0.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>17:40:28</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>01-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>17:40:28</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>02-dir.Rmd</span><span> file    2.41K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>17:40:28</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 34 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
@@ -1200,7 +1202,7 @@ Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> 
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x27f8f80&gt;</code></pre>
+## &lt;environment: 0x236df80&gt;</code></pre>
 <p>See the <a href="function-basics.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
@@ -1371,6 +1373,25 @@ input_data <span class="op">%&gt;%</span><span class="st"> </span>
 ## 
 ## $zurich
 ## [1] 882</code></pre></li>
+<li><p>Create four plots of humidity vs. pressure, one for each city. Use <code>geom_path()</code>, map <code>temperature</code> to the <code>color</code> aesthetic:</p>
+<pre class="sourceCode r"><code class="sourceCode r">create_plot &lt;-<span class="st"> </span><span class="cf">function</span>(___) {
+  ___ <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(_____)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_path</span>()
+}
+___ <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(___)</code></pre>
+<pre><code>## $berlin</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<pre><code>## 
+## $toronto</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-2.png" width="672" /></p>
+<pre><code>## 
+## $tel_aviv</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-3.png" width="672" /></p>
+<pre><code>## 
+## $zurich</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-4.png" width="672" /></p></li>
 </ol>
 </div>
 </div>
@@ -1416,8 +1437,41 @@ Therefore we can call <code>map_int()</code>, to create a named integer vector:<
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="kw">nrow</span>(.)))</code></pre>
 <pre><code>##   berlin  toronto tel_aviv   zurich 
 ##     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;</code></pre>
-<p>There are many sub-types of the <code>map()</code> function also for other classes of output values available.</p>
+<p>There are sub-types of the <code>map()</code> function for each atomic type:</p>
+<ul>
+<li><p>integer: <code>map_int()</code></p></li>
+<li><p>numeric (double-precision value): <code>map_dbl()</code></p></li>
+<li><p>character (strings): <code>map_chr()</code></p></li>
+<li><p>logical (flags): <code>map_lgl()</code></p></li>
+<li><p>raw (bytes): <code>map_raw()</code></p></li>
+</ul>
+<div id="exercises-6" class="section level3">
+<h3><span class="header-section-number">2.8.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Explain what happens if you try to use <code>map_dbl()</code> with the <code>dim()</code> output:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map_dbl</span>(dim)</code></pre></li>
+<li><p>Extract a concise version of the first temperature value for each dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">slice</span>(., <span class="dv">1</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">___</span>(<span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(_____))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##    13.43     7.46    23.90     6.96</code></pre></li>
+<li><p>Use <code>paste0()</code> to build a textual description for the weather during the observed period in a function. Create a two-column tibble.</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">slice</span>(., <span class="dv">1</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">___</span>(<span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(_____))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>     </span><span style='font-weight: bold;'>value</span><span>                                                           
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                           
+ ## </span><span style='color: #555555;'>1</span><span> berlin   We had temperatures between 6.14 and 19.98 °C.The average humid…
+ ## </span><span style='color: #555555;'>2</span><span> toronto  We had temperatures between 3.03 and 9.99 °C.The average humidi…
+ ## </span><span style='color: #555555;'>3</span><span> tel_aviv We had temperatures between 17.15 and 28.77 °C.The average humi…
+ ## </span><span style='color: #555555;'>4</span><span> zurich   We had temperatures between 2.01 and 14.3 °C.The average humidi…
+ </span></CODE></PRE></li>
+</ol>
 
+</div>
 </div>
 </div>
 <div class="footnotes">
