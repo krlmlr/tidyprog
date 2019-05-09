@@ -35,3 +35,18 @@ Material for the zhRcourse workshop "Programming in the tidyverse" on May 10, 20
     - Sign up, or log in with Google or GitHub
     - Click the "Save a private copy" link next to the **TEMPORARY** label in red in the header
     - All necessary packages are preinstalled
+
+## Package versions used
+
+<details><summary>Click to expand</summary>
+
+```{r include = FALSE}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+sessioninfo::session_info()
+```
+
+</details>

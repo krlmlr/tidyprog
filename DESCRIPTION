@@ -21,6 +21,7 @@ Imports:
     here,
     leaflet,
     plotly,
+    sessioninfo,
     shiny,
     tidyverse
 Roxygen: list(markdown = TRUE)
