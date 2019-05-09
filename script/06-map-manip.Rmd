@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Manipulating all datasets
+## Manipulating all datasets {#map_manip}
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
@@ -24,6 +24,10 @@ input_data <-
 ```
 </details>
 
+How to selectively manipulate specific parts of a list of datasets?
+
+We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map).
+Of each tibble we only want the column `time` and all the columns whose name contains "emperature":
 
 ```{r include = FALSE}
 # Manipulate results
@@ -33,6 +37,8 @@ input_data %>%
   map(~ select(., time, contains("emperature")))
 ```
 
+But we don't want all of the observations, respectively. 
+We only want those with values in column `temperature` greater or equal than 14°C:
 
 ```{r include = FALSE}
 # Manipulate results more
@@ -43,6 +49,7 @@ input_data %>%
   map(~ filter(., temperature >= 14))
 ```
 
+Create a custom function for that specific purpose in a call to `map()`:
 
 ```{r include = FALSE}
 # Create a function to manipulate
@@ -55,6 +62,7 @@ manipulator <- function(data) {
 }
 ```
 
+Let's look at the object `manipulator`, that we created:
 
 ```{r include = FALSE}
 # Functions are first-class objects!
@@ -63,6 +71,7 @@ manipulator <- function(data) {
 manipulator
 ```
 
+Testing the function:
 
 ```{r include = FALSE}
 # Test the function
@@ -71,6 +80,7 @@ manipulator
 manipulator(input_data[[4]])
 ```
 
+Now let's use `map()` to let our function act on the entire dataset:
 
 ```{r include = FALSE}
 # Run the function on the entire dataset
@@ -80,6 +90,7 @@ manipulated_data <- map(input_data, ~ manipulator(.))
 manipulated_data
 ```
 
+`map()` also allows for other notations, e.g.:
 
 ```{r include = FALSE}
 # Shortcut
