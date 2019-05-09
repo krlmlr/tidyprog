@@ -5,7 +5,8 @@ rm(list = ls())
 
 ## Definition and execution
 
-<details><summary>*Click here to show setup code.*</summary>
+The following packages are used for this chapter.
+
 ```{r include = FALSE}
 ### Definition and execution
 
@@ -14,9 +15,6 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
-</details>
-
-In this chapter the basics of function definitions are covered.
 
 
 ```{r include = FALSE}
@@ -29,7 +27,7 @@ In this chapter the basics of function definitions are covered.
 
 ### Designing functions
 
-Create functions for tasks that need to be executed frequently.
+Create functions for tasks that need to be executed repeatedly, or to hide implementation details.
 
 ```{r include = FALSE}
 # Declare a function to hide implementation details

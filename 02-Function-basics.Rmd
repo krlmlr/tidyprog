@@ -2,10 +2,7 @@
 
 > Structuring the code to avoid too much copy-pasting
 
-```{r 02-setup, include = FALSE}
-library(here)
-```
+This section discusses functions as building blocks for more expressive and more powerful data analysis code.
 
-
-```{r child = here("script", "2.Rmd")}
+```{r child = here::here("script", "2.Rmd")}
 ```
