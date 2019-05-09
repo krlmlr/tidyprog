@@ -1,4 +1,4 @@
-```{r 72-remove-all, include = FALSE}
+```{r 73-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,27 +10,48 @@ rm(list = ls())
 ### Iterating and traversing
 
 ```
-```{r 72-setup-72-komoot-r}
+```{r 73-setup-73-multi-r}
 library(tidyverse)
 library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+komoot_content <-
+  komoot %>%
+  pull(content)
 ```
 </details>
 
 
 ```{r include = FALSE}
-# Results from downloading geolocation data for all cities from photon.komoot.de:
+# Use multiple accessors:
 ```
-```{r 72-results-from-downloading-geolocation-data-for-all-cities-from-photon-komoot-de}
-komoot <- readRDS(here("data/komoot.rds"))
+```{r 73-use-multiple-accessors}
+accessor_coords <- list("features", 1, "geometry", "coordinates")
+accessor_country <- list("features", 1, "properties", "country")
 
-komoot
+komoot_content %>%
+  map(accessor_coords)
+
+komoot_content %>%
+  map(accessor_country)
 ```
 
 
 ```{r include = FALSE}
-# Results are stored in the "content" column:
+# All at once:
 ```
-```{r 72-results-are-stored-in-the-content-column}
+```{r 73-all-at-once}
+accessors <- list(coords = accessor_coords, country = accessor_country)
+
+accessors %>%
+  map(~ map(komoot_content, .))
+
+komoot_content %>%
+  map(accessors)
+
+coordinates
+
+
 komoot_content <-
   komoot %>%
   pull(content)
@@ -54,7 +75,7 @@ toronto %>%
 ```{r include = FALSE}
 # Apply same pluck() on all values with map():
 ```
-```{r 72-apply-same-pluck-on-all-values-with-map}
+```{r 73-apply-same-pluck-on-all-values-with-map}
 komoot_content %>%
   map(~ pluck(., "features", 1, "geometry", "coordinates"))
 ```
@@ -63,7 +84,7 @@ komoot_content %>%
 ```{r include = FALSE}
 # Shortcut:
 ```
-```{r 72-shortcut}
+```{r 73-shortcut}
 komoot_content %>%
   map(list("features", 1, "geometry", "coordinates"))
 

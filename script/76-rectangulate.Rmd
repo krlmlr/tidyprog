@@ -5,7 +5,8 @@ rm(list = ls())
 
 ## Rectangling
 
-<details><summary>Setup code</summary>
+
+<details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
 ### Rectangling
 

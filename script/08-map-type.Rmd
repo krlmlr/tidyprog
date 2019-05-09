@@ -6,7 +6,7 @@ rm(list = ls())
 
 
 
-<details><summary>Click here to make setup code visible</summary>
+<details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
 ### Typed output
 
