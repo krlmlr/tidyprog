@@ -17,14 +17,18 @@ dict %>%
   here()
 
 # Acquire file names as a named vector
-dict %>%
+weather_filenames <-
+  dict %>%
   select(city_code, weather_filename) %>%
   deframe()
+weather_filenames
+
+# Use names() to access names
+weather_filenames %>%
+  names()
 
 # Not all operations maintain vector names!
-dict %>%
-  select(city_code, weather_filename) %>%
-  deframe() %>%
+weather_filenames %>%
   here()
 
 # Move the here() call into "tibble-land"
