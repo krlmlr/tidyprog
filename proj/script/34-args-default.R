@@ -2,9 +2,6 @@
 
 library(tidyverse)
 library(here)
-library(conflicted)
-
-conflict_prefer("filter", "dplyr")
 
 
 weather_path <- function(filename) {
