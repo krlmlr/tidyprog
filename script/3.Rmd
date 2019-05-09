@@ -1,17 +1,17 @@
-```{r child = here("script", "31-function.Rmd")}
+```{r child = here::here("script", "31-function.Rmd")}
 ```
 
-```{r child = here("script", "32-args.Rmd")}
+```{r child = here::here("script", "32-args.Rmd")}
 ```
 
-```{r child = here("script", "33-intermediate.Rmd")}
+```{r child = here::here("script", "33-intermediate.Rmd")}
 ```
 
-```{r child = here("script", "34-args-default.Rmd")}
+```{r child = here::here("script", "34-args-default.Rmd")}
 ```
 
-```{r child = here("script", "35-args-multi.Rmd")}
+```{r child = here::here("script", "35-args-multi.Rmd")}
 ```
 
-```{r child = here("script", "36-args-matching.Rmd")}
+```{r child = here::here("script", "36-args-matching.Rmd")}
 ```
