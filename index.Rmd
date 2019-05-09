@@ -1,7 +1,7 @@
 ---
 title: "Programming in the tidyverse"
 author: "Kirill Müller, Tobias Schieferdecker"
-date: "`r format(Sys.time(), '%d %B %Y, %H:%M')`"
+date: "`r format(lubridate::with_tz(Sys.time(), "CET"), '%d %B %Y, %H:%M')`"
 documentclass: "book"
 site: bookdown::bookdown_site
 ---
