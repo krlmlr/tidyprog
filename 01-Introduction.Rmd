@@ -15,6 +15,13 @@ This section gives a brief overview, introduces the data used for the course, an
 ## Overview
 
 This course covers several topics, which everyone working more intently with the `tidyverse` almost inevitably needs to deal with at some point or another.
+The topics are organized in chapters that contain mostly R code with output and text.
+In each section, exercises are provided.
+
+Each subsection corresponds to an R script in the [`script` directory](`r tidyprog_repo("script")`) in the [sister repository on GitHub](`r tidyprog_repo()`).
+For example, the code from the next section 1.2 can be found in [`12-intro.R`](`r tidyprog_repo("script", "12-intro.R")`).
+Clone or download the repository and open the `R-workshop.Rproj` file to run the script.
+(It is important to open the `.Rproj` file and not only the `.R` scripts.)
 
 ### Function basics
 
