@@ -14,4 +14,4 @@
 
 - What they forgot to teach you: https://whattheyforgot.org/
 
-- furrr package: https://davisvaughan.github.io/furrr/
+- Parallel processing with a purrr-like interface: https://davisvaughan.github.io/furrr/
