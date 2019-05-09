@@ -8,18 +8,27 @@ weather_path <- function(filename) {
   # Returned value
   here("data/weather", filename)
 }
+
 read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
+}
+
+get_weather_file_for <- function(city_code) {
+  paste0(city_code, ".xlsx")
+}
+
+get_weather_data_for <- function(city_code) {
+  read_weather_file(get_weather_file_for(city_code))
 }
 
 # Function arguments can have default values
 read_weather_data <- function(omit_zurich = FALSE) {
   # Create ensemble dataset from files on disk
   weather_data <- bind_rows(
-    berlin = read_weather_file("berlin.xlsx"),
-    toronto = read_weather_file("toronto.xlsx"),
-    tel_aviv = read_weather_file("tel_aviv.xlsx"),
-    zurich = read_weather_file("zurich.xlsx"),
+    berlin = get_weather_data_for("berlin"),
+    toronto = get_weather_data_for("toronto"),
+    tel_aviv = get_weather_data_for("tel_aviv"),
+    zurich = get_weather_data_for("zurich"),
     .id = "city_code"
   )
 
@@ -33,3 +42,12 @@ read_weather_data <- function(omit_zurich = FALSE) {
 read_weather_data(TRUE)
 read_weather_data(omit_zurich = TRUE)
 read_weather_data()
+
+# Exercises
+
+get_weather_data_for <- function(city_code = "zurich") {
+  read_weather_file(get_weather_file_for(city_code))
+}
+
+get_weather_data_for()
+get_weather_data_for("tel_aviv")
