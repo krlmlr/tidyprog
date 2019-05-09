@@ -31,6 +31,7 @@ read_weather_data()
 
 # Exercises
 
+# Operate on city codes, not file names:
 get_weather_file_for <- function(city_code) {
   paste0(city_code, ".xlsx")
 }
@@ -38,6 +39,7 @@ get_weather_file_for <- function(city_code) {
 get_weather_file_for("munich")
 get_weather_file_for("san_diego")
 
+# High-level reader:
 get_weather_data_for <- function(city_code) {
   read_weather_file(get_weather_file_for(city_code))
 }

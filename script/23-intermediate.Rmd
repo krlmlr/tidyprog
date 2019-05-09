@@ -63,19 +63,20 @@ read_weather_data()
     get_weather_file_for <- _____ {
       paste0(city_code, ".xlsx")
     }
-    
-    get_weather_file_for("munich")
-    get_weather_file_for("san_diego")
     ```
     
     ```{r echo = FALSE}
+    # Operate on city codes, not file names:
     get_weather_file_for <- function(city_code) {
       paste0(city_code, ".xlsx")
     }
-    
+    ```
+        
+    ```{r}
     get_weather_file_for("munich")
     get_weather_file_for("san_diego")
     ```
+
 
 1. Implement a helper function `get_weather_data_for()` that takes a city code as input (as opposed to a file name). Intended usage: `get_weather_data_for("berlin")`. Update `read_weather_data()` to use `get_weather_data_for()`.
 
@@ -83,14 +84,15 @@ read_weather_data()
     get_weather_data_for <- _____ {
       read_weather_file(_____)
     }
-    
-    get_weather_data_for("toronto")
     ```
     
     ```{r echo = FALSE}
+    # High-level reader:
     get_weather_data_for <- function(city_code) {
       read_weather_file(get_weather_file_for(city_code))
     }
+    ```
     
+    ```{r}
     get_weather_data_for("toronto")
     ```

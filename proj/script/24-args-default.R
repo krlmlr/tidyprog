@@ -45,6 +45,7 @@ read_weather_data()
 
 # Exercises
 
+# Default city:
 get_weather_data_for <- function(city_code = "zurich") {
   read_weather_file(get_weather_file_for(city_code))
 }

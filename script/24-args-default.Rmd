@@ -86,16 +86,16 @@ read_weather_data()
     get_weather_data_for <- _____ {
       _____
     }
-    
-    get_weather_data_for()
-    get_weather_data_for("tel_aviv")
     ```
     
     ```{r echo = FALSE}
+    # Default city:
     get_weather_data_for <- function(city_code = "zurich") {
       read_weather_file(get_weather_file_for(city_code))
     }
+    ```
     
+    ```{r}
     get_weather_data_for()
     get_weather_data_for("tel_aviv")
     ```
