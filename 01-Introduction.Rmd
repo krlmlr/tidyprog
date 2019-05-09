@@ -1,2 +1,11 @@
 # Introduction
 
+The `tidyverse` has quickly developed over the last years.
+Its first implementation as a collection of partly older packages was in the second half of 2016.
+All its packages "share an underlying design philosophy, grammar, and data structures."^[citation from [tidyverse homepage](https://www.tidyverse.org/)]
+It is for sure difficult to tell, if "learning the `tidyverse`" is a hard task, since the result of this assessment might differ from person to person.
+We do believe though, that there are concepts in its approach, which -- when grasped -- have the potential to increase one's productivity, since code creation will seem more natural.
+While this might be true for all languages (once you speak it well enough, things go smoothly), in our opinion the `tidyverse` worth exploring in depth, since it is 
+    1. an especially thought through framework that aims at making programming intuitive
+    2. evolving: challenges in the quickly changing world of hardware and software technology are addressed by `tidyverse` developers on comparably short notice
+    3. ...
