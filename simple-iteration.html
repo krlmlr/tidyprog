@@ -131,15 +131,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="simple-iteration.html"><a href="simple-iteration.html"><i class="fa fa-check"></i><b>2</b> Simple iteration</a><ul>
 <li class="chapter" data-level="2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>2.1</b> Review of visualization and data transformation</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="simple-iteration.html"><a href="simple-iteration.html#data"><i class="fa fa-check"></i><b>2.1.1</b> Data</a></li>
+<li class="chapter" data-level="2.1.1" data-path="simple-iteration.html"><a href="simple-iteration.html#intro-data"><i class="fa fa-check"></i><b>2.1.1</b> Data</a></li>
 <li class="chapter" data-level="2.1.2" data-path="simple-iteration.html"><a href="simple-iteration.html#exploration"><i class="fa fa-check"></i><b>2.1.2</b> Exploration</a></li>
 <li class="chapter" data-level="2.1.3" data-path="simple-iteration.html"><a href="simple-iteration.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>2.1.3</b> Further possibilities of using {dplyr} to transform data</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
-<li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#named-vectors-and-two-column-tibbles"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
 <li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing</a></li>
-<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#processing-all-files"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
-<li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#manipulating-all-datasets"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
+<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#map"><i class="fa fa-check"></i><b>2.5</b> Processing all files</a></li>
+<li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#map_manip"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a></li>
 <li class="chapter" data-level="2.7" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>2.7</b> Typed output</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>3</b> Function basics</a><ul>
@@ -207,28 +207,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(here)</code></pre>
 </details>
-<div id="data" class="section level3">
+<div id="intro-data" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Data</h3>
 <p>We will be working with hourly measurements of weather data (<a href="https://darksky.net/dev/docs">link to data documentation</a>) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
 Thus we have 49 observations in each city.
-- <code>time</code>
-- <code>summary</code> (how to describe the weather in one word)
-- <code>icon</code> (mix of description of weather plus time of day)
-- <code>precipIntensity</code> (intensity of precipitation [mm/h])
-- <code>precipProbability</code>
-- <code>temperature</code>
-- <code>apparentTemperature</code>
-- <code>dewPoint</code>
-- <code>humidity</code>
-- <code>pressure</code>
-- <code>windSpeed</code>
-- <code>windGust</code>
-- <code>windBearing</code> (direction in degrees)
-- <code>cloudCover</code>
-- <code>uvIndex</code>
-- <code>visibility</code>
-- <code>ozone</code>
-- <code>precipType</code></p>
+Variables are:</p>
+<ul>
+<li><code>time</code></li>
+<li><code>summary</code> (how to describe the weather in one word)</li>
+<li><code>icon</code> (mix of description of weather plus time of day)</li>
+<li><code>precipIntensity</code> (intensity of precipitation [mm/h])</li>
+<li><code>precipProbability</code></li>
+<li><code>temperature</code></li>
+<li><code>apparentTemperature</code></li>
+<li><code>dewPoint</code></li>
+<li><code>humidity</code></li>
+<li><code>pressure</code></li>
+<li><code>windSpeed</code></li>
+<li><code>windGust</code></li>
+<li><code>windBearing</code> (direction in degrees)</li>
+<li><code>cloudCover</code></li>
+<li><code>uvIndex</code></li>
+<li><code>visibility</code></li>
+<li><code>ozone</code></li>
+<li><code>precipType</code></li>
+</ul>
 <p>Reading in the data, which is stored in MS Excel-Files:</p>
 <pre class="sourceCode r"><code class="sourceCode r">berlin &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;berlin.xlsx&quot;</span>))
 toronto &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;toronto.xlsx&quot;</span>))
@@ -423,12 +426,15 @@ temperature_data <span class="op">%&gt;%</span>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
+<p>Here we briefly show the relationship between columns of data frames and their corresponding vectors, i.e. the answer to “how to get from one to the other?”:</p>
+<p>We can e.g. get a vector with the files in a specific directory of our current project (function <code>here::here()</code> is taking care of making sure we start from the root directory of our current project) like this:</p>
 <pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>), <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 files</code></pre>
 <pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
 ## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
 ## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
 ## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>You can create a tibble from it using <code>tibble::enframe()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">files_df &lt;-
 <span class="st">  </span>files <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">enframe</span>()
@@ -442,6 +448,7 @@ files_df</code></pre>
 ## </span><span style='color: #555555;'>3</span><span>     3 /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
 ## </span><span style='color: #555555;'>4</span><span>     4 /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
 </span></CODE></PRE>
+<p>The <code>name</code> column might be unwanted in some cases. Suppress its creation by setting <code>name = NULL</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">files_df_<span class="dv">1</span> &lt;-
 <span class="st">  </span>files <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">enframe</span>(<span class="dt">name =</span> <span class="ot">NULL</span>)
@@ -455,6 +462,8 @@ files_df_<span class="dv">1</span></code></pre>
 ## </span><span style='color: #555555;'>3</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
 ## </span><span style='color: #555555;'>4</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
 </span></CODE></PRE>
+<p>Another way to create a tibble from a vector is using <code>tibble::tibble()</code>.
+You can name the newly created columns by assigning the vectors they are created from to (quoted or unquoted) column names:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(<span class="dt">filename =</span> files)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 1</span><span>
 ##   </span><span style='font-weight: bold;'>filename</span><span>                                                     
@@ -464,23 +473,28 @@ files_df_<span class="dv">1</span></code></pre>
 ## </span><span style='color: #555555;'>3</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
 ## </span><span style='color: #555555;'>4</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
 </span></CODE></PRE>
+<p>The other direction – producing a vector from a tibble column – works with <code>dplyr::pull()</code>.
+By default <code>pull()</code> will turn the rightmost column into a vector and ignore the rest of the tibble:</p>
 <pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>()</code></pre>
 <pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
 ## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
 ## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
 ## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>Turn a specific column into a vector by providing the desired column name to <code>pull()</code>, either quoted or unquoted:</p>
 <pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(name)</code></pre>
 <pre><code>## [1] 1 2 3 4</code></pre>
 </div>
-<div id="named-vectors-and-two-column-tibbles" class="section level2">
+<div id="names" class="section level2">
 <h2><span class="header-section-number">2.3</span> Named vectors and two-column tibbles</h2>
 <details>
 <p><summary>Setup code</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
+<p>Here we look at tidyverse-functions to work with named vectors and tibbles with more columns and the relations netween the two.</p>
+<p>As seen in the <a href="simple-iteration.html#intro-data">“introduction”</a>, load a table – here a dictionary detailing information related to an id-like name – from an MS Excel file with <code>readxl::read_excel()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
 dict</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 5</span><span>
@@ -491,10 +505,12 @@ dict</code></pre>
 ## </span><span style='color: #555555;'>3</span><span> tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
 ## </span><span style='color: #555555;'>4</span><span> zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4
 </span></CODE></PRE>
+<p>Use <code>pull()</code> as seen in the last chapter:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(weather_filename)</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;   &quot;data/weather/toronto.xlsx&quot; 
 ## [3] &quot;data/weather/tel_aviv.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<p>Create absolute paths using <code>here::here()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">here</span>()</code></pre>
@@ -502,6 +518,10 @@ dict</code></pre>
 ## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
 ## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
 ## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>Produce a named vector with <code>tibble::deframe()</code>, which is thought as the inverse function to <code>enframe()</code>.
+When given a 2-column tibble, <code>deframe()</code> will by default use the first column for the names and the second column for the values of the resulting vector.
+When given a 1-column tibble, it creates an unnamed vector.
+When given a more-than-2-column tibble, it will use the first two columns as name- and value-columns for the resulting vector, ignore the rest and in addition give a warning that it expects a one- or two-column data frame.</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>()</code></pre>
@@ -509,6 +529,7 @@ dict</code></pre>
 ##   &quot;data/weather/berlin.xlsx&quot;  &quot;data/weather/toronto.xlsx&quot; 
 ##                     tel_aviv                       zurich 
 ## &quot;data/weather/tel_aviv.xlsx&quot;   &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<p>Some operations producing vectors from vectors cause the names to be lost:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
@@ -517,6 +538,7 @@ dict</code></pre>
 ## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
 ## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
 ## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>A possible solution can be in many cases to change the order of the transformations, so that the creation of the named vector comes last (or at least later):</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_filename_here =</span> <span class="kw">here</span>(weather_filename)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename_here) <span class="op">%&gt;%</span>
@@ -539,6 +561,9 @@ dict</code></pre>
 
 dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))</code></pre>
 </details>
+<p>Here we look at the indexing of a named vector.</p>
+<p>We start with the data frame <code>dict</code> from section <a href="simple-iteration.html#names">“Named vectors and two-column tibbles”</a>.
+Create named vector of the – future – input files:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_files &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
@@ -550,6 +575,7 @@ input_files</code></pre>
 ## &quot;data/weather/tel_aviv.xlsx&quot;   &quot;data/weather/zurich.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(input_files)</code></pre>
 <pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<p>There are different ways of accessing individual entries of the named vector:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="dv">1</span>]</code></pre>
 <pre><code>##                     berlin 
 ## &quot;data/weather/berlin.xlsx&quot;</code></pre>
@@ -557,6 +583,7 @@ input_files</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="st">&quot;berlin&quot;</span>]]</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<p>Choose multiple entries with:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre>
 <pre><code>##                      berlin                     toronto 
 ##  &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/toronto.xlsx&quot;</code></pre>
@@ -564,7 +591,7 @@ input_files</code></pre>
 <pre><code>##                     berlin                     zurich 
 ## &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
 </div>
-<div id="processing-all-files" class="section level2">
+<div id="map" class="section level2">
 <h2><span class="header-section-number">2.5</span> Processing all files</h2>
 <details>
 <p><summary>Setup code</summary></p>
@@ -578,6 +605,9 @@ input_files &lt;-
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>()</code></pre>
 </details>
+<p>Here we look at how to act on each entry of a list or a vector using <code>purrr::map()</code>:</p>
+<p>We start with the named vector <code>input_files</code> from section <a href="simple-iteration.html#indexing">“Indexing”</a>.
+As just seen, manually choosing just one entry of a vector works like so:</p>
 <pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">1</span>]]))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -591,8 +621,11 @@ input_files &lt;-
 ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 </span></CODE></PRE>
+<p>With <code>map()</code>, you can successively work through the whole vector and each time let the same function deal with the respective entry.
+The output of <code>map()</code> is a (named, if the input vector/list was named) list of the individual results:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
 <span class="st">  </span><span class="kw">map</span>(input_files, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<p>Let’s take a closer look at what we produced:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
@@ -660,6 +693,7 @@ input_files &lt;-
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(input_data)</code></pre>
 <pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<p><code>map()</code> can be included in your pipe in the following way:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
@@ -714,7 +748,7 @@ input_files &lt;-
 ## #   </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 </span></CODE></PRE>
 </div>
-<div id="manipulating-all-datasets" class="section level2">
+<div id="map_manip" class="section level2">
 <h2><span class="header-section-number">2.6</span> Manipulating all datasets</h2>
 <details>
 <p><summary>Setup code</summary></p>
@@ -729,6 +763,9 @@ input_data &lt;-
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
 </details>
+<p>How to selectively manipulate specific parts of a list of datasets?</p>
+<p>We start with the named list of tibbles called <code>input_data</code> from section <a href="simple-iteration.html#map">“Processing all files”</a>.
+Of each tibble we only want the column <code>time</code> and all the columns whose name contains “emperature”:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
@@ -767,6 +804,8 @@ input_data &lt;-
 ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        7.32                5.41
 ## </span><span style='color: #555555;'># … with 46 more rows</span><span>
 </span></CODE></PRE>
+<p>But we don’t want all of the observations, respectively.
+We only want those with values in column <code>temperature</code> greater or equal than 14°C:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">filter</span>(., temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>))</code></pre>
@@ -799,24 +838,28 @@ input_data &lt;-
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
+<p>Create a custom function for that specific purpose in a call to <code>map()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
   data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
 }</code></pre>
+<p>Let’s look at the object <code>manipulator</code>, that we created:</p>
 <pre class="sourceCode r"><code class="sourceCode r">manipulator</code></pre>
 <pre><code>## function(data) {
 ##   data %&gt;%
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x17b8f48&gt;</code></pre>
+## &lt;environment: 0x244ef48&gt;</code></pre>
+<p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 1 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
+<p>Now let’s use <code>map()</code> to let our function act on the entire dataset:</p>
 <pre class="sourceCode r"><code class="sourceCode r">manipulated_data &lt;-<span class="st"> </span><span class="kw">map</span>(input_data, <span class="op">~</span><span class="st"> </span><span class="kw">manipulator</span>(.))
 manipulated_data</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
@@ -848,6 +891,7 @@ manipulated_data</code></pre>
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
+<p><code>map()</code> also allows for other notations, e.g.:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(input_data, manipulator)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
@@ -894,6 +938,9 @@ input_data &lt;-
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
 </details>
+<p>If we know, what the output of each function call in a <code>map()</code> sequence looks like, we can often call a sub-type of <code>map()</code> to produce a more condensed output.</p>
+<p>We start with the named list of tibbles called <code>input_data</code> from section <a href="simple-iteration.html#map">“Processing all files”</a>.</p>
+<p>We want to know the number of rows of each tibble in <code>input_data</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
 <pre><code>## $berlin
@@ -907,14 +954,18 @@ input_data &lt;-
 ## 
 ## $zurich
 ## [1] 49</code></pre>
+<p>Each time an integer is produced.
+Therefore we can call <code>map_int()</code>, to create a named integer vector:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
 <pre><code>##   berlin  toronto tel_aviv   zurich 
 ##       49       49       49       49</code></pre>
+<p>If the output is a character variable, use <code>map_chr()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="kw">nrow</span>(.)))</code></pre>
 <pre><code>##   berlin  toronto tel_aviv   zurich 
 ##     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;</code></pre>
+<p>There are many sub-types of the <code>map()</code> function also for other classes of output values available.</p>
 
 </div>
 </div>
