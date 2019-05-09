@@ -1,6 +1,6 @@
-# Simple iteration
+# Function basics {#function-basics}
 
-> Processing multiple files that contain different parts of the same dataset
+> Structuring the code to avoid too much copy-pasting
 
 ```{r 02-setup, include = FALSE}
 library(here)
