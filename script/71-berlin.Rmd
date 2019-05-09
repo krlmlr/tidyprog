@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Traversing
+## Traversing {#berlin}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
@@ -16,6 +16,8 @@ library(here)
 ```
 </details>
 
+We are now working with the results from downloading geolocation data from [photon.komoot.de](http://photon.komoot.de/).
+This is stored in the file `here("data/komoot-berlin.rds")` and we can read it with `readRDS()`:
 
 ```{r include = FALSE}
 # Results from downloading geolocation data from photon.komoot.de:
@@ -27,6 +29,8 @@ berlin
 str(berlin)
 ```
 
+As you can see it is a somewhat complex list structure.
+We know from ["Indexing"](#indexing) that we can access it's components in the following way:
 
 ```{r include = FALSE}
 # Access components
@@ -37,6 +41,7 @@ berlin$features
 berlin$features[[1]]
 ```
 
+With the function `purrr::pluck()`, there is however a more universal tool available for accessing elements of more complex lists:
 
 ```{r include = FALSE}
 # Uniform access with pluck():
@@ -58,6 +63,7 @@ berlin %>%
   pluck("features", 1, "geometry", "coordinates")
 ```
 
+Similarly:
 
 ```{r include = FALSE}
 # Accessing different properties
@@ -67,6 +73,7 @@ berlin %>%
   pluck("features", 1, "properties", "country")
 ```
 
+And as one more important characteristic of a `tidyverse`-function, `pluck()` is pipe-able:
 
 ```{r include = FALSE}
 # Composable
