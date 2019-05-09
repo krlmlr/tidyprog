@@ -63,3 +63,11 @@ input_data %>%
 input_data %>% 
   map(dim) %>% 
   map(prod)
+
+create_plot <- function(data) {
+  data %>% 
+    ggplot(aes(x = pressure, y = humidity, color = temperature)) +
+    geom_path()
+}
+input_data %>% 
+  map(create_plot)

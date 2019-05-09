@@ -123,7 +123,7 @@ There are sub-types of the `map()` function for each atomic type:
       weather_summary %>%
         mutate(
           text = paste0(
-            "We had temperatures between ", min_temp, " and ", max_temp, " °C."
+            "We had temperatures between ", min_temp, " and ", max_temp, " °C.",
             "The average humidity was ", round(mean_humidity * 100), " %. ",
             "The weather was ", summary, "."
           )

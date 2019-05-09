@@ -22,3 +22,35 @@ input_data %>%
 # ... or a character vector?
 input_data %>%
   map_chr(~ as.character(nrow(.)))
+
+# Exercises
+
+input_data %>% 
+  map(~ slice(., 1)) %>%
+  map_dbl(~ pull(., temperature))
+
+summarize_weather <- function(data) {
+  data %>%
+    summarize(
+      max_temp = max(temperature),
+      min_temp = min(temperature),
+      mean_humidity = mean(humidity),
+      summary = paste(rle(summary)$values, collapse = ", then ")
+    )
+}
+
+describe_weather <- function(weather_summary) {
+  weather_summary %>%
+    mutate(
+      text = paste0(
+        "We had temperatures between ", min_temp, " and ", max_temp, " °C.",
+        "The average humidity was ", round(mean_humidity * 100), " %. ",
+        "The weather was ", summary, "."
+      )
+    ) %>% 
+    pull()
+}
+input_data %>% 
+  map(summarize_weather) %>%
+  map_chr(describe_weather) %>% 
+  enframe()
