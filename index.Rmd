@@ -31,7 +31,7 @@ Material for the zhRcourse workshop "Programming in the tidyverse" on May 10, 20
     - Longer URL: https://krlmlr.github.io/tidyprog/
 
 - Scripts and installation instructions: `r tidyprog_repo()`
-    - Prepared scripts: `r tidyprog_repo("scripts")`
+    - Prepared scripts: `r tidyprog_repo("script")`
     - Live code: `r tidyprog_repo("live")`
     - The code **will be updated live** with a delay of a few seconds during the workshop, it is **not necessary** to repeat the instructor's typing
 
