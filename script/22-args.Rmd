@@ -58,7 +58,8 @@ read_weather_data <- function() {
 }
 ```
 
-Always immediately test the newly created function by running it (best with varying parameters):
+The function still needs to be called for testing it.
+It is a good practice to always immediately test a the newly created or updated function by running it:
 
 ```{r include = FALSE}
 # Still need to run a function
@@ -66,3 +67,21 @@ Always immediately test the newly created function by running it (best with vary
 ```{r 32-still-need-to-run-a-function}
 read_weather_data()
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. How does the behavior of `read_weather_data()` change if we update the definition of the `read_weather()` function as follows:
+
+    ```r
+    weather_path <- function(filename) {
+      # Returned value
+      here("data", "weather", filename)
+    }
+    ```
+    
+    Hint: Define this function with a different name and check its output values, before running `read_weather()` data again.
