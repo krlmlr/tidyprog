@@ -227,17 +227,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Structuring the code to avoid too much copy-pasting</p>
 </blockquote>
+<p>This section discusses functions as building blocks for more expressive and more powerful data analysis code.</p>
 <div id="definition-and-execution" class="section level2">
 <h2><span class="header-section-number">2.1</span> Definition and execution</h2>
-<details>
-<p><summary><em>Click here to show setup code.</em></summary></p>
+<p>The following packages are used for this chapter.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
-</details>
-<p>In this chapter the basics of function definitions are covered.</p>
 <div id="designing-functions" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Designing functions</h3>
-<p>Create functions for tasks that need to be executed frequently.</p>
+<p>Create functions for tasks that need to be executed repeatedly, or to hide implementation details.</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>() {
   <span class="co"># Read all files</span>
   berlin &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, <span class="st">&quot;berlin.xlsx&quot;</span>))
@@ -278,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x2aa7f80&gt;</code></pre>
+## &lt;environment: 0x1a07f80&gt;</code></pre>
 <p>Execute the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
