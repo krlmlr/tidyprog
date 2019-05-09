@@ -6,34 +6,68 @@ All its packages "share an underlying design philosophy, grammar, and data struc
 It is for sure difficult to tell, if "learning the `tidyverse`" is a hard task, since the result of this assessment might differ from person to person.
 We do believe though, that there are concepts in its approach, which -- when grasped -- have the potential to increase one's productivity, since code creation will seem more natural.
 While this might be true for all languages (once you speak it well enough, things go smoothly), in our opinion the `tidyverse` worth exploring in depth, since it is 
-    1. an especially thought through framework that aims at making programming intuitive
-    2. evolving: challenges in the quickly changing world of hardware and software technology are addressed by `tidyverse` developers on comparably short notice
+1. consistent: an especially well designed framework that aims at making data analysis and programming intuitive,
+2. evolving: constantly deepened understanding for challenges arising in modern data analysis leads to improving ergonomic user interfaces.
 
-<!-- 3. FIXME: more? -->
+This section gives a brief overview, introduces the data used for the course, and offers a refresher for tidy data manipulation and visualization.
+
+## Overview
 
 This course covers several topics, which everyone working more intently with the `tidyverse` almost inevitably needs to deal with at some point or another.
 
-The first part, "Simple iteration":
+### Function basics
 
-1. We start off with an overview of basic issues, like data visualization and data exploration using packages `ggplot2` and `dplyr`
-2. Then we look at how to get from a list or a vector to a tibble and vice-versa
-3. Next topic is indexing for vectors and lists
-4. Applying a function to each element of a list or a vector
+> structuring the code to avoid too much copy-pasting
 
-The second part, "Function basics":
+Using functions to structure code. This part is independent of the subsequent section.
 
 1. We begin with how to define and execute a function
-2. A functions arguments (from a developer's and from a user's perspective)
+2. Discussion of a function's arguments (from both the developers' and the users' perspective)
+3. A few words on function design
 
-The third part, "Pairwise iteration and nesting":
+### Simple iteration
 
-1. Simultaneously feed 2 separate lists of inputs into a function working with those two arguments
-2. Iterate through column entries of a tibble
-3. Nested tibbles
+> processing multiple files that contain different parts of the same dataset
 
-The fourth part, "Scoping and flow control":
+This part introduces iteration and is independent of the previous section.
 
-<!-- FIXME: continue from here -->
+1. How to get from a list or a vector to a tibble and vice-versa
+1. Indexing for vectors and lists
+1. Applying a function to each element of a list or a vector
+
+### Pairwise iteration and nesting
+
+More advanced iteration.
+
+1. Simultaneously feed two or more separate lists of inputs into a function working with those two arguments
+2. Iterate rowwise through columns in a tibble
+3. Nested tibbles, a very powerful concept
+
+### Scoping and flow control
+
+More advanced functional concepts.
+
+1. Data lifecycle
+2. Purity
+3. Control flow
+4. Metaprogramming
+
+### Non-rectangular data
+
+> working with raw data from online services (JSON)
+
+Processing hierarchical lists as commonly returned from web APIs.
+
+1. Data lifecycle
+2. Purity
+3. Control flow
+4. Metaprogramming
+
+### Tidy evaluation
+
+> writing functions that work with datasets of different shape
+
+TBD
 
 ```{r child = here("script", "1.Rmd")}
 ```
