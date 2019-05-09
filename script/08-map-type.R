@@ -50,6 +50,7 @@ describe_weather <- function(weather_summary) {
     ) %>% 
     pull()
 }
+
 input_data %>% 
   map(summarize_weather) %>%
   map_chr(describe_weather) %>% 
