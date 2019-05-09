@@ -9,7 +9,8 @@ This section is a refresher for visualization and data transformation in the tid
 Readers familiar with the first half or [R for data science](https://r4ds.had.co.nz/) will recognize the concepts repeated here.
 The data used throughout this course is presented, plotted and briefly analyzed.
 
-The code in each section is self-contained.
+The code in each chapter is self-contained.
+The code in each section is also self-contained, but the necessary setup code is hidden and can be expanded with a click.
 We will always load the following packages:
 
 ```{r include = FALSE}
@@ -144,7 +145,7 @@ weather_data %>%
   geom_point(aes(color = city_code))
 ```
 
-### Further possibilities of using {dplyr} to transform data
+### Further dplyr transformations
 
 If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:
 
