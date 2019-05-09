@@ -35,6 +35,7 @@ komoot_content %>%
 komoot_content %>%
   map(list("features", 1, "geometry", "coordinates"))
 
+# Can also be stored in a variable:
 accessor <- list("features", 1, "geometry", "coordinates")
 coordinates <-
   komoot_content %>%
