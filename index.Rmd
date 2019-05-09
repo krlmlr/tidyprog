@@ -21,7 +21,7 @@ library(here)
 
 Material for the zhRcourse workshop "Programming in the tidyverse" on May 10, 2019.
 
-## Links
+## Links {-}
 
 - This website: https://bit.ly/tidyprog
     - Longer URL: https://krlmlr.github.io/tidyprog/
@@ -36,7 +36,7 @@ Material for the zhRcourse workshop "Programming in the tidyverse" on May 10, 20
     - Click the "Save a private copy" link next to the **TEMPORARY** label in red in the header
     - All necessary packages are preinstalled
 
-## Package versions used
+## Package versions used {-}
 
 <details><summary>Click to expand</summary>
 
@@ -46,6 +46,7 @@ library(here)
 ```
 
 ```{r}
+getOption("width")
 sessioninfo::session_info()
 ```
 
