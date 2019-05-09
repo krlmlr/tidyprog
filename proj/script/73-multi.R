@@ -10,11 +10,11 @@ komoot_content <-
 
 # Use multiple accessors:
 accessor_coords <- list("features", 1, "geometry", "coordinates")
-accessor_country <- list("features", 1, "properties", "country")
 
 komoot_content %>%
   map(accessor_coords)
 
+accessor_country <- list("features", 1, "properties", "country")
 komoot_content %>%
   map(accessor_country)
 
