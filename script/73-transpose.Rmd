@@ -1,0 +1,85 @@
+```{r 73-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Transposing
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### Transposing
+
+```
+```{r 73-setup-73-transpose-r}
+library(tidyverse)
+library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+coordinates <-
+  komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates"))
+```
+</details>
+
+
+```{r include = FALSE}
+# Transposing inside out:
+```
+```{r 73-transposing-inside-out}
+coordinates %>%
+  transpose()
+
+
+komoot
+```
+
+
+```{r include = FALSE}
+# Results are stored in the "content" column:
+```
+```{r 73-results-are-stored-in-the-content-column}
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+berlin <-
+  komoot_content %>%
+  pluck(1)
+
+berlin %>%
+  pluck("features", 1, "geometry", "coordinates")
+
+toronto <-
+  komoot_content %>%
+  pluck(2)
+
+toronto %>%
+  pluck("features", 1, "geometry", "coordinates")
+```
+
+
+```{r include = FALSE}
+# Apply same pluck() on all values with map():
+```
+```{r 73-apply-same-pluck-on-all-values-with-map}
+komoot_content %>%
+  map(~ pluck(., "features", 1, "geometry", "coordinates"))
+```
+
+
+```{r include = FALSE}
+# Shortcut:
+```
+```{r 73-shortcut}
+komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates"))
+
+accessor <- list("features", 1, "geometry", "coordinates")
+komoot_content %>%
+  map(accessor)
+```

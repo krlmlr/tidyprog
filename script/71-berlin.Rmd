@@ -1,0 +1,59 @@
+```{r 71-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Traversing
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### Traversing
+
+```
+```{r 71-setup-71-berlin-r}
+library(tidyverse)
+library(here)
+```
+</details>
+
+
+```{r include = FALSE}
+# Results from downloading geolocation data from photon.komoot.de:
+```
+```{r 71-results-from-downloading-geolocation-data-from-photon-komoot-de}
+berlin <- readRDS(here("data/komoot-berlin.rds"))
+
+berlin
+str(berlin)
+```
+
+
+```{r include = FALSE}
+# Access components
+```
+```{r 71-access-components}
+berlin$type
+berlin$features
+berlin$features[[1]]
+```
+
+
+```{r include = FALSE}
+# Uniform access with pluck():
+```
+```{r 71-uniform-access-with-pluck}
+berlin %>%
+  pluck("type")
+
+berlin %>%
+  pluck("features")
+
+berlin %>%
+  pluck("features", 1)
+
+berlin %>%
+  pluck("features", 1, "geometry")
+
+berlin %>%
+  pluck("features", 1, "geometry", "coordinates")
+```
