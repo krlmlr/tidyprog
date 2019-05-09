@@ -16,6 +16,8 @@ library(here)
 ```
 </details>
 
+In this chapter the basics of function definitions are covered.
+
 
 ```{r include = FALSE}
 ## TODO: Split script, don't overwrite!
