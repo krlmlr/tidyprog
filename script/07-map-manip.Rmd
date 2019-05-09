@@ -171,3 +171,25 @@ map(input_data, manipulator)
       map(dim) %>% 
       map(prod)
     ```
+
+1. Create four plots of humidity vs. pressure, one for each city. Use `geom_path()`, map `temperature` to the `color` aesthetic:
+
+    ```r
+    create_plot <- function(___) {
+      ___ %>% 
+        ggplot(aes(_____)) +
+        geom_path()
+    }
+    ___ %>% 
+      ___(___)
+    ```
+    
+    ```{r echo = FALSE}
+    create_plot <- function(data) {
+      data %>% 
+        ggplot(aes(x = pressure, y = humidity, color = temperature)) +
+        geom_path()
+    }
+    input_data %>% 
+      map(create_plot)
+    ```
