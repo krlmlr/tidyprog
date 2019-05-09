@@ -66,6 +66,9 @@ read_weather_data()
 
 ```
 
+Here we create a function `weather_path_for()` that wraps a character variable in a path with the correct file ending.
+This function is in turn called by `read_ecxel()` in our function `get_weather_for2()`.
+As a result, `get_weather_for2()` works the same way as `get_weather_for()` (below), but it is easier to read and looks slightly more elegant:
 
 ```{r include = FALSE}
 # Get rid of repeated .xlsx?
