@@ -52,61 +52,45 @@ read_weather_data()
 
 
 ```{r include = FALSE}
-### Exercise
-```
-```{r 23-exercise}
-
+# Exercises
 ```
 
+### Exercises
 
-```{r include = FALSE}
-# Simplify more?
-```
-```{r 23-simplify-more}
+1. Implement a helper function `get_weather_file_for()` that takes a city code as input and returns the file name for the corresponding Excel file. Intended usage: `get_weather_file_for("berlin")`. Test this function on a few example inputs.
 
-```
+    ```r
+    get_weather_file_for <- _____ {
+      paste0(city_code, ".xlsx")
+    }
+    
+    get_weather_file_for("munich")
+    get_weather_file_for("san_diego")
+    ```
+    
+    ```{r echo = FALSE}
+    get_weather_file_for <- function(city_code) {
+      paste0(city_code, ".xlsx")
+    }
+    
+    get_weather_file_for("munich")
+    get_weather_file_for("san_diego")
+    ```
 
-Here we create a function `weather_path_for()` that wraps a character variable in a path with the correct file ending.
-This function is in turn called by `read_ecxel()` in our function `get_weather_for2()`.
-As a result, `get_weather_for2()` works the same way as `get_weather_for()` (below), but it is easier to read and looks slightly more elegant:
+1. Implement a helper function `get_weather_data_for()` that takes a city code as input (as opposed to a file name). Intended usage: `get_weather_data_for("berlin")`. Update `read_weather_data()` to use `get_weather_data_for()`.
 
-```{r include = FALSE}
-# Get rid of repeated .xlsx?
-```
-```{r 23-get-rid-of-repeated-xlsx}
-
-get_weather_for <- function(city) {
-  filename <- paste0(city, ".xlsx")
-
-  readxl::read_excel(
-    paste0(
-      weather_path(filename)
-    )
-  )
-}
-
-weather_path_for <- function(city) {
-
-  here("data/weather", paste0(city, ".xlsx"))
-}
-
-get_weather_for2 <- function(city) {
-  readxl::read_excel(weather_path_for(city))
-}
-
-read_weather_data <- function() {
-  # Create ensemble dataset from files on disk
-  weather_data <- bind_rows(
-    berlin = get_weather_for2("berlin"),
-    toronto = get_weather_for2("toronto"),
-    tel_aviv = get_weather_for2("tel_aviv"),
-    zurich = get_weather_for2("zurich"),
-    .id = "city_code"
-  )
-
-  # Return it
-  weather_data
-}
-
-read_weather_data()
-```
+    ```r
+    get_weather_data_for <- _____ {
+      read_weather_file(_____)
+    }
+    
+    get_weather_data_for("toronto")
+    ```
+    
+    ```{r echo = FALSE}
+    get_weather_data_for <- function(city_code) {
+      read_weather_file(get_weather_file_for(city_code))
+    }
+    
+    get_weather_data_for("toronto")
+    ```
