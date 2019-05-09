@@ -4,7 +4,7 @@ rm(list = ls())
 
 ## Indexing/subsetting {#indexing}
 
-<details><summary>*Click here to make setup code visible*</summary>
+<details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
 ### Indexing/subsetting
 
