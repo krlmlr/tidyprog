@@ -63,17 +63,18 @@ Display the code of any function by writing its name without the subsequent pare
 read_weather_data
 ```
 
-Execute the function by adding the parentheses:
+Call the function by adding the parentheses:
 
 ```{r include = FALSE}
-# Execute like functions exported from packages
+# Call like functions exported from packages
 ```
 ```{r 31-execute-like-functions-exported-from-packages}
 read_weather_data()
 ```
 
 
-List `R`-objects in an environment:
+Execution of the function does not create new variables in the global environment.
+The only object in the global environment is the function itself:
 
 ```{r include = FALSE}
 # Variables are local, execution doesn't change global variables.
@@ -83,7 +84,17 @@ List `R`-objects in an environment:
 ls()
 ```
 
-Assign function values to a variable:
+A function can also be used as input for a pipe:
+
+```{r include = FALSE}
+# Pipe
+```
+```{r 31-pipe}
+read_weather_data() %>% 
+  count(city_code)
+```
+
+To reuse a function value, assign it to a variable:
 
 ```{r include = FALSE}
 # Assign result to use in further operations
@@ -91,3 +102,53 @@ Assign function values to a variable:
 ```{r 31-assign-result-to-use-in-further-operations}
 weather_data <- read_weather_data()
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Create a modified version of the function to return only data for Toronto and Tel Aviv. Call it.
+
+    ```r
+    read_weather_data_non_europe <- function() {
+      _______
+    }
+    
+    _______
+    ```
+    
+    ```{r echo = FALSE}
+    read_weather_data_non_europe <- function() {
+      # Read all files
+      toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+      tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+    
+      # Create ensemble dataset
+      weather_data <- bind_rows(
+        toronto = toronto,
+        tel_aviv = tel_aviv,
+        .id = "city_code"
+      )
+    
+      # Return it
+      weather_data
+    }
+    
+    read_weather_data_non_europe()
+    ```
+    
+
+1. Retrieve data for Europe using `setdiff()`, count observations for each city code to validate:
+
+    ```r
+    setdiff(_____, _____) %>% 
+      count(___)
+    ```
+    
+    ```{r echo = FALSE}
+    setdiff(read_weather_data(), read_weather_data_non_europe()) %>% 
+      count(city_code)
+    ```
