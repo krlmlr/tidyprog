@@ -135,7 +135,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="simple-iteration.html"><a href="simple-iteration.html#exploration"><i class="fa fa-check"></i><b>2.1.2</b> Exploration</a></li>
 <li class="chapter" data-level="2.1.3" data-path="simple-iteration.html"><a href="simple-iteration.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>2.1.3</b> Further possibilities of using {dplyr} to transform data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
+<li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises"><i class="fa fa-check"></i><b>2.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
 <li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing</a></li>
 <li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#construction"><i class="fa fa-check"></i><b>2.5</b> Construction</a></li>
@@ -203,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="review-of-visualization-and-data-transformation" class="section level2">
 <h2><span class="header-section-number">2.1</span> Review of visualization and data transformation</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 <pre><code>## ── [1mAttaching packages[22m ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## [32m✔[39m [34mggplot2[39m 3.1.1       [32m✔[39m [34mpurrr  [39m 0.3.2  
@@ -430,7 +432,7 @@ temperature_data <span class="op">%&gt;%</span>
 <div id="vectors-and-columns" class="section level2">
 <h2><span class="header-section-number">2.2</span> Vectors and columns</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
@@ -493,11 +495,79 @@ By default <code>pull()</code> will turn the rightmost column into a vector and 
 <pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(name)</code></pre>
 <pre><code>## [1] 1 2 3 4</code></pre>
+<div id="exercises" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Investigate the output of <code>fs::dir_ls()</code> with <code>enframe()</code>. Explain.</p>
+<pre><code># install.packages(&quot;fs&quot;)
+fs::dir_ls()
+fs::dir_ls() %&gt;%
+  ___()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 36 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>         </span><span style='font-weight: bold;'>value</span><span>       
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span>  
+ ## </span><span style='color: #555555;'>1</span><span> 0.Rmd        </span><span style='color: #00BB00;'>0.Rmd</span><span>       
+ ## </span><span style='color: #555555;'>2</span><span> 01-intro.Rmd </span><span style='color: #00BB00;'>01-intro.Rmd</span><span>
+ ## </span><span style='color: #555555;'>3</span><span> 02-dir.Rmd   </span><span style='color: #00BB00;'>02-dir.Rmd</span><span>  
+ ## </span><span style='color: #555555;'># … with 33 more rows</span><span>
+ </span></CODE></PRE></li>
+<li><p>Convert the output of <code>fs::dir_info()</code> to that seen from <code>fs::dir_ls()</code>. How do you make sure that the vector is named?</p>
+<pre><code># install.packages(&quot;fs&quot;)
+fs::dir_info()
+fs::dir_info() %&gt;% 
+  pull(___)
+fs::dir_info() %&gt;%
+  select(_____, _____) %&gt;% 
+  ___()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 36 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>0.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>13:16:22</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>01-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>13:16:22</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>02-dir.Rmd</span><span> file    2.88K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>13:16:22</span><span> trav… trav…
+ ## </span><span style='color: #555555;'># … with 33 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>access_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>change_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>birth_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>
+ </span></CODE></PRE>
+<pre><code>##  [1] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+##  [3] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+##  [5] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+##  [7] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+##  [9] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [11] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [13] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [15] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [17] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [19] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [21] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [23] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [25] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [27] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [29] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [31] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [33] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
+## [35] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>0.Rmd</span><span>                   </span><span style='color: #00BB00;'>01-intro.Rmd</span><span>            </span><span style='color: #00BB00;'>02-dir.Rmd</span><span>              
+ ## </span><span style='color: #00BB00;'>03-names.Rmd</span><span>            </span><span style='color: #00BB00;'>04-index.Rmd</span><span>            </span><span style='color: #00BB00;'>05-construct.Rmd</span><span>        
+ ## </span><span style='color: #00BB00;'>06-map.Rmd</span><span>              </span><span style='color: #00BB00;'>07-map-manip.Rmd</span><span>        </span><span style='color: #00BB00;'>08-map-type.Rmd</span><span>         
+ ## </span><span style='color: #00BB00;'>1.Rmd</span><span>                   </span><span style='color: #00BB00;'>11-map2.Rmd</span><span>             </span><span style='color: #00BB00;'>12-mutate-map.Rmd</span><span>       
+ ## </span><span style='color: #00BB00;'>13-unnest.Rmd</span><span>           </span><span style='color: #00BB00;'>3.Rmd</span><span>                   </span><span style='color: #00BB00;'>31-function.Rmd</span><span>         
+ ## </span><span style='color: #00BB00;'>32-args.Rmd</span><span>             </span><span style='color: #00BB00;'>33-intermediate.Rmd</span><span>     </span><span style='color: #00BB00;'>34-args-default.Rmd</span><span>     
+ ## </span><span style='color: #00BB00;'>35-args-multi.Rmd</span><span>       </span><span style='color: #00BB00;'>36-args-matching.Rmd</span><span>    </span><span style='color: #00BB00;'>4.Rmd</span><span>                   
+ ## </span><span style='color: #00BB00;'>43-function-scoping.Rmd</span><span> </span><span style='color: #00BB00;'>44-function-purity.Rmd</span><span>  </span><span style='color: #00BB00;'>5.Rmd</span><span>                   
+ ## </span><span style='color: #00BB00;'>51-function-if.Rmd</span><span>      </span><span style='color: #00BB00;'>52-closure.Rmd</span><span>          </span><span style='color: #00BB00;'>6.Rmd</span><span>                   
+ ## </span><span style='color: #00BB00;'>60-split-strings.Rmd</span><span>    </span><span style='color: #00BB00;'>61-state.Rmd</span><span>            </span><span style='color: #00BB00;'>7.Rmd</span><span>                   
+ ## </span><span style='color: #00BB00;'>71-berlin.Rmd</span><span>           </span><span style='color: #00BB00;'>72-komoot.Rmd</span><span>           </span><span style='color: #00BB00;'>73-multi.Rmd</span><span>            
+ ## </span><span style='color: #00BB00;'>74-flatten.Rmd</span><span>          </span><span style='color: #00BB00;'>75-transpose.Rmd</span><span>        </span><span style='color: #00BB00;'>76-rectangulate.Rmd</span><span>
+ </span></CODE></PRE></li>
+</ol>
+</div>
 </div>
 <div id="names" class="section level2">
 <h2><span class="header-section-number">2.3</span> Named vectors and two-column tibbles</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
@@ -567,7 +637,7 @@ weather_filenames</code></pre>
 <div id="indexing" class="section level2">
 <h2><span class="header-section-number">2.4</span> Indexing</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -606,7 +676,7 @@ input_files</code></pre>
 <div id="construction" class="section level2">
 <h2><span class="header-section-number">2.5</span> Construction</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)</code></pre>
@@ -677,7 +747,7 @@ input_files</code></pre>
 <div id="map" class="section level2">
 <h2><span class="header-section-number">2.6</span> Processing all files</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -834,7 +904,7 @@ The output of <code>map()</code> is a (named, if the input vector/list was named
 <div id="map_manip" class="section level2">
 <h2><span class="header-section-number">2.7</span> Manipulating all datasets</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -934,7 +1004,7 @@ We only want those with values in column <code>temperature</code> greater or equ
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x3414f80&gt;</code></pre>
+## &lt;environment: 0x330df80&gt;</code></pre>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 1 x 3</span><span>
@@ -1009,7 +1079,7 @@ manipulated_data</code></pre>
 <div id="typed-output" class="section level2">
 <h2><span class="header-section-number">2.8</span> Typed output</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 

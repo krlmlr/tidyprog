@@ -135,7 +135,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="simple-iteration.html"><a href="simple-iteration.html#exploration"><i class="fa fa-check"></i><b>2.1.2</b> Exploration</a></li>
 <li class="chapter" data-level="2.1.3" data-path="simple-iteration.html"><a href="simple-iteration.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>2.1.3</b> Further possibilities of using {dplyr} to transform data</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a></li>
+<li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.2</b> Vectors and columns</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises"><i class="fa fa-check"></i><b>2.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>2.3</b> Named vectors and two-column tibbles</a></li>
 <li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.4</b> Indexing</a></li>
 <li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#construction"><i class="fa fa-check"></i><b>2.5</b> Construction</a></li>
@@ -203,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="definition-and-execution" class="section level2">
 <h2><span class="header-section-number">3.1</span> Definition and execution</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
@@ -251,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   # Return it
 ##   weather_data
 ## }
-## &lt;environment: 0x3414f80&gt;</code></pre>
+## &lt;environment: 0x330df80&gt;</code></pre>
 <p>Execute the function by adding the parentheses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 19</span><span>
@@ -276,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="args" class="section level2">
 <h2><span class="header-section-number">3.2</span> Arguments</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
@@ -325,7 +327,7 @@ But it is advisable to be conservative here: try to minimise the number of argum
 <div id="intermediate" class="section level2">
 <h2><span class="header-section-number">3.3</span> Use case: Intermediate variables</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -420,7 +422,7 @@ read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>
 <div id="default-values" class="section level2">
 <h2><span class="header-section-number">3.4</span> Default values</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -494,7 +496,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 <div id="multiple-arguments" class="section level2">
 <h2><span class="header-section-number">3.5</span> Multiple arguments</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -567,7 +569,7 @@ This can be e.g. useful for passing arguments downstream:</p>
 <div id="argument-matching" class="section level2">
 <h2><span class="header-section-number">3.6</span> Argument matching</h2>
 <details>
-<p><summary>Click here to make setup code visible</summary></p>
+<p><summary><em>Click here to make setup code visible</em></summary></p>
 </details>
 <p>How does <code>R</code> handle function calls with arguments?</p>
 <p>Named arguments are assigned first, after that remaining slots are filled from left to right.</p>
