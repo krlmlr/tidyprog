@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Flattening
+## Flattening {#flatten}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
@@ -26,6 +26,11 @@ coordinates <-
 ```
 </details>
 
+It can occur that we end up with lists which are unnecessarily deep and we would like to make them flatter to make it easier to handle them.
+
+We are starting in our setup with `komoot_content` and `coordinates` from section ["Iterating and traversing"](#komoot).
+
+An example for an list that seems a bit too deep is given here:
 
 ```{r include = FALSE}
 # Odd structure:
@@ -35,6 +40,8 @@ coordinates %>%
   pluck(1)
 ```
 
+We can chop off a layer of a list and end up with a vector with one of the functions `purrr::flatten_*()`. 
+In the `*` we need to specify what class the output will be:
 
 ```{r include = FALSE}
 # Flattening can chop off a layer, need to specify output type:
@@ -45,6 +52,7 @@ coordinates %>%
   flatten_dbl()
 ```
 
+Let's use `map()` to apply this to the entire list of our cities' coordinates:
 
 ```{r include = FALSE}
 # Apply to entire list:
