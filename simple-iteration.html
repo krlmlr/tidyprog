@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>2 Simple iteration | Programming in the tidyverse</title>
-  <meta name="description" content="2 Simple iteration | Programming in the tidyverse">
+  <title>3 Simple iteration | Programming in the tidyverse</title>
+  <meta name="description" content="3 Simple iteration | Programming in the tidyverse">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="2 Simple iteration | Programming in the tidyverse" />
+  <meta property="og:title" content="3 Simple iteration | Programming in the tidyverse" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Simple iteration | Programming in the tidyverse" />
+  <meta name="twitter:title" content="3 Simple iteration | Programming in the tidyverse" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="function-basics.html">
+<link rel="prev" href="function-basics.html">
+<link rel="next" href="pairwise-iteration-and-nesting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -135,41 +135,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>1.1.3</b> Further possibilities of using {dplyr} to transform data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="simple-iteration.html"><a href="simple-iteration.html"><i class="fa fa-check"></i><b>2</b> Simple iteration</a><ul>
-<li class="chapter" data-level="2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>2.1</b> Vectors and columns</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises"><i class="fa fa-check"></i><b>2.1.1</b> Exercises</a></li>
+<li class="chapter" data-level="2" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>2</b> Function basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="function-basics.html"><a href="function-basics.html#definition-and-execution"><i class="fa fa-check"></i><b>2.1</b> Definition and execution</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>2.1.1</b> Designing functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>2.2</b> Named vectors and two-column tibbles</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-1"><i class="fa fa-check"></i><b>2.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.2" data-path="function-basics.html"><a href="function-basics.html#args"><i class="fa fa-check"></i><b>2.2</b> Arguments</a></li>
+<li class="chapter" data-level="2.3" data-path="function-basics.html"><a href="function-basics.html#intermediate"><i class="fa fa-check"></i><b>2.3</b> Use case: Intermediate variables</a></li>
+<li class="chapter" data-level="2.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>2.4</b> Default values</a></li>
+<li class="chapter" data-level="2.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>2.5</b> Multiple arguments</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>2.5.1</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>2.3</b> Indexing/subsetting</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-2"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="simple-iteration.html"><a href="simple-iteration.html#construction"><i class="fa fa-check"></i><b>2.4</b> Construction</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-3"><i class="fa fa-check"></i><b>2.4.1</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="simple-iteration.html"><a href="simple-iteration.html#map"><i class="fa fa-check"></i><b>2.5</b> Processing multiple files</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-4"><i class="fa fa-check"></i><b>2.5.1</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="simple-iteration.html"><a href="simple-iteration.html#map_manip"><i class="fa fa-check"></i><b>2.6</b> Manipulating all datasets</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-5"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>2.7</b> Typed output</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-6"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.6" data-path="function-basics.html"><a href="function-basics.html#argument-matching"><i class="fa fa-check"></i><b>2.6</b> Argument matching</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="function-basics.html"><a href="function-basics.html#exercise-1"><i class="fa fa-check"></i><b>2.6.1</b> Exercise</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>3</b> Function basics</a><ul>
-<li class="chapter" data-level="3.1" data-path="function-basics.html"><a href="function-basics.html#definition-and-execution"><i class="fa fa-check"></i><b>3.1</b> Definition and execution</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>3.1.1</b> Designing functions</a></li>
+<li class="chapter" data-level="3" data-path="simple-iteration.html"><a href="simple-iteration.html"><i class="fa fa-check"></i><b>3</b> Simple iteration</a><ul>
+<li class="chapter" data-level="3.1" data-path="simple-iteration.html"><a href="simple-iteration.html#vectors-and-columns"><i class="fa fa-check"></i><b>3.1</b> Vectors and columns</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises"><i class="fa fa-check"></i><b>3.1.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="function-basics.html"><a href="function-basics.html#args"><i class="fa fa-check"></i><b>3.2</b> Arguments</a></li>
-<li class="chapter" data-level="3.3" data-path="function-basics.html"><a href="function-basics.html#intermediate"><i class="fa fa-check"></i><b>3.3</b> Use case: Intermediate variables</a></li>
-<li class="chapter" data-level="3.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>3.4</b> Default values</a></li>
-<li class="chapter" data-level="3.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>3.5</b> Multiple arguments</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>3.5.1</b> Exercise</a></li>
+<li class="chapter" data-level="3.2" data-path="simple-iteration.html"><a href="simple-iteration.html#names"><i class="fa fa-check"></i><b>3.2</b> Named vectors and two-column tibbles</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-1"><i class="fa fa-check"></i><b>3.2.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="function-basics.html"><a href="function-basics.html#argument-matching"><i class="fa fa-check"></i><b>3.6</b> Argument matching</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="function-basics.html"><a href="function-basics.html#exercise-1"><i class="fa fa-check"></i><b>3.6.1</b> Exercise</a></li>
+<li class="chapter" data-level="3.3" data-path="simple-iteration.html"><a href="simple-iteration.html#indexing"><i class="fa fa-check"></i><b>3.3</b> Indexing/subsetting</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-2"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="simple-iteration.html"><a href="simple-iteration.html#construction"><i class="fa fa-check"></i><b>3.4</b> Construction</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-3"><i class="fa fa-check"></i><b>3.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="simple-iteration.html"><a href="simple-iteration.html#map"><i class="fa fa-check"></i><b>3.5</b> Processing multiple files</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-4"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="simple-iteration.html"><a href="simple-iteration.html#map_manip"><i class="fa fa-check"></i><b>3.6</b> Manipulating all datasets</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-5"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="simple-iteration.html"><a href="simple-iteration.html#typed-output"><i class="fa fa-check"></i><b>3.7</b> Typed output</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="simple-iteration.html"><a href="simple-iteration.html#exercises-6"><i class="fa fa-check"></i><b>3.7.1</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
@@ -212,12 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="simple-iteration" class="section level1">
-<h1><span class="header-section-number">2</span> Simple iteration</h1>
+<h1><span class="header-section-number">3</span> Simple iteration</h1>
 <blockquote>
 <p>Processing multiple files that contain different parts of the same dataset</p>
 </blockquote>
 <div id="vectors-and-columns" class="section level2">
-<h2><span class="header-section-number">2.1</span> Vectors and columns</h2>
+<h2><span class="header-section-number">3.1</span> Vectors and columns</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -283,7 +283,7 @@ By default <code>pull()</code> will turn the rightmost column into a vector and 
 <span class="st">  </span><span class="kw">pull</span>(name)</code></pre>
 <pre><code>## [1] 1 2 3 4</code></pre>
 <div id="exercises" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.1.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Investigate the output of <code>fs::dir_ls()</code> with <code>enframe()</code>. Explain.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;fs&quot;)</span>
@@ -302,7 +302,7 @@ fs<span class="op">::</span><span class="kw">dir_ls</span>() <span class="op">%&
 </div>
 </div>
 <div id="names" class="section level2">
-<h2><span class="header-section-number">2.2</span> Named vectors and two-column tibbles</h2>
+<h2><span class="header-section-number">3.2</span> Named vectors and two-column tibbles</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -371,7 +371,7 @@ weather_filenames</code></pre>
 ##                                                          zurich 
 ##   &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
 <div id="exercises-1" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.2.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Obtain a mapping between city code and city name as a named vector.</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span><span class="st"> </span>
@@ -390,35 +390,35 @@ fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 37 x 18</span><span>
  ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file       56 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:18:22</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>11-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:18:22</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      405 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:18:22</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file       56 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:22:37</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>11-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:22:37</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      370 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:22:37</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 34 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>access_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>change_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>birth_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>
  </span></CODE></PRE>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>1.Rmd</span><span>                </span><span style='color: #00BB00;'>11-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>2.Rmd</span><span>                
- ## </span><span style='color: #00BB00;'>21-dir.Rmd</span><span>           </span><span style='color: #00BB00;'>22-names.Rmd</span><span>         </span><span style='color: #00BB00;'>23-index.Rmd</span><span>         
- ## </span><span style='color: #00BB00;'>24-construct.Rmd</span><span>     </span><span style='color: #00BB00;'>25-map.Rmd</span><span>           </span><span style='color: #00BB00;'>26-map-manip.Rmd</span><span>     
- ## </span><span style='color: #00BB00;'>27-map-type.Rmd</span><span>      </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-function.Rmd</span><span>      
- ## </span><span style='color: #00BB00;'>32-args.Rmd</span><span>          </span><span style='color: #00BB00;'>33-intermediate.Rmd</span><span>  </span><span style='color: #00BB00;'>34-args-default.Rmd</span><span>  
- ## </span><span style='color: #00BB00;'>35-args-multi.Rmd</span><span>    </span><span style='color: #00BB00;'>36-args-matching.Rmd</span><span> </span><span style='color: #00BB00;'>4.Rmd</span><span>                
+ ## </span><span style='color: #00BB00;'>21-function.Rmd</span><span>      </span><span style='color: #00BB00;'>22-args.Rmd</span><span>          </span><span style='color: #00BB00;'>23-intermediate.Rmd</span><span>  
+ ## </span><span style='color: #00BB00;'>24-args-default.Rmd</span><span>  </span><span style='color: #00BB00;'>25-args-multi.Rmd</span><span>    </span><span style='color: #00BB00;'>26-args-matching.Rmd</span><span> 
+ ## </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-dir.Rmd</span><span>           </span><span style='color: #00BB00;'>32-names.Rmd</span><span>         
+ ## </span><span style='color: #00BB00;'>33-index.Rmd</span><span>         </span><span style='color: #00BB00;'>34-construct.Rmd</span><span>     </span><span style='color: #00BB00;'>35-map.Rmd</span><span>           
+ ## </span><span style='color: #00BB00;'>36-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>37-map-type.Rmd</span><span>      </span><span style='color: #00BB00;'>4.Rmd</span><span>                
  ## </span><span style='color: #00BB00;'>41-map2.Rmd</span><span>          </span><span style='color: #00BB00;'>42-mutate-map.Rmd</span><span>
  </span></CODE></PRE>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>1.Rmd</span><span>                </span><span style='color: #00BB00;'>11-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>2.Rmd</span><span>                
- ## </span><span style='color: #00BB00;'>21-dir.Rmd</span><span>           </span><span style='color: #00BB00;'>22-names.Rmd</span><span>         </span><span style='color: #00BB00;'>23-index.Rmd</span><span>         
- ## </span><span style='color: #00BB00;'>24-construct.Rmd</span><span>     </span><span style='color: #00BB00;'>25-map.Rmd</span><span>           </span><span style='color: #00BB00;'>26-map-manip.Rmd</span><span>     
- ## </span><span style='color: #00BB00;'>27-map-type.Rmd</span><span>      </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-function.Rmd</span><span>      
- ## </span><span style='color: #00BB00;'>32-args.Rmd</span><span>          </span><span style='color: #00BB00;'>33-intermediate.Rmd</span><span>  </span><span style='color: #00BB00;'>34-args-default.Rmd</span><span>  
- ## </span><span style='color: #00BB00;'>35-args-multi.Rmd</span><span>    </span><span style='color: #00BB00;'>36-args-matching.Rmd</span><span> </span><span style='color: #00BB00;'>4.Rmd</span><span>                
+ ## </span><span style='color: #00BB00;'>21-function.Rmd</span><span>      </span><span style='color: #00BB00;'>22-args.Rmd</span><span>          </span><span style='color: #00BB00;'>23-intermediate.Rmd</span><span>  
+ ## </span><span style='color: #00BB00;'>24-args-default.Rmd</span><span>  </span><span style='color: #00BB00;'>25-args-multi.Rmd</span><span>    </span><span style='color: #00BB00;'>26-args-matching.Rmd</span><span> 
+ ## </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-dir.Rmd</span><span>           </span><span style='color: #00BB00;'>32-names.Rmd</span><span>         
+ ## </span><span style='color: #00BB00;'>33-index.Rmd</span><span>         </span><span style='color: #00BB00;'>34-construct.Rmd</span><span>     </span><span style='color: #00BB00;'>35-map.Rmd</span><span>           
+ ## </span><span style='color: #00BB00;'>36-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>37-map-type.Rmd</span><span>      </span><span style='color: #00BB00;'>4.Rmd</span><span>                
  ## </span><span style='color: #00BB00;'>41-map2.Rmd</span><span>          </span><span style='color: #00BB00;'>42-mutate-map.Rmd</span><span>
  </span></CODE></PRE></li>
 </ol>
 </div>
 </div>
 <div id="indexing" class="section level2">
-<h2><span class="header-section-number">2.3</span> Indexing/subsetting</h2>
+<h2><span class="header-section-number">3.3</span> Indexing/subsetting</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -463,7 +463,7 @@ input_files</code></pre>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;berlin&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <div id="exercises-2" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.3.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Explain the difference between <code>[</code> and <code>[[</code> subsetting.</p></li>
 <li><p>Implement a variant of subsetting in “tibble-land” with a combination of <code>enframe()</code>, <code>slice()</code> or <code>filter()</code>, and <code>deframe()</code>:</p>
@@ -477,7 +477,7 @@ input_files</code></pre>
 </div>
 </div>
 <div id="construction" class="section level2">
-<h2><span class="header-section-number">2.4</span> Construction</h2>
+<h2><span class="header-section-number">3.4</span> Construction</h2>
 <details>
 <summary><em>Click here to show setup code.</em></summary>
 </details>
@@ -557,7 +557,7 @@ They are a special type of vector – they can contain elements of different typ
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#vctrs::list_of(1, 2, 3)</span>
 <span class="co">#vctrs::list_of(letters[1:3], &quot;e&quot;)</span></code></pre>
 <div id="exercises-3" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.4.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Explain the differences between the outputs below.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dt">a =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">b =</span> <span class="kw">list</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>))</code></pre>
@@ -579,7 +579,7 @@ They are a special type of vector – they can contain elements of different typ
 </div>
 </div>
 <div id="map" class="section level2">
-<h2><span class="header-section-number">2.5</span> Processing multiple files</h2>
+<h2><span class="header-section-number">3.5</span> Processing multiple files</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -736,7 +736,7 @@ The list is named if the input is named:</p>
 ## #   </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 </span></CODE></PRE>
 <div id="exercises-4" class="section level3">
-<h3><span class="header-section-number">2.5.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.5.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Read only the data for Toronto and Tel Aviv, using subsetting or <code>filter()</code>. Compare.</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[_____] <span class="op">%&gt;%</span><span class="st"> </span>
@@ -862,7 +862,7 @@ input_files <span class="op">%&gt;%</span>
 </div>
 </div>
 <div id="map_manip" class="section level2">
-<h2><span class="header-section-number">2.6</span> Manipulating all datasets</h2>
+<h2><span class="header-section-number">3.6</span> Manipulating all datasets</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -976,7 +976,7 @@ Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> 
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x27dcf80&gt;</code></pre>
+## &lt;environment: 0x1b2cf80&gt;</code></pre>
 <p>See the <a href="function-basics.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
@@ -1049,7 +1049,7 @@ manipulated_data</code></pre>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
 <div id="exercises-5" class="section level3">
-<h3><span class="header-section-number">2.6.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.6.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Use <code>summarize()</code> to compute the mean temperature and humidity for each city during that period.</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
@@ -1156,21 +1156,21 @@ input_data <span class="op">%&gt;%</span><span class="st"> </span>
 ___ <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">___</span>(___)</code></pre>
 <pre><code>## $berlin</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <pre><code>## 
 ## $toronto</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-2.png" width="672" /></p>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-2.png" width="672" /></p>
 <pre><code>## 
 ## $tel_aviv</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-3.png" width="672" /></p>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-3.png" width="672" /></p>
 <pre><code>## 
 ## $zurich</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-82-4.png" width="672" /></p></li>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-4.png" width="672" /></p></li>
 </ol>
 </div>
 </div>
 <div id="typed-output" class="section level2">
-<h2><span class="header-section-number">2.7</span> Typed output</h2>
+<h2><span class="header-section-number">3.7</span> Typed output</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -1220,7 +1220,7 @@ Therefore we can call <code>map_int()</code>, to create a named integer vector:<
 <li><p>raw (bytes): <code>map_raw()</code></p></li>
 </ul>
 <div id="exercises-6" class="section level3">
-<h3><span class="header-section-number">2.7.1</span> Exercises</h3>
+<h3><span class="header-section-number">3.7.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Explain what happens if you try to use <code>map_dbl()</code> with the <code>dim()</code> output:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
@@ -1282,8 +1282,8 @@ input_data <span class="op">%&gt;%</span><span class="st"> </span>
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="function-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="function-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pairwise-iteration-and-nesting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
