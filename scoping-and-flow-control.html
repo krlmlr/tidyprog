@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>3.1.1</b> Designing functions</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="function-basics.html"><a href="function-basics.html#args"><i class="fa fa-check"></i><b>3.2</b> Arguments</a></li>
-<li class="chapter" data-level="3.3" data-path="function-basics.html"><a href="function-basics.html#use-case-intermediate-variables"><i class="fa fa-check"></i><b>3.3</b> Use case: Intermediate variables</a></li>
+<li class="chapter" data-level="3.3" data-path="function-basics.html"><a href="function-basics.html#intermediate"><i class="fa fa-check"></i><b>3.3</b> Use case: Intermediate variables</a></li>
 <li class="chapter" data-level="3.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>3.4</b> Default values</a></li>
 <li class="chapter" data-level="3.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>3.5</b> Multiple arguments</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>3.5.1</b> Exercise</a></li>
@@ -202,7 +202,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><summary>Click here to make setup code visible</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
 </details>
-<p><code>a</code> is now an object of the global environemnt. A function can access global variables:</p>
+<p>In the setup code we assigned <code>a &lt;- 5</code>.
+<code>a</code> is now an object of the global environment.
+A function can access global variables:</p>
 <pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
   a
 }
@@ -230,7 +232,7 @@ Best practice: functions should be self-contained, independent of global variabl
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 </details>
 <p>Functions should do one thing, and do it well.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<p>Pure function: called for its return value, no side effects:</p>
+<p>Pure function: A function that is called for its return value and which has no side effects:</p>
 <pre class="sourceCode r"><code class="sourceCode r">pure_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
 }
@@ -249,7 +251,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpUQHZYk/file2c5b2fd2f5cc</code></pre>
+<pre><code>## 2 written to /tmp/Rtmp1bU8En/file2bff455a551f</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -257,7 +259,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpUQHZYk/file2c5b7229869</code></pre>
+<pre><code>## 6 written to /tmp/Rtmp1bU8En/file2bff12d9f751</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -275,6 +277,7 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
 }</code></pre>
 </details>
+<p>We start once more with the functions <code>weather_path()</code> from section <a href="function-basics.html#args">“Arguments”</a> and <code>read_weather_file()</code> from section <a href="function-basics.html#intermediate">“Intermediate variables”</a>.</p>
 <p>A way to regulate the control flow is by using <code>if ()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
   <span class="co"># Create ensemble dataset from files on disk</span>
@@ -439,7 +442,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x9ffa1d8&gt;</code></pre>
+## &lt;environment: 0x9e345d8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -475,7 +478,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0xb594680&gt;</code></pre>
+## &lt;environment: 0x9f16920&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
