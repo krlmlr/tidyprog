@@ -15,7 +15,9 @@ a <- 5
 ```
 </details>
 
-`a` is now an object of the global environemnt. A function can access global variables:
+In the setup code we assigned `a <- 5`. 
+`a` is now an object of the global environment. 
+A function can access global variables:
 
 ```{r include = FALSE}
 # A function can access global variables:

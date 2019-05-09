@@ -15,6 +15,7 @@ rm(list = ls())
 ```
 </details>
 
+How does `R` handle function calls with arguments?
 
 Named arguments are assigned first, after that remaining slots are filled from left to right.
 
@@ -32,7 +33,7 @@ use_names(3, a = 4)
 use_names(a = 3, b = 4)
 ```
 
-The ellipsis can be used to enfore the user to name the function parameters when setting them:
+The ellipsis can be used to enforce the user to name the function parameters when setting them:
 
 ```{r include = FALSE}
 # The ellipsis is useful to enforce naming of arguments

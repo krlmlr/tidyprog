@@ -24,7 +24,7 @@ Functions should do one thing, and do it well.^[Unix philosophy, originated by K
 
 ```
 
-Pure function: called for its return value, no side effects:
+Pure function: A function that is called for its return value and which has no side effects:
 
 ```{r include = FALSE}
 # Pure function: called for its return value, no side effects!
@@ -36,9 +36,6 @@ pure_function <- function(x) {
 
 pure_function(1)
 ```
-
-
-
 
 Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):
 

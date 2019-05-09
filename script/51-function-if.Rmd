@@ -24,6 +24,8 @@ read_weather_file <- function(filename) {
 ```
 </details>
 
+We start once more with the functions `weather_path()` from section ["Arguments"](#args) and `read_weather_file()` from section ["Intermediate variables"](#intermediate).
+
 A way to regulate the control flow is by using `if ()`:
 
 ```{r include = FALSE}
