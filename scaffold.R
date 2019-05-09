@@ -7,7 +7,7 @@ path <- path[[1]]
 rmd_path <- here("script", gsub("R$", "Rmd", basename(path)))
 
 setup_first <- function(x) {
-  x[[1]] <- paste0("<details><summary>Click here to make setup code visible</summary>\n", gsub("\n+$", "\n", x[[1]]), "</details>\n\n\n")
+  x[[1]] <- paste0("<details><summary>*Click here to make setup code visible*</summary>\n", gsub("\n+$", "\n", x[[1]]), "</details>\n\n\n")
   x
 }
 
