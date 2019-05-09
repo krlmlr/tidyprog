@@ -26,6 +26,8 @@ names(input_data)
 input_files %>%
   map(~ readxl::read_excel(here(.)))
 
+# Exercises
+
 input_files[c("toronto", "tel_aviv")] %>% 
   map(~ readxl::read_excel(here(.)))
 
