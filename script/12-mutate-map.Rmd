@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Moving to tibble-land {#mut_map}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Moving to tibble-land
 

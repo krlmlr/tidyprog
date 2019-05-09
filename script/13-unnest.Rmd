@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Nesting and unnesting {#nest}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Nesting and unnesting
 

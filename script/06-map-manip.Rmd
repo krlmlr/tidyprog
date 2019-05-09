@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Manipulating all datasets {#map_manip}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Manipulating all datasets
 
