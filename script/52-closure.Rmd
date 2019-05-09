@@ -24,7 +24,10 @@ read_weather_file <- function(filename) {
 ```
 </details>
 
-Closures can e.g. be used for the creation of functions. 
+Closures can e.g. be used during function definition. 
+
+We start once more with the functions `weather_path()` from section ["Arguments"](#args) and `read_weather_file()` from section ["Intermediate variables"](#intermediate).
+
 Here we create a function that loads a particular dataset:
 
 ```{r include = FALSE}

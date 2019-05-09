@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Rectangling
+## Rectangling {#rectangulate}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
@@ -27,8 +27,13 @@ coordinates_transposed <-
   map(~ flatten_dbl(.))
 ```
 </details>
+Most of us `R`-users feel most at ease when dealing in `R` with data frames on which we can use a plethora of well-known (by us) functions with non-startling behaviour.
+What if we don't get our data in such a form?
 
+We are starting in our setup with the list `coordinates_transposed` from section ["Transposing"](#transpose).
 
+A tibble is internally a list of named vectors of equal length.
+In two easy steps we can therefore make a tibble out of the unnamed list `coordinates_transposed`:
 ```{r include = FALSE}
 # A tibble is internally a list of named vectors of equal length:
 ```
@@ -41,7 +46,7 @@ coordinates_transposed %>%
   as_tibble()
 ```
 
-
+If you want to keep the names open for now, but still get a tibble, you can set `as_tibble()`'s argument `.name_repair = "universal"`:
 ```{r include = FALSE}
 # Name repair helps if you don't know the names yet
 ```

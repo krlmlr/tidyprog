@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Iterating and traversing
+## Iterating and traversing {#komoot}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
@@ -16,6 +16,7 @@ library(here)
 ```
 </details>
 
+Now we are not only working with the geolocation data for Berlin, but we are adding data for our usual suspects:
 
 ```{r include = FALSE}
 # Results from downloading geolocation data for all cities from photon.komoot.de:
@@ -26,6 +27,9 @@ komoot <- readRDS(here("data/komoot.rds"))
 komoot
 ```
 
+It looks slightly different from the list `berlin` from section ["Traversing"](#berlin).
+That is because we have the list-of-2 stored for each city in the column `content`.
+By using `pull()` on `content`,  we can produce a list containing the information for all cities:
 
 ```{r include = FALSE}
 # Results are stored in the "content" column:
@@ -50,6 +54,7 @@ toronto %>%
   pluck("features", 1, "geometry", "coordinates")
 ```
 
+With `map()` we can access the same element of the respective list for each city:
 
 ```{r include = FALSE}
 # Apply same pluck() on all values with map():
@@ -59,6 +64,8 @@ komoot_content %>%
   map(~ pluck(., "features", 1, "geometry", "coordinates"))
 ```
 
+With `map()` we can also use a shorthand notation for this, without the need to use `pluck()`.
+We can just give it a list of the arguments which we would normally use as arguments for `pluck()`:
 
 ```{r include = FALSE}
 # Shortcut:
