@@ -21,8 +21,9 @@ weather_path <- function(filename) {
 ```
 </details>
 
+We start with the function `weather_path()` from section ["Arguments"](#args).
 
-Functions can help to avoid using intermediate variables:
+Functions can help to avoid having to use intermediate variables:
 
 ```{r include = FALSE}
 # Functions can help eliminate intermediate variables
