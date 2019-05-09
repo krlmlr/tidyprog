@@ -171,9 +171,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
 <li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#traversing"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
 <li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#iterating-and-traversing"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
-<li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flattening"><i class="fa fa-check"></i><b>6.3</b> Flattening</a></li>
-<li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transposing"><i class="fa fa-check"></i><b>6.4</b> Transposing</a></li>
-<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangling"><i class="fa fa-check"></i><b>6.5</b> Rectangling</a></li>
+<li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#plucking-multiple-locations"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
+<li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flattening"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transposing"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangling"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
@@ -202,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="traversing" class="section level2">
 <h2><span class="header-section-number">6.1</span> Traversing</h2>
 <details>
-<p><summary>Setup code</summary></p>
+<p><summary>Click here to make setup code visible</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
@@ -469,11 +470,18 @@ berlin</code></pre>
 ## 
 ## [[2]]
 ## [1] 52.51704</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;Germany&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;Germany&quot;</code></pre>
 </div>
 <div id="iterating-and-traversing" class="section level2">
 <h2><span class="header-section-number">6.2</span> Iterating and traversing</h2>
 <details>
-<p><summary>Setup code</summary></p>
+<p><summary>Click here to make setup code visible</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
@@ -614,10 +622,121 @@ coordinates</code></pre>
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
 </div>
-<div id="flattening" class="section level2">
-<h2><span class="header-section-number">6.3</span> Flattening</h2>
+<div id="plucking-multiple-locations" class="section level2">
+<h2><span class="header-section-number">6.3</span> Plucking multiple locations</h2>
 <details>
-<p><summary>Setup code</summary></p>
+<p><summary>Click here to make setup code visible</summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
+komoot_content &lt;-
+<span class="st">  </span>komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(content)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">accessor_coords &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
+accessor_country &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)
+
+komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(accessor_coords)</code></pre>
+<pre><code>## [[1]]
+## [[1]][[1]]
+## [1] 13.38886
+## 
+## [[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] -79.38721
+## 
+## [[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 34.78053
+## 
+## [[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## [[4]]
+## [[4]][[1]]
+## [1] 8.542322
+## 
+## [[4]][[2]]
+## [1] 47.3724</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(accessor_country)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;Germany&quot;
+## 
+## [[2]]
+## [1] &quot;Canada&quot;
+## 
+## [[3]]
+## [1] &quot;Israel&quot;
+## 
+## [[4]]
+## [1] &quot;Switzerland&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">accessors &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">coords =</span> accessor_coords, <span class="dt">country =</span> accessor_country)
+
+accessors <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">map</span>(komoot_content, .))</code></pre>
+<pre><code>## $coords
+## $coords[[1]]
+## $coords[[1]][[1]]
+## [1] 13.38886
+## 
+## $coords[[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## $coords[[2]]
+## $coords[[2]][[1]]
+## [1] -79.38721
+## 
+## $coords[[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## $coords[[3]]
+## $coords[[3]][[1]]
+## [1] 34.78053
+## 
+## $coords[[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## $coords[[4]]
+## $coords[[4]][[1]]
+## [1] 8.542322
+## 
+## $coords[[4]][[2]]
+## [1] 47.3724
+## 
+## 
+## 
+## $country
+## $country[[1]]
+## [1] &quot;Germany&quot;
+## 
+## $country[[2]]
+## [1] &quot;Canada&quot;
+## 
+## $country[[3]]
+## [1] &quot;Israel&quot;
+## 
+## $country[[4]]
+## [1] &quot;Switzerland&quot;</code></pre>
+</div>
+<div id="flattening" class="section level2">
+<h2><span class="header-section-number">6.4</span> Flattening</h2>
+<details>
+<p><summary>Click here to make setup code visible</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -657,9 +776,9 @@ coordinates &lt;-
 ## [1]  8.542322 47.372396</code></pre>
 </div>
 <div id="transposing" class="section level2">
-<h2><span class="header-section-number">6.4</span> Transposing</h2>
+<h2><span class="header-section-number">6.5</span> Transposing</h2>
 <details>
-<p><summary>Setup code</summary></p>
+<p><summary>Click here to make setup code visible</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
@@ -707,9 +826,9 @@ coordinates &lt;-
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
 </div>
 <div id="rectangling" class="section level2">
-<h2><span class="header-section-number">6.5</span> Rectangling</h2>
+<h2><span class="header-section-number">6.6</span> Rectangling</h2>
 <details>
-<p><summary>Setup code</summary></p>
+<p><summary>Click here to make setup code visible</summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)
 
