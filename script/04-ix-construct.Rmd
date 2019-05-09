@@ -1,4 +1,4 @@
-```{r 04-remove-all, include = FALSE}
+```{r 04-remove-all-2, include = FALSE}
 rm(list = ls())
 ```
 
