@@ -16,10 +16,12 @@ library(here)
 ```
 </details>
 
-### Data
+### Data {#intro-data}
 
 We will be working with hourly measurements of weather data ([link to data documentation](https://darksky.net/dev/docs)) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
 Thus we have 49 observations in each city.
+Variables are:
+
 - `time`
 - `summary` (how to describe the weather in one word)
 - `icon` (mix of description of weather plus time of day)

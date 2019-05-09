@@ -2,8 +2,9 @@
 rm(list = ls())
 ```
 
-
 ## Typed output
+
+
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
@@ -24,6 +25,11 @@ input_data <-
 ```
 </details>
 
+If we know, what the output of each function call in a `map()` sequence looks like, we can often call a sub-type of `map()` to produce a more condensed output.
+
+We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map).
+
+We want to know the number of rows of each tibble in `input_data`:
 
 ```{r include = FALSE}
 # map() returns a list
@@ -33,6 +39,8 @@ input_data %>%
   map(~ nrow(.))
 ```
 
+Each time an integer is produced.
+Therefore we can call `map_int()`, to create a named integer vector:
 
 ```{r include = FALSE}
 # Return an integer vector with map_int()
@@ -42,6 +50,7 @@ input_data %>%
   map_int(~ nrow(.))
 ```
 
+If the output is a character variable, use `map_chr()`:
 
 ```{r include = FALSE}
 # ... or a character vector?
@@ -50,3 +59,5 @@ input_data %>%
 input_data %>%
   map_chr(~ as.character(nrow(.)))
 ```
+
+There are many sub-types of the `map()` function also for other classes of output values available.

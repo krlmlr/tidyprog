@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Named vectors and two-column tibbles
+## Named vectors and two-column tibbles {#names}
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
@@ -16,6 +16,9 @@ library(here)
 ```
 </details>
 
+Here we look at tidyverse-functions to work with named vectors and tibbles with more columns and the relations netween the two.
+
+As seen in the ["introduction"](#intro-data), load a table -- here a dictionary detailing information related to an id-like name -- from an MS Excel file with `readxl::read_excel()`:
 
 ```{r include = FALSE}
 # Load dictionary from file
@@ -25,6 +28,7 @@ dict <- readxl::read_excel(here("data/cities.xlsx"))
 dict
 ```
 
+Use `pull()` as seen in the last chapter:
 
 ```{r include = FALSE}
 # Acquire file names
@@ -34,6 +38,7 @@ dict %>%
   pull(weather_filename)
 ```
 
+Create absolute paths using `here::here()`:
 
 ```{r include = FALSE}
 # Use here() to create absolute paths
@@ -44,6 +49,10 @@ dict %>%
   here()
 ```
 
+Produce a named vector with `tibble::deframe()`, which is thought as the inverse function to `enframe()`.
+When given a 2-column tibble, `deframe()` will by default use the first column for the names and the second column for the values of the resulting vector.
+When given a 1-column tibble, it creates an unnamed vector.
+When given a more-than-2-column tibble, it will use the first two columns as name- and value-columns for the resulting vector, ignore the rest and in addition give a warning that it expects a one- or two-column data frame.
 
 ```{r include = FALSE}
 # Acquire file names as a named vector
@@ -54,6 +63,7 @@ dict %>%
   deframe()
 ```
 
+Some operations producing vectors from vectors cause the names to be lost:
 
 ```{r include = FALSE}
 # Not all operations maintain vector names!
@@ -65,6 +75,7 @@ dict %>%
   here()
 ```
 
+A possible solution can be in many cases to change the order of the transformations, so that the creation of the named vector comes last (or at least later):
 
 ```{r include = FALSE}
 # Move the here() call into "tibble-land"

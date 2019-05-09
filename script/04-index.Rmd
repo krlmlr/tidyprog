@@ -2,8 +2,7 @@
 rm(list = ls())
 ```
 
-
-## Indexing
+## Indexing {#indexing}
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
@@ -18,6 +17,10 @@ dict <- readxl::read_excel(here("data/cities.xlsx"))
 ```
 </details>
 
+Here we look at the indexing of a named vector.
+
+We start with the data frame `dict` from section ["Named vectors and two-column tibbles"](#names).
+Create named vector of the -- future -- input files:
 
 ```{r include = FALSE}
 # Collect input files as a named vector
@@ -31,6 +34,7 @@ input_files
 names(input_files)
 ```
 
+There are different ways of accessing individual entries of the named vector:
 
 ```{r include = FALSE}
 # Access individual input files
@@ -41,6 +45,7 @@ input_files[[1]]
 input_files[["berlin"]]
 ```
 
+Choose multiple entries with:
 
 ```{r include = FALSE}
 # Access multiple input files
