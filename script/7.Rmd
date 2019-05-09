@@ -4,11 +4,11 @@
 ```{r child = here::here("script", "72-komoot.Rmd")}
 ```
 
-```{r child = here::here("script", "73-flatten.Rmd")}
+```{r child = here::here("script", "74-flatten.Rmd")}
 ```
 
-```{r child = here::here("script", "74-transpose.Rmd")}
+```{r child = here::here("script", "75-transpose.Rmd")}
 ```
 
-```{r child = here::here("script", "75-rectangulate.Rmd")}
+```{r child = here::here("script", "76-rectangulate.Rmd")}
 ```

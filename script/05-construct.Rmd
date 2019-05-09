@@ -1,4 +1,4 @@
-```{r 05-remove-all-2, include = FALSE}
+```{r 05-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Construction
 
 ```
-```{r 05-setup-04-ix-construct-r}
+```{r 05-setup-05-construct-r}
 c(1, 2, 3)
 c(1:3, 5)
 c(1:3, "5")
