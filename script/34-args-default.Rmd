@@ -13,9 +13,6 @@ rm(list = ls())
 ```{r 34-setup-34-args-default-r}
 library(tidyverse)
 library(here)
-library(conflicted)
-
-conflict_prefer("filter", "dplyr")
 
 
 weather_path <- function(filename) {
