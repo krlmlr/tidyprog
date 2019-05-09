@@ -1,5 +1,20 @@
-```{r child = here::here("script", "60-split-strings.Rmd")}
+```{r child = here::here("script", "61-berlin.Rmd")}
 ```
 
-```{r child = here::here("script", "61-state.Rmd")}
+```{r child = here::here("script", "62-komoot.Rmd")}
+```
+
+```{r child = here::here("script", "63-multi.Rmd")}
+```
+
+```{r child = here::here("script", "64-flatten.Rmd")}
+```
+
+```{r child = here::here("script", "65-transpose.Rmd")}
+```
+
+```{r child = here::here("script", "66-rectangulate.Rmd")}
+```
+
+```{r child = here::here("script", "67-json.Rmd")}
 ```

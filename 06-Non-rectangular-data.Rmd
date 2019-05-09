@@ -3,5 +3,5 @@
 > working with raw data from online services (JSON)
 
 
-```{r child = here("script", "7.Rmd")}
+```{r child = here("script", "6.Rmd")}
 ```
