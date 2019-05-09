@@ -2,11 +2,11 @@
 rm(list = ls())
 ```
 
-## Indexing {#indexing}
+## Indexing/subsetting {#indexing}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
-### Indexing
+### Indexing/subsetting
 
 ```
 ```{r 04-setup-04-index-r}
@@ -54,3 +54,36 @@ Choose multiple entries with:
 input_files[1:2]
 input_files[c("berlin", "zurich")]
 ```
+
+Consistent pipe-friendly access of single elements:
+
+```{r include = FALSE}
+# Consistent pipe-friendly access of single elements
+```
+```{r 04-consistent}
+input_files %>% 
+  pluck(1)
+input_files %>% 
+  pluck("berlin")
+```
+
+### Exercises
+
+1. Explain the difference between `[` and `[[` subsetting.
+
+1. Implement a variant of subsetting in "tibble-land" with a combination of `enframe()`, `slice()` or `filter()`, and `deframe()`:
+    
+    ```r
+    input_files %>%
+      enframe() %>% 
+      ___(_____) %>% 
+      deframe()
+    ```
+    
+    ```{r echo = FALSE}
+    input_files %>%
+      enframe() %>% 
+      filter(name == "toronto") %>% 
+      deframe()
+    ```
+    
