@@ -46,8 +46,7 @@ library(here)
 ```
 
 ```{r}
-getOption("width")
-sessioninfo::session_info()
+withr::with_options(list(width = 80), print(sessioninfo::session_info()))
 ```
 
 </details>
