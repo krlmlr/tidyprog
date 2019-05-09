@@ -103,9 +103,32 @@ There are sub-types of the `map()` function for each atomic type:
 1. Use `paste0()` to build a textual description for the weather during the observed period in a function. Create a two-column tibble.
 
     ```r
+    summarize_weather <- _____ {
+      ___ %>%
+        ___(
+          _____,
+          _____,
+          _____,
+          summary = paste(rle(summary)$values, collapse = ", then ")
+        )
+    }
+
+    describe_weather <- function(weather_summary) {
+      weather_summary %>%
+        mutate(
+          text = paste0(
+            "We had temperatures between ", min_temp, " and ", max_temp, " °C.",
+            "The average humidity was ", round(mean_humidity * 100), " %. ",
+            "The weather was ", summary, "."
+          )
+        ) %>% 
+        pull()
+    }
+    
     input_data %>% 
-      map(~ slice(., 1)) %>%
-      ___(~ pull(_____))
+      ___(___) %>%
+      ___(___) %>% 
+      ___()
     ```
     
     ```{r echo = FALSE}
@@ -130,6 +153,7 @@ There are sub-types of the `map()` function for each atomic type:
         ) %>% 
         pull()
     }
+    
     input_data %>% 
       map(summarize_weather) %>%
       map_chr(describe_weather) %>% 
