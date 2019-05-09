@@ -267,7 +267,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpW5dawX/file2be4461dcea7</code></pre>
+<pre><code>## 2 written to /tmp/RtmpCK4KlE/file2bca37113c6</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -275,7 +275,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpW5dawX/file2be46f8e1a13</code></pre>
+<pre><code>## 6 written to /tmp/RtmpCK4KlE/file2bca7132372e</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -459,7 +459,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8ab2500&gt;</code></pre>
+## &lt;environment: 0xa451b10&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -495,7 +495,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x8eb3b28&gt;</code></pre>
+## &lt;environment: 0x4c59908&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
