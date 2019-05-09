@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Use case: Intermediate variables
+## Use case: Intermediate variables {#intermediate}
 
 <details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}

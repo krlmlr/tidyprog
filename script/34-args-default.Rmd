@@ -27,7 +27,7 @@ read_weather_file <- function(filename) {
 
 For user-friendliness it is often good practice to provide default values for parameters
 
-We start with the function `weather_path()` from section ["Arguments"](#args).
+We start with the functions `weather_path()` from section ["Arguments"](#args) and `read_weather_file()` from section ["Intermediate variables"](#intermediate).
 
 Here an example of a boolean argument which when `TRUE` leads to dropping the data about Zurich.
 
