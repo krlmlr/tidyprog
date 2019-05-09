@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>3 Simple iteration | Programming in the tidyverse</title>
+  <meta name="description" content="3 Simple iteration | Programming in the tidyverse">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="3 Simple iteration | Programming in the tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Simple iteration | Programming in the tidyverse" />
+  
+  
+  
+
+<meta name="author" content="Kirill Müller, Tobias Schieferdecker">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="function-basics.html">
+<link rel="next" href="pairwise-iteration-and-nesting-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i><b>0.1</b> Links</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>1.1.1</b> Function basics</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#simple-iteration"><i class="fa fa-check"></i><b>1.1.2</b> Simple iteration</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#pairwise-iteration-and-nesting"><i class="fa fa-check"></i><b>1.1.3</b> Pairwise iteration and nesting</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#scoping-and-flow-control"><i class="fa fa-check"></i><b>1.1.4</b> Scoping and flow control</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#non-rectangular-data"><i class="fa fa-check"></i><b>1.1.5</b> Non-rectangular data</a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction.html"><a href="introduction.html#tidy-evaluation"><i class="fa fa-check"></i><b>1.1.6</b> Tidy evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>1.2</b> Review of visualization and data transformation</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#intro-data"><i class="fa fa-check"></i><b>1.2.1</b> Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#exploration"><i class="fa fa-check"></i><b>1.2.2</b> Exploration</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>1.2.3</b> Further possibilities of using {dplyr} to transform data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>2</b> Function basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>2.1</b> Definition and execution</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>2.1.1</b> Designing functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="function-basics.html"><a href="function-basics.html#args"><i class="fa fa-check"></i><b>2.2</b> Arguments</a></li>
+<li class="chapter" data-level="2.3" data-path="function-basics.html"><a href="function-basics.html#intermediate"><i class="fa fa-check"></i><b>2.3</b> Use case: Intermediate variables</a></li>
+<li class="chapter" data-level="2.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>2.4</b> Default values</a></li>
+<li class="chapter" data-level="2.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>2.5</b> Multiple arguments</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>2.5.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="function-basics.html"><a href="function-basics.html#argument-matching"><i class="fa fa-check"></i><b>2.6</b> Argument matching</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="function-basics.html"><a href="function-basics.html#exercise-1"><i class="fa fa-check"></i><b>2.6.1</b> Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html"><i class="fa fa-check"></i><b>3</b> Simple iteration</a><ul>
+<li class="chapter" data-level="3.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#vectors-and-columns"><i class="fa fa-check"></i><b>3.1</b> Vectors and columns</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises"><i class="fa fa-check"></i><b>3.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#names"><i class="fa fa-check"></i><b>3.2</b> Named vectors and two-column tibbles</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-1"><i class="fa fa-check"></i><b>3.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#indexing"><i class="fa fa-check"></i><b>3.3</b> Indexing/subsetting</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-2"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#construction"><i class="fa fa-check"></i><b>3.4</b> Construction</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-3"><i class="fa fa-check"></i><b>3.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#map"><i class="fa fa-check"></i><b>3.5</b> Processing multiple files</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-4"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#map_manip"><i class="fa fa-check"></i><b>3.6</b> Manipulating all datasets</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-5"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#typed-output"><i class="fa fa-check"></i><b>3.7</b> Typed output</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-6"><i class="fa fa-check"></i><b>3.7.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
+<li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
+<li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
+<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.3" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
+<li class="chapter" data-level="5.4" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
+<li class="chapter" data-level="6.1" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.3" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
+<li class="chapter" data-level="6.4" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.6" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
+<li class="chapter" data-level="6.7" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy-evaluation-1.html"><a href="tidy-evaluation-1.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Programming in the tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simple-iteration-1" class="section level1">
+<h1><span class="header-section-number">3</span> Simple iteration</h1>
+<blockquote>
+<p>Processing multiple files that contain different parts of the same dataset</p>
+</blockquote>
+<div id="vectors-and-columns" class="section level2">
+<h2><span class="header-section-number">3.1</span> Vectors and columns</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+</details>
+<p>Here we briefly show the relationship between columns of data frames and their corresponding vectors, i.e. the answer to “how to get from one to the other?”:</p>
+<p>We can e.g. get a vector with the files in a specific directory of our current project<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>), <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+files</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>You can create a tibble from it using <code>tibble::enframe()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">files_df &lt;-
+<span class="st">  </span>files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>()
+
+files_df</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+##    </span><span style='font-weight: bold;'>name</span><span> </span><span style='font-weight: bold;'>value</span><span>                                                        
+##   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                        
+## </span><span style='color: #555555;'>1</span><span>     1 /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## </span><span style='color: #555555;'>2</span><span>     2 /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## </span><span style='color: #555555;'>3</span><span>     3 /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## </span><span style='color: #555555;'>4</span><span>     4 /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
+</span></CODE></PRE>
+<p>The <code>name</code> column might be unwanted in some cases. Suppress its creation by setting <code>name = NULL</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">files_df_<span class="dv">1</span> &lt;-
+<span class="st">  </span>files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>(<span class="dt">name =</span> <span class="ot">NULL</span>)
+
+files_df_<span class="dv">1</span></code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 1</span><span>
+##   </span><span style='font-weight: bold;'>value</span><span>                                                        
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                        
+## </span><span style='color: #555555;'>1</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## </span><span style='color: #555555;'>2</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## </span><span style='color: #555555;'>3</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## </span><span style='color: #555555;'>4</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
+</span></CODE></PRE>
+<p>Another way to create a tibble from a vector is using <code>tibble::tibble()</code>.
+You can name the newly created columns by assigning the vectors they are created from to (quoted or unquoted) column names:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(<span class="dt">filename =</span> files)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 1</span><span>
+##   </span><span style='font-weight: bold;'>filename</span><span>                                                     
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                        
+## </span><span style='color: #555555;'>1</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## </span><span style='color: #555555;'>2</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## </span><span style='color: #555555;'>3</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## </span><span style='color: #555555;'>4</span><span> /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
+</span></CODE></PRE>
+<p>The other direction – producing a vector from a tibble column – works with <code>dplyr::pull()</code>.
+By default <code>pull()</code> will turn the rightmost column into a vector and ignore the rest of the tibble:</p>
+<pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>()</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>Turn a specific column into a vector by providing the desired column name to <code>pull()</code>, either quoted or unquoted:</p>
+<pre class="sourceCode r"><code class="sourceCode r">files_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(name)</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div id="exercises" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Investigate the output of <code>fs::dir_ls()</code> with <code>enframe()</code>. Explain.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;fs&quot;)</span>
+fs<span class="op">::</span><span class="kw">dir_ls</span>()
+fs<span class="op">::</span><span class="kw">dir_ls</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">___</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 37 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>         </span><span style='font-weight: bold;'>value</span><span>       
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span>  
+ ## </span><span style='color: #555555;'>1</span><span> 1.Rmd        </span><span style='color: #00BB00;'>1.Rmd</span><span>       
+ ## </span><span style='color: #555555;'>2</span><span> 11-intro.Rmd </span><span style='color: #00BB00;'>11-intro.Rmd</span><span>
+ ## </span><span style='color: #555555;'>3</span><span> 2.Rmd        </span><span style='color: #00BB00;'>2.Rmd</span><span>       
+ ## </span><span style='color: #555555;'># … with 34 more rows</span><span>
+ </span></CODE></PRE></li>
+</ol>
+</div>
+</div>
+<div id="names" class="section level2">
+<h2><span class="header-section-number">3.2</span> Named vectors and two-column tibbles</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+</details>
+<p>Here we look at tidyverse-functions to work with named vectors and tibbles with more columns and the relations netween the two.</p>
+<p>As seen in section <a href="introduction.html#intro-data">“Data”</a>, load a table – here a dictionary detailing information related to an id-like name – from an MS Excel file with <code>readxl::read_excel()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+dict</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 5</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>weather_filename</span><span>           </span><span style='font-weight: bold;'>name</span><span>        </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    data/weather/berlin.xlsx   Berlin    13.4   52.5
+## </span><span style='color: #555555;'>2</span><span> toronto   data/weather/toronto.xlsx  Toronto  -</span><span style='color: #BB0000;'>79.4</span><span>   43.7
+## </span><span style='color: #555555;'>3</span><span> tel_aviv  data/weather/tel_aviv.xlsx Tel Aviv  34.8   32.1
+## </span><span style='color: #555555;'>4</span><span> zurich    data/weather/zurich.xlsx   Zürich     8.54  47.4
+</span></CODE></PRE>
+<p>Use <code>pull()</code> as seen in the last chapter:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(weather_filename)</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;   &quot;data/weather/toronto.xlsx&quot; 
+## [3] &quot;data/weather/tel_aviv.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<p>Create absolute paths using <code>here::here()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">here</span>()</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>Produce a named vector with <code>tibble::deframe()</code>, which is thought as the inverse function to <code>enframe()</code>.
+When given a 2-column tibble, <code>deframe()</code> will by default use the first column for the names and the second column for the values of the resulting vector.
+When given a 1-column tibble, it creates an unnamed vector.
+When given a more-than-2-column tibble, it will use the first two columns as name- and value-columns for the resulting vector, ignore the rest and in addition give a warning that it expects a one- or two-column data frame.</p>
+<pre class="sourceCode r"><code class="sourceCode r">weather_filenames &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()
+weather_filenames</code></pre>
+<pre><code>##                       berlin                      toronto 
+##   &quot;data/weather/berlin.xlsx&quot;  &quot;data/weather/toronto.xlsx&quot; 
+##                     tel_aviv                       zurich 
+## &quot;data/weather/tel_aviv.xlsx&quot;   &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<p>The <code>names()</code> function accesses the names of a vector:</p>
+<pre class="sourceCode r"><code class="sourceCode r">weather_filenames <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">names</span>()</code></pre>
+<pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<p>Some operations producing vectors from vectors cause the names to be lost:</p>
+<pre class="sourceCode r"><code class="sourceCode r">weather_filenames <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">here</span>()</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<p>A possible solution can be in many cases to change the order of the transformations, so that the creation of the named vector comes last (or at least later):</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_filename_here =</span> <span class="kw">here</span>(weather_filename)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename_here) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()</code></pre>
+<pre><code>##                                                          berlin 
+##   &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot; 
+##                                                         toronto 
+##  &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+##                                                        tel_aviv 
+## &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot; 
+##                                                          zurich 
+##   &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<div id="exercises-1" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Obtain a mapping between city code and city name as a named vector.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(___, ___) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">deframe</span>()</code></pre>
+<pre><code>##     berlin    toronto   tel_aviv     zurich 
+##   &quot;Berlin&quot;  &quot;Toronto&quot; &quot;Tel Aviv&quot;   &quot;Zürich&quot;</code></pre></li>
+<li><p>Convert the output of <code>fs::dir_info()</code> to that seen from <code>fs::dir_ls()</code>. How do you make sure that the vector is named?</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;fs&quot;)</span>
+fs<span class="op">::</span><span class="kw">dir_info</span>()
+fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(___)
+fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(_____, _____) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 37 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file       56 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:48:36</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>11-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:48:36</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      370 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:48:36</span><span> trav… trav…
+ ## </span><span style='color: #555555;'># … with 34 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>access_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>change_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>birth_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>
+ </span></CODE></PRE>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>1.Rmd</span><span>                </span><span style='color: #00BB00;'>11-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>2.Rmd</span><span>                
+ ## </span><span style='color: #00BB00;'>21-function.Rmd</span><span>      </span><span style='color: #00BB00;'>22-args.Rmd</span><span>          </span><span style='color: #00BB00;'>23-intermediate.Rmd</span><span>  
+ ## </span><span style='color: #00BB00;'>24-args-default.Rmd</span><span>  </span><span style='color: #00BB00;'>25-args-multi.Rmd</span><span>    </span><span style='color: #00BB00;'>26-args-matching.Rmd</span><span> 
+ ## </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-dir.Rmd</span><span>           </span><span style='color: #00BB00;'>32-names.Rmd</span><span>         
+ ## </span><span style='color: #00BB00;'>33-index.Rmd</span><span>         </span><span style='color: #00BB00;'>34-construct.Rmd</span><span>     </span><span style='color: #00BB00;'>35-map.Rmd</span><span>           
+ ## </span><span style='color: #00BB00;'>36-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>37-map-type.Rmd</span><span>      </span><span style='color: #00BB00;'>4.Rmd</span><span>                
+ ## </span><span style='color: #00BB00;'>41-map2.Rmd</span><span>          </span><span style='color: #00BB00;'>42-mutate-map.Rmd</span><span>
+ </span></CODE></PRE>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>1.Rmd</span><span>                </span><span style='color: #00BB00;'>11-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>2.Rmd</span><span>                
+ ## </span><span style='color: #00BB00;'>21-function.Rmd</span><span>      </span><span style='color: #00BB00;'>22-args.Rmd</span><span>          </span><span style='color: #00BB00;'>23-intermediate.Rmd</span><span>  
+ ## </span><span style='color: #00BB00;'>24-args-default.Rmd</span><span>  </span><span style='color: #00BB00;'>25-args-multi.Rmd</span><span>    </span><span style='color: #00BB00;'>26-args-matching.Rmd</span><span> 
+ ## </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-dir.Rmd</span><span>           </span><span style='color: #00BB00;'>32-names.Rmd</span><span>         
+ ## </span><span style='color: #00BB00;'>33-index.Rmd</span><span>         </span><span style='color: #00BB00;'>34-construct.Rmd</span><span>     </span><span style='color: #00BB00;'>35-map.Rmd</span><span>           
+ ## </span><span style='color: #00BB00;'>36-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>37-map-type.Rmd</span><span>      </span><span style='color: #00BB00;'>4.Rmd</span><span>                
+ ## </span><span style='color: #00BB00;'>41-map2.Rmd</span><span>          </span><span style='color: #00BB00;'>42-mutate-map.Rmd</span><span>
+ </span></CODE></PRE></li>
+</ol>
+</div>
+</div>
+<div id="indexing" class="section level2">
+<h2><span class="header-section-number">3.3</span> Indexing/subsetting</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))</code></pre>
+</details>
+<p>Here we look at the indexing of a named vector (works equivalently for a named list).</p>
+<p>We start with the data frame <code>dict</code> from section <a href="simple-iteration-1.html#names">“Named vectors and two-column tibbles”</a>.
+Create named vector of the – future – input files:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()
+input_files</code></pre>
+<pre><code>##                       berlin                      toronto 
+##   &quot;data/weather/berlin.xlsx&quot;  &quot;data/weather/toronto.xlsx&quot; 
+##                     tel_aviv                       zurich 
+## &quot;data/weather/tel_aviv.xlsx&quot;   &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(input_files)</code></pre>
+<pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<p>There are different ways of accessing individual entries of the named vector:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="dv">1</span>]</code></pre>
+<pre><code>##                     berlin 
+## &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="st">&quot;berlin&quot;</span>]]</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<p>Choose multiple entries with:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre>
+<pre><code>##                      berlin                     toronto 
+##  &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/toronto.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="kw">c</span>(<span class="st">&quot;berlin&quot;</span>, <span class="st">&quot;zurich&quot;</span>)]</code></pre>
+<pre><code>##                     berlin                     zurich 
+## &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
+<p>Consistent pipe-friendly access of single elements:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>)</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;berlin&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<div id="exercises-2" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Explain the difference between <code>[</code> and <code>[[</code> subsetting.</p></li>
+<li><p>Implement a variant of subsetting in “tibble-land” with a combination of <code>enframe()</code>, <code>slice()</code> or <code>filter()</code>, and <code>deframe()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(_____) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">deframe</span>()</code></pre>
+<pre><code>##                     toronto 
+## &quot;data/weather/toronto.xlsx&quot;</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="construction" class="section level2">
+<h2><span class="header-section-number">3.4</span> Construction</h2>
+<details>
+<summary><em>Click here to show setup code.</em></summary>
+</details>
+<p>The <code>c()</code> function constructs vectors.
+All elements of a vector must have the same type.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)</code></pre>
+<pre><code>## [1] 1 2 3 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&quot;5&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;5&quot;</code></pre>
+<p>Lists are constructed with <code>list()</code>.
+They are a special type of vector – they can contain elements of different type and length.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&quot;5&quot;</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [1] &quot;5&quot;</code></pre>
+<p>Lists can also contain other lists.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(
+  <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
+  <span class="kw">list</span>(<span class="dv">4</span>, <span class="st">&quot;5&quot;</span>),
+  <span class="kw">list</span>(
+    <span class="kw">list</span>(letters[<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]),
+    <span class="dv">9</span>
+  )
+)</code></pre>
+<pre><code>## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] 4
+## 
+## [[2]][[2]]
+## [1] &quot;5&quot;
+## 
+## 
+## [[3]]
+## [[3]][[1]]
+## [[3]][[1]][[1]]
+## [1] &quot;f&quot; &quot;g&quot; &quot;h&quot;
+## 
+## 
+## [[3]][[2]]
+## [1] 9</code></pre>
+<p>Vectors (and also lists) can have names.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>, <span class="dt">c =</span> <span class="dv">3</span>)</code></pre>
+<pre><code>## a b c 
+## 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="dv">5</span>)</code></pre>
+<pre><code>## $a
+## [1] 1 2 3
+## 
+## $b
+## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set_names</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</code></pre>
+<pre><code>## a b c 
+## 1 2 3</code></pre>
+<p>The new {vctrs} package defines a data type for lists where all elements have the same type: a stricter list, but more powerful than a bare vector.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#vctrs::list_of(1, 2, 3)</span>
+<span class="co">#vctrs::list_of(letters[1:3], &quot;e&quot;)</span></code></pre>
+<div id="exercises-3" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Explain the differences between the outputs below.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dt">a =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">b =</span> <span class="kw">list</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>))</code></pre>
+<pre><code>## $a
+## [1] 1 2 3
+## 
+## $b
+## [1] 4 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dt">a =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">b =</span> <span class="kw">list</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>))</code></pre>
+<pre><code>## $a
+## $a[[1]]
+## [1] 1 2 3
+## 
+## 
+## $b
+## $b[[1]]
+## [1] 4 5</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="map" class="section level2">
+<h2><span class="header-section-number">3.5</span> Processing multiple files</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+input_files &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>()</code></pre>
+</details>
+<p>Here we look at how to act on each entry of a list or a vector using <code>purrr::map()</code>:</p>
+<p>We start with the named vector <code>input_files</code> from section <a href="simple-iteration-1.html#indexing">“Indexing”</a>.
+As just seen, manually choosing just one entry of a vector works like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">1</span>]]))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+<p>With <code>map()</code>, you can successively work through the whole vector and each time let the same function deal with the respective entry.
+The output of <code>map()</code> is a list where each element contains one results.
+The list is named if the input is named:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
+<span class="st">  </span><span class="kw">map</span>(input_files, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<p>Let’s take a closer look at what we produced:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## $toronto
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## $tel_aviv
+## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## $zurich
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…           0.267             0.28
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…           0.198             0.27
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…           0.137             0.25
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">input_data[[<span class="dv">1</span>]]</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(input_data)</code></pre>
+<pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
+<p><code>map()</code> can be included in your pipe in the following way:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## $toronto
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## $tel_aviv
+## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## $zurich
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…           0.267             0.28
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…           0.198             0.27
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…           0.137             0.25
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+</span></CODE></PRE>
+<div id="exercises-4" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Read only the data for Toronto and Tel Aviv, using subsetting or <code>filter()</code>. Compare.</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[_____] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
+
+input_files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">___</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(_____)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $toronto
+ ## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## 
+ ## $tel_aviv
+ ## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ </span></CODE></PRE>
+<PRE class="fansi fansi-output"><CODE>## $toronto
+ ## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## 
+ ## $tel_aviv
+ ## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ </span></CODE></PRE></li>
+<li><p>Compute the absolute file name with <code>here()</code> outside of the <code>map()</code> call.</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">enframe</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(_____) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(.))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+ ## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## 
+ ## $toronto
+ ## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## 
+ ## $tel_aviv
+ ## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## 
+ ## $zurich
+ ## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+ ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…           0.267             0.28
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…           0.198             0.27
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…           0.137             0.25
+ ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+ ## #   </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ </span></CODE></PRE></li>
+<li><p>Can you explain what happens when you call <code>enframe()</code> on the result? Can you explain?</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">enframe</span>()</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="map_manip" class="section level2">
+<h2><span class="header-section-number">3.6</span> Manipulating all datasets</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+input_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+</details>
+<p>How to selectively manipulate specific parts of a list of datasets?</p>
+<p>We start with the named list of tibbles called <code>input_data</code> from section <a href="simple-iteration-1.html#map">“Processing all files”</a>.
+Of each tibble we only want the column <code>time</code> and all the columns whose name contains “emperature”.
+We test with the first entry:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data[[<span class="dv">1</span>]] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        13.4                13.4
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        13.6                13.6
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        14.1                14.1
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+</span></CODE></PRE>
+<p>To apply this on all entries, we use <code>map()</code> again.
+Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> call here, to indicate the position where each sub-dataset will be plugged in.</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+## <span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        13.4                13.4
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        13.6                13.6
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        14.1                14.1
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+## 
+## $toronto
+## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        7.46                3.96
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        8.17                5.04
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        8.82                6.52
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+## 
+## $tel_aviv
+## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        23.9                23.9
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        23.1                23.1
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        22.4                22.4
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+## 
+## $zurich
+## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        6.96                3.89
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        7.14                4.33
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        7.32                5.41
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+</span></CODE></PRE>
+<p>We can extend this to preserve only the observations with <code>temperature</code> greater or equal than 14°C:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">select</span>(., time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">filter</span>(., temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        14.1                14.1
+## </span><span style='color: #555555;'>2</span><span> 2019-04-29 </span><span style='color: #555555;'>12:00:00</span><span>        15.6                15.6
+## </span><span style='color: #555555;'>3</span><span> 2019-04-29 </span><span style='color: #555555;'>13:00:00</span><span>        17.4                17.4
+## </span><span style='color: #555555;'># … with 13 more rows</span><span>
+## 
+## $toronto
+## </span><span style='color: #555555;'># A tibble: 0 x 3</span><span>
+## </span><span style='color: #555555;'># … with 3 variables: </span><span style='color: #555555;font-weight: bold;'>time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## $tel_aviv
+## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        23.9                23.9
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        23.1                23.1
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        22.4                22.4
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+## 
+## $zurich
+## </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
+</span></CODE></PRE>
+<p>Create a custom function for that specific purpose in a call to <code>map()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
+}</code></pre>
+<p>Let’s look at the object <code>manipulator</code>, that we created:</p>
+<pre class="sourceCode r"><code class="sourceCode r">manipulator</code></pre>
+<pre><code>## function(data) {
+##   data %&gt;%
+##     select(time, contains(&quot;emperature&quot;)) %&gt;%
+##     filter(temperature &gt;= 14)
+## }
+## &lt;environment: 0x2be7f80&gt;</code></pre>
+<p>See the <a href="introduction.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
+<p>Testing the function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 1 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
+</span></CODE></PRE>
+<p>Now let’s use <code>map()</code> to let our function act on the entire dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">manipulated_data &lt;-<span class="st"> </span><span class="kw">map</span>(input_data, <span class="op">~</span><span class="st"> </span><span class="kw">manipulator</span>(.))
+manipulated_data</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        14.1                14.1
+## </span><span style='color: #555555;'>2</span><span> 2019-04-29 </span><span style='color: #555555;'>12:00:00</span><span>        15.6                15.6
+## </span><span style='color: #555555;'>3</span><span> 2019-04-29 </span><span style='color: #555555;'>13:00:00</span><span>        17.4                17.4
+## </span><span style='color: #555555;'># … with 13 more rows</span><span>
+## 
+## $toronto
+## </span><span style='color: #555555;'># A tibble: 0 x 3</span><span>
+## </span><span style='color: #555555;'># … with 3 variables: </span><span style='color: #555555;font-weight: bold;'>time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## $tel_aviv
+## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        23.9                23.9
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        23.1                23.1
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        22.4                22.4
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+## 
+## $zurich
+## </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
+</span></CODE></PRE>
+<p><code>map()</code> allows for the following shortcut notation for functions with one argument only:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(input_data, manipulator)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        14.1                14.1
+## </span><span style='color: #555555;'>2</span><span> 2019-04-29 </span><span style='color: #555555;'>12:00:00</span><span>        15.6                15.6
+## </span><span style='color: #555555;'>3</span><span> 2019-04-29 </span><span style='color: #555555;'>13:00:00</span><span>        17.4                17.4
+## </span><span style='color: #555555;'># … with 13 more rows</span><span>
+## 
+## $toronto
+## </span><span style='color: #555555;'># A tibble: 0 x 3</span><span>
+## </span><span style='color: #555555;'># … with 3 variables: </span><span style='color: #555555;font-weight: bold;'>time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## $tel_aviv
+## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        23.9                23.9
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        23.1                23.1
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        22.4                22.4
+## </span><span style='color: #555555;'># … with 46 more rows</span><span>
+## 
+## $zurich
+## </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
+</span></CODE></PRE>
+<div id="exercises-5" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Use <code>summarize()</code> to compute the mean temperature and humidity for each city during that period.</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(<span class="op">~</span><span class="st"> </span><span class="kw">___</span>(., <span class="kw">mean</span>(___), <span class="kw">mean</span>(___)))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+ ## <span style='color: #555555;'># A tibble: 1 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span>                12.5            0.634
+ ## 
+ ## $toronto
+ ## </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span>                6.39            0.597
+ ## 
+ ## $tel_aviv
+ ## </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span>                22.6            0.526
+ ## 
+ ## $zurich
+ ## </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span>                7.15            0.776
+ </span></CODE></PRE></li>
+<li><p>Create a function to compute the daily mean of these values for each dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">compute_daily_mean &lt;-<span class="st"> </span><span class="kw">___</span>(data) {
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">___</span>(<span class="kw">as.Date</span>(time)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">___</span>(_____) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ungroup</span>()
+}
+input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(___)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $berlin
+ ## <span style='color: #555555;'># A tibble: 3 x 3</span><span>
+ ##   </span><span style='font-weight: bold;'>`as.Date(time)`</span><span> </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28                     12.2            0.636
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-29                     12.7            0.690
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-30                     12.3            0.551
+ ## 
+ ## $toronto
+ ## </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
+ ##   </span><span style='font-weight: bold;'>`as.Date(time)`</span><span> </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28                     8.96            0.398
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-29                     5.84            0.554
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-30                     5.76            0.774
+ ## 
+ ## $tel_aviv
+ ## </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
+ ##   </span><span style='font-weight: bold;'>`as.Date(time)`</span><span> </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28                     21.9            0.542
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-29                     23.6            0.477
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-30                     21.7            0.591
+ ## 
+ ## $zurich
+ ## </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
+ ##   </span><span style='font-weight: bold;'>`as.Date(time)`</span><span> </span><span style='font-weight: bold;'>`mean(temperature)`</span><span> </span><span style='font-weight: bold;'>`mean(humidity)`</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>                        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> 2019-04-28                     5.80            0.778
+ ## </span><span style='color: #555555;'>2</span><span> 2019-04-29                     7.09            0.756
+ ## </span><span style='color: #555555;'>3</span><span> 2019-04-30                     7.98            0.803
+ </span></CODE></PRE></li>
+<li><p>Use the <code>dim()</code> function to compute the dimensions of each sub-dataset. Then, use <code>prod()</code> to compute the number of cells. Discuss your observation.</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>_____
+input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>_____ <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>_____</code></pre>
+<pre><code>## $berlin
+## [1] 49 18
+## 
+## $toronto
+## [1] 49 18
+## 
+## $tel_aviv
+## [1] 49 17
+## 
+## $zurich
+## [1] 49 18</code></pre>
+<pre><code>## $berlin
+## [1] 882
+## 
+## $toronto
+## [1] 882
+## 
+## $tel_aviv
+## [1] 833
+## 
+## $zurich
+## [1] 882</code></pre></li>
+<li><p>Create four plots of humidity vs. pressure, one for each city. Use <code>geom_path()</code>, map <code>temperature</code> to the <code>color</code> aesthetic:</p>
+<pre class="sourceCode r"><code class="sourceCode r">create_plot &lt;-<span class="st"> </span><span class="cf">function</span>(___) {
+  ___ <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(_____)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_path</span>()
+}
+___ <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(___)</code></pre>
+<pre><code>## $berlin</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<pre><code>## 
+## $toronto</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-2.png" width="672" /></p>
+<pre><code>## 
+## $tel_aviv</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-3.png" width="672" /></p>
+<pre><code>## 
+## $zurich</code></pre>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-119-4.png" width="672" /></p></li>
+</ol>
+</div>
+</div>
+<div id="typed-output" class="section level2">
+<h2><span class="header-section-number">3.7</span> Typed output</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+dict &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data/cities.xlsx&quot;</span>))
+
+input_data &lt;-
+<span class="st">  </span>dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+</details>
+<p>If we know, what the output of each function call in a <code>map()</code> sequence looks like, we can often call a sub-type of <code>map()</code> to produce a more condensed output.</p>
+<p>We start with the named list of tibbles called <code>input_data</code> from section <a href="simple-iteration-1.html#map">“Processing all files”</a>.</p>
+<p>We want to know the number of rows of each tibble in <code>input_data</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
+<pre><code>## $berlin
+## [1] 49
+## 
+## $toronto
+## [1] 49
+## 
+## $tel_aviv
+## [1] 49
+## 
+## $zurich
+## [1] 49</code></pre>
+<p>Each time an integer is produced.
+Therefore we can call <code>map_int()</code>, to create a named integer vector:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##       49       49       49       49</code></pre>
+<p>If the output is a character variable, use <code>map_chr()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="kw">nrow</span>(.)))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;</code></pre>
+<p>There are sub-types of the <code>map()</code> function for each atomic type:</p>
+<ul>
+<li><p>integer: <code>map_int()</code></p></li>
+<li><p>numeric (double-precision value): <code>map_dbl()</code></p></li>
+<li><p>character (strings): <code>map_chr()</code></p></li>
+<li><p>logical (flags): <code>map_lgl()</code></p></li>
+<li><p>raw (bytes): <code>map_raw()</code></p></li>
+</ul>
+<div id="exercises-6" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Explain what happens if you try to use <code>map_dbl()</code> with the <code>dim()</code> output:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map_dbl</span>(dim)</code></pre></li>
+<li><p>Extract a concise version of the first temperature value for each dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">slice</span>(., <span class="dv">1</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">___</span>(<span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(_____))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##    13.43     7.46    23.90     6.96</code></pre></li>
+<li><p>Use <code>paste0()</code> to build a textual description for the weather during the observed period in a function. Create a two-column tibble.</p>
+<pre class="sourceCode r"><code class="sourceCode r">summarize_weather &lt;-<span class="st"> </span>_____ {
+  ___ <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">___</span>(
+      _____,
+      _____,
+      _____,
+      <span class="dt">summary =</span> <span class="kw">paste</span>(<span class="kw">rle</span>(summary)<span class="op">$</span>values, <span class="dt">collapse =</span> <span class="st">&quot;, then &quot;</span>)
+    )
+}
+
+describe_weather &lt;-<span class="st"> </span><span class="cf">function</span>(weather_summary) {
+  weather_summary <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(
+      <span class="dt">text =</span> <span class="kw">paste0</span>(
+        <span class="st">&quot;We had temperatures between &quot;</span>, min_temp, <span class="st">&quot; and &quot;</span>, max_temp, <span class="st">&quot; °C.&quot;</span>,
+        <span class="st">&quot;The average humidity was &quot;</span>, <span class="kw">round</span>(mean_humidity <span class="op">*</span><span class="st"> </span><span class="dv">100</span>), <span class="st">&quot; %. &quot;</span>,
+        <span class="st">&quot;The weather was &quot;</span>, summary, <span class="st">&quot;.&quot;</span>
+      )
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">pull</span>()
+}
+
+input_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>(___) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">___</span>(___) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">___</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>     </span><span style='font-weight: bold;'>value</span><span>                                                           
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                           
+ ## </span><span style='color: #555555;'>1</span><span> berlin   We had temperatures between 6.14 and 19.98 °C.The average humid…
+ ## </span><span style='color: #555555;'>2</span><span> toronto  We had temperatures between 3.03 and 9.99 °C.The average humidi…
+ ## </span><span style='color: #555555;'>3</span><span> tel_aviv We had temperatures between 17.15 and 28.77 °C.The average humi…
+ ## </span><span style='color: #555555;'>4</span><span> zurich   We had temperatures between 2.01 and 14.3 °C.The average humidi…
+ </span></CODE></PRE></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>function <code>here::here()</code> is taking care of making sure we start from the root directory of our current project<a href="simple-iteration-1.html#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="function-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pairwise-iteration-and-nesting-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

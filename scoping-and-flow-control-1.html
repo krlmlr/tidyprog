@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>5 Scoping and flow control | Programming in the tidyverse</title>
+  <meta name="description" content="5 Scoping and flow control | Programming in the tidyverse">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="5 Scoping and flow control | Programming in the tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Scoping and flow control | Programming in the tidyverse" />
+  
+  
+  
+
+<meta name="author" content="Kirill Müller, Tobias Schieferdecker">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="pairwise-iteration-and-nesting-1.html">
+<link rel="next" href="non-rectangular-data-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i><b>0.1</b> Links</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>1.1.1</b> Function basics</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#simple-iteration"><i class="fa fa-check"></i><b>1.1.2</b> Simple iteration</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#pairwise-iteration-and-nesting"><i class="fa fa-check"></i><b>1.1.3</b> Pairwise iteration and nesting</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#scoping-and-flow-control"><i class="fa fa-check"></i><b>1.1.4</b> Scoping and flow control</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#non-rectangular-data"><i class="fa fa-check"></i><b>1.1.5</b> Non-rectangular data</a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction.html"><a href="introduction.html#tidy-evaluation"><i class="fa fa-check"></i><b>1.1.6</b> Tidy evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>1.2</b> Review of visualization and data transformation</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#intro-data"><i class="fa fa-check"></i><b>1.2.1</b> Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#exploration"><i class="fa fa-check"></i><b>1.2.2</b> Exploration</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>1.2.3</b> Further possibilities of using {dplyr} to transform data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>2</b> Function basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>2.1</b> Definition and execution</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>2.1.1</b> Designing functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="function-basics.html"><a href="function-basics.html#args"><i class="fa fa-check"></i><b>2.2</b> Arguments</a></li>
+<li class="chapter" data-level="2.3" data-path="function-basics.html"><a href="function-basics.html#intermediate"><i class="fa fa-check"></i><b>2.3</b> Use case: Intermediate variables</a></li>
+<li class="chapter" data-level="2.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>2.4</b> Default values</a></li>
+<li class="chapter" data-level="2.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>2.5</b> Multiple arguments</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>2.5.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="function-basics.html"><a href="function-basics.html#argument-matching"><i class="fa fa-check"></i><b>2.6</b> Argument matching</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="function-basics.html"><a href="function-basics.html#exercise-1"><i class="fa fa-check"></i><b>2.6.1</b> Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html"><i class="fa fa-check"></i><b>3</b> Simple iteration</a><ul>
+<li class="chapter" data-level="3.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#vectors-and-columns"><i class="fa fa-check"></i><b>3.1</b> Vectors and columns</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises"><i class="fa fa-check"></i><b>3.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#names"><i class="fa fa-check"></i><b>3.2</b> Named vectors and two-column tibbles</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-1"><i class="fa fa-check"></i><b>3.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#indexing"><i class="fa fa-check"></i><b>3.3</b> Indexing/subsetting</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-2"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#construction"><i class="fa fa-check"></i><b>3.4</b> Construction</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-3"><i class="fa fa-check"></i><b>3.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#map"><i class="fa fa-check"></i><b>3.5</b> Processing multiple files</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-4"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#map_manip"><i class="fa fa-check"></i><b>3.6</b> Manipulating all datasets</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-5"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#typed-output"><i class="fa fa-check"></i><b>3.7</b> Typed output</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-6"><i class="fa fa-check"></i><b>3.7.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
+<li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
+<li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
+<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.3" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
+<li class="chapter" data-level="5.4" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
+<li class="chapter" data-level="6.1" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.3" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
+<li class="chapter" data-level="6.4" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.6" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
+<li class="chapter" data-level="6.7" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy-evaluation-1.html"><a href="tidy-evaluation-1.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Programming in the tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="scoping-and-flow-control-1" class="section level1">
+<h1><span class="header-section-number">5</span> Scoping and flow control</h1>
+<div id="scope" class="section level2">
+<h2><span class="header-section-number">5.1</span> Scope</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
+</details>
+<p>In the setup code we assigned <code>a &lt;- 5</code>.
+<code>a</code> is now an object of the global environment.
+A function can access global variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a
+}
+
+<span class="kw">f</span>()</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>On the other hand, a variable which is defined inside a function, will not be known outside of that function. Respectively, it won’t overwrite the value of global variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a &lt;-<span class="st"> </span><span class="dv">2</span>
+  a
+}
+
+<span class="kw">f</span>()</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">a</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Global variables are a (hidden) part of a function’s interface.
+Best practice: functions should be self-contained, independent of global variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>()</code></pre>
+</div>
+<div id="pure-functions-and-side-effects" class="section level2">
+<h2><span class="header-section-number">5.2</span> Pure functions and side effects</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+</details>
+<p>Functions should do one thing, and do it well.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Pure function: A function that is called for its return value and which has no side effects:</p>
+<pre class="sourceCode r"><code class="sourceCode r">pure_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}
+
+<span class="kw">pure_function</span>(<span class="dv">1</span>)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):</p>
+<pre class="sourceCode r"><code class="sourceCode r">side_effect_function &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  file &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+  <span class="kw">writeLines</span>(<span class="kw">format</span>(x), <span class="kw">tempfile</span>())
+  <span class="kw">print</span>(x)
+  <span class="kw">message</span>(x, <span class="st">&quot; written to &quot;</span>, file)
+
+  <span class="kw">invisible</span>(x)
+}
+
+<span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre><code>## 2 written to /tmp/Rtmp36lkiC/file2c4340f89c95</code></pre>
+<p>Separation helps isolate the side effects.
+If side effect functions return the input, they remain composable with pure functions:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pure_function</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre><code>## 6 written to /tmp/Rtmp36lkiC/file2c43679c1764</code></pre>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="control-flow" class="section level2">
+<h2><span class="header-section-number">5.3</span> Control flow</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Returned value</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
+}
+read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}</code></pre>
+</details>
+<p>We start once more with the functions <code>weather_path()</code> from section <a href="function-basics.html#args">“Arguments”</a> and <code>read_weather_file()</code> from section <a href="function-basics.html#intermediate">“Intermediate variables”</a>.</p>
+<p>A way to regulate the control flow is by using <code>if ()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Filter, conditionally</span>
+  <span class="cf">if</span> (omit_zurich) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  }
+
+  <span class="cf">if</span> (omit_toronto) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+
+  <span class="co"># Return result</span>
+  weather_data
+}
+
+<span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>, <span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 2 x 2</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span>     </span><span style='font-weight: bold;'>n</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin       49
+## </span><span style='color: #555555;'>2</span><span> tel_aviv     49
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>, <span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span>     </span><span style='font-weight: bold;'>n</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin       49
+## </span><span style='color: #555555;'>2</span><span> tel_aviv     49
+## </span><span style='color: #555555;'>3</span><span> zurich       49
+</span></CODE></PRE>
+<p>This can be useful if aiming at a possible early return:</p>
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Can keep original data?</span>
+  <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    <span class="kw">return</span>(weather_data)
+  }
+
+  <span class="co"># Filter, conditionally</span>
+  <span class="cf">if</span> (omit_zurich) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  }
+
+  <span class="cf">if</span> (omit_toronto) {
+    weather_data &lt;-
+<span class="st">      </span>weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+
+  <span class="co"># Return result</span>
+  weather_data
+}</code></pre>
+<p>Conditional branching with if-else-logic.
+(This is just for illustration, you should not implement code like this!)</p>
+<pre class="sourceCode r"><code class="sourceCode r">read_weather_data &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">omit_zurich =</span> <span class="ot">FALSE</span>, <span class="dt">omit_toronto =</span> <span class="ot">FALSE</span>) {
+  <span class="co"># Create ensemble dataset from files on disk</span>
+  weather_data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="dt">berlin =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>),
+    <span class="dt">toronto =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>),
+    <span class="dt">tel_aviv =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>),
+    <span class="dt">zurich =</span> <span class="kw">read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>),
+    <span class="dt">.id =</span> <span class="st">&quot;city_code&quot;</span>
+  )
+
+  <span class="co"># Filter, conditionally, and return</span>
+  <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    weather_data
+  } <span class="cf">else</span> <span class="cf">if</span> (omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span><span class="op">!</span>omit_toronto) {
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>)
+  } <span class="cf">else</span> <span class="cf">if</span> (<span class="op">!</span>omit_zurich <span class="op">&amp;&amp;</span><span class="st"> </span>omit_toronto) {
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  } <span class="cf">else</span> {
+    <span class="co"># Filter both</span>
+    weather_data <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;zurich&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(city_code <span class="op">!=</span><span class="st"> &quot;toronto&quot;</span>)
+  }
+}
+
+<span class="kw">read_weather_data</span>(<span class="dt">omit_toronto =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span>     </span><span style='font-weight: bold;'>n</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin       49
+## </span><span style='color: #555555;'>2</span><span> tel_aviv     49
+## </span><span style='color: #555555;'>3</span><span> zurich       49
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_weather_data</span>(<span class="dt">omit_zurich =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(city_code)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span>     </span><span style='font-weight: bold;'>n</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin       49
+## </span><span style='color: #555555;'>2</span><span> tel_aviv     49
+## </span><span style='color: #555555;'>3</span><span> toronto      49
+</span></CODE></PRE>
+</div>
+<div id="closures" class="section level2">
+<h2><span class="header-section-number">5.4</span> Closures</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Returned value</span>
+  <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
+}
+read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}</code></pre>
+</details>
+<p>Closures can e.g. be used during function definition.</p>
+<p>We start once more with the functions <code>weather_path()</code> from section <a href="function-basics.html#args">“Arguments”</a> and <code>read_weather_file()</code> from section <a href="function-basics.html#intermediate">“Intermediate variables”</a>.</p>
+<p>Here we create a function that loads a particular dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">make_read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
+  <span class="co"># Avoid odd effects due to lazy evaluation</span>
+  <span class="kw">force</span>(filename)
+
+  <span class="co"># This function (closure) accesses the filename from the</span>
+  <span class="co"># outer function</span>
+  f &lt;-<span class="st"> </span><span class="cf">function</span>() {
+    <span class="kw">read_weather_file</span>(filename)
+  }
+
+  f
+}
+
+read_berlin &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)
+read_toronto &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;toronto.xlsx&quot;</span>)
+read_tel_aviv &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;tel_aviv.xlsx&quot;</span>)
+read_zurich &lt;-<span class="st"> </span><span class="kw">make_read_weather_file</span>(<span class="st">&quot;zurich.xlsx&quot;</span>)
+
+read_berlin</code></pre>
+<pre><code>## function() {
+##     read_weather_file(filename)
+##   }
+## &lt;environment: 0x8cb2de8&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+<p>Use closures as wrappers for other verbs/functions (such functions are also called “adverbs”):</p>
+<pre class="sourceCode r"><code class="sourceCode r">loudly &lt;-<span class="st"> </span><span class="cf">function</span>(f) {
+  <span class="kw">force</span>(f)
+
+  <span class="cf">function</span>(...) {
+    args &lt;-<span class="st"> </span><span class="kw">list</span>(...)
+    msg &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">length</span>(args), <span class="st">&quot; argument(s)&quot;</span>)
+    <span class="kw">message</span>(msg)
+
+    <span class="kw">f</span>(...)
+  }
+}
+
+read_loudly &lt;-<span class="st"> </span><span class="kw">loudly</span>(read_weather_file)
+read_loudly</code></pre>
+<pre><code>## function(...) {
+##     args &lt;- list(...)
+##     msg &lt;- paste0(length(args), &quot; argument(s)&quot;)
+##     message(msg)
+## 
+##     f(...)
+##   }
+## &lt;environment: 0xbd9bf40&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
+<pre><code>## 1 argument(s)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Unix philosophy, originated by Ken Thompson<a href="scoping-and-flow-control-1.html#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pairwise-iteration-and-nesting-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="non-rectangular-data-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>6 Non-rectangular data | Programming in the tidyverse</title>
+  <meta name="description" content="6 Non-rectangular data | Programming in the tidyverse">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="6 Non-rectangular data | Programming in the tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Non-rectangular data | Programming in the tidyverse" />
+  
+  
+  
+
+<meta name="author" content="Kirill Müller, Tobias Schieferdecker">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="scoping-and-flow-control-1.html">
+<link rel="next" href="tidy-evaluation-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i><b>0.1</b> Links</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>1.1.1</b> Function basics</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#simple-iteration"><i class="fa fa-check"></i><b>1.1.2</b> Simple iteration</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#pairwise-iteration-and-nesting"><i class="fa fa-check"></i><b>1.1.3</b> Pairwise iteration and nesting</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#scoping-and-flow-control"><i class="fa fa-check"></i><b>1.1.4</b> Scoping and flow control</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#non-rectangular-data"><i class="fa fa-check"></i><b>1.1.5</b> Non-rectangular data</a></li>
+<li class="chapter" data-level="1.1.6" data-path="introduction.html"><a href="introduction.html#tidy-evaluation"><i class="fa fa-check"></i><b>1.1.6</b> Tidy evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>1.2</b> Review of visualization and data transformation</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#intro-data"><i class="fa fa-check"></i><b>1.2.1</b> Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#exploration"><i class="fa fa-check"></i><b>1.2.2</b> Exploration</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>1.2.3</b> Further possibilities of using {dplyr} to transform data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>2</b> Function basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="function-basics.html"><a href="function-basics.html"><i class="fa fa-check"></i><b>2.1</b> Definition and execution</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="function-basics.html"><a href="function-basics.html#designing-functions"><i class="fa fa-check"></i><b>2.1.1</b> Designing functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="function-basics.html"><a href="function-basics.html#args"><i class="fa fa-check"></i><b>2.2</b> Arguments</a></li>
+<li class="chapter" data-level="2.3" data-path="function-basics.html"><a href="function-basics.html#intermediate"><i class="fa fa-check"></i><b>2.3</b> Use case: Intermediate variables</a></li>
+<li class="chapter" data-level="2.4" data-path="function-basics.html"><a href="function-basics.html#default-values"><i class="fa fa-check"></i><b>2.4</b> Default values</a></li>
+<li class="chapter" data-level="2.5" data-path="function-basics.html"><a href="function-basics.html#multiple-arguments"><i class="fa fa-check"></i><b>2.5</b> Multiple arguments</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="function-basics.html"><a href="function-basics.html#exercise"><i class="fa fa-check"></i><b>2.5.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="function-basics.html"><a href="function-basics.html#argument-matching"><i class="fa fa-check"></i><b>2.6</b> Argument matching</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="function-basics.html"><a href="function-basics.html#exercise-1"><i class="fa fa-check"></i><b>2.6.1</b> Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html"><i class="fa fa-check"></i><b>3</b> Simple iteration</a><ul>
+<li class="chapter" data-level="3.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#vectors-and-columns"><i class="fa fa-check"></i><b>3.1</b> Vectors and columns</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises"><i class="fa fa-check"></i><b>3.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#names"><i class="fa fa-check"></i><b>3.2</b> Named vectors and two-column tibbles</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-1"><i class="fa fa-check"></i><b>3.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#indexing"><i class="fa fa-check"></i><b>3.3</b> Indexing/subsetting</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-2"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#construction"><i class="fa fa-check"></i><b>3.4</b> Construction</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-3"><i class="fa fa-check"></i><b>3.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#map"><i class="fa fa-check"></i><b>3.5</b> Processing multiple files</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-4"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#map_manip"><i class="fa fa-check"></i><b>3.6</b> Manipulating all datasets</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-5"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#typed-output"><i class="fa fa-check"></i><b>3.7</b> Typed output</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="simple-iteration-1.html"><a href="simple-iteration-1.html#exercises-6"><i class="fa fa-check"></i><b>3.7.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
+<li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
+<li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
+<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.3" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
+<li class="chapter" data-level="5.4" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
+<li class="chapter" data-level="6.1" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.3" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
+<li class="chapter" data-level="6.4" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.6" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
+<li class="chapter" data-level="6.7" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy-evaluation-1.html"><a href="tidy-evaluation-1.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Programming in the tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="non-rectangular-data-1" class="section level1">
+<h1><span class="header-section-number">6</span> Non-rectangular data</h1>
+<blockquote>
+<p>working with raw data from online services (JSON)</p>
+</blockquote>
+<div id="berlin" class="section level2">
+<h2><span class="header-section-number">6.1</span> Traversing</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+</details>
+<p>We are now working with the results from downloading geolocation data from <a href="http://photon.komoot.de/">photon.komoot.de</a>.
+This is stored in the file <code>here(&quot;data/komoot-berlin.rds&quot;)</code> and we can read it with <code>readRDS()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">berlin &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot-berlin.rds&quot;</span>))
+
+berlin</code></pre>
+<pre><code>## $features
+## $features[[1]]
+## $features[[1]]$geometry
+## $features[[1]]$geometry$coordinates
+## $features[[1]]$geometry$coordinates[[1]]
+## [1] 13.38886
+## 
+## $features[[1]]$geometry$coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## $features[[1]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[1]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[1]]$properties
+## $features[[1]]$properties$osm_id
+## [1] 240109189
+## 
+## $features[[1]]$properties$osm_type
+## [1] &quot;N&quot;
+## 
+## $features[[1]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## $features[[1]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $features[[1]]$properties$city
+## [1] &quot;Berlin&quot;
+## 
+## $features[[1]]$properties$osm_value
+## [1] &quot;city&quot;
+## 
+## $features[[1]]$properties$postcode
+## [1] &quot;10117&quot;
+## 
+## $features[[1]]$properties$name
+## [1] &quot;Berlin&quot;
+## 
+## 
+## 
+## 
+## $type
+## [1] &quot;FeatureCollection&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(berlin)</code></pre>
+<pre><code>## List of 2
+##  $ features:List of 1
+##   ..$ :List of 3
+##   .. ..$ geometry  :List of 2
+##   .. .. ..$ coordinates:List of 2
+##   .. .. .. ..$ : num 13.4
+##   .. .. .. ..$ : num 52.5
+##   .. .. ..$ type       : chr &quot;Point&quot;
+##   .. ..$ type      : chr &quot;Feature&quot;
+##   .. ..$ properties:List of 8
+##   .. .. ..$ osm_id   : int 240109189
+##   .. .. ..$ osm_type : chr &quot;N&quot;
+##   .. .. ..$ country  : chr &quot;Germany&quot;
+##   .. .. ..$ osm_key  : chr &quot;place&quot;
+##   .. .. ..$ city     : chr &quot;Berlin&quot;
+##   .. .. ..$ osm_value: chr &quot;city&quot;
+##   .. .. ..$ postcode : chr &quot;10117&quot;
+##   .. .. ..$ name     : chr &quot;Berlin&quot;
+##  $ type    : chr &quot;FeatureCollection&quot;</code></pre>
+<p>As you can see it is a somewhat complex list structure.
+We know from <a href="simple-iteration-1.html#indexing">“Indexing”</a> that we can access it’s components in the following way:</p>
+<pre class="sourceCode r"><code class="sourceCode r">berlin<span class="op">$</span>type</code></pre>
+<pre><code>## [1] &quot;FeatureCollection&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin<span class="op">$</span>features</code></pre>
+<pre><code>## [[1]]
+## [[1]]$geometry
+## [[1]]$geometry$coordinates
+## [[1]]$geometry$coordinates[[1]]
+## [1] 13.38886
+## 
+## [[1]]$geometry$coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## [[1]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## [[1]]$type
+## [1] &quot;Feature&quot;
+## 
+## [[1]]$properties
+## [[1]]$properties$osm_id
+## [1] 240109189
+## 
+## [[1]]$properties$osm_type
+## [1] &quot;N&quot;
+## 
+## [[1]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## [[1]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## [[1]]$properties$city
+## [1] &quot;Berlin&quot;
+## 
+## [[1]]$properties$osm_value
+## [1] &quot;city&quot;
+## 
+## [[1]]$properties$postcode
+## [1] &quot;10117&quot;
+## 
+## [[1]]$properties$name
+## [1] &quot;Berlin&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin<span class="op">$</span>features[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## $geometry
+## $geometry$coordinates
+## $geometry$coordinates[[1]]
+## [1] 13.38886
+## 
+## $geometry$coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## $geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $type
+## [1] &quot;Feature&quot;
+## 
+## $properties
+## $properties$osm_id
+## [1] 240109189
+## 
+## $properties$osm_type
+## [1] &quot;N&quot;
+## 
+## $properties$country
+## [1] &quot;Germany&quot;
+## 
+## $properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $properties$city
+## [1] &quot;Berlin&quot;
+## 
+## $properties$osm_value
+## [1] &quot;city&quot;
+## 
+## $properties$postcode
+## [1] &quot;10117&quot;
+## 
+## $properties$name
+## [1] &quot;Berlin&quot;</code></pre>
+<p>With the function <code>purrr::pluck()</code>, there is however a more universal tool available for accessing elements of more complex lists:</p>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;type&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;FeatureCollection&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>)</code></pre>
+<pre><code>## [[1]]
+## [[1]]$geometry
+## [[1]]$geometry$coordinates
+## [[1]]$geometry$coordinates[[1]]
+## [1] 13.38886
+## 
+## [[1]]$geometry$coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## [[1]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## [[1]]$type
+## [1] &quot;Feature&quot;
+## 
+## [[1]]$properties
+## [[1]]$properties$osm_id
+## [1] 240109189
+## 
+## [[1]]$properties$osm_type
+## [1] &quot;N&quot;
+## 
+## [[1]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## [[1]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## [[1]]$properties$city
+## [1] &quot;Berlin&quot;
+## 
+## [[1]]$properties$osm_value
+## [1] &quot;city&quot;
+## 
+## [[1]]$properties$postcode
+## [1] &quot;10117&quot;
+## 
+## [[1]]$properties$name
+## [1] &quot;Berlin&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>)</code></pre>
+<pre><code>## $geometry
+## $geometry$coordinates
+## $geometry$coordinates[[1]]
+## [1] 13.38886
+## 
+## $geometry$coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## $geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $type
+## [1] &quot;Feature&quot;
+## 
+## $properties
+## $properties$osm_id
+## [1] 240109189
+## 
+## $properties$osm_type
+## [1] &quot;N&quot;
+## 
+## $properties$country
+## [1] &quot;Germany&quot;
+## 
+## $properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $properties$city
+## [1] &quot;Berlin&quot;
+## 
+## $properties$osm_value
+## [1] &quot;city&quot;
+## 
+## $properties$postcode
+## [1] &quot;10117&quot;
+## 
+## $properties$name
+## [1] &quot;Berlin&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>)</code></pre>
+<pre><code>## $coordinates
+## $coordinates[[1]]
+## [1] 13.38886
+## 
+## $coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## $type
+## [1] &quot;Point&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] 13.38886
+## 
+## [[2]]
+## [1] 52.51704</code></pre>
+<p>Similarly:</p>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;Germany&quot;</code></pre>
+<p>And as one more important characteristic of a <code>tidyverse</code>-function, <code>pluck()</code> is pipe-able:</p>
+<pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;Germany&quot;</code></pre>
+</div>
+<div id="komoot" class="section level2">
+<h2><span class="header-section-number">6.2</span> Iterating and traversing</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+</details>
+<p>Now we are not only working with the geolocation data for Berlin, but we are adding data for our usual suspects:</p>
+<pre class="sourceCode r"><code class="sourceCode r">komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
+
+komoot</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 6</span><span>
+##   </span><span style='font-weight: bold;'>name</span><span>    </span><span style='font-weight: bold;'>url_name</span><span>   </span><span style='font-weight: bold;'>url</span><span>                          </span><span style='font-weight: bold;'>res</span><span>       </span><span style='font-weight: bold;'>status</span><span> </span><span style='font-weight: bold;'>content</span><span> 
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>  
+## </span><span style='color: #555555;'>1</span><span> Berlin  Berlin     https://photon.komoot.de/ap… </span><span style='color: #555555;'>&lt;S3: res</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list [</span><span>…
+## </span><span style='color: #555555;'>2</span><span> Toronto Toronto    https://photon.komoot.de/ap… </span><span style='color: #555555;'>&lt;S3: res</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list [</span><span>…
+## </span><span style='color: #555555;'>3</span><span> Tel Av… Tel%20Aviv https://photon.komoot.de/ap… </span><span style='color: #555555;'>&lt;S3: res</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list [</span><span>…
+## </span><span style='color: #555555;'>4</span><span> Zürich  Z%C3%BCri… https://photon.komoot.de/ap… </span><span style='color: #555555;'>&lt;S3: res</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list [</span><span>…
+</span></CODE></PRE>
+<p>It looks slightly different from the list <code>berlin</code> from section <a href="non-rectangular-data-1.html#berlin">“Traversing”</a>.
+That is because we have the list-of-2 stored for each city in the column <code>content</code>.
+By using <code>pull()</code> on <code>content</code>, we can produce a list containing the information for all cities:</p>
+<pre class="sourceCode r"><code class="sourceCode r">komoot_content &lt;-
+<span class="st">  </span>komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(content)
+
+berlin &lt;-
+<span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>)
+
+berlin <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] 13.38886
+## 
+## [[2]]
+## [1] 52.51704</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">toronto &lt;-
+<span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="dv">2</span>)
+
+toronto <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] -79.38721
+## 
+## [[2]]
+## [1] 43.65396</code></pre>
+<p>With <code>map()</code> we can access the same element of the respective list for each city:</p>
+<pre class="sourceCode r"><code class="sourceCode r">komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">pluck</span>(., <span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
+<pre><code>## [[1]]
+## [[1]][[1]]
+## [1] 13.38886
+## 
+## [[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] -79.38721
+## 
+## [[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 34.78053
+## 
+## [[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## [[4]]
+## [[4]][[1]]
+## [1] 8.542322
+## 
+## [[4]][[2]]
+## [1] 47.3724</code></pre>
+<p>With <code>map()</code> we can also use a shorthand notation for this, without the need to use <code>pluck()</code>.
+We can just give it a list of the arguments which we would normally use as arguments for <code>pluck()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
+<pre><code>## [[1]]
+## [[1]][[1]]
+## [1] 13.38886
+## 
+## [[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] -79.38721
+## 
+## [[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 34.78053
+## 
+## [[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## [[4]]
+## [[4]][[1]]
+## [1] 8.542322
+## 
+## [[4]][[2]]
+## [1] 47.3724</code></pre>
+<p>The acces path can also be stored in a variable:</p>
+<pre class="sourceCode r"><code class="sourceCode r">accessor &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
+coordinates &lt;-
+<span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(accessor)
+coordinates</code></pre>
+<pre><code>## [[1]]
+## [[1]][[1]]
+## [1] 13.38886
+## 
+## [[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] -79.38721
+## 
+## [[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 34.78053
+## 
+## [[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## [[4]]
+## [[4]][[1]]
+## [1] 8.542322
+## 
+## [[4]][[2]]
+## [1] 47.3724</code></pre>
+</div>
+<div id="multipluck" class="section level2">
+<h2><span class="header-section-number">6.3</span> Plucking multiple locations</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
+komoot_content &lt;-
+<span class="st">  </span>komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(content)</code></pre>
+</details>
+<p>What if we want to access two different pieces of information of each main list point at once?</p>
+<p>We are again starting in the setup with the list <code>komoot_content</code> from <a href="non-rectangular-data-1.html#komoot">“Iterating and traversing”</a>.</p>
+<p>Let’s define the two locations of the city-lists we would like to access:</p>
+<pre class="sourceCode r"><code class="sourceCode r">accessor_coords &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
+
+komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(accessor_coords)</code></pre>
+<pre><code>## [[1]]
+## [[1]][[1]]
+## [1] 13.38886
+## 
+## [[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] -79.38721
+## 
+## [[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 34.78053
+## 
+## [[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## [[4]]
+## [[4]][[1]]
+## [1] 8.542322
+## 
+## [[4]][[2]]
+## [1] 47.3724</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">accessor_country &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)
+komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(accessor_country)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;Germany&quot;
+## 
+## [[2]]
+## [1] &quot;Canada&quot;
+## 
+## [[3]]
+## [1] &quot;Israel&quot;
+## 
+## [[4]]
+## [1] &quot;Switzerland&quot;</code></pre>
+<p>Combine them as a list of lists and hand it over to a <code>map()</code> inside a <code>map()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">accessors &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">coords =</span> accessor_coords, <span class="dt">country =</span> accessor_country)
+
+accessors <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">map</span>(komoot_content, .))</code></pre>
+<pre><code>## $coords
+## $coords[[1]]
+## $coords[[1]][[1]]
+## [1] 13.38886
+## 
+## $coords[[1]][[2]]
+## [1] 52.51704
+## 
+## 
+## $coords[[2]]
+## $coords[[2]][[1]]
+## [1] -79.38721
+## 
+## $coords[[2]][[2]]
+## [1] 43.65396
+## 
+## 
+## $coords[[3]]
+## $coords[[3]][[1]]
+## [1] 34.78053
+## 
+## $coords[[3]][[2]]
+## [1] 32.08048
+## 
+## 
+## $coords[[4]]
+## $coords[[4]][[1]]
+## [1] 8.542322
+## 
+## $coords[[4]][[2]]
+## [1] 47.3724
+## 
+## 
+## 
+## $country
+## $country[[1]]
+## [1] &quot;Germany&quot;
+## 
+## $country[[2]]
+## [1] &quot;Canada&quot;
+## 
+## $country[[3]]
+## [1] &quot;Israel&quot;
+## 
+## $country[[4]]
+## [1] &quot;Switzerland&quot;</code></pre>
+</div>
+<div id="flatten" class="section level2">
+<h2><span class="header-section-number">6.4</span> Flattening</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
+
+komoot_content &lt;-
+<span class="st">  </span>komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(content)
+
+coordinates &lt;-
+<span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
+</details>
+<p>It can occur that we end up with lists which are unnecessarily deep and we would like to make them flatter to make it easier to handle them.</p>
+<p>We are starting in our setup with <code>komoot_content</code> and <code>coordinates</code> from section <a href="non-rectangular-data-1.html#komoot">“Iterating and traversing”</a>.</p>
+<p>An example for an list that seems a bit too deep is given here:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>)</code></pre>
+<pre><code>## [[1]]
+## [1] 13.38886
+## 
+## [[2]]
+## [1] 52.51704</code></pre>
+<p>We can chop off a layer of a list and end up with a vector with one of the functions <code>purrr::flatten_*()</code>.
+In the <code>*</code> we need to specify what class the output will be:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">flatten_dbl</span>()</code></pre>
+<pre><code>## [1] 13.38886 52.51704</code></pre>
+<p>Let’s use <code>map()</code> to apply this to the entire list of our cities’ coordinates:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
+<pre><code>## [[1]]
+## [1] 13.38886 52.51704
+## 
+## [[2]]
+## [1] -79.38721  43.65396
+## 
+## [[3]]
+## [1] 34.78053 32.08048
+## 
+## [[4]]
+## [1]  8.542322 47.372396</code></pre>
+</div>
+<div id="transpose" class="section level2">
+<h2><span class="header-section-number">6.5</span> Transposing</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
+
+komoot_content &lt;-
+<span class="st">  </span>komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(content)
+
+coordinates &lt;-
+<span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
+</details>
+<p>You might know the mathematical concept of transposition from your linear algebra courses.
+A similar concept is available in <code>R</code> when we are dealing with lists.</p>
+<p>We are starting in our setup with <code>komoot_content</code> and <code>coordinates</code> from section <a href="non-rectangular-data-1.html#komoot">“Iterating and traversing”</a>.</p>
+<p>Let’s apply <code>purrr::transpose()</code> to our list <code>coordinates</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">transpose</span>()</code></pre>
+<pre><code>## [[1]]
+## [[1]][[1]]
+## [1] 13.38886
+## 
+## [[1]][[2]]
+## [1] -79.38721
+## 
+## [[1]][[3]]
+## [1] 34.78053
+## 
+## [[1]][[4]]
+## [1] 8.542322
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] 52.51704
+## 
+## [[2]][[2]]
+## [1] 43.65396
+## 
+## [[2]][[3]]
+## [1] 32.08048
+## 
+## [[2]][[4]]
+## [1] 47.3724</code></pre>
+<p>What was originally a list with 4 elements of which each one was a list of 2 elements has become a list of 2 elements of which each one is a list of 4 elements.
+With <code>flatten_dbl()</code> we can simplify the structure, so that we end up with a list of 2, where each element consists of a vector of 4.
+The first vector contains the longitude and the second the latitude of our cities:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed &lt;-
+<span class="st">  </span>coordinates <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
+</div>
+<div id="rectangulate" class="section level2">
+<h2><span class="header-section-number">6.6</span> Rectangling</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)
+
+komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
+
+komoot_content &lt;-
+<span class="st">  </span>komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(content)
+
+coordinates_transposed &lt;-
+<span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
+</details>
+<p>Most of us <code>R</code>-users feel most at ease when dealing in <code>R</code> with data frames on which we can use a plethora of well-known (by us) functions with non-startling behaviour.
+What if we don’t get our data in such a form?</p>
+<p>We are starting in our setup with the list <code>coordinates_transposed</code> from section <a href="non-rectangular-data-1.html#transpose">“Transposing”</a>.</p>
+<p>A tibble is internally a list of named vectors of equal length.
+In two easy steps we can therefore make a tibble out of the unnamed list <code>coordinates_transposed</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>))</code></pre>
+<pre><code>## $lon
+## [1]  13.388860 -79.387207  34.780527   8.542322
+## 
+## $lat
+## [1] 52.51704 43.65396 32.08048 47.37240</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_tibble</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+##      </span><span style='font-weight: bold;'>lon</span><span>   </span><span style='font-weight: bold;'>lat</span><span>
+##    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span>  13.4   52.5
+## </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>79.4</span><span>   43.7
+## </span><span style='color: #555555;'>3</span><span>  34.8   32.1
+## </span><span style='color: #555555;'>4</span><span>   8.54  47.4
+</span></CODE></PRE>
+<p>If you want to keep the names open for now, but still get a tibble, you can set <code>as_tibble()</code>’s argument <code>.name_repair = &quot;universal&quot;</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> <span class="st">&quot;universal&quot;</span>)</code></pre>
+<pre><code>## New names:
+## * `` -&gt; ...1
+## * `` -&gt; ...2</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+##     </span><span style='font-weight: bold;'>...1</span><span>  </span><span style='font-weight: bold;'>...2</span><span>
+##    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span>  13.4   52.5
+## </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>79.4</span><span>   43.7
+## </span><span style='color: #555555;'>3</span><span>  34.8   32.1
+## </span><span style='color: #555555;'>4</span><span>   8.54  47.4
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> <span class="st">&quot;universal&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">lon =</span> ...<span class="dv">1</span>, <span class="dt">lat =</span> ...<span class="dv">2</span>)</code></pre>
+<pre><code>## New names:
+## * `` -&gt; ...1
+## * `` -&gt; ...2</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+##      </span><span style='font-weight: bold;'>lon</span><span>   </span><span style='font-weight: bold;'>lat</span><span>
+##    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span>  13.4   52.5
+## </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>79.4</span><span>   43.7
+## </span><span style='color: #555555;'>3</span><span>  34.8   32.1
+## </span><span style='color: #555555;'>4</span><span>   8.54  47.4
+</span></CODE></PRE>
+</div>
+<div id="accessing-apis" class="section level2">
+<h2><span class="header-section-number">6.7</span> Accessing APIs</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(here)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;https://photon.komoot.de/api/?q=Paradeplatz&amp;limit=3&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">httr<span class="op">::</span><span class="kw">stop_for_status</span>(req)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">content &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(req)
+content</code></pre>
+<pre><code>## $features
+## $features[[1]]
+## $features[[1]]$geometry
+## $features[[1]]$geometry$coordinates
+## $features[[1]]$geometry$coordinates[[1]]
+## [1] 8.538948
+## 
+## $features[[1]]$geometry$coordinates[[2]]
+## [1] 47.36981
+## 
+## 
+## $features[[1]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[1]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[1]]$properties
+## $features[[1]]$properties$osm_id
+## [1] 905841
+## 
+## $features[[1]]$properties$osm_type
+## [1] &quot;R&quot;
+## 
+## $features[[1]]$properties$extent
+## $features[[1]]$properties$extent[[1]]
+## [1] 8.538163
+## 
+## $features[[1]]$properties$extent[[2]]
+## [1] 47.37027
+## 
+## $features[[1]]$properties$extent[[3]]
+## [1] 8.539516
+## 
+## $features[[1]]$properties$extent[[4]]
+## [1] 47.36935
+## 
+## 
+## $features[[1]]$properties$country
+## [1] &quot;Switzerland&quot;
+## 
+## $features[[1]]$properties$osm_key
+## [1] &quot;highway&quot;
+## 
+## $features[[1]]$properties$city
+## [1] &quot;Zurich&quot;
+## 
+## $features[[1]]$properties$osm_value
+## [1] &quot;pedestrian&quot;
+## 
+## $features[[1]]$properties$postcode
+## [1] &quot;8001&quot;
+## 
+## $features[[1]]$properties$name
+## [1] &quot;Paradeplatz&quot;
+## 
+## $features[[1]]$properties$state
+## [1] &quot;Zurich&quot;
+## 
+## 
+## 
+## $features[[2]]
+## $features[[2]]$geometry
+## $features[[2]]$geometry$coordinates
+## $features[[2]]$geometry$coordinates[[1]]
+## [1] 7.108249
+## 
+## $features[[2]]$geometry$coordinates[[2]]
+## [1] 50.88602
+## 
+## 
+## $features[[2]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[2]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[2]]$properties
+## $features[[2]]$properties$osm_id
+## [1] 389550464
+## 
+## $features[[2]]$properties$osm_type
+## [1] &quot;N&quot;
+## 
+## $features[[2]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## $features[[2]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $features[[2]]$properties$city
+## [1] &quot;Cologne&quot;
+## 
+## $features[[2]]$properties$osm_value
+## [1] &quot;locality&quot;
+## 
+## $features[[2]]$properties$postcode
+## [1] &quot;51147&quot;
+## 
+## $features[[2]]$properties$name
+## [1] &quot;Paradeplatz&quot;
+## 
+## $features[[2]]$properties$state
+## [1] &quot;North Rhine-Westphalia&quot;
+## 
+## 
+## 
+## $features[[3]]
+## $features[[3]]$geometry
+## $features[[3]]$geometry$coordinates
+## $features[[3]]$geometry$coordinates[[1]]
+## [1] 8.684258
+## 
+## $features[[3]]$geometry$coordinates[[2]]
+## [1] 49.38674
+## 
+## 
+## $features[[3]]$geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $features[[3]]$type
+## [1] &quot;Feature&quot;
+## 
+## $features[[3]]$properties
+## $features[[3]]$properties$osm_id
+## [1] 391678888
+## 
+## $features[[3]]$properties$osm_type
+## [1] &quot;W&quot;
+## 
+## $features[[3]]$properties$extent
+## $features[[3]]$properties$extent[[1]]
+## [1] 8.683635
+## 
+## $features[[3]]$properties$extent[[2]]
+## [1] 49.38719
+## 
+## $features[[3]]$properties$extent[[3]]
+## [1] 8.68488
+## 
+## $features[[3]]$properties$extent[[4]]
+## [1] 49.3863
+## 
+## 
+## $features[[3]]$properties$country
+## [1] &quot;Germany&quot;
+## 
+## $features[[3]]$properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $features[[3]]$properties$city
+## [1] &quot;Heidelberg&quot;
+## 
+## $features[[3]]$properties$osm_value
+## [1] &quot;locality&quot;
+## 
+## $features[[3]]$properties$postcode
+## [1] &quot;69120&quot;
+## 
+## $features[[3]]$properties$name
+## [1] &quot;Paradeplatz&quot;
+## 
+## $features[[3]]$properties$state
+## [1] &quot;Baden-Württemberg&quot;
+## 
+## 
+## 
+## 
+## $type
+## [1] &quot;FeatureCollection&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">text_content &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(req, <span class="dt">as =</span> <span class="st">&quot;text&quot;</span>)
+<span class="kw">cat</span>(text_content)</code></pre>
+<pre><code>## {&quot;features&quot;:[{&quot;geometry&quot;:{&quot;coordinates&quot;:[8.538948327037028,47.369806999999994],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:905841,&quot;osm_type&quot;:&quot;R&quot;,&quot;extent&quot;:[8.5381631,47.3702704,8.5395156,47.3693475],&quot;country&quot;:&quot;Switzerland&quot;,&quot;osm_key&quot;:&quot;highway&quot;,&quot;city&quot;:&quot;Zurich&quot;,&quot;osm_value&quot;:&quot;pedestrian&quot;,&quot;postcode&quot;:&quot;8001&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;Zurich&quot;}},{&quot;geometry&quot;:{&quot;coordinates&quot;:[7.1082488,50.8860177],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:389550464,&quot;osm_type&quot;:&quot;N&quot;,&quot;country&quot;:&quot;Germany&quot;,&quot;osm_key&quot;:&quot;place&quot;,&quot;city&quot;:&quot;Cologne&quot;,&quot;osm_value&quot;:&quot;locality&quot;,&quot;postcode&quot;:&quot;51147&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;North Rhine-Westphalia&quot;}},{&quot;geometry&quot;:{&quot;coordinates&quot;:[8.684257597277371,49.3867415],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:391678888,&quot;osm_type&quot;:&quot;W&quot;,&quot;extent&quot;:[8.6836355,49.3871856,8.6848797,49.3862973],&quot;country&quot;:&quot;Germany&quot;,&quot;osm_key&quot;:&quot;place&quot;,&quot;city&quot;:&quot;Heidelberg&quot;,&quot;osm_value&quot;:&quot;locality&quot;,&quot;postcode&quot;:&quot;69120&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;Baden-Württemberg&quot;}}],&quot;type&quot;:&quot;FeatureCollection&quot;}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(jsonlite<span class="op">::</span><span class="kw">prettify</span>(text_content))</code></pre>
+<pre><code>## {
+##     &quot;features&quot;: [
+##         {
+##             &quot;geometry&quot;: {
+##                 &quot;coordinates&quot;: [
+##                     8.538948327037028,
+##                     47.369806999999994
+##                 ],
+##                 &quot;type&quot;: &quot;Point&quot;
+##             },
+##             &quot;type&quot;: &quot;Feature&quot;,
+##             &quot;properties&quot;: {
+##                 &quot;osm_id&quot;: 905841,
+##                 &quot;osm_type&quot;: &quot;R&quot;,
+##                 &quot;extent&quot;: [
+##                     8.5381631,
+##                     47.3702704,
+##                     8.5395156,
+##                     47.3693475
+##                 ],
+##                 &quot;country&quot;: &quot;Switzerland&quot;,
+##                 &quot;osm_key&quot;: &quot;highway&quot;,
+##                 &quot;city&quot;: &quot;Zurich&quot;,
+##                 &quot;osm_value&quot;: &quot;pedestrian&quot;,
+##                 &quot;postcode&quot;: &quot;8001&quot;,
+##                 &quot;name&quot;: &quot;Paradeplatz&quot;,
+##                 &quot;state&quot;: &quot;Zurich&quot;
+##             }
+##         },
+##         {
+##             &quot;geometry&quot;: {
+##                 &quot;coordinates&quot;: [
+##                     7.1082488,
+##                     50.8860177
+##                 ],
+##                 &quot;type&quot;: &quot;Point&quot;
+##             },
+##             &quot;type&quot;: &quot;Feature&quot;,
+##             &quot;properties&quot;: {
+##                 &quot;osm_id&quot;: 389550464,
+##                 &quot;osm_type&quot;: &quot;N&quot;,
+##                 &quot;country&quot;: &quot;Germany&quot;,
+##                 &quot;osm_key&quot;: &quot;place&quot;,
+##                 &quot;city&quot;: &quot;Cologne&quot;,
+##                 &quot;osm_value&quot;: &quot;locality&quot;,
+##                 &quot;postcode&quot;: &quot;51147&quot;,
+##                 &quot;name&quot;: &quot;Paradeplatz&quot;,
+##                 &quot;state&quot;: &quot;North Rhine-Westphalia&quot;
+##             }
+##         },
+##         {
+##             &quot;geometry&quot;: {
+##                 &quot;coordinates&quot;: [
+##                     8.684257597277371,
+##                     49.3867415
+##                 ],
+##                 &quot;type&quot;: &quot;Point&quot;
+##             },
+##             &quot;type&quot;: &quot;Feature&quot;,
+##             &quot;properties&quot;: {
+##                 &quot;osm_id&quot;: 391678888,
+##                 &quot;osm_type&quot;: &quot;W&quot;,
+##                 &quot;extent&quot;: [
+##                     8.6836355,
+##                     49.3871856,
+##                     8.6848797,
+##                     49.3862973
+##                 ],
+##                 &quot;country&quot;: &quot;Germany&quot;,
+##                 &quot;osm_key&quot;: &quot;place&quot;,
+##                 &quot;city&quot;: &quot;Heidelberg&quot;,
+##                 &quot;osm_value&quot;: &quot;locality&quot;,
+##                 &quot;postcode&quot;: &quot;69120&quot;,
+##                 &quot;name&quot;: &quot;Paradeplatz&quot;,
+##                 &quot;state&quot;: &quot;Baden-Württemberg&quot;
+##             }
+##         }
+##     ],
+##     &quot;type&quot;: &quot;FeatureCollection&quot;
+## }</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="scoping-and-flow-control-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidy-evaluation-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
