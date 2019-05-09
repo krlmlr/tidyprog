@@ -18,7 +18,7 @@ library(here)
 
 Here we look at tidyverse-functions to work with named vectors and tibbles with more columns and the relations netween the two.
 
-As seen in the ["introduction"](#intro-data), load a table -- here a dictionary detailing information related to an id-like name -- from an MS Excel file with `readxl::read_excel()`:
+As seen in section ["Data"](#intro-data), load a table -- here a dictionary detailing information related to an id-like name -- from an MS Excel file with `readxl::read_excel()`:
 
 ```{r include = FALSE}
 # Load dictionary from file
