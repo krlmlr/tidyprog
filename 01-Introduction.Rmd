@@ -34,3 +34,6 @@ The third part, "Pairwise iteration and nesting":
 The fourth part, "Scoping and flow control":
 
 <!-- FIXME: continue from here -->
+
+```{r child = here("script", "1.Rmd")}
+```
