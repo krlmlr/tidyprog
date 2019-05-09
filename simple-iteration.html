@@ -519,9 +519,9 @@ fs<span class="op">::</span><span class="kw">dir_ls</span>() <span class="op">%&
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 36 x 2</span><span>
  ##   </span><span style='font-weight: bold;'>name</span><span>         </span><span style='font-weight: bold;'>value</span><span>       
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span>  
- ## </span><span style='color: #555555;'>1</span><span> 0.Rmd        </span><span style='color: #00BB00;'>0.Rmd</span><span>       
- ## </span><span style='color: #555555;'>2</span><span> 01-intro.Rmd </span><span style='color: #00BB00;'>01-intro.Rmd</span><span>
- ## </span><span style='color: #555555;'>3</span><span> 02-dir.Rmd   </span><span style='color: #00BB00;'>02-dir.Rmd</span><span>  
+ ## </span><span style='color: #555555;'>1</span><span> 2.Rmd        </span><span style='color: #00BB00;'>2.Rmd</span><span>       
+ ## </span><span style='color: #555555;'>2</span><span> 21-intro.Rmd </span><span style='color: #00BB00;'>21-intro.Rmd</span><span>
+ ## </span><span style='color: #555555;'>3</span><span> 22-dir.Rmd   </span><span style='color: #00BB00;'>22-dir.Rmd</span><span>  
  ## </span><span style='color: #555555;'># … with 33 more rows</span><span>
  </span></CODE></PRE></li>
 </ol>
@@ -616,25 +616,25 @@ fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 36 x 18</span><span>
  ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>0.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:12:53</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>01-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:12:53</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>02-dir.Rmd</span><span> file    2.41K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:12:53</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:15:56</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>21-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:15:56</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>22-dir.Rmd</span><span> file    2.41K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>19:15:56</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 33 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>access_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>change_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>birth_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>
  </span></CODE></PRE>
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>0.Rmd</span><span>                </span><span style='color: #00BB00;'>01-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>02-dir.Rmd</span><span>           
- ## </span><span style='color: #00BB00;'>03-names.Rmd</span><span>         </span><span style='color: #00BB00;'>04-index.Rmd</span><span>         </span><span style='color: #00BB00;'>05-construct.Rmd</span><span>     
- ## </span><span style='color: #00BB00;'>06-map.Rmd</span><span>           </span><span style='color: #00BB00;'>07-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>08-map-type.Rmd</span><span>      
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>2.Rmd</span><span>                </span><span style='color: #00BB00;'>21-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>22-dir.Rmd</span><span>           
+ ## </span><span style='color: #00BB00;'>23-names.Rmd</span><span>         </span><span style='color: #00BB00;'>24-index.Rmd</span><span>         </span><span style='color: #00BB00;'>25-construct.Rmd</span><span>     
+ ## </span><span style='color: #00BB00;'>26-map.Rmd</span><span>           </span><span style='color: #00BB00;'>27-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>28-map-type.Rmd</span><span>      
  ## </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-function.Rmd</span><span>      </span><span style='color: #00BB00;'>32-args.Rmd</span><span>          
  ## </span><span style='color: #00BB00;'>33-intermediate.Rmd</span><span>  </span><span style='color: #00BB00;'>34-args-default.Rmd</span><span>  </span><span style='color: #00BB00;'>35-args-multi.Rmd</span><span>    
  ## </span><span style='color: #00BB00;'>36-args-matching.Rmd</span><span> </span><span style='color: #00BB00;'>4.Rmd</span><span>                </span><span style='color: #00BB00;'>41-map2.Rmd</span><span>          
  ## </span><span style='color: #00BB00;'>42-mutate-map.Rmd</span><span>    </span><span style='color: #00BB00;'>43-unnest.Rmd</span><span>
  </span></CODE></PRE>
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>0.Rmd</span><span>                </span><span style='color: #00BB00;'>01-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>02-dir.Rmd</span><span>           
- ## </span><span style='color: #00BB00;'>03-names.Rmd</span><span>         </span><span style='color: #00BB00;'>04-index.Rmd</span><span>         </span><span style='color: #00BB00;'>05-construct.Rmd</span><span>     
- ## </span><span style='color: #00BB00;'>06-map.Rmd</span><span>           </span><span style='color: #00BB00;'>07-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>08-map-type.Rmd</span><span>      
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>2.Rmd</span><span>                </span><span style='color: #00BB00;'>21-intro.Rmd</span><span>         </span><span style='color: #00BB00;'>22-dir.Rmd</span><span>           
+ ## </span><span style='color: #00BB00;'>23-names.Rmd</span><span>         </span><span style='color: #00BB00;'>24-index.Rmd</span><span>         </span><span style='color: #00BB00;'>25-construct.Rmd</span><span>     
+ ## </span><span style='color: #00BB00;'>26-map.Rmd</span><span>           </span><span style='color: #00BB00;'>27-map-manip.Rmd</span><span>     </span><span style='color: #00BB00;'>28-map-type.Rmd</span><span>      
  ## </span><span style='color: #00BB00;'>3.Rmd</span><span>                </span><span style='color: #00BB00;'>31-function.Rmd</span><span>      </span><span style='color: #00BB00;'>32-args.Rmd</span><span>          
  ## </span><span style='color: #00BB00;'>33-intermediate.Rmd</span><span>  </span><span style='color: #00BB00;'>34-args-default.Rmd</span><span>  </span><span style='color: #00BB00;'>35-args-multi.Rmd</span><span>    
  ## </span><span style='color: #00BB00;'>36-args-matching.Rmd</span><span> </span><span style='color: #00BB00;'>4.Rmd</span><span>                </span><span style='color: #00BB00;'>41-map2.Rmd</span><span>          
@@ -1202,7 +1202,7 @@ Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> 
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x17c9f80&gt;</code></pre>
+## &lt;environment: 0x2477f80&gt;</code></pre>
 <p>See the <a href="function-basics.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
