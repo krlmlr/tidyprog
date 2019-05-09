@@ -1,4 +1,4 @@
-### Indexing
+### Indexing/subsetting
 
 library(tidyverse)
 library(here)
@@ -21,3 +21,16 @@ input_files[["berlin"]]
 # Access multiple input files
 input_files[1:2]
 input_files[c("berlin", "zurich")]
+
+# Consistent pipe-friendly access of single elements
+input_files %>% 
+  pluck(1)
+input_files %>% 
+  pluck("berlin")
+
+# Exercises
+
+input_files %>%
+  enframe() %>% 
+  filter(name == "toronto") %>% 
+  deframe()

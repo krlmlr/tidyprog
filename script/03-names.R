@@ -36,3 +36,16 @@ dict %>%
   mutate(weather_filename_here = here(weather_filename)) %>%
   select(city_code, weather_filename_here) %>%
   deframe()
+
+# Exercises
+
+dict %>% 
+  select(city_code, name) %>% 
+  deframe()
+
+fs::dir_info()
+fs::dir_info() %>% 
+  pull(path)
+fs::dir_info() %>% 
+  select(name = path, path) %>% 
+  deframe()

@@ -36,10 +36,3 @@ files_df %>%
 
 fs::dir_ls() %>% 
   enframe()
-
-fs::dir_info()
-fs::dir_info() %>% 
-  pull()
-fs::dir_info() %>% 
-  select(name = path, path) %>% 
-  deframe()
