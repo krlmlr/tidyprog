@@ -1,5 +1,0 @@
-```{r child = here::here("script", "43-function-scoping.Rmd")}
-```
-
-```{r child = here::here("script", "44-function-purity.Rmd")}
-```
