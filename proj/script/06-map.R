@@ -1,4 +1,4 @@
-### Processing all files
+### Processing multiple files
 
 library(tidyverse)
 library(here)
@@ -25,3 +25,18 @@ names(input_data)
 # Pipe notation
 input_files %>%
   map(~ readxl::read_excel(here(.)))
+
+input_files[c("toronto", "tel_aviv")] %>% 
+  map(~ readxl::read_excel(here(.)))
+
+input_files %>%
+  enframe() %>% 
+  filter(name %in% c("toronto", "tel_aviv")) %>% 
+  deframe() %>% 
+  map(~ readxl::read_excel(here(.)))
+
+input_files %>% 
+  enframe() %>% 
+  mutate(value = here(value)) %>% 
+  deframe() %>% 
+  map(~ readxl::read_excel(.))

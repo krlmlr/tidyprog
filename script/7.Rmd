@@ -15,3 +15,6 @@
 
 ```{r child = here::here("script", "76-rectangulate.Rmd")}
 ```
+
+```{r child = here::here("script", "77-json.Rmd")}
+```
