@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Plucking multiple locations
+## Plucking multiple locations {#multipluck}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
@@ -21,6 +21,11 @@ komoot_content <-
 ```
 </details>
 
+What if we want to access two different pieces of information of each main list point at once?
+
+We are again starting in the setup with the list `komoot_content` from ["Iterating and traversing"](#komoot).
+
+Let's define the two locations of the city-lists we would like to access:
 
 ```{r include = FALSE}
 # Use multiple accessors:
@@ -36,6 +41,7 @@ komoot_content %>%
   map(accessor_country)
 ```
 
+Combine them as a list of lists and hand it over to a `map()` inside a `map()`:
 
 ```{r include = FALSE}
 # All at once:
