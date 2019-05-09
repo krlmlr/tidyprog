@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Transposing
+## Transposing {#transpose}
 
 <details><summary>*Click here to make setup code visible*</summary>
 ```{r include = FALSE}
@@ -26,6 +26,12 @@ coordinates <-
 ```
 </details>
 
+You might know the mathematical concept of transposition from your linear algebra courses.
+A similar concept is available in `R` when we are dealing with lists.
+
+We are starting in our setup with `komoot_content` and `coordinates` from section ["Iterating and traversing"](#komoot).
+
+Let's apply `purrr::transpose()` to our list `coordinates`:
 
 ```{r include = FALSE}
 # Transposing inside out:
@@ -35,6 +41,9 @@ coordinates %>%
   transpose()
 ```
 
+What was originally a list with 4 elements of which each one was a list of 2 elements has become a list of 2 elements of which each one is a list of 4 elements.
+With `flatten_dbl()` we can simplify the structure, so that we end up with a list of 2, where each element consists of a vector of 4.
+The first vector contains the longitude and the second the latitude of our cities:
 
 ```{r include = FALSE}
 # Flatten to simplify structure:
