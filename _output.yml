@@ -1,3 +1,8 @@
 bookdown::gitbook: default
-bookdown::pdf_book: default
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: lualatex
+  citation_package: natbib
+  keep_tex: yes
 bookdown::epub_book: default
