@@ -32,3 +32,5 @@ read_weather_data <- function() {
 
 # Still need to run a function
 read_weather_data()
+
+# Exercises

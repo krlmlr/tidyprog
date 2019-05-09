@@ -57,7 +57,7 @@ Vectors (and also lists) can have names.
 ```{r 34-vectors-and-lists-can-have-names}
 c(a = 1, b = 2, c = 3)
 list(a = 1:3, b = 5)
-set_names(1:3, letters[1:3])
+rlang::set_names(1:3, letters[1:3])
 ```
 
 The new {vctrs} package defines a data type for lists where all elements have the same type: a stricter list, but more powerful than a bare vector.

@@ -31,12 +31,39 @@ read_weather_data <- function() {
 # Functions are first-class objects
 read_weather_data
 
-# Execute like functions exported from packages
+# Call like functions exported from packages
 read_weather_data()
 
 # Variables are local, execution doesn't change global variables.
 # (The effect is only seen when starting R in a fresh session.)
 ls()
 
+# Pipe
+read_weather_data() %>% 
+  count(city_code)
+
 # Assign result to use in further operations
 weather_data <- read_weather_data()
+
+# Exercises
+
+read_weather_data_non_europe <- function() {
+  # Read all files
+  toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+  tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+
+  # Create ensemble dataset
+  weather_data <- bind_rows(
+    toronto = toronto,
+    tel_aviv = tel_aviv,
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+
+read_weather_data_non_europe()
+
+setdiff(read_weather_data(), read_weather_data_non_europe()) %>% 
+  count(city_code)
