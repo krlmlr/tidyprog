@@ -158,8 +158,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
 <li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
-<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#moving-to-tibble-land"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
-<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#nesting-and-unnesting"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting.html"><a href="pairwise-iteration-and-nesting.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
 <li class="chapter" data-level="5.1" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
@@ -211,12 +211,18 @@ manipulated_data &lt;-
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(manipulator)</code></pre>
 </details>
+<p>Here we take cases into consideration, when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.</p>
+<p>We start with the reduced list of tibbles <code>manipulated_data</code> from <a href="simple-iteration.html#map_manip">“Manipulating all datasets”</a>.</p>
+<p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/Rtmp23fexK/berlin2c696512d85c.csv&quot; 
-## [2] &quot;/tmp/Rtmp23fexK/toronto2c69350a95e8.csv&quot;
-## [3] &quot;/tmp/Rtmp23fexK/tel_aviv2c6954b2527.csv&quot;
-## [4] &quot;/tmp/Rtmp23fexK/zurich2c695082fab5.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpPyLn8n/berlin2bf143cc62fa.csv&quot;  
+## [2] &quot;/tmp/RtmpPyLn8n/toronto2bf141f0e1d8.csv&quot; 
+## [3] &quot;/tmp/RtmpPyLn8n/tel_aviv2bf17582ddd9.csv&quot;
+## [4] &quot;/tmp/RtmpPyLn8n/zurich2bf12f55572e.csv&quot;</code></pre>
+<p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
+<code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
+We use <code>map2()</code> to handle this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
@@ -247,9 +253,10 @@ output_filenames</code></pre>
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30T15:00:00Z        14.3                14.3
 </span></CODE></PRE>
+<p>Since we are just interested in the side-effects of <code>write_csv()</code> and not in the displayed output, we rather use the related function <code>walk2()</code>, which does not return output.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
 </div>
-<div id="moving-to-tibble-land" class="section level2">
+<div id="mut_map" class="section level2">
 <h2><span class="header-section-number">4.2</span> Moving to tibble-land</h2>
 <details>
 <p><summary>Setup code</summary></p>
@@ -264,6 +271,9 @@ input_data &lt;-
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
 </details>
+<p>How to combine the abilities of <code>map()</code> &amp; co., which work on vectors and lists, with our commonly used data structure, the tibble?</p>
+<p>We start with the named list of tibbles called <code>input_data</code> from section <a href="simple-iteration.html#map">“Processing all files”</a> and with <code>dict</code> from section <a href="simple-iteration.html#names">“Named vectors and two-column tibbles”</a>.</p>
+<p>Produce a data frame from <code>input_data</code> with <code>enframe()</code> leads to a maybe at first surprising, but oftentimes useful result:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">enframe</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
@@ -274,6 +284,9 @@ input_data &lt;-
 ## </span><span style='color: #555555;'>3</span><span> tel_aviv </span><span style='color: #555555;'>&lt;tibble [49 × 17]&gt;</span><span>
 ## </span><span style='color: #555555;'>4</span><span> zurich   </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 </span></CODE></PRE>
+<p>This is because lists are also vectors.
+In our case each list entry contains a tibble, which can be “nested” into each entry of column <code>value</code>.</p>
+<p>Starting with the tibble <code>dict</code> we can see how <code>dpylr::mutate()</code> and <code>map()</code> can nicely work together to produce a somewhat similar result:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
@@ -287,6 +300,8 @@ input_data &lt;-
 ## </span><span style='color: #555555;'>3</span><span> tel_aviv  data/weather/tel_aviv.xlsx </span><span style='color: #555555;'>&lt;tibble [49 × 17]&gt;</span><span>
 ## </span><span style='color: #555555;'>4</span><span> zurich    data/weather/zurich.xlsx   </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 </span></CODE></PRE>
+<p>This works because <code>R</code> interprets columns of tibbles as vectors, which can be fed to <code>map()</code>.</p>
+<p>Deselect i.e. drop columns using <code>select()</code> with <code>-</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
@@ -303,7 +318,7 @@ dict_data</code></pre>
 ## </span><span style='color: #555555;'>4</span><span> zurich    Zürich     8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 </span></CODE></PRE>
 </div>
-<div id="nesting-and-unnesting" class="section level2">
+<div id="nest" class="section level2">
 <h2><span class="header-section-number">4.3</span> Nesting and unnesting</h2>
 <details>
 <p><summary>Setup code</summary></p>
@@ -317,6 +332,10 @@ dict_data &lt;-
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">map</span>(weather_filename, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>weather_filename)</code></pre>
 </details>
+<p>How to work with nested data?</p>
+<p>We start with the tibble <code>dict_data</code> from section <a href="pairwise-iteration-and-nesting.html#mut_map">“Moving to tibble-land”</a>, which includes the nested tibbles in its column <code>data</code>.</p>
+<p>If we want to actually look at the data we can directly use <code>tidyr::unnest()</code> on the whole tibble, which by default acts on all list-columns.
+This blows up our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 22</span><span>
@@ -342,6 +361,9 @@ dict_data &lt;-
 ## </span><span style='color: #555555;'>3</span><span> Toronto     49
 ## </span><span style='color: #555555;'>4</span><span> Zürich      49
 </span></CODE></PRE>
+<p>Inversely, if you want to have a more condensed view of your data, you can nest again.
+By default, the function <code>tidyr::nest()</code> will nest all data.
+Therefore it is often useful to tell it, which columns to ignore:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>city_code, <span class="op">-</span>name, <span class="op">-</span>lng, <span class="op">-</span>lat)</code></pre>
@@ -353,6 +375,8 @@ dict_data &lt;-
 ## </span><span style='color: #555555;'>3</span><span> tel_aviv  Tel Aviv  34.8   32.1 </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 ## </span><span style='color: #555555;'>4</span><span> zurich    Zürich     8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 </span></CODE></PRE>
+<p>Using this, we structure our data in new, customized ways.
+Here, we create a new column <code>date</code>, by dropping the detailed information of the time of the day, and create a nested tibble for each day:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(time)) <span class="op">%&gt;%</span>
