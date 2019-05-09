@@ -121,7 +121,7 @@ files_df %>%
     ```{r echo = FALSE}
     fs::dir_info()
     fs::dir_info() %>% 
-      pull()
+      pull(path)
     fs::dir_info() %>% 
       select(name = path, path) %>% 
       deframe()
