@@ -90,14 +90,23 @@ read_weather_data()
 ```
 
 
-### Exercise
-
 ```{r include = FALSE}
-## What does the following return? Why?
-```
-```{r 25-what-does-the-following-return-why}
-read_weather_data(TRUE, omit_z = FALSE) %>%
-  count(city_code)
+# Exercises
 ```
 
-See the next section for ideas on avoiding this behavior.
+### Exercises
+
+1. What does the following return? Why?
+
+    ```r
+    read_weather_data(TRUE, omit_z = FALSE) %>%
+      count(city_code)
+    ```
+
+    ```{r include = FALSE}
+    # What does the following return? Why?
+    read_weather_data(TRUE, omit_z = FALSE) %>%
+      count(city_code)
+    ```
+    
+    See the next section for ideas on avoiding this behavior.
