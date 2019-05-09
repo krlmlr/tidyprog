@@ -24,5 +24,5 @@ c(a = 1, b = 2, c = 3)
 list(a = 1:3, b = 5)
 
 # Preview: vctrs::list_of() to construct typed lists
-vctrs::list_of(1, 2, 3)
-vctrs::list_of(letters[1:3], "e")
+#vctrs::list_of(1, 2, 3)
+#vctrs::list_of(letters[1:3], "e")
