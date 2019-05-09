@@ -28,7 +28,7 @@ read_weather_file <- function(filename) {
 We start once more with the functions `weather_path()` from section ["Arguments"](#args) and `read_weather_file()` from section ["Intermediate variables"](#intermediate).
 
 What are the considerations when using multiple function arguments?
-
+You can add new parameters in a very straightforward manner like this:
 
 ```{r include = FALSE}
 # Multiple function arguments are separated by comma:
@@ -51,7 +51,8 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
 }
 ```
 
-Ellipsis (`...`) for list of arguments of unspecified length. Useful for passing arguments downstream:
+Use the so called ellipsis (`...`) when you want to provide the possibility for the user to call your function with a list of arguments of unspecified length. 
+This can be e.g. useful for passing arguments downstream:
 
 ```{r include = FALSE}
 # Ellipsis: variable argument list, useful for passing arguments downstream
@@ -89,6 +90,5 @@ read_weather_data()
 read_weather_data(TRUE, omit_z = FALSE) %>%
   count(city_code)
 ```
-
 
 See the next section for ideas on avoiding this behavior.
