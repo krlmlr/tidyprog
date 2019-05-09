@@ -97,3 +97,40 @@ dict %>%
   select(city_code, weather_filename_here) %>%
   deframe()
 ```
+
+### Exercises
+
+1. Obtain a mapping between city code and city name as a named vector.
+    
+    ```r
+    dict %>% 
+      select(___, ___) %>% 
+      deframe()
+    ```
+    
+    ```{r echo = FALSE}
+    dict %>% 
+      select(city_code, name) %>% 
+      deframe()
+    ```
+
+1. Convert the output of `fs::dir_info()` to that seen from `fs::dir_ls()`. How do you make sure that the vector is named?
+
+    ```r
+    # install.packages("fs")
+    fs::dir_info()
+    fs::dir_info() %>% 
+      pull(___)
+    fs::dir_info() %>%
+      select(_____, _____) %>% 
+      ___()
+    ```
+
+    ```{r echo = FALSE}
+    fs::dir_info()
+    fs::dir_info() %>% 
+      pull(path)
+    fs::dir_info() %>% 
+      select(name = path, path) %>% 
+      deframe()
+    ```

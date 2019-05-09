@@ -93,7 +93,7 @@ files_df %>%
 
 1. Investigate the output of `fs::dir_ls()` with `enframe()`. Explain.
 
-    ```
+    ```r
     # install.packages("fs")
     fs::dir_ls()
     fs::dir_ls() %>%
@@ -103,26 +103,4 @@ files_df %>%
     ```{r echo = FALSE}
     fs::dir_ls() %>% 
       enframe()
-    ```
-        
-        
-1. Convert the output of `fs::dir_info()` to that seen from `fs::dir_ls()`. How do you make sure that the vector is named?
-
-    ```
-    # install.packages("fs")
-    fs::dir_info()
-    fs::dir_info() %>% 
-      pull(___)
-    fs::dir_info() %>%
-      select(_____, _____) %>% 
-      ___()
-    ```
-
-    ```{r echo = FALSE}
-    fs::dir_info()
-    fs::dir_info() %>% 
-      pull(path)
-    fs::dir_info() %>% 
-      select(name = path, path) %>% 
-      deframe()
     ```
