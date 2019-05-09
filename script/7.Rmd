@@ -7,9 +7,6 @@
 ```{r child = here::here("script", "73-flatten.Rmd")}
 ```
 
-```{r child = here::here("script", "73-transpose.Rmd")}
-```
-
 ```{r child = here::here("script", "74-transpose.Rmd")}
 ```
 
