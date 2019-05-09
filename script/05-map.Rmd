@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Processing all files
+## Processing all files {#map}
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
@@ -23,6 +23,11 @@ input_files <-
 ```
 </details>
 
+Here we look at how to act on each entry of a list or a vector using `purrr::map()`:
+
+We start with the named vector `input_files` from section ["Indexing"](#indexing).
+
+As just seen, manually choosing just one entry of a vector works like so:
 
 ```{r include = FALSE}
 # Read a single input file
@@ -31,6 +36,8 @@ input_files <-
 readxl::read_excel(here(input_files[[1]]))
 ```
 
+With `map()`, you can successively work through the whole vector and each time let the same function deal with the respective entry.
+The output of `map()` is a (named, if the input vector/list was named) list of the individual results:
 
 ```{r include = FALSE}
 # Read all input files
@@ -40,6 +47,7 @@ input_data <-
   map(input_files, ~ readxl::read_excel(here(.)))
 ```
 
+Let's take a closer look at what we produced:
 
 ```{r include = FALSE}
 # Analyze the results
@@ -50,6 +58,7 @@ input_data[[1]]
 names(input_data)
 ```
 
+`map()` can be included in your pipe in the following way:
 
 ```{r include = FALSE}
 # Pipe notation

@@ -2,7 +2,7 @@
 rm(list = ls())
 ```
 
-## Indexing
+## Indexing {#indexing}
 
 <details><summary>Setup code</summary>
 ```{r include = FALSE}
