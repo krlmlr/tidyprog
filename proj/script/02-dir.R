@@ -31,3 +31,15 @@ files_df %>%
 # Extract a specific column as a vector
 files_df %>%
   pull(name)
+
+# Exercises
+
+fs::dir_ls() %>% 
+  enframe()
+
+fs::dir_info()
+fs::dir_info() %>% 
+  pull()
+fs::dir_info() %>% 
+  select(name = path, path) %>% 
+  deframe()
