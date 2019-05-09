@@ -22,7 +22,7 @@ list(
 # Vectors and lists can have names:
 c(a = 1, b = 2, c = 3)
 list(a = 1:3, b = 5)
-set_names(1:3, letters[1:3])
+rlang::set_names(1:3, letters[1:3])
 
 # Preview: vctrs::list_of() to construct typed lists
 #vctrs::list_of(1, 2, 3)
