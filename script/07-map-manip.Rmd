@@ -1,4 +1,4 @@
-```{r 06-remove-all, include = FALSE}
+```{r 07-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -10,7 +10,7 @@ rm(list = ls())
 ### Manipulating all datasets
 
 ```
-```{r 06-setup-05-map-manip-r}
+```{r 07-setup-05-map-manip-r}
 library(tidyverse)
 library(here)
 
@@ -32,7 +32,7 @@ Of each tibble we only want the column `time` and all the columns whose name con
 ```{r include = FALSE}
 # Manipulate results
 ```
-```{r 06-manipulate-results}
+```{r 07-manipulate-results}
 input_data %>%
   map(~ select(., time, contains("emperature")))
 ```
@@ -43,7 +43,7 @@ We only want those with values in column `temperature` greater or equal than 14Â
 ```{r include = FALSE}
 # Manipulate results more
 ```
-```{r 06-manipulate-results-more}
+```{r 07-manipulate-results-more}
 input_data %>%
   map(~ select(., time, contains("emperature"))) %>%
   map(~ filter(., temperature >= 14))
@@ -54,7 +54,7 @@ Create a custom function for that specific purpose in a call to `map()`:
 ```{r include = FALSE}
 # Create a function to manipulate
 ```
-```{r 06-create-a-function-to-manipulate}
+```{r 07-create-a-function-to-manipulate}
 manipulator <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
@@ -67,7 +67,7 @@ Let's look at the object `manipulator`, that we created:
 ```{r include = FALSE}
 # Functions are first-class objects!
 ```
-```{r 06-functions-are-first-class-objects}
+```{r 07-functions-are-first-class-objects}
 manipulator
 ```
 
@@ -76,7 +76,7 @@ Testing the function:
 ```{r include = FALSE}
 # Test the function
 ```
-```{r 06-test-the-function}
+```{r 07-test-the-function}
 manipulator(input_data[[4]])
 ```
 
@@ -85,7 +85,7 @@ Now let's use `map()` to let our function act on the entire dataset:
 ```{r include = FALSE}
 # Run the function on the entire dataset
 ```
-```{r 06-run-the-function-on-the-entire-dataset}
+```{r 07-run-the-function-on-the-entire-dataset}
 manipulated_data <- map(input_data, ~ manipulator(.))
 manipulated_data
 ```
@@ -95,6 +95,6 @@ manipulated_data
 ```{r include = FALSE}
 # Shortcut
 ```
-```{r 06-shortcut}
+```{r 07-shortcut}
 map(input_data, manipulator)
 ```
