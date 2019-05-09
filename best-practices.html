@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Programming in the tidyverse</title>
-  <meta name="description" content="Programming in the tidyverse">
+  <title>8 Best practices | Programming in the tidyverse</title>
+  <meta name="description" content="8 Best practices | Programming in the tidyverse">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Programming in the tidyverse" />
+  <meta property="og:title" content="8 Best practices | Programming in the tidyverse" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Programming in the tidyverse" />
+  <meta name="twitter:title" content="8 Best practices | Programming in the tidyverse" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="tidy-evaluation-1.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -234,118 +234,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Programming in the tidyverse</h1>
-<p class="author"><em>Kirill Müller, Tobias Schieferdecker</em></p>
-<p class="date"><em>10 May 2019, 00:16 CEST</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>Material for the <a href="https://www.zhrcourses.uzh.ch/en/programm2019/tidyverse.html">zhRcourse workshop “Programming in the tidyverse”</a> on May 10, 2019.</p>
-<div id="links" class="section level2 unnumbered">
-<h2>Links</h2>
+<div id="best-practices" class="section level1">
+<h1><span class="header-section-number">8</span> Best practices</h1>
+<p>R code is often organized in packages that can be installed from centralized repositories such as CRAN or GitHub.
+If you are new to writing R packages, this course cannot give a complete introduction into packages.
+It is still useful to embrace some very few concepts of R packages to gain access to a vast toolbox and also organize your code in a standardized way familiar to other users.
+With the first steps in place, the road to your first R package may become less steep.</p>
 <ul>
-<li>This website: <a href="https://bit.ly/tidyprog" class="uri">https://bit.ly/tidyprog</a>
+<li>Create a <code>DESCRIPTION</code> file to declare dependencies and allow easy reloading of the functions you define</li>
+<li>Store your functions in <code>.R</code> files in the <code>R/</code> directory in your project
 <ul>
-<li>Longer URL: <a href="https://krlmlr.github.io/tidyprog/" class="uri">https://krlmlr.github.io/tidyprog/</a></li>
+<li>Scripts that you execute live in <code>script/</code> or a similar directory</li>
 </ul></li>
-<li>Scripts and installation instructions: <a href="https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr" class="uri">https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr</a>
-<ul>
-<li>Prepared scripts: <a href="https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr/script" class="uri">https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr/script</a></li>
-<li>Live code: <a href="https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr/live" class="uri">https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr/live</a></li>
-<li>The code <strong>will be updated live</strong> with a delay of a few seconds during the workshop, it is <strong>not necessary</strong> to repeat the instructor’s typing</li>
-</ul></li>
-<li>rstudio.cloud server: <a href="https://rstudio.cloud/project/329883" class="uri">https://rstudio.cloud/project/329883</a>
-<ul>
-<li>Sign up, or log in with Google or GitHub</li>
-<li>Click the “Save a private copy” link next to the <strong>TEMPORARY</strong> label in red in the header</li>
-<li>All necessary packages are preinstalled</li>
-</ul></li>
+<li>Use <a href="https://github.com/klutometis/roxygen">roxygen2</a> to document your functions close to the source</li>
+<li>Write tests for your functions, e.g. with <a href="https://testthat.r-lib.org/">testthat</a></li>
 </ul>
+<p>See <a href="http://r-pkgs.had.co.nz/">R packages</a> for a more comprehensive treatment.</p>
+<div id="description" class="section level2">
+<h2><span class="header-section-number">8.1</span> DESCRIPTION</h2>
+<p>Create and open a new RStudio project.
+Then, create a <code>DESCRIPTION</code> file with <code>usethis::use_description()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;usethis&quot;)</span>
+usethis<span class="op">::</span><span class="kw">use_description</span>()</code></pre>
+<p>Double-check success:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
+devtools<span class="op">::</span><span class="kw">load_all</span>()</code></pre>
+<p>Declare that your project requires the tidyverse and the here package:</p>
+<pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">&quot;tidyverse&quot;</span>)
+usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">&quot;here&quot;</span>)</code></pre>
 </div>
-<div id="package-versions-used" class="section level2 unnumbered">
-<h2>Package versions used</h2>
-<details>
-<p><summary>Click to expand</summary></p>
-<pre class="sourceCode r"><code class="sourceCode r">withr<span class="op">::</span><span class="kw">with_options</span>(<span class="kw">list</span>(<span class="dt">width =</span> <span class="dv">80</span>), <span class="kw">print</span>(sessioninfo<span class="op">::</span><span class="kw">session_info</span>()))</code></pre>
-<pre><code>## ─ Session info ───────────────────────────────────────────────────────────────
-##  setting  value                       
-##  version  R version 3.6.0 (2017-01-27)
-##  os       Ubuntu 16.04.6 LTS          
-##  system   x86_64, linux-gnu           
-##  ui       X11                         
-##  language en_US.UTF-8                 
-##  collate  en_US.UTF-8                 
-##  ctype    en_US.UTF-8                 
-##  tz       UTC                         
-##  date     2019-05-09                  
-## 
-## ─ Packages ───────────────────────────────────────────────────────────────────
-##  package     * version     date       lib source                           
-##  assertthat    0.2.1       2019-03-21 [1] CRAN (R 3.6.0)                   
-##  backports     1.1.4       2019-04-10 [1] CRAN (R 3.6.0)                   
-##  bookdown      0.9         2018-12-21 [1] CRAN (R 3.6.0)                   
-##  broom         0.5.2       2019-04-07 [1] CRAN (R 3.6.0)                   
-##  cellranger    1.1.0       2016-07-27 [1] CRAN (R 3.6.0)                   
-##  cli           1.1.0       2019-03-19 [1] CRAN (R 3.6.0)                   
-##  codetools     0.2-16      2018-12-24 [3] CRAN (R 3.6.0)                   
-##  colorspace    1.4-1       2019-03-18 [1] CRAN (R 3.6.0)                   
-##  crayon        1.3.4       2017-09-16 [1] CRAN (R 3.6.0)                   
-##  digest        0.6.18      2018-10-10 [1] CRAN (R 3.6.0)                   
-##  dplyr       * 0.8.0.1     2019-02-15 [1] CRAN (R 3.6.0)                   
-##  evaluate      0.13        2019-02-12 [1] CRAN (R 3.6.0)                   
-##  fansi         0.4.0       2018-10-05 [1] CRAN (R 3.6.0)                   
-##  forcats     * 0.4.0       2019-02-17 [1] CRAN (R 3.6.0)                   
-##  generics      0.0.2       2018-11-29 [1] CRAN (R 3.6.0)                   
-##  ggplot2     * 3.1.1       2019-04-07 [1] CRAN (R 3.6.0)                   
-##  glue          1.3.1       2019-03-12 [1] CRAN (R 3.6.0)                   
-##  gtable        0.3.0       2019-03-25 [1] CRAN (R 3.6.0)                   
-##  haven         2.1.0       2019-02-19 [1] CRAN (R 3.6.0)                   
-##  here        * 0.1         2017-05-28 [1] CRAN (R 3.6.0)                   
-##  hms           0.4.2       2018-03-10 [1] CRAN (R 3.6.0)                   
-##  htmltools     0.3.6       2017-04-28 [1] CRAN (R 3.6.0)                   
-##  httr          1.4.0       2018-12-11 [1] CRAN (R 3.6.0)                   
-##  jsonlite      1.6         2018-12-07 [1] CRAN (R 3.6.0)                   
-##  knitr         1.22        2019-03-08 [1] CRAN (R 3.6.0)                   
-##  lattice       0.20-38     2018-11-04 [3] CRAN (R 3.6.0)                   
-##  lazyeval      0.2.2       2019-03-15 [1] CRAN (R 3.6.0)                   
-##  lubridate     1.7.4       2018-04-11 [1] CRAN (R 3.6.0)                   
-##  magrittr      1.5         2014-11-22 [1] CRAN (R 3.6.0)                   
-##  memoise       1.1.0       2017-04-21 [1] CRAN (R 3.6.0)                   
-##  modelr        0.1.4       2019-02-18 [1] CRAN (R 3.6.0)                   
-##  munsell       0.5.0       2018-06-12 [1] CRAN (R 3.6.0)                   
-##  nlme          3.1-139     2019-04-09 [3] CRAN (R 3.6.0)                   
-##  pillar        1.3.1       2018-12-15 [1] CRAN (R 3.6.0)                   
-##  pkgconfig     2.0.2       2018-08-16 [1] CRAN (R 3.6.0)                   
-##  plyr          1.8.4       2016-06-08 [1] CRAN (R 3.6.0)                   
-##  purrr       * 0.3.2       2019-03-15 [1] CRAN (R 3.6.0)                   
-##  R6            2.4.0       2019-02-14 [1] CRAN (R 3.6.0)                   
-##  Rcpp          1.0.1       2019-03-17 [1] CRAN (R 3.6.0)                   
-##  readr       * 1.3.1       2018-12-21 [1] CRAN (R 3.6.0)                   
-##  readxl        1.3.1       2019-03-13 [1] CRAN (R 3.6.0)                   
-##  rlang         0.3.4       2019-04-07 [1] CRAN (R 3.6.0)                   
-##  rmarkdown     1.12        2019-03-14 [1] CRAN (R 3.6.0)                   
-##  rprojroot     1.3-2       2018-01-03 [1] CRAN (R 3.6.0)                   
-##  rstudioapi    0.10        2019-03-19 [1] CRAN (R 3.6.0)                   
-##  rvest         0.3.3       2019-04-11 [1] CRAN (R 3.6.0)                   
-##  scales        1.0.0       2018-08-09 [1] CRAN (R 3.6.0)                   
-##  sessioninfo   1.1.1       2018-11-05 [1] CRAN (R 3.6.0)                   
-##  stringi       1.4.3       2019-03-12 [1] CRAN (R 3.6.0)                   
-##  stringr     * 1.4.0       2019-02-10 [1] CRAN (R 3.6.0)                   
-##  tibble      * 2.1.1       2019-03-16 [1] CRAN (R 3.6.0)                   
-##  tic           0.2.13.9015 2019-05-06 [1] Github (ropenscilabs/tic@09bacc6)
-##  tidyr       * 0.8.3       2019-03-01 [1] CRAN (R 3.6.0)                   
-##  tidyselect    0.2.5       2018-10-11 [1] CRAN (R 3.6.0)                   
-##  tidyverse   * 1.2.1       2017-11-14 [1] CRAN (R 3.6.0)                   
-##  withr         2.1.2       2018-03-15 [1] CRAN (R 3.6.0)                   
-##  xfun          0.6         2019-04-02 [1] CRAN (R 3.6.0)                   
-##  xml2          1.2.0       2018-01-24 [1] CRAN (R 3.6.0)                   
-##  yaml          2.2.0       2018-07-25 [1] CRAN (R 3.6.0)                   
-## 
-## [1] /home/travis/R/Library
-## [2] /usr/local/lib/R/site-library
-## [3] /home/travis/R-bin/lib/R/library</code></pre>
-</details>
+<div id="r" class="section level2">
+<h2><span class="header-section-number">8.2</span> R</h2>
+<p>With a <code>DESCRIPTION</code> file defined, create a new <code>.R</code> file and save it in the <code>R/</code> directory.
+(Create this directory if it does not exist.)
+Create a function in this file, save the file:</p>
+<pre class="sourceCode r"><code class="sourceCode r">hi &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">text =</span> <span class="st">&quot;Hello, world!&quot;</span>) {
+  <span class="kw">print</span>(text)
+  <span class="kw">invisible</span>(text)
+}</code></pre>
+<p>Do not source the file.</p>
+<p>Restart R (with Ctrl + Shift + F10 in RStudio).</p>
+<p>Run <code>devtools::load_all()</code> again, you can use the shortcut Ctrl + Shift + L or Cmd + Shift + L in RStudio.</p>
+<p>Check that you can run <code>hi()</code> in the console:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hi</span>()</code></pre>
+<pre><code>## [1] &quot;Hello, world!&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hi</span>(<span class="st">&quot;Wow!&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;Wow!&quot;</code></pre>
+<p>Edit the function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">hi &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">text =</span> <span class="st">&quot;Wow!&quot;</span>) {
+  <span class="kw">print</span>(text)
+  <span class="kw">invisible</span>(text)
+}</code></pre>
+<p>Save the file, but do not source it.</p>
+<p>Run <code>devtools::load_all()</code> again, you can use the shortcut Ctrl + Shift + L or Cmd + Shift + L in RStudio.</p>
+<p>Check that the new implementation of <code>hi()</code> is active:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hi</span>()</code></pre>
+<pre><code>## [1] &quot;Wow!&quot;</code></pre>
+<p>All functions that are required for your project are stored in this directory.
+Do not store executable scripts, use a <code>script/</code> directory.</p>
+</div>
+<div id="roxygen2" class="section level2">
+<h2><span class="header-section-number">8.3</span> roxygen2</h2>
+<p>The following intuitive annotation syntax is a standard way to create documentation for your functions:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&#39; Print a welcome message</span>
+<span class="co">#&#39; </span>
+<span class="co">#&#39; This function prints &quot;Wow!&quot;, or a custom text, on the console.</span>
+<span class="co">#&#39;</span>
+<span class="co">#&#39; @param text The text to print, &quot;Wow!&quot; by default.</span>
+<span class="co">#&#39; </span>
+<span class="co">#&#39; @return The `text` argument, invisibly.</span>
+<span class="co">#&#39; </span>
+<span class="co">#&#39; @examples</span>
+<span class="co">#&#39; hi()</span>
+<span class="co">#&#39; hi(&quot;Hello!&quot;)</span>
+hi &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">text =</span> <span class="st">&quot;Wow!&quot;</span>) {
+  <span class="kw">print</span>(text)
+  <span class="kw">invisible</span>(text)
+}</code></pre>
+<p>This annotation can be rendered to a nicely looking HTML page with the roxygen2 and pkgdown packages.
+All you need to do is provide (and maintain) it.</p>
+</div>
+<div id="testthat" class="section level2">
+<h2><span class="header-section-number">8.4</span> testthat</h2>
+<p>Automated tests make sure that the functions you write today continue working tomorrow.
+Create your first test with <code>usethis::use_test()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;testthat&quot;)</span>
+usethis<span class="op">::</span><span class="kw">use_test</span>(<span class="st">&quot;hi&quot;</span>)</code></pre>
+<p>The file <code>tests/testthat/test-hi.R</code> is created, with the following contents:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test_that</span>(<span class="st">&quot;multiplication works&quot;</span>, {
+  <span class="kw">expect_equal</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">4</span>)
+})</code></pre>
+<p>Replace this predefined text with a test that makes more sense for us:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test_that</span>(<span class="st">&quot;hi() works&quot;</span>, {
+  <span class="kw">expect_output</span>(<span class="kw">hi</span>(), <span class="st">&quot;Wow&quot;</span>)
+  <span class="kw">expect_output</span>(<span class="kw">hi</span>(<span class="st">&quot;Hello&quot;</span>), <span class="st">&quot;Hello&quot;</span>)
+})</code></pre>
+<p>Run the new test with <code>devtools::test()</code>, you can use the shortcut Ctrl + Shift + T or Cmd + Shift + T in RStudio.</p>
+<p>Check that the test actually detects failures by modifying the implementation of <code>hi()</code> and rerunning the test:</p>
+<pre class="sourceCode r"><code class="sourceCode r">hi &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">text =</span> <span class="st">&quot;Oops!&quot;</span>) {
+  <span class="kw">print</span>(text)
+  <span class="kw">invisible</span>(text)
+}</code></pre>
+<p>Run the new test with <code>devtools::test()</code>, you can use the shortcut Ctrl + Shift + T or Cmd + Shift + T in RStudio.
+One test should be failing now.</p>
 
 </div>
 </div>
@@ -354,8 +345,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidy-evaluation-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -210,6 +210,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data-1.html"><a href="non-rectangular-data-1.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation-1.html"><a href="tidy-evaluation-1.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
+<li class="chapter" data-level="8.1" data-path="best-practices.html"><a href="best-practices.html#description"><i class="fa fa-check"></i><b>8.1</b> DESCRIPTION</a></li>
+<li class="chapter" data-level="8.2" data-path="best-practices.html"><a href="best-practices.html#r"><i class="fa fa-check"></i><b>8.2</b> R</a></li>
+<li class="chapter" data-level="8.3" data-path="best-practices.html"><a href="best-practices.html#roxygen2"><i class="fa fa-check"></i><b>8.3</b> roxygen2</a></li>
+<li class="chapter" data-level="8.4" data-path="best-practices.html"><a href="best-practices.html#testthat"><i class="fa fa-check"></i><b>8.4</b> testthat</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
 </ul>
 
@@ -285,7 +291,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpzO4t6j/file2c6adbc2587</code></pre>
+<pre><code>## 2 written to /tmp/RtmpVmN093/file2d8733173458</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -293,7 +299,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpzO4t6j/file2c6aec9cb85</code></pre>
+<pre><code>## 6 written to /tmp/RtmpVmN093/file2d875abf7bb</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -477,7 +483,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x9bf00c8&gt;</code></pre>
+## &lt;environment: 0x8162658&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -513,7 +519,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0xa073048&gt;</code></pre>
+## &lt;environment: 0x5647a60&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
