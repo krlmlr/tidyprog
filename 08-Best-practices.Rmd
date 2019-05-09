@@ -13,19 +13,13 @@ With the first steps in place, the road to your first R package may become less 
 
 See [R packages](http://r-pkgs.had.co.nz/) for a more comprehensive treatment.
 
-```{r include = FALSE}
-unlink("pkg", recursive = TRUE)
-dir.create("pkg")
-usethis::proj_set("pkg", force = TRUE)
-```
-
 
 ## DESCRIPTION
 
 Create and open a new RStudio project.
 Then, create a `DESCRIPTION` file with `usethis::use_description()`:
 
-```{r}
+```r
 # install.packages("usethis")
 usethis::use_description()
 ```
@@ -39,7 +33,7 @@ devtools::load_all()
 
 Declare that your project requires the tidyverse and the here package:
 
-```{r}
+```r
 usethis::use_package("tidyverse")
 usethis::use_package("here")
 ```
@@ -128,7 +122,7 @@ All you need to do is provide (and maintain) it.
 Automated tests make sure that the functions you write today continue working tomorrow.
 Create your first test with `usethis::use_test()`:
 
-```{r}
+```r
 # install.packages("testthat")
 usethis::use_test("hi")
 ```

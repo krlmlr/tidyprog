@@ -23,6 +23,5 @@ Imports:
     plotly,
     sessioninfo,
     shiny,
-    tidyverse,
-    usethis
+    tidyverse
 Roxygen: list(markdown = TRUE)
