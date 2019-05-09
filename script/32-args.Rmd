@@ -3,9 +3,9 @@ rm(list = ls())
 ```
 
 
-## Arguments
+## Arguments {#args}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Arguments
 
@@ -16,6 +16,8 @@ library(here)
 ```
 </details>
 
+By adding arguments to your functions, you can turn them into tools for a wide range of applications.
+But it is advisable to be conservative here: try to minimise the number of arguments to the necessary ones, so the user has a clear and intuitive interface to deal with.
 
 Functions with arguments:
 
@@ -56,7 +58,7 @@ read_weather_data <- function() {
 }
 ```
 
-Testing the new function by running it:
+Always immediately test the newly created function by running it (best with varying parameters):
 
 ```{r include = FALSE}
 # Still need to run a function

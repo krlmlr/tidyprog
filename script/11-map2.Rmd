@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Manipulating pairwise
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Manipulating pairwise
 
@@ -31,6 +31,11 @@ manipulated_data <-
 ```
 </details>
 
+Here we take cases into consideration, when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.
+
+We start with the reduced list of tibbles `manipulated_data` from ["Manipulating all datasets"](#map_manip).
+
+We first prepare a list of future output filenames:
 
 ```{r include = FALSE}
 # Write back results: new file names
@@ -40,6 +45,9 @@ output_filenames <- tempfile(names(manipulated_data), fileext = ".csv")
 output_filenames
 ```
 
+We want to use `readr::write_csv()` to write each tibble into the respective file.
+`write_csv()` needs at least 2 arguments: the tibble itself and the path to the filename.
+We use `map2()` to handle this:
 
 ```{r include = FALSE}
 # Iterate over pairs
@@ -48,6 +56,7 @@ output_filenames
 map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
 
+Since we are just interested in the side-effects of `write_csv()` and not in the displayed output, we rather use the related function `walk2()`, which does not return output.
 
 ```{r include = FALSE}
 # We don't really need the output

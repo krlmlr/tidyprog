@@ -1,0 +1,55 @@
+```{r 73-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Flattening
+
+<details><summary>Setup code</summary>
+```{r include = FALSE}
+### Flattening
+
+```
+```{r 73-setup-73-flatten-r}
+library(tidyverse)
+library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+coordinates <-
+  komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates"))
+```
+</details>
+
+
+```{r include = FALSE}
+# Odd structure:
+```
+```{r 73-odd-structure}
+coordinates %>%
+  pluck(1)
+```
+
+
+```{r include = FALSE}
+# Flattening can chop off a layer, need to specify output type:
+```
+```{r 73-flattening-can-chop-off-a-layer-need-to-specify-output-type}
+coordinates %>%
+  pluck(1) %>%
+  flatten_dbl()
+```
+
+
+```{r include = FALSE}
+# Apply to entire list:
+```
+```{r 73-apply-to-entire-list}
+coordinates %>%
+  map(~ flatten_dbl(.))
+```

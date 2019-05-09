@@ -3,9 +3,9 @@ rm(list = ls())
 ```
 
 
-## Nesting and unnesting
+## Nesting and unnesting {#nest}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Nesting and unnesting
 
@@ -23,6 +23,12 @@ dict_data <-
 ```
 </details>
 
+How to work with nested data?
+
+We start with the tibble `dict_data` from section ["Moving to tibble-land"](#mut_map), which includes the nested tibbles in its column `data`.
+
+If we want to actually look at the data we can directly use `tidyr::unnest()` on the whole tibble, which by default acts on all list-columns.
+This blows up our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:
 
 ```{r include = FALSE}
 # Flatten a nested tibble with unnest():
@@ -36,6 +42,9 @@ dict_data %>%
   count(name)
 ```
 
+Inversely, if you want to have a more condensed view of your data, you can nest again.
+By default, the function `tidyr::nest()` will nest all data.
+Therefore it is often useful to tell it, which columns to ignore:
 
 ```{r include = FALSE}
 # Inverse operation: nest()
@@ -46,6 +55,8 @@ dict_data %>%
   nest(-city_code, -name, -lng, -lat)
 ```
 
+Using this, we structure our data in new, customized ways.
+Here, we create a new column `date`, by dropping the detailed information of the time of the day, and create a nested tibble for each day:
 
 ```{r include = FALSE}
 # Split into daily data:

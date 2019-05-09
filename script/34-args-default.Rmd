@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Default values
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Default values
 
@@ -13,9 +13,6 @@ rm(list = ls())
 ```{r 34-setup-34-args-default-r}
 library(tidyverse)
 library(here)
-library(conflicted)
-
-conflict_prefer("filter", "dplyr")
 
 
 weather_path <- function(filename) {
@@ -28,8 +25,11 @@ read_weather_file <- function(filename) {
 ```
 </details>
 
+For user-friendliness it is often good practice to provide default values for parameters
 
-Provide default values for parameters:
+We start with the functions `weather_path()` from section ["Arguments"](#args) and `read_weather_file()` from section ["Intermediate variables"](#intermediate).
+
+Here an example of a boolean argument which when `TRUE` leads to dropping the data about Zurich.
 
 ```{r include = FALSE}
 # Function arguments can have default values

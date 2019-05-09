@@ -72,7 +72,7 @@ files_df %>%
 files_df %>%
   mutate(basename = basename(r)) %>%
   mutate(group = substr(basename, 1, 1)) %>%
-  mutate(rmd_path_code = paste0('here("script", "', basename, 'md")')) %>%
+  mutate(rmd_path_code = paste0('here::here("script", "', basename, 'md")')) %>%
   mutate(chunk = paste0('```{r child = ', rmd_path_code, '}\n```')) %>%
   nest(-group) %>%
   mutate(chunks = map_chr(data, ~ glue::glue_collapse(.$chunk, sep = "\n\n"))) %>%

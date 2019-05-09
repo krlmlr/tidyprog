@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Definition and execution
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Definition and execution
 
@@ -16,13 +16,7 @@ library(here)
 ```
 </details>
 
-
-```{r include = FALSE}
-## TODO: Split script, don't overwrite!
-```
-```{r 31-todo-split-script-don-t-overwrite}
-
-```
+In this chapter the basics of function definitions are covered.
 
 
 ```{r include = FALSE}

@@ -1,20 +1,23 @@
-```{r child = here("script", "01-intro.Rmd")}
+```{r child = here::here("script", "01-intro.Rmd")}
 ```
 
-```{r child = here("script", "02-dir.Rmd")}
+```{r child = here::here("script", "02-dir.Rmd")}
 ```
 
-```{r child = here("script", "03-names.Rmd")}
+```{r child = here::here("script", "03-names.Rmd")}
 ```
 
-```{r child = here("script", "04-index.Rmd")}
+```{r child = here::here("script", "04-index.Rmd")}
 ```
 
-```{r child = here("script", "05-map.Rmd")}
+```{r child = here::here("script", "04-ix-construct.Rmd")}
 ```
 
-```{r child = here("script", "06-map-manip.Rmd")}
+```{r child = here::here("script", "05-map.Rmd")}
 ```
 
-```{r child = here("script", "07-map-type.Rmd")}
+```{r child = here::here("script", "06-map-manip.Rmd")}
+```
+
+```{r child = here::here("script", "07-map-type.Rmd")}
 ```

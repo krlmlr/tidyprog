@@ -1,6 +1,7 @@
 ---
 title: "Programming in the tidyverse"
-author: "Kirill Müller"
+author: "Kirill Müller, Tobias Schieferdecker"
+date: "`r format(Sys.time(), '%d %B %Y, %H:%M')`"
 documentclass: "book"
 site: bookdown::bookdown_site
 ---
@@ -8,8 +9,10 @@ site: bookdown::bookdown_site
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE)
 options(tibble.print_min = 3, tibble.print_max = 5)
-options(crayon.enabled = TRUE, pillar.bold = TRUE)
-fansi::set_knit_hooks(knitr::knit_hooks)
+if (!knitr::is_latex_output()) {
+  options(crayon.enabled = TRUE, pillar.bold = TRUE)
+  fansi::set_knit_hooks(knitr::knit_hooks)
+}
 library(here)
 ```
 

@@ -1,0 +1,29 @@
+### Construction
+
+# Use c() to construct a vector, all elements will be of the same type:
+c(1, 2, 3)
+c(1:3, 5)
+c(1:3, "5")
+
+# Use list() to construct a list, all elements can have different types and lengths:
+list(1, 2, 3)
+list(1:3, 5)
+list(1:3, "5")
+
+# Lists can be nested:
+list(
+  1:3,
+  list(4, "5"),
+  list(
+    list(letters[6:8]),
+    9
+  )
+)
+
+# Vectors and lists can have names:
+c(a = 1, b = 2, c = 3)
+list(a = 1:3, b = 5)
+
+# Preview: vctrs::list_of() to construct typed lists
+vctrs::list_of(1, 2, 3)
+vctrs::list_of(letters[1:3], "e")

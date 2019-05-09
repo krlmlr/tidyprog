@@ -3,9 +3,9 @@ rm(list = ls())
 ```
 
 
-## Moving to tibble-land
+## Moving to tibble-land {#mut_map}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Moving to tibble-land
 
@@ -24,6 +24,11 @@ input_data <-
 ```
 </details>
 
+How to combine the abilities of `map()` & co., which work on vectors and lists, with our commonly used data structure, the tibble?
+
+We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map) and with `dict` from section ["Named vectors and two-column tibbles"](#names).
+
+Produce a data frame from `input_data` with `enframe()` leads to a maybe at first surprising, but oftentimes useful result:
 
 ```{r include = FALSE}
 # Lists are also vectors, enframe() returns a nested tibble!
@@ -33,6 +38,10 @@ input_data %>%
   enframe()
 ```
 
+This is because lists are also vectors.
+In our case each list entry contains a tibble, which can be "nested" into each entry of column `value`.
+
+Starting with the tibble `dict` we can see how `dpylr::mutate()` and `map()` can nicely work together to produce a somewhat similar result:
 
 ```{r include = FALSE}
 # Operate in "tibble-land" right away: columns are vectors
@@ -45,6 +54,9 @@ dict %>%
   )
 ```
 
+This works because `R` interprets columns of tibbles as vectors, which can be fed to `map()`.
+
+Deselect i.e. drop columns using `select()` with `-`:
 
 ```{r include = FALSE}
 # Keep important columns

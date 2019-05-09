@@ -1,16 +1,16 @@
-```{r 05-remove-all, include = FALSE}
+```{r 06-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
 
 ## Processing all files {#map}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Processing all files
 
 ```
-```{r 05-setup-05-map-r}
+```{r 06-setup-05-map-r}
 library(tidyverse)
 library(here)
 
@@ -31,7 +31,7 @@ As just seen, manually choosing just one entry of a vector works like so:
 ```{r include = FALSE}
 # Read a single input file
 ```
-```{r 05-read-a-single-input-file}
+```{r 06-read-a-single-input-file}
 readxl::read_excel(here(input_files[[1]]))
 ```
 
@@ -41,7 +41,7 @@ The output of `map()` is a (named, if the input vector/list was named) list of t
 ```{r include = FALSE}
 # Read all input files
 ```
-```{r 05-read-all-input-files}
+```{r 06-read-all-input-files}
 input_data <-
   map(input_files, ~ readxl::read_excel(here(.)))
 ```
@@ -51,7 +51,7 @@ Let's take a closer look at what we produced:
 ```{r include = FALSE}
 # Analyze the results
 ```
-```{r 05-analyze-the-results}
+```{r 06-analyze-the-results}
 input_data
 input_data[[1]]
 names(input_data)
@@ -62,7 +62,7 @@ names(input_data)
 ```{r include = FALSE}
 # Pipe notation
 ```
-```{r 05-pipe-notation}
+```{r 06-pipe-notation}
 input_files %>%
   map(~ readxl::read_excel(here(.)))
 ```

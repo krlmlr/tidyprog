@@ -5,7 +5,7 @@ rm(list = ls())
 
 ## Named vectors and two-column tibbles {#names}
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Named vectors and two-column tibbles
 
@@ -18,7 +18,7 @@ library(here)
 
 Here we look at tidyverse-functions to work with named vectors and tibbles with more columns and the relations netween the two.
 
-As seen in the ["introduction"](#intro-data), load a table -- here a dictionary detailing information related to an id-like name -- from an MS Excel file with `readxl::read_excel()`:
+As seen in section ["Data"](#intro-data), load a table -- here a dictionary detailing information related to an id-like name -- from an MS Excel file with `readxl::read_excel()`:
 
 ```{r include = FALSE}
 # Load dictionary from file
@@ -58,10 +58,23 @@ When given a more-than-2-column tibble, it will use the first two columns as nam
 # Acquire file names as a named vector
 ```
 ```{r 03-acquire-file-names-as-a-named-vector}
-dict %>%
+weather_filenames <-
+  dict %>%
   select(city_code, weather_filename) %>%
   deframe()
+weather_filenames
 ```
+
+The `names()` function accesses the names of a vector:
+
+```{r include = FALSE}
+# Use names() to access names
+```
+```{r 03-use-names-to-access-names}
+weather_filenames %>%
+  names()
+```
+
 
 Some operations producing vectors from vectors cause the names to be lost:
 
@@ -69,9 +82,7 @@ Some operations producing vectors from vectors cause the names to be lost:
 # Not all operations maintain vector names!
 ```
 ```{r 03-not-all-operations-maintain-vector-names}
-dict %>%
-  select(city_code, weather_filename) %>%
-  deframe() %>%
+weather_filenames %>%
   here()
 ```
 

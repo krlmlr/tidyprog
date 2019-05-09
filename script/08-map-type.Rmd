@@ -1,4 +1,4 @@
-```{r 07-remove-all, include = FALSE}
+```{r 08-remove-all, include = FALSE}
 rm(list = ls())
 ```
 
@@ -6,12 +6,12 @@ rm(list = ls())
 
 
 
-<details><summary>Setup code</summary>
+<details><summary>Click here to make setup code visible</summary>
 ```{r include = FALSE}
 ### Typed output
 
 ```
-```{r 07-setup-07-map-type-r}
+```{r 08-setup-07-map-type-r}
 library(tidyverse)
 library(here)
 
@@ -34,7 +34,7 @@ We want to know the number of rows of each tibble in `input_data`:
 ```{r include = FALSE}
 # map() returns a list
 ```
-```{r 07-map-returns-a-list}
+```{r 08-map-returns-a-list}
 input_data %>%
   map(~ nrow(.))
 ```
@@ -45,7 +45,7 @@ Therefore we can call `map_int()`, to create a named integer vector:
 ```{r include = FALSE}
 # Return an integer vector with map_int()
 ```
-```{r 07-return-an-integer-vector-with-map-int}
+```{r 08-return-an-integer-vector-with-map-int}
 input_data %>%
   map_int(~ nrow(.))
 ```
@@ -55,7 +55,7 @@ If the output is a character variable, use `map_chr()`:
 ```{r include = FALSE}
 # ... or a character vector?
 ```
-```{r 07-or-a-character-vector}
+```{r 08-or-a-character-vector}
 input_data %>%
   map_chr(~ as.character(nrow(.)))
 ```

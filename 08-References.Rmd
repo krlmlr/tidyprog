@@ -1,5 +1,9 @@
 # `r if (knitr::is_html_output()) '# References {-}'`
 
+- R for data science: https://r4ds.had.co.nz/
+
+- Row oriented workflows: https://github.com/jennybc/row-oriented-workflows#readme
+
 - Advanced R: http://adv-r.had.co.nz/
 
 - Tidy evaluation: https://tidyeval.tidyverse.org/
@@ -7,3 +11,7 @@
 - R packages: http://r-pkgs.had.co.nz/
 
 - How R searches and finds stuff: http://blog.obeautifulcode.com/R/How-R-Searches-And-Finds-Stuff/
+
+- What they forgot to teach you: https://whattheyforgot.org/
+
+- furrr package: https://davisvaughan.github.io/furrr/
