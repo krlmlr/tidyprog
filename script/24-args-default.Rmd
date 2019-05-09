@@ -36,7 +36,7 @@ get_weather_data_for <- function(city_code) {
 
 For user-friendliness it is often good practice to provide default values for parameters
 
-We start with the functions `weather_path()` from section ["Arguments"](#args) and `get_weather_data_for()` from section ["Intermediate variables"](#intermediate).
+We start with the function`get_weather_data_for()` from section ["Intermediate variables"](#intermediate).
 
 Here an example of a boolean argument which when `TRUE` leads to dropping the data about Zurich.
 
@@ -72,3 +72,30 @@ read_weather_data(TRUE)
 read_weather_data(omit_zurich = TRUE)
 read_weather_data()
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Update `get_weather_data_for()` to return Zurich data if called without arguments. Is this a good idea?
+
+    ```r
+    get_weather_data_for <- _____ {
+      _____
+    }
+    
+    get_weather_data_for()
+    get_weather_data_for("tel_aviv")
+    ```
+    
+    ```{r echo = FALSE}
+    get_weather_data_for <- function(city_code = "zurich") {
+      read_weather_file(get_weather_file_for(city_code))
+    }
+    
+    get_weather_data_for()
+    get_weather_data_for("tel_aviv")
+    ```
