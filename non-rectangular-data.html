@@ -171,12 +171,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
-<li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#traversing"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
-<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#iterating-and-traversing"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
-<li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#plucking-multiple-locations"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
-<li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flattening"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
-<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transposing"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
-<li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangling"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
+<li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
+<li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
@@ -202,13 +202,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>working with raw data from online services (JSON)</p>
 </blockquote>
-<div id="traversing" class="section level2">
+<div id="berlin" class="section level2">
 <h2><span class="header-section-number">6.1</span> Traversing</h2>
 <details>
 <p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
+<p>We are now working with the results from downloading geolocation data from <a href="http://photon.komoot.de/">photon.komoot.de</a>.
+This is stored in the file <code>here(&quot;data/komoot-berlin.rds&quot;)</code> and we can read it with <code>readRDS()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">berlin &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot-berlin.rds&quot;</span>))
 
 berlin</code></pre>
@@ -280,6 +282,8 @@ berlin</code></pre>
 ##   .. .. ..$ postcode : chr &quot;10117&quot;
 ##   .. .. ..$ name     : chr &quot;Berlin&quot;
 ##  $ type    : chr &quot;FeatureCollection&quot;</code></pre>
+<p>As you can see it is a somewhat complex list structure.
+We know from <a href="simple-iteration.html#indexing">“Indexing”</a> that we can access it’s components in the following way:</p>
 <pre class="sourceCode r"><code class="sourceCode r">berlin<span class="op">$</span>type</code></pre>
 <pre><code>## [1] &quot;FeatureCollection&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">berlin<span class="op">$</span>features</code></pre>
@@ -365,6 +369,7 @@ berlin</code></pre>
 ## 
 ## $properties$name
 ## [1] &quot;Berlin&quot;</code></pre>
+<p>With the function <code>purrr::pluck()</code>, there is however a more universal tool available for accessing elements of more complex lists:</p>
 <pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;type&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;FeatureCollection&quot;</code></pre>
@@ -472,21 +477,24 @@ berlin</code></pre>
 ## 
 ## [[2]]
 ## [1] 52.51704</code></pre>
+<p>Similarly:</p>
 <pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;Germany&quot;</code></pre>
+<p>And as one more important characteristic of a <code>tidyverse</code>-function, <code>pluck()</code> is pipe-able:</p>
 <pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;Germany&quot;</code></pre>
 </div>
-<div id="iterating-and-traversing" class="section level2">
+<div id="komoot" class="section level2">
 <h2><span class="header-section-number">6.2</span> Iterating and traversing</h2>
 <details>
 <p><summary><em>Click here to make setup code visible</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
+<p>Now we are not only working with the geolocation data for Berlin, but we are adding data for our usual suspects:</p>
 <pre class="sourceCode r"><code class="sourceCode r">komoot &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">here</span>(<span class="st">&quot;data/komoot.rds&quot;</span>))
 
 komoot</code></pre>
@@ -498,6 +506,9 @@ komoot</code></pre>
 ## </span><span style='color: #555555;'>3</span><span> Tel Av… Tel%20Aviv https://photon.komoot.de/ap… </span><span style='color: #555555;'>&lt;S3: res</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list [</span><span>…
 ## </span><span style='color: #555555;'>4</span><span> Zürich  Z%C3%BCri… https://photon.komoot.de/ap… </span><span style='color: #555555;'>&lt;S3: res</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list [</span><span>…
 </span></CODE></PRE>
+<p>It looks slightly different from the list <code>berlin</code> from section <a href="non-rectangular-data.html#berlin">“Traversing”</a>.
+That is because we have the list-of-2 stored for each city in the column <code>content</code>.
+By using <code>pull()</code> on <code>content</code>, we can produce a list containing the information for all cities:</p>
 <pre class="sourceCode r"><code class="sourceCode r">komoot_content &lt;-
 <span class="st">  </span>komoot <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(content)
@@ -524,6 +535,7 @@ toronto <span class="op">%&gt;%</span>
 ## 
 ## [[2]]
 ## [1] 43.65396</code></pre>
+<p>With <code>map()</code> we can access the same element of the respective list for each city:</p>
 <pre class="sourceCode r"><code class="sourceCode r">komoot_content <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">pluck</span>(., <span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
 <pre><code>## [[1]]
@@ -556,6 +568,8 @@ toronto <span class="op">%&gt;%</span>
 ## 
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
+<p>With <code>map()</code> we can also use a shorthand notation for this, without the need to use <code>pluck()</code>.
+We can just give it a list of the arguments which we would normally use as arguments for <code>pluck()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">komoot_content <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
 <pre><code>## [[1]]
@@ -624,7 +638,7 @@ coordinates</code></pre>
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
 </div>
-<div id="plucking-multiple-locations" class="section level2">
+<div id="multipluck" class="section level2">
 <h2><span class="header-section-number">6.3</span> Plucking multiple locations</h2>
 <details>
 <p><summary><em>Click here to make setup code visible</em></summary></p>
@@ -636,6 +650,9 @@ komoot_content &lt;-
 <span class="st">  </span>komoot <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(content)</code></pre>
 </details>
+<p>What if we want to access two different pieces of information of each main list point at once?</p>
+<p>We are again starting in the setup with the list <code>komoot_content</code> from <a href="non-rectangular-data.html#komoot">“Iterating and traversing”</a>.</p>
+<p>Let’s define the two locations of the city-lists we would like to access:</p>
 <pre class="sourceCode r"><code class="sourceCode r">accessor_coords &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
 accessor_country &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;properties&quot;</span>, <span class="st">&quot;country&quot;</span>)
 
@@ -684,6 +701,7 @@ komoot_content <span class="op">%&gt;%</span>
 ## 
 ## [[4]]
 ## [1] &quot;Switzerland&quot;</code></pre>
+<p>Combine them as a list of lists and hand it over to a <code>map()</code> inside a <code>map()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">accessors &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">coords =</span> accessor_coords, <span class="dt">country =</span> accessor_country)
 
 accessors <span class="op">%&gt;%</span>
@@ -735,7 +753,7 @@ accessors <span class="op">%&gt;%</span>
 ## $country[[4]]
 ## [1] &quot;Switzerland&quot;</code></pre>
 </div>
-<div id="flattening" class="section level2">
+<div id="flatten" class="section level2">
 <h2><span class="header-section-number">6.4</span> Flattening</h2>
 <details>
 <p><summary><em>Click here to make setup code visible</em></summary></p>
@@ -752,6 +770,9 @@ coordinates &lt;-
 <span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
 </details>
+<p>It can occur that we end up with lists which are unnecessarily deep and we would like to make them flatter to make it easier to handle them.</p>
+<p>We are starting in our setup with <code>komoot_content</code> and <code>coordinates</code> from section <a href="non-rectangular-data.html#komoot">“Iterating and traversing”</a>.</p>
+<p>An example for an list that seems a bit too deep is given here:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>)</code></pre>
 <pre><code>## [[1]]
@@ -759,10 +780,13 @@ coordinates &lt;-
 ## 
 ## [[2]]
 ## [1] 52.51704</code></pre>
+<p>We can chop off a layer of a list and end up with a vector with one of the functions <code>purrr::flatten_*()</code>.
+In the <code>*</code> we need to specify what class the output will be:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">flatten_dbl</span>()</code></pre>
 <pre><code>## [1] 13.38886 52.51704</code></pre>
+<p>Let’s use <code>map()</code> to apply this to the entire list of our cities’ coordinates:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
 <pre><code>## [[1]]
@@ -777,7 +801,7 @@ coordinates &lt;-
 ## [[4]]
 ## [1]  8.542322 47.372396</code></pre>
 </div>
-<div id="transposing" class="section level2">
+<div id="transpose" class="section level2">
 <h2><span class="header-section-number">6.5</span> Transposing</h2>
 <details>
 <p><summary><em>Click here to make setup code visible</em></summary></p>
@@ -794,6 +818,10 @@ coordinates &lt;-
 <span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>))</code></pre>
 </details>
+<p>You might know the mathematical concept of transposition from your linear algebra courses.
+A similar concept is available in <code>R</code> when we are dealing with lists.</p>
+<p>We are starting in our setup with <code>komoot_content</code> and <code>coordinates</code> from section <a href="non-rectangular-data.html#komoot">“Iterating and traversing”</a>.</p>
+<p>Let’s apply <code>purrr::transpose()</code> to our list <code>coordinates</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">transpose</span>()</code></pre>
 <pre><code>## [[1]]
@@ -822,12 +850,15 @@ coordinates &lt;-
 ## 
 ## [[2]][[4]]
 ## [1] 47.3724</code></pre>
+<p>What was originally a list with 4 elements of which each one was a list of 2 elements has become a list of 2 elements of which each one is a list of 4 elements.
+With <code>flatten_dbl()</code> we can simplify the structure, so that we end up with a list of 2, where each element consists of a vector of 4.
+The first vector contains the longitude and the second the latitude of our cities:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed &lt;-
 <span class="st">  </span>coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
 </div>
-<div id="rectangling" class="section level2">
+<div id="rectangulate" class="section level2">
 <h2><span class="header-section-number">6.6</span> Rectangling</h2>
 <details>
 <p><summary><em>Click here to make setup code visible</em></summary></p>
@@ -846,6 +877,11 @@ coordinates_transposed &lt;-
 <span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
 </details>
+<p>Most of us <code>R</code>-users feel most at ease when dealing in <code>R</code> with data frames on which we can use a plethora of well-known (by us) functions with non-startling behaviour.
+What if we don’t get our data in such a form?</p>
+<p>We are starting in our setup with the list <code>coordinates_transposed</code> from section <a href="non-rectangular-data.html#transpose">“Transposing”</a>.</p>
+<p>A tibble is internally a list of named vectors of equal length.
+In two easy steps we can therefore make a tibble out of the unnamed list <code>coordinates_transposed</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>))</code></pre>
 <pre><code>## $lon
@@ -864,6 +900,7 @@ coordinates_transposed &lt;-
 ## </span><span style='color: #555555;'>3</span><span>  34.8   32.1
 ## </span><span style='color: #555555;'>4</span><span>   8.54  47.4
 </span></CODE></PRE>
+<p>If you want to keep the names open for now, but still get a tibble, you can set <code>as_tibble()</code>’s argument <code>.name_repair = &quot;universal&quot;</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> <span class="st">&quot;universal&quot;</span>)</code></pre>
 <pre><code>## New names:

@@ -171,12 +171,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
-<li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#traversing"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
-<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#iterating-and-traversing"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
-<li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#plucking-multiple-locations"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
-<li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flattening"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
-<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transposing"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
-<li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangling"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
+<li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
+<li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i># References</a></li>
@@ -522,32 +522,32 @@ fs::dir_info() %&gt;%
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 36 x 18</span><span>
  ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>0.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>13:16:22</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>01-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>13:16:22</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>02-dir.Rmd</span><span> file    2.88K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>13:16:22</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>0.Rmd</span><span>      file      462 rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>14:35:55</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>01-intro.</span><span>… file    5.24K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>14:35:55</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>02-dir.Rmd</span><span> file    2.88K rw-rw-r--   2019-05-09 </span><span style='color: #555555;'>14:35:55</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 33 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>access_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>change_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>birth_time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>
  </span></CODE></PRE>
-<pre><code>##  [1] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-##  [3] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-##  [5] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-##  [7] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-##  [9] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [11] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [13] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [15] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [17] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [19] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [21] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [23] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [25] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [27] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [29] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [31] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [33] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;
-## [35] &quot;2019-05-09 13:16:22 UTC&quot; &quot;2019-05-09 13:16:22 UTC&quot;</code></pre>
+<pre><code>##  [1] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+##  [3] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+##  [5] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+##  [7] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+##  [9] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [11] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [13] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [15] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [17] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [19] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [21] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [23] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [25] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [27] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [29] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [31] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [33] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;
+## [35] &quot;2019-05-09 14:35:55 UTC&quot; &quot;2019-05-09 14:35:55 UTC&quot;</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>0.Rmd</span><span>                   </span><span style='color: #00BB00;'>01-intro.Rmd</span><span>            </span><span style='color: #00BB00;'>02-dir.Rmd</span><span>              
  ## </span><span style='color: #00BB00;'>03-names.Rmd</span><span>            </span><span style='color: #00BB00;'>04-index.Rmd</span><span>            </span><span style='color: #00BB00;'>05-construct.Rmd</span><span>        
  ## </span><span style='color: #00BB00;'>06-map.Rmd</span><span>              </span><span style='color: #00BB00;'>07-map-manip.Rmd</span><span>        </span><span style='color: #00BB00;'>08-map-type.Rmd</span><span>         
@@ -1004,7 +1004,7 @@ We only want those with values in column <code>temperature</code> greater or equ
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x330df80&gt;</code></pre>
+## &lt;environment: 0x2647f80&gt;</code></pre>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 1 x 3</span><span>
