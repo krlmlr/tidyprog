@@ -29,3 +29,7 @@ berlin %>%
 
 berlin %>%
   pluck("features", 1, "geometry", "coordinates")
+
+# Accessing different properties
+berlin %>%
+  pluck("features", 1, "properties", "country")
