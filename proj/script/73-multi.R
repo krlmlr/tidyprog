@@ -3,10 +3,10 @@
 library(tidyverse)
 library(here)
 
-# Results from downloading geolocation data for all cities from photon.komoot.de:
 komoot <- readRDS(here("data/komoot.rds"))
-
-komoot
+komoot_content <-
+  komoot %>%
+  pull(content)
 
 # Use multiple accessors:
 accessor_coords <- list("features", 1, "geometry", "coordinates")
@@ -19,7 +19,7 @@ komoot_content %>%
   map(accessor_country)
 
 # All at once:
-accessors <- list(accessor_coords, accessor_country)
+accessors <- list(coords = accessor_coords, country = accessor_country)
 
 accessors %>%
   map(~ map(komoot_content, .))

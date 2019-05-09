@@ -13,18 +13,13 @@ rm(list = ls())
 ```{r 73-setup-73-multi-r}
 library(tidyverse)
 library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+komoot_content <-
+  komoot %>%
+  pull(content)
 ```
 </details>
-
-
-```{r include = FALSE}
-# Results from downloading geolocation data for all cities from photon.komoot.de:
-```
-```{r 73-results-from-downloading-geolocation-data-for-all-cities-from-photon-komoot-de}
-komoot <- readRDS(here("data/komoot.rds"))
-
-komoot
-```
 
 
 ```{r include = FALSE}
@@ -46,7 +41,7 @@ komoot_content %>%
 # All at once:
 ```
 ```{r 73-all-at-once}
-accessors <- list(accessor_coords, accessor_country)
+accessors <- list(coords = accessor_coords, country = accessor_country)
 
 accessors %>%
   map(~ map(komoot_content, .))
