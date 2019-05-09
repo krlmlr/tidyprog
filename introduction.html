@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>1.2</b> Review of visualization and data transformation</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#intro-data"><i class="fa fa-check"></i><b>1.2.1</b> Data</a></li>
 <li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#exploration"><i class="fa fa-check"></i><b>1.2.2</b> Exploration</a></li>
-<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#further-possibilities-of-using-dplyr-to-transform-data"><i class="fa fa-check"></i><b>1.2.3</b> Further possibilities of using {dplyr} to transform data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#further-dplyr-transformations"><i class="fa fa-check"></i><b>1.2.3</b> Further dplyr transformations</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>2</b> Function basics</a><ul>
@@ -307,7 +307,8 @@ While this might be true for all languages (once you speak it well enough, thing
 <p>This section is a refresher for visualization and data transformation in the tidyverse.
 Readers familiar with the first half or <a href="https://r4ds.had.co.nz/">R for data science</a> will recognize the concepts repeated here.
 The data used throughout this course is presented, plotted and briefly analyzed.</p>
-<p>The code in each section is self-contained.
+<p>The code in each chapter is self-contained.
+The code in each section is also self-contained, but the necessary setup code is hidden and can be expanded with a click.
 We will always load the following packages:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
@@ -401,8 +402,8 @@ temperature_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> city_code))</code></pre>
 <p><img src="tidyprog_files/figure-html/01-compute-and-plot-temperature-difference-1.png" width="672" /></p>
 </div>
-<div id="further-possibilities-of-using-dplyr-to-transform-data" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Further possibilities of using {dplyr} to transform data</h3>
+<div id="further-dplyr-transformations" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Further dplyr transformations</h3>
 <p>If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:</p>
 <pre class="sourceCode r"><code class="sourceCode r">weather_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(city_code) <span class="op">%&gt;%</span>
