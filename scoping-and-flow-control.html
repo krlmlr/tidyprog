@@ -209,7 +209,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
-<li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a></li>
+<li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#exercises-20"><i class="fa fa-check"></i><b>6.1.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
 <li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
 <li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
@@ -319,7 +321,7 @@ a</code></pre></li>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmpa6D3Uc/file2c2e4278c660</code></pre>
+<pre><code>## 2 written to /tmp/Rtmpnv8L3D/file2c075aa3b85a</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -327,7 +329,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmpa6D3Uc/file2c2e2afc870d</code></pre>
+<pre><code>## 6 written to /tmp/Rtmpnv8L3D/file2c07421ab12</code></pre>
 <pre><code>## [1] 7</code></pre>
 <div id="exercises-17" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Exercises</h3>
@@ -546,7 +548,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x9408c68&gt;</code></pre>
+## &lt;environment: 0x76cc418&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -582,7 +584,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x99e2748&gt;</code></pre>
+## &lt;environment: 0xa21e790&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
@@ -607,7 +609,7 @@ read_loudly</code></pre>
 ##     .f &lt;- as_mapper(.f)
 ##     function(...) capture_error(.f(...), otherwise, quiet)
 ## }
-## &lt;bytecode: 0xa482768&gt;
+## &lt;bytecode: 0xa9be470&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">possibly</code></pre>
 <pre><code>## function (.f, otherwise, quiet = TRUE) 
@@ -624,7 +626,7 @@ read_loudly</code></pre>
 ##         })
 ##     }
 ## }
-## &lt;bytecode: 0x9337b08&gt;
+## &lt;bytecode: 0x8d3bdd8&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre></li>
 </ol>
 
