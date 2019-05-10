@@ -132,14 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#package-versions-used"><i class="fa fa-check"></i>Package versions used</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#function-basics"><i class="fa fa-check"></i><b>1.1.1</b> Function basics</a></li>
-<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#simple-iteration"><i class="fa fa-check"></i><b>1.1.2</b> Simple iteration</a></li>
-<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#pairwise-iteration-and-nesting"><i class="fa fa-check"></i><b>1.1.3</b> Pairwise iteration and nesting</a></li>
-<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#scoping-and-flow-control"><i class="fa fa-check"></i><b>1.1.4</b> Scoping and flow control</a></li>
-<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#non-rectangular-data"><i class="fa fa-check"></i><b>1.1.5</b> Non-rectangular data</a></li>
-<li class="chapter" data-level="1.1.6" data-path="introduction.html"><a href="introduction.html#tidy-evaluation"><i class="fa fa-check"></i><b>1.1.6</b> Tidy evaluation</a></li>
-</ul></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-visualization-and-data-transformation"><i class="fa fa-check"></i><b>1.2</b> Review of visualization and data transformation</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#intro-data"><i class="fa fa-check"></i><b>1.2.1</b> Data</a></li>
 <li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#exploration"><i class="fa fa-check"></i><b>1.2.2</b> Exploration</a></li>
@@ -263,10 +256,10 @@ manipulated_data &lt;-
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpVmN093/berlin2d874e4ecba3.csv&quot;  
-## [2] &quot;/tmp/RtmpVmN093/toronto2d87ef876d.csv&quot;   
-## [3] &quot;/tmp/RtmpVmN093/tel_aviv2d876937f867.csv&quot;
-## [4] &quot;/tmp/RtmpVmN093/zurich2d872b8f6744.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpTlViv3/berlin2c54561ff84c.csv&quot;  
+## [2] &quot;/tmp/RtmpTlViv3/toronto2c542f3bc0b3.csv&quot; 
+## [3] &quot;/tmp/RtmpTlViv3/tel_aviv2c5430e25992.csv&quot;
+## [4] &quot;/tmp/RtmpTlViv3/zurich2c5429667ab8.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>
