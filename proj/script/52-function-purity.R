@@ -32,3 +32,11 @@ side_effect_function(2)
   pure_function() %>%
   side_effect_function() %>%
   pure_function()
+
+# Exercises
+
+reduce(1:5, `+`)
+
+accumulate(1:5, `+`)
+
+reduce(1:5, ~ c(..1, tail(..1, 1) + ..2))

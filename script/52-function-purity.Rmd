@@ -24,7 +24,7 @@ Functions should do one thing, and do it well.^[Unix philosophy, originated by K
 
 ```
 
-Pure function: A function that is called for its return value and which has no side effects:
+A *pure function* is one that is called for its return value and which has no side effects:
 
 ```{r include = FALSE}
 # Pure function: called for its return value, no side effects!
@@ -37,7 +37,7 @@ pure_function <- function(x) {
 pure_function(1)
 ```
 
-Function with side effect: called for its side effect, returns input (here invisibly; assigning is possible):
+For functions with side effect, it is good practice to return the input invisibly:
 
 ```{r include = FALSE}
 # Function with side effect: called for its side effect, returns input
@@ -73,3 +73,41 @@ If side effect functions return the input, they remain composable with pure func
   side_effect_function() %>%
   pure_function()
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. In the above example, which part of the pipe triggers the display of `6` and `7`, respectively?
+
+1. How do you create a function that returns more than one value?
+
+1. Implement your own purely functional version of `sum()` by using `reduce()`. (Hint: `` `+` `` is a function that takes two arguments and returns the sum.)
+    
+    ```r
+    reduce(1:5, ___)
+    ```
+    ```{r echo = FALSE}
+    reduce(1:5, `+`)
+    ```
+
+1. Implement your own purely functional version of `cumsum()` by using `accumulate()`. 
+
+    ```r
+    accumulate(1:5, ___)
+    ```
+    ```{r echo = FALSE}
+    accumulate(1:5, `+`)
+    ```
+
+1. Implement your own purely functional version of `cumsum()` by using `reduce()` only. (Hint: Use `tail(., 1)` to access the last element of a vector.)
+
+    ```r
+    reduce(1:5, ~ _____)
+    ```
+    ```{r echo = FALSE}
+    reduce(1:5, ~ c(..1, tail(..1, 1) + ..2))
+    ```
