@@ -197,7 +197,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#exercises-16"><i class="fa fa-check"></i><b>5.1.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#exercises-17"><i class="fa fa-check"></i><b>5.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="5.3" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
 <li class="chapter" data-level="5.4" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
 </ul></li>
@@ -417,9 +419,9 @@ fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 37 x 18</span><span>
  ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>    </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file      56 rw-rw-r--   2019-05-10 </span><span style='color: #555555;'>05:51:53</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>12-intro.</span><span>… file    5.7K rw-rw-r--   2019-05-10 </span><span style='color: #555555;'>05:51:53</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file     370 rw-rw-r--   2019-05-10 </span><span style='color: #555555;'>05:51:53</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file      56 rw-rw-r--   2019-05-10 </span><span style='color: #555555;'>06:03:51</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>12-intro.</span><span>… file    5.7K rw-rw-r--   2019-05-10 </span><span style='color: #555555;'>06:03:51</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file     370 rw-rw-r--   2019-05-10 </span><span style='color: #555555;'>06:03:51</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 34 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
@@ -1003,7 +1005,7 @@ Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> 
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x2717f80&gt;</code></pre>
+## &lt;environment: 0x342ff80&gt;</code></pre>
 <p>See the <a href="introduction.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>

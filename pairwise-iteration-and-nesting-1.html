@@ -197,7 +197,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#exercises-16"><i class="fa fa-check"></i><b>5.1.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
+<li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#exercises-17"><i class="fa fa-check"></i><b>5.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="5.3" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
 <li class="chapter" data-level="5.4" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
 </ul></li>
@@ -297,10 +299,10 @@ manipulated_data</code></pre>
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/Rtmp6IaMen/berlin2c42215e439a.csv&quot; 
-## [2] &quot;/tmp/Rtmp6IaMen/toronto2c422be1e5b8.csv&quot;
-## [3] &quot;/tmp/Rtmp6IaMen/tel_aviv2c427df23c1.csv&quot;
-## [4] &quot;/tmp/Rtmp6IaMen/zurich2c4253bb50c3.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpFZpCBy/berlin2c3f53c82681.csv&quot;  
+## [2] &quot;/tmp/RtmpFZpCBy/toronto2c3f686aafeb.csv&quot; 
+## [3] &quot;/tmp/RtmpFZpCBy/tel_aviv2c3f28cadafc.csv&quot;
+## [4] &quot;/tmp/RtmpFZpCBy/zurich2c3f5435bdd5.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>
