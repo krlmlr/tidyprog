@@ -23,7 +23,7 @@ For example, the code from the next section 1.2 can be found in [`12-intro.R`](`
 Clone or download the repository and open the `R-workshop.Rproj` file to run the script.
 (It is important to open the `.Rproj` file and not only the `.R` scripts.)
 
-#### Function basics
+##### Function basics
 
 > structuring the code to avoid too much copy-pasting
 
@@ -33,7 +33,7 @@ Using functions to structure code. This part is independent of the subsequent se
 2. Discussion of a function's arguments (from both the developers' and the users' perspective)
 3. A few words on function design
 
-#### Simple iteration
+##### Simple iteration
 
 > processing multiple files that contain different parts of the same dataset
 
@@ -43,7 +43,7 @@ This part introduces iteration and is independent of the previous section.
 1. Indexing for vectors and lists
 1. Applying a function to each element of a list or a vector
 
-#### Pairwise iteration and nesting
+##### Pairwise iteration and nesting
 
 More advanced iteration.
 
@@ -51,7 +51,7 @@ More advanced iteration.
 2. Iterate rowwise through columns in a tibble
 3. Nested tibbles, a very powerful concept
 
-#### Scoping and flow control
+##### Scoping and flow control
 
 More advanced functional concepts.
 
@@ -60,7 +60,7 @@ More advanced functional concepts.
 3. Control flow
 4. Metaprogramming
 
-#### Non-rectangular data
+##### Non-rectangular data
 
 > working with raw data from online services (JSON)
 
@@ -71,7 +71,7 @@ Processing hierarchical lists as commonly returned from web APIs.
 3. Control flow
 4. Metaprogramming
 
-#### Tidy evaluation
+##### Tidy evaluation
 
 > writing functions that work with datasets of different shape
 
