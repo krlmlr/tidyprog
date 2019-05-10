@@ -9,5 +9,8 @@ purl:
 id:
 	R -q -f id.R
 
-sync:
+push:
 	git subtree push --prefix proj ../tidyprog-proj website
+
+pull:
+	git subtree pull --prefix proj ../tidyprog-proj website
