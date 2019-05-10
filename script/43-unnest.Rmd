@@ -28,7 +28,7 @@ How to work with nested data?
 We start with the tibble `dict_data` from section ["Moving to tibble-land"](#mut_map), which includes the nested tibbles in its column `data`.
 
 If we want to actually look at the data we can directly use `tidyr::unnest()` on the whole tibble, which by default acts on all list-columns.
-This blows up our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:
+This expands our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:
 
 ```{r include = FALSE}
 # Flatten a nested tibble with unnest():
@@ -36,6 +36,18 @@ This blows up our tibble by repeating the formerly unnested column entries as ma
 ```{r 43-flatten-a-nested-tibble-with-unnest}
 dict_data %>%
   unnest()
+```
+
+Data flattened in this way is useful if the parts can be combined naturally into a larger dataset.
+Iterating over columns in the nested view corresponds to grouped operations in the flat view.
+
+```{r include = FALSE}
+# Mapping in nested view are grouped operation in the flat view:
+```
+```{r 43-unnested-grouped}
+dict_data %>%
+  mutate(n = map_int(data, nrow)) %>% 
+  select(-data)
 
 dict_data %>%
   unnest() %>%
@@ -56,7 +68,7 @@ dict_data %>%
 ```
 
 Using this, we structure our data in new, customized ways.
-Here, we create a new column `date`, by dropping the detailed information of the time of the day, and create a nested tibble for each day:
+For processing of daily data over all cities, we create a new column `date`:
 
 ```{r include = FALSE}
 # Split into daily data:
@@ -67,3 +79,40 @@ dict_data %>%
   mutate(date = as.Date(time)) %>%
   nest(-date)
 ```
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Implement the following code as a mapping over a nested tibble. Use a helper function:
+
+    ```{r}
+    iris %>% 
+      group_by(Species) %>% 
+      summarize_all(list(Mean = mean)) %>% 
+      ungroup()
+    ```
+        
+    ```r
+    summarize_to_mean <- function(data) {
+      data %>% 
+        ___(_____)
+    }
+    
+    iris %>%
+      nest(___) %>% 
+      mutate(data = map(___, summarize_to_mean)) %>%
+      unnest()
+    ```
+
+1. When is a grouped operation preferable over nesting? Discuss.
+
+1. Data frames are lists under the hood. Explain the output of the following code. What use cases can you imagine?
+
+    ```{r}
+    dict_data %>% 
+      as.list() %>% 
+      enframe()
+    ```
