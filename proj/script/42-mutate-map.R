@@ -26,7 +26,31 @@ dict %>%
 dict_data <-
   dict %>%
   mutate(
-    data = map(weather_filename, ~ readxl::read_excel(here(.)))
+    data = map(weather_filename, ~ readxl::read_excel(here(.))),
+    rows = map_int(data, nrow),
   ) %>%
   select(-weather_filename)
 dict_data
+
+# Also with map2:
+dict_data %>% 
+  mutate(
+    desc = map2_chr(
+      name, rows,
+      ~ paste0(ncol(..2), " columns in data for ", ..1)
+    )
+  )
+
+# Keep important columns
+dict_data %>% 
+  mutate(
+    desc = pmap_chr(
+      list(name, rows),
+      ~ paste0(ncol(..2), " columns in data for ", ..1)
+    )
+  )
+
+# Exercises
+
+input_data %>% 
+  imap_chr(~ paste0(.y, ": ", nrow(.x), " rows"))
