@@ -194,7 +194,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
-<li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
+<li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#exercises-16"><i class="fa fa-check"></i><b>5.1.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="5.2" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a></li>
 <li class="chapter" data-level="5.3" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
 <li class="chapter" data-level="5.4" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
@@ -235,22 +237,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="scoping-and-flow-control-1" class="section level1">
 <h1><span class="header-section-number">5</span> Scoping and flow control</h1>
+<p>This chapter discusses a few details regarding functions.</p>
 <div id="scope" class="section level2">
 <h2><span class="header-section-number">5.1</span> Scope</h2>
-<details>
-<p><summary><em>Click here to show setup code.</em></summary></p>
+<p>What happens if a function defines variables that have a variable by the same name in the global environment?</p>
+<p>We start with a variable defined in the global environment:</p>
 <pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">5</span></code></pre>
-</details>
-<p>In the setup code we assigned <code>a &lt;- 5</code>.
-<code>a</code> is now an object of the global environment.
-A function can access global variables:</p>
+<p>A function can access global variables:</p>
 <pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
   a
 }
 
 <span class="kw">f</span>()</code></pre>
 <pre><code>## [1] 5</code></pre>
-<p>On the other hand, a variable which is defined inside a function, will not be known outside of that function. Respectively, it won’t overwrite the value of global variables.</p>
+<p>On the other hand, a variable which is defined inside a function is contained in that function.
+It will not be known outside of that function.
+Respectively, it won’t overwrite the value of global variables.</p>
 <pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="cf">function</span>() {
   a &lt;-<span class="st"> </span><span class="dv">2</span>
   a
@@ -261,8 +263,28 @@ A function can access global variables:</p>
 <pre class="sourceCode r"><code class="sourceCode r">a</code></pre>
 <pre><code>## [1] 5</code></pre>
 <p>Global variables are a (hidden) part of a function’s interface.
-Best practice: functions should be self-contained, independent of global variables.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>()</code></pre>
+Ideally, functions are be self-contained, independent of global variables.
+Notable exceptions are objects are used across your entire analysis, such as “the dataset”.
+(Otherwise you would need to pass them across many layers.)</p>
+<div id="exercises-16" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Double-check what happens if two functions declare/use a variable of the same name.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Variables in different functions</span>
+f1 &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a &lt;-<span class="st"> </span><span class="dv">3</span>
+  a <span class="op">+</span><span class="st"> </span><span class="kw">f2</span>()
+}
+
+f2 &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  a
+}
+
+<span class="kw">f1</span>()
+<span class="kw">f2</span>()
+a</code></pre></li>
+</ol>
+</div>
 </div>
 <div id="pure-functions-and-side-effects" class="section level2">
 <h2><span class="header-section-number">5.2</span> Pure functions and side effects</h2>
@@ -290,7 +312,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpEqeV4H/file2c55379d12f6</code></pre>
+<pre><code>## 2 written to /tmp/Rtmp6IaMen/file2c4228a22b08</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -298,7 +320,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpEqeV4H/file2c552a934f0b</code></pre>
+<pre><code>## 6 written to /tmp/Rtmp6IaMen/file2c425eee833d</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -482,7 +504,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0xa85fa20&gt;</code></pre>
+## &lt;environment: 0x9dc2c78&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -518,7 +540,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0xa972240&gt;</code></pre>
+## &lt;environment: 0x66d9a00&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
