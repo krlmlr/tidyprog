@@ -150,3 +150,39 @@ read_weather_data(omit_toronto = TRUE) %>%
 read_weather_data(omit_zurich = TRUE) %>%
   count(city_code)
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Implement a function that branches over an argument and returns the sum or the product of the input, respectively.
+
+    ```r
+    agg <- function(_____) {
+      if (fun == "___") {
+        sum(x)
+      } else if (_____) {
+        prod(___)
+      } else {
+        rlang::abort('`fun` must be "sum" or "prod".')
+      }
+    }
+    ```
+    ```{r include = FALSE}
+    agg <- function(x, fun) {
+      if (fun == "sum") {
+        sum(x)
+      } else if (fun == "prod") {
+        prod(x)
+      } else {
+        rlang::abort('`fun` must be "sum" or "prod".')
+      }
+    }
+    ```
+    ```{r}
+    agg(1:4, "sum")
+    agg(1:4, "prod")
+    ```
