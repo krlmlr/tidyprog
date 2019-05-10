@@ -2,7 +2,7 @@
 
 > Structuring the code to avoid too much copy-pasting
 
-This section discusses functions as building blocks for more expressive and more powerful data analysis code.
+This chapter discusses functions as building blocks for more expressive and more powerful data analysis code.
 
 ```{r child = here::here("script", "2.Rmd")}
 ```

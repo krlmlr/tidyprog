@@ -2,10 +2,8 @@
 rm(list = ls())
 ```
 
+The following packages are required throughout this chapter:
 
-## Vectors and columns
-
-<details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
 ### Vectors and columns
 
@@ -14,9 +12,14 @@ rm(list = ls())
 library(tidyverse)
 library(here)
 ```
-</details>
 
-Here we briefly show the relationship between columns of data frames and their corresponding vectors, i.e. the answer to "how to get from one to the other?":
+## Vectors and columns
+
+So far we focus on the data frame, or tibble, as primary object for data analysis.
+Internally, a tibble is a list of vectors of the same length.
+Accessing a row in a tibble requires finding the same index in that list of vectors.
+
+Here we explore the relationship between columns of data frames and their corresponding vectors, i.e. the answer to "how to get from one to the other?":
 
 We can e.g. get a vector with the files in a specific directory of our current project^[function `here::here()` is taking care of making sure we start from the root directory of our current project] like this:
 
