@@ -212,7 +212,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#exercises-20"><i class="fa fa-check"></i><b>6.1.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#exercises-21"><i class="fa fa-check"></i><b>6.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
 <li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
 <li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
@@ -306,10 +308,10 @@ manipulated_data</code></pre>
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/Rtmpnv8L3D/berlin2c0771ecfac3.csv&quot;  
-## [2] &quot;/tmp/Rtmpnv8L3D/toronto2c079c6f616.csv&quot;  
-## [3] &quot;/tmp/Rtmpnv8L3D/tel_aviv2c07351cd578.csv&quot;
-## [4] &quot;/tmp/Rtmpnv8L3D/zurich2c071d884949.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/Rtmpd5gMiP/berlin2c9560d59116.csv&quot;  
+## [2] &quot;/tmp/Rtmpd5gMiP/toronto2c95135812e7.csv&quot; 
+## [3] &quot;/tmp/Rtmpd5gMiP/tel_aviv2c955eaf4d07.csv&quot;
+## [4] &quot;/tmp/Rtmpd5gMiP/zurich2c95671d81a.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>

@@ -212,7 +212,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#berlin"><i class="fa fa-check"></i><b>6.1</b> Traversing</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#exercises-20"><i class="fa fa-check"></i><b>6.1.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a></li>
+<li class="chapter" data-level="6.2" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#komoot"><i class="fa fa-check"></i><b>6.2</b> Iterating and traversing</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#exercises-21"><i class="fa fa-check"></i><b>6.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
 <li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
 <li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
@@ -671,7 +673,7 @@ We can just give it a list of the arguments which we would normally use as argum
 ## 
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
-<p>The acces path can also be stored in a variable:</p>
+<p>The access path can also be stored in a variable:</p>
 <pre class="sourceCode r"><code class="sourceCode r">accessor &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>, <span class="st">&quot;coordinates&quot;</span>)
 coordinates &lt;-
 <span class="st">  </span>komoot_content <span class="op">%&gt;%</span>
@@ -707,6 +709,38 @@ coordinates</code></pre>
 ## 
 ## [[4]][[2]]
 ## [1] 47.3724</code></pre>
+<div id="exercises-21" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Augment <code>komoot</code> with a columns containing information on the first feature only.</p>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 7</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>   </span><span style='font-weight: bold;'>url_name</span><span>  </span><span style='font-weight: bold;'>url</span><span>                </span><span style='font-weight: bold;'>res</span><span>      </span><span style='font-weight: bold;'>status</span><span> </span><span style='font-weight: bold;'>content</span><span> </span><span style='font-weight: bold;'>first_feature</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>       
+ ## </span><span style='color: #555555;'>1</span><span> Berlin Berlin    https://photon.ko… </span><span style='color: #555555;'>&lt;S3: re</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>   
+ ## </span><span style='color: #555555;'>2</span><span> Toron… Toronto   https://photon.ko… </span><span style='color: #555555;'>&lt;S3: re</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>   
+ ## </span><span style='color: #555555;'>3</span><span> Tel A… Tel%20Av… https://photon.ko… </span><span style='color: #555555;'>&lt;S3: re</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>   
+ ## </span><span style='color: #555555;'>4</span><span> Zürich Z%C3%BCr… https://photon.ko… </span><span style='color: #555555;'>&lt;S3: re</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>
+ </span></CODE></PRE></li>
+<li><p>Augment <code>komoot_first</code> with columns containing information on coordinates, place and postal code. Use accessors and appropriate types for the columns.</p>
+<pre class="sourceCode r"><code class="sourceCode r">acc_coordinates &lt;-<span class="st"> </span>_____
+acc_country &lt;-<span class="st"> </span>_____
+komoot_first <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">coordinates =</span> <span class="kw">___</span>(___, acc_coordinates),
+    <span class="dt">country =</span> _____,
+    <span class="dt">postcode =</span> <span class="kw">map_chr</span>(_____, <span class="op">~</span><span class="st"> </span><span class="kw">pluck</span>(___, <span class="dt">.default =</span> <span class="ot">NA</span>))
+  )</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 10</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>  </span><span style='font-weight: bold;'>url_name</span><span> </span><span style='font-weight: bold;'>url</span><span>   </span><span style='font-weight: bold;'>res</span><span>   </span><span style='font-weight: bold;'>status</span><span> </span><span style='font-weight: bold;'>content</span><span> </span><span style='font-weight: bold;'>first_feature</span><span> </span><span style='font-weight: bold;'>coordinates</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lis&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>     
+ ## </span><span style='color: #555555;'>1</span><span> Berl… Berlin   http… </span><span style='color: #555555;'>&lt;S3:</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>    </span><span style='color: #555555;'>&lt;NULL&gt;</span><span>     
+ ## </span><span style='color: #555555;'>2</span><span> Toro… Toronto  http… </span><span style='color: #555555;'>&lt;S3:</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>    </span><span style='color: #555555;'>&lt;NULL&gt;</span><span>     
+ ## </span><span style='color: #555555;'>3</span><span> Tel … Tel%20A… http… </span><span style='color: #555555;'>&lt;S3:</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>    </span><span style='color: #555555;'>&lt;NULL&gt;</span><span>     
+ ## </span><span style='color: #555555;'>4</span><span> Züri… Z%C3%BC… http… </span><span style='color: #555555;'>&lt;S3:</span><span>… </span><span style='color: #555555;'>&lt;NULL&gt;</span><span> </span><span style='color: #555555;'>&lt;list </span><span>… </span><span style='color: #555555;'>&lt;list [3]&gt;</span><span>    </span><span style='color: #555555;'>&lt;NULL&gt;</span><span>     
+ ## </span><span style='color: #555555;'># … with 2 more variables: </span><span style='color: #555555;font-weight: bold;'>country</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>postcode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ </span></CODE></PRE></li>
+</ol>
+</div>
 </div>
 <div id="multipluck" class="section level2">
 <h2><span class="header-section-number">6.3</span> Plucking multiple locations</h2>
