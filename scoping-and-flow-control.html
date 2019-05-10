@@ -201,7 +201,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#pure-functions-and-side-effects"><i class="fa fa-check"></i><b>5.2</b> Pure functions and side effects</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#exercises-17"><i class="fa fa-check"></i><b>5.2.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a></li>
+<li class="chapter" data-level="5.3" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#control-flow"><i class="fa fa-check"></i><b>5.3</b> Control flow</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#exercises-18"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="5.4" data-path="scoping-and-flow-control.html"><a href="scoping-and-flow-control.html#closures"><i class="fa fa-check"></i><b>5.4</b> Closures</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html"><i class="fa fa-check"></i><b>6</b> Non-rectangular data</a><ul>
@@ -315,7 +317,7 @@ a</code></pre></li>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmp1Hn9d8/file2c1130546d14</code></pre>
+<pre><code>## 2 written to /tmp/RtmpGKZDK2/file2c682509a6fc</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -323,7 +325,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmp1Hn9d8/file2c1161785a2a</code></pre>
+<pre><code>## 6 written to /tmp/RtmpGKZDK2/file2c684da09bcc</code></pre>
 <pre><code>## [1] 7</code></pre>
 <div id="exercises-17" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Exercises</h3>
@@ -482,6 +484,25 @@ read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>
 ## </span><span style='color: #555555;'>2</span><span> tel_aviv     49
 ## </span><span style='color: #555555;'>3</span><span> toronto      49
 </span></CODE></PRE>
+<div id="exercises-18" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Implement a function that branches over an argument and returns the sum or the product of the input, respectively.</p>
+<pre class="sourceCode r"><code class="sourceCode r">agg &lt;-<span class="st"> </span><span class="cf">function</span>(_____) {
+  <span class="cf">if</span> (fun <span class="op">==</span><span class="st"> &quot;___&quot;</span>) {
+    <span class="kw">sum</span>(x)
+  } <span class="cf">else</span> <span class="cf">if</span> (_____) {
+    <span class="kw">prod</span>(___)
+  } <span class="cf">else</span> {
+    rlang<span class="op">::</span><span class="kw">abort</span>(<span class="st">&#39;`fun` must be &quot;sum&quot; or &quot;prod&quot;.&#39;</span>)
+  }
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">agg</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="st">&quot;sum&quot;</span>)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">agg</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="st">&quot;prod&quot;</span>)</code></pre>
+<pre><code>## [1] 24</code></pre></li>
+</ol>
+</div>
 </div>
 <div id="closures" class="section level2">
 <h2><span class="header-section-number">5.4</span> Closures</h2>
@@ -523,7 +544,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0xa4654a0&gt;</code></pre>
+## &lt;environment: 0x6f1aaf0&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -559,7 +580,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x8e3d238&gt;</code></pre>
+## &lt;environment: 0x9f73a68&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
