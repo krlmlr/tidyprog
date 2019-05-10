@@ -183,8 +183,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html"><i class="fa fa-check"></i><b>4</b> Pairwise iteration and nesting</a><ul>
-<li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a></li>
-<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a></li>
+<li class="chapter" data-level="4.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#manipulating-pairwise"><i class="fa fa-check"></i><b>4.1</b> Manipulating pairwise</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#exercises-13"><i class="fa fa-check"></i><b>4.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#exercises-14"><i class="fa fa-check"></i><b>4.2.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
@@ -284,7 +288,7 @@ Best practice: functions should be self-contained, independent of global variabl
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmpa9hQKU/file2c5637bf4087</code></pre>
+<pre><code>## 2 written to /tmp/RtmppOxm1R/file2c0b4644e1ca</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -292,7 +296,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmpa9hQKU/file2c5677b5fec5</code></pre>
+<pre><code>## 6 written to /tmp/RtmppOxm1R/file2c0b3b54be04</code></pre>
 <pre><code>## [1] 7</code></pre>
 </div>
 <div id="control-flow" class="section level2">
@@ -476,7 +480,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8a6dd88&gt;</code></pre>
+## &lt;environment: 0xa6be7c8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -512,7 +516,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x6a6d358&gt;</code></pre>
+## &lt;environment: 0x9113a40&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
