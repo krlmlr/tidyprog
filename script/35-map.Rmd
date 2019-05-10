@@ -116,7 +116,7 @@ input_files %>%
       map(~ readxl::read_excel(.))
     ```
 
-1. Can you explain what happens when you call `enframe()` on the result? Can you explain?
+1. Can you explain what happens when you call `enframe()` on the result?
 
     ```r
     input_files %>%
