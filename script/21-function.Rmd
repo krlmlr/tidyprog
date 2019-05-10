@@ -139,7 +139,7 @@ weather_data <- read_weather_data()
     ```
     
 
-1. Retrieve data for Europe using `setdiff()`, count observations to validate:
+1. Compute number of rows for Europe, count observations to validate:
 
     ```r
     nrow(_____) - nrow(_____)
