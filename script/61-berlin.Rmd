@@ -83,3 +83,39 @@ berlin %>%
   pluck("features", 1) %>%
   pluck("properties", "country")
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Introduce a variable for the first feature. Collect the coordinates, the country and the postal code.
+        
+    ```r
+    first_feature <-
+      berlin %>% 
+      ___(_____)
+    
+    first_feature %>% 
+      ___(_____)
+    
+    first_feature %>% 
+      ___(_____)
+    
+    first_feature %>% 
+      ___(_____)
+    ```
+    
+    ```{r echo = FALSE}
+    first_feature <-
+      berlin %>% 
+      pluck("features", 1)
+    first_feature %>% 
+      pluck("coordinates")
+    first_feature %>% 
+      pluck("properties", "country")
+    first_feature %>% 
+      pluck("properties", "postcode")
+    ```
