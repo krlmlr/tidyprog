@@ -23,59 +23,59 @@ For example, the code from the next section 1.2 can be found in [`12-intro.R`](`
 Clone or download the repository and open the `R-workshop.Rproj` file to run the script.
 (It is important to open the `.Rproj` file and not only the `.R` scripts.)
 
-##### Function basics
+1. Function basics
 
-> structuring the code to avoid too much copy-pasting
+    > structuring the code to avoid too much copy-pasting
+    
+    Using functions to structure code. This part is independent of the subsequent section.
+    
+    - We begin with how to define and execute a function
+    - Discussion of a function's arguments (from both the developers' and the users' perspective)
+    - A few words on function design
+    
+2. Simple iteration
+    
+    > processing multiple files that contain different parts of the same dataset
+    
+    This part introduces iteration and is independent of the previous section.
+    
+    - How to get from a list or a vector to a tibble and vice-versa
+    - Indexing for vectors and lists
+    - Applying a function to each element of a list or a vector
 
-Using functions to structure code. This part is independent of the subsequent section.
+3. Pairwise iteration and nesting
 
-1. We begin with how to define and execute a function
-2. Discussion of a function's arguments (from both the developers' and the users' perspective)
-3. A few words on function design
+    More advanced iteration.
+    
+    - Simultaneously feed two or more separate lists of inputs into a function working with those two arguments
+    - Iterate rowwise through columns in a tibble
+    - Nested tibbles, a very powerful concept
+    
+4. Scoping and flow control
 
-##### Simple iteration
+    More advanced functional concepts.
+    
+    - Data lifecycle
+    - Purity
+    - Control flow
+    - Metaprogramming
+    
+5. Non-rectangular data
+    
+    > working with raw data from online services (JSON)
+    
+    Processing hierarchical lists as commonly returned from web APIs.
+    
+    - Data lifecycle
+    - Purity
+    - Control flow
+    - Metaprogramming
 
-> processing multiple files that contain different parts of the same dataset
+6. Tidy evaluation
 
-This part introduces iteration and is independent of the previous section.
-
-1. How to get from a list or a vector to a tibble and vice-versa
-1. Indexing for vectors and lists
-1. Applying a function to each element of a list or a vector
-
-##### Pairwise iteration and nesting
-
-More advanced iteration.
-
-1. Simultaneously feed two or more separate lists of inputs into a function working with those two arguments
-2. Iterate rowwise through columns in a tibble
-3. Nested tibbles, a very powerful concept
-
-##### Scoping and flow control
-
-More advanced functional concepts.
-
-1. Data lifecycle
-2. Purity
-3. Control flow
-4. Metaprogramming
-
-##### Non-rectangular data
-
-> working with raw data from online services (JSON)
-
-Processing hierarchical lists as commonly returned from web APIs.
-
-1. Data lifecycle
-2. Purity
-3. Control flow
-4. Metaprogramming
-
-##### Tidy evaluation
-
-> writing functions that work with datasets of different shape
-
-TBD
+    > writing functions that work with datasets of different shape
+    
+    TBD
 
 ```{r child = here("script", "1.Rmd")}
 ```
