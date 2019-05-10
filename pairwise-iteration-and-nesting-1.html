@@ -189,7 +189,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#mut_map"><i class="fa fa-check"></i><b>4.2</b> Moving to tibble-land</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#exercises-14"><i class="fa fa-check"></i><b>4.2.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a></li>
+<li class="chapter" data-level="4.3" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#nest"><i class="fa fa-check"></i><b>4.3</b> Nesting and unnesting</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="pairwise-iteration-and-nesting-1.html"><a href="pairwise-iteration-and-nesting-1.html#exercises-15"><i class="fa fa-check"></i><b>4.3.1</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html"><i class="fa fa-check"></i><b>5</b> Scoping and flow control</a><ul>
 <li class="chapter" data-level="5.1" data-path="scoping-and-flow-control-1.html"><a href="scoping-and-flow-control-1.html#scope"><i class="fa fa-check"></i><b>5.1</b> Scope</a></li>
@@ -293,10 +295,10 @@ manipulated_data</code></pre>
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmppOxm1R/berlin2c0b16293a30.csv&quot;  
-## [2] &quot;/tmp/RtmppOxm1R/toronto2c0bffe0309.csv&quot;  
-## [3] &quot;/tmp/RtmppOxm1R/tel_aviv2c0b3ab343bf.csv&quot;
-## [4] &quot;/tmp/RtmppOxm1R/zurich2c0b61ae6e14.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpEqeV4H/berlin2c55224e141a.csv&quot;  
+## [2] &quot;/tmp/RtmpEqeV4H/toronto2c55425963e9.csv&quot; 
+## [3] &quot;/tmp/RtmpEqeV4H/tel_aviv2c5523c58427.csv&quot;
+## [4] &quot;/tmp/RtmpEqeV4H/zurich2c554b80e5bd.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>
@@ -471,7 +473,7 @@ dict_data &lt;-
 <p>How to work with nested data?</p>
 <p>We start with the tibble <code>dict_data</code> from section <a href="pairwise-iteration-and-nesting-1.html#mut_map">“Moving to tibble-land”</a>, which includes the nested tibbles in its column <code>data</code>.</p>
 <p>If we want to actually look at the data we can directly use <code>tidyr::unnest()</code> on the whole tibble, which by default acts on all list-columns.
-This blows up our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:</p>
+This expands our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 22</span><span>
@@ -485,6 +487,19 @@ This blows up our tibble by repeating the formerly unnested column entries as ma
 ## #   </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+<p>Data flattened in this way is useful if the parts can be combined naturally into a larger dataset.
+Iterating over columns in the nested view corresponds to grouped operations in the flat view.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">map_int</span>(data, nrow)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>data)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 5</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>name</span><span>        </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span>     </span><span style='font-weight: bold;'>n</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> berlin    Berlin    13.4   52.5    49
+## </span><span style='color: #555555;'>2</span><span> toronto   Toronto  -</span><span style='color: #BB0000;'>79.4</span><span>   43.7    49
+## </span><span style='color: #555555;'>3</span><span> tel_aviv  Tel Aviv  34.8   32.1    49
+## </span><span style='color: #555555;'>4</span><span> zurich    Zürich     8.54  47.4    49
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
@@ -512,7 +527,7 @@ Therefore it is often useful to tell it, which columns to ignore:</p>
 ## </span><span style='color: #555555;'>4</span><span> zurich    Zürich     8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 </span></CODE></PRE>
 <p>Using this, we structure our data in new, customized ways.
-Here, we create a new column <code>date</code>, by dropping the detailed information of the time of the day, and create a nested tibble for each day:</p>
+For processing of daily data over all cities, we create a new column <code>date</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(time)) <span class="op">%&gt;%</span>
@@ -524,7 +539,48 @@ Here, we create a new column <code>date</code>, by dropping the detailed informa
 ## </span><span style='color: #555555;'>2</span><span> 2019-04-29 </span><span style='color: #555555;'>&lt;tibble [96 × 22]&gt;</span><span>
 ## </span><span style='color: #555555;'>3</span><span> 2019-04-30 </span><span style='color: #555555;'>&lt;tibble [64 × 22]&gt;</span><span>
 </span></CODE></PRE>
+<div id="exercises-15" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Implement the following code as a mapping over a nested tibble. Use a helper function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize_all</span>(<span class="kw">list</span>(<span class="dt">Mean =</span> mean)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 5</span><span>
+ ##   </span><span style='font-weight: bold;'>Species</span><span> </span><span style='font-weight: bold;'>Sepal.Length_Me…</span><span> </span><span style='font-weight: bold;'>Sepal.Width_Mean</span><span> </span><span style='font-weight: bold;'>Petal.Length_Me…</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> setosa              5.01             3.43             1.46
+ ## </span><span style='color: #555555;'>2</span><span> versic…             5.94             2.77             4.26
+ ## </span><span style='color: #555555;'>3</span><span> virgin…             6.59             2.97             5.55
+ ## </span><span style='color: #555555;'># … with 1 more variable: </span><span style='color: #555555;font-weight: bold;'>Petal.Width_Mean</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+ </span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">summarize_to_mean &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+  data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">___</span>(_____)
+}
 
+iris <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">nest</span>(___) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">map</span>(___, summarize_to_mean)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest</span>()</code></pre></li>
+<li><p>When is a grouped operation preferable over nesting? Discuss.</p></li>
+<li><p>Data frames are lists under the hood. Explain the output of the following code. What use cases can you imagine?</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.list</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">enframe</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 5 x 2</span><span>
+ ##   </span><span style='font-weight: bold;'>name</span><span>      </span><span style='font-weight: bold;'>value</span><span>     
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>    
+ ## </span><span style='color: #555555;'>1</span><span> city_code </span><span style='color: #555555;'>&lt;chr [4]&gt;</span><span> 
+ ## </span><span style='color: #555555;'>2</span><span> name      </span><span style='color: #555555;'>&lt;chr [4]&gt;</span><span> 
+ ## </span><span style='color: #555555;'>3</span><span> lng       </span><span style='color: #555555;'>&lt;dbl [4]&gt;</span><span> 
+ ## </span><span style='color: #555555;'>4</span><span> lat       </span><span style='color: #555555;'>&lt;dbl [4]&gt;</span><span> 
+ ## </span><span style='color: #555555;'>5</span><span> data      </span><span style='color: #555555;'>&lt;list [4]&gt;</span><span>
+ </span></CODE></PRE></li>
+</ol>
+
+</div>
 </div>
 </div>
             </section>
