@@ -78,3 +78,17 @@ read_loudly <- loudly(read_weather_file)
 read_loudly
 read_loudly("berlin.xlsx")
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Review the help and the implementation of `safely()` and `possibly()`.
+    
+    ```{r}
+    safely
+    possibly
+    ```
