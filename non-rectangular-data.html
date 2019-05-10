@@ -217,7 +217,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#multipluck"><i class="fa fa-check"></i><b>6.3</b> Plucking multiple locations</a></li>
 <li class="chapter" data-level="6.4" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#flatten"><i class="fa fa-check"></i><b>6.4</b> Flattening</a></li>
-<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a></li>
+<li class="chapter" data-level="6.5" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#transpose"><i class="fa fa-check"></i><b>6.5</b> Transposing</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#exercises-22"><i class="fa fa-check"></i><b>6.5.1</b> Exercises</a></li>
+</ul></li>
 <li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
@@ -961,6 +963,14 @@ The first vector contains the longitude and the second the latitude of our citie
 <span class="st">  </span>coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
+<div id="exercises-22" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> Exercises</h3>
+<ol style="list-style-type: decimal">
+<li><p>Explain what happens if you transpose a tibble:</p>
+<pre class="sourceCode r"><code class="sourceCode r">komoot <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">transpose</span>()</code></pre></li>
+</ol>
+</div>
 </div>
 <div id="rectangulate" class="section level2">
 <h2><span class="header-section-number">6.6</span> Rectangling</h2>
