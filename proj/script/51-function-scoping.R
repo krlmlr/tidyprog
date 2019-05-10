@@ -1,5 +1,6 @@
 ### Scope
 
+# Define global variable
 a <- 5
 
 # A function can access global variables:
@@ -22,5 +23,18 @@ a
 # Best practice: self-contained functions, independent of global variables
 
 
-## Exercises:
-invisible()
+# Exercises
+
+# Variables in different functions
+f1 <- function() {
+  a <- 3
+  a + f2()
+}
+
+f2 <- function() {
+  a
+}
+
+f1()
+f2()
+a

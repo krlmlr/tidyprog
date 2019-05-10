@@ -1,5 +1,7 @@
 # Scoping and flow control
 
+This chapter discusses a few details regarding functions.
+
 ```{r 05-setup, include = FALSE}
 library(here)
 ```

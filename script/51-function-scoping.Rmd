@@ -2,21 +2,26 @@
 rm(list = ls())
 ```
 
-
-## Scope
-
-<details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
 ### Scope
 
 ```
 ```{r 51-setup-43-function-scoping-r}
+```
+
+## Scope
+
+What happens if a function defines variables that have a variable by the same name in the global environment?
+
+We start with a variable defined in the global environment:
+
+```{r include = FALSE}
+# Define global variable
+```
+```{r 51-init}
 a <- 5
 ```
-</details>
 
-In the setup code we assigned `a <- 5`. 
-`a` is now an object of the global environment. 
 A function can access global variables:
 
 ```{r include = FALSE}
@@ -30,7 +35,9 @@ f <- function() {
 f()
 ```
 
-On the other hand, a variable which is defined inside a function, will not be known outside of that function. Respectively, it won't overwrite the value of global variables.
+On the other hand, a variable which is defined inside a function is contained in that function.
+It will not be known outside of that function.
+Respectively, it won't overwrite the value of global variables.
 
 ```{r include = FALSE}
 # When a function writes to a variable, it always writes in scope
@@ -47,7 +54,9 @@ a
 
 
 Global variables are a (hidden) part of a function's interface.
-Best practice: functions should be self-contained, independent of global variables.
+Ideally, functions are be self-contained, independent of global variables.
+Notable exceptions are objects are used across your entire analysis, such as "the dataset".
+(Otherwise you would need to pass them across many layers.)
 
 ```{r include = FALSE}
 # Global variables are a (hidden) part of a function's interface!
@@ -59,8 +68,25 @@ Best practice: functions should be self-contained, independent of global variabl
 
 
 ```{r include = FALSE}
-## Exercises:
+# Exercises
 ```
-```{r 51-exercises}
-invisible()
-```
+
+### Exercises
+
+1. Double-check what happens if two functions declare/use a variable of the same name.
+    
+    ```{r results = "hide"}
+    # Variables in different functions
+    f1 <- function() {
+      a <- 3
+      a + f2()
+    }
+
+    f2 <- function() {
+      a
+    }
+    
+    f1()
+    f2()
+    a
+    ```
