@@ -3,9 +3,8 @@ rm(list = ls())
 ```
 
 
-## Manipulating pairwise
+This chapter uses the `manipulated_data` object from the ["Manipulating all datasets"](#map_manip) section.
 
-<details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
 ### Manipulating pairwise
 
@@ -16,6 +15,12 @@ library(here)
 
 dict <- readxl::read_excel(here("data/cities.xlsx"))
 
+input_data <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe() %>%
+  map(~ readxl::read_excel(here(.)))
+
 manipulator <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
@@ -23,17 +28,15 @@ manipulator <- function(data) {
 }
 
 manipulated_data <-
-  dict %>%
-  select(city_code, weather_filename) %>%
-  deframe() %>%
-  map(~ readxl::read_excel(here(.))) %>%
+  input_data %>%
   map(manipulator)
+
+manipulated_data
 ```
-</details>
 
-Here we take cases into consideration, when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.
+## Manipulating pairwise
 
-We start with the reduced list of tibbles `manipulated_data` from ["Manipulating all datasets"](#map_manip).
+Here we take discuss cases when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.
 
 We first prepare a list of future output filenames:
 
@@ -64,3 +67,21 @@ Since we are just interested in the side-effects of `write_csv()` and not in the
 ```{r 41-we-don-t-really-need-the-output}
 walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. What does the following code display?
+
+    ```{r include = FALSE}
+    # map2() and walk2() are pipable:
+    ```
+    ```{r results = "hide"}
+    manipulated_data %>% 
+      walk2(output_filenames, ~ readr::write_csv(..1, ..2)) %>% 
+      map_int(nrow)
+    ```

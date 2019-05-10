@@ -1,5 +1,7 @@
 # Pairwise iteration and nesting
 
+This chapter explores iterating over pairs (or generally lists) of vectors of the same length.
+The relationship between vectors and data frame columns is especially helpful here, because values in one row of a tibble naturally correspond to accessing the same index in multiple vectors.
 
 ```{r 04-setup, include = FALSE}
 library(here)

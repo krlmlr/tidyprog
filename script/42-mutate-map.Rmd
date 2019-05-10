@@ -28,7 +28,7 @@ How to combine the abilities of `map()` & co., which work on vectors and lists, 
 
 We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map) and with `dict` from section ["Named vectors and two-column tibbles"](#names).
 
-Produce a data frame from `input_data` with `enframe()` leads to a maybe at first surprising, but oftentimes useful result:
+Calling `enframe()` to produce a data frame from `input_data` leads to a maybe at first surprising, but oftentimes useful result:
 
 ```{r include = FALSE}
 # Lists are also vectors, enframe() returns a nested tibble!
@@ -55,8 +55,7 @@ dict %>%
 ```
 
 This works because `R` interprets columns of tibbles as vectors, which can be fed to `map()`.
-
-Deselect i.e. drop columns using `select()` with `-`:
+Staying in "tibble-land" as long as possible helps retaining other iportant components of the data you are processing, so that you can keep using familiar data transformation tools.
 
 ```{r include = FALSE}
 # Keep important columns
@@ -65,8 +64,61 @@ Deselect i.e. drop columns using `select()` with `-`:
 dict_data <-
   dict %>%
   mutate(
-    data = map(weather_filename, ~ readxl::read_excel(here(.)))
+    data = map(weather_filename, ~ readxl::read_excel(here(.))),
+    rows = map_int(data, nrow),
   ) %>%
   select(-weather_filename)
 dict_data
 ```
+
+This pattern can also be used with the `map2()` family of functions:
+
+```{r include = FALSE}
+# Also with map2:
+```
+```{r 42-map2}
+dict_data %>% 
+  mutate(
+    desc = map2_chr(
+      name, rows,
+      ~ paste0(ncol(..2), " columns in data for ", ..1)
+    )
+  )
+```
+
+More generally, `pmap()` supports functions with an arbitrary number of arguments:
+
+```{r include = FALSE}
+# Keep important columns
+```
+```{r 42-pmap}
+dict_data %>% 
+  mutate(
+    desc = pmap_chr(
+      list(name, rows),
+      ~ paste0(ncol(..2), " columns in data for ", ..1)
+    )
+  )
+```
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. The `imap()` family of functions iterates over a vector and its names:
+
+    ```{r}
+    input_data %>% 
+      imap_chr(~ paste0(.y, ": ", nrow(.x), " rows"))
+    ```
+    
+    Implement the same functionality using `map2()` inside a `mutate()`, and `enframe()`:
+
+    ```r
+    manipulated_data %>%
+      ___() %>%
+      mutate(___ = map2()) %>%
+      deframe()
+    ```
