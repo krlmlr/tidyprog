@@ -54,3 +54,17 @@ coordinates_transposed <-
   transpose() %>%
   map(~ flatten_dbl(.))
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Explain what happens if you transpose a tibble:
+
+    ```r
+    komoot %>%
+      transpose()
+    ```
