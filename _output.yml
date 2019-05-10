@@ -1,4 +1,5 @@
-bookdown::gitbook: default
+bookdown::gitbook:
+  css: scroll.css
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
