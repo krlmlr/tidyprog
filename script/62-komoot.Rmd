@@ -75,7 +75,7 @@ komoot_content %>%
   map(list("features", 1, "geometry", "coordinates"))
 ```
 
-The acces path can also be stored in a variable:
+The access path can also be stored in a variable:
 
 
 ```{r include = FALSE}
@@ -88,3 +88,45 @@ coordinates <-
   map(accessor)
 coordinates
 ```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Augment `komoot` with a columns containing information on the first feature only.
+    
+    ```{r echo = FALSE}
+    komoot_first <- 
+      komoot %>% 
+      mutate(
+        first_feature = map(content, list("features", 1))
+      )
+    komoot_first
+    ```
+
+1. Augment `komoot_first` with columns containing information on coordinates, place and postal code. Use accessors and appropriate types for the columns.
+    
+    ```r
+    acc_coordinates <- _____
+    acc_country <- _____
+    komoot_first %>% 
+      mutate(
+        coordinates = ___(___, acc_coordinates),
+        country = _____,
+        postcode = map_chr(_____, ~ pluck(___, .default = NA))
+      )
+    ```
+
+    ```{r echo = FALSE}
+    acc_coordinates <- list("coordinates")
+    acc_country <- list("properties", "country")
+    komoot_first %>% 
+      mutate(
+        coordinates = map(first_feature, acc_coordinates),
+        country = map_chr(first_feature, acc_country),
+        postcode = map_chr(first_feature, ~ pluck(., "properties", "postcode", .default = NA))
+      )
+    ```
