@@ -256,10 +256,10 @@ manipulated_data &lt;-
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpTlViv3/berlin2c54561ff84c.csv&quot;  
-## [2] &quot;/tmp/RtmpTlViv3/toronto2c542f3bc0b3.csv&quot; 
-## [3] &quot;/tmp/RtmpTlViv3/tel_aviv2c5430e25992.csv&quot;
-## [4] &quot;/tmp/RtmpTlViv3/zurich2c5429667ab8.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/Rtmpa9hQKU/berlin2c5618361a60.csv&quot;  
+## [2] &quot;/tmp/Rtmpa9hQKU/toronto2c56660a9687.csv&quot; 
+## [3] &quot;/tmp/Rtmpa9hQKU/tel_aviv2c5671ca2a26.csv&quot;
+## [4] &quot;/tmp/Rtmpa9hQKU/zurich2c5667bdeb9a.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>
