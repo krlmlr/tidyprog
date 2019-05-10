@@ -15,6 +15,10 @@ if (!knitr::is_latex_output()) {
 }
 library(here)
 
+this_repo <- function(...) {
+  file.path("https://github.com/krlmlr/tidyprog", ...)
+}
+
 tidyprog_repo <- function(...) {
   file.path("https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr", ...)
 }
@@ -39,6 +43,8 @@ Material for the [zhRcourse workshop "Programming in the tidyverse"](https://www
     - Sign up, or log in with Google or GitHub
     - Click the "Save a private copy" link next to the **TEMPORARY** label in red in the header
     - All necessary packages are preinstalled
+
+- The source project for this material: `r this_repo()`
 
 ## Package versions used {-}
 
