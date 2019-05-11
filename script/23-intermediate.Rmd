@@ -10,7 +10,7 @@ rm(list = ls())
 ### Use case: Intermediate variables
 
 ```
-```{r 23-setup-33-intermediate-r}
+```{r 23-setup-23-intermediate-r}
 library(tidyverse)
 library(here)
 

@@ -10,7 +10,7 @@ rm(list = ls())
 ### Rectangling
 
 ```
-```{r 66-setup-75-rectangulate-r}
+```{r 66-setup-66-rectangulate-r}
 library(tidyverse)
 library(here)
 
@@ -39,14 +39,15 @@ In two easy steps we can therefore make a tibble out of the unnamed list `coordi
 ```
 ```{r 66-a-tibble-is-internally-a-list-of-named-vectors-of-equal-length}
 coordinates_transposed %>%
-  set_names(c("lon", "lat"))
+  rlang::set_names(c("lon", "lat"))
 
 coordinates_transposed %>%
-  set_names(c("lon", "lat")) %>%
+  rlang::set_names(c("lon", "lat")) %>%
   as_tibble()
 ```
 
 If you want to keep the names open for now, but still get a tibble, you can set `as_tibble()`'s argument `.name_repair = "universal"`:
+
 ```{r include = FALSE}
 # Name repair helps if you don't know the names yet
 ```

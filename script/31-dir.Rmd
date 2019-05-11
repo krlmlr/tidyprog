@@ -8,7 +8,7 @@ The following packages are required throughout this chapter:
 ### Vectors and columns
 
 ```
-```{r 31-setup-02-dir-r}
+```{r 31-setup-31-dir-r}
 library(tidyverse)
 library(here)
 ```
@@ -87,6 +87,7 @@ Turn a specific column into a vector by providing the desired column name to `pu
 files_df %>%
   pull(name)
 ```
+
 
 ```{r include = FALSE}
 # Exercises

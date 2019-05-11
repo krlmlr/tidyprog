@@ -11,7 +11,7 @@ The following packages are used for this chapter.
 ### Definition and execution
 
 ```
-```{r 21-setup-31-function-r}
+```{r 21-setup-21-function-r}
 library(tidyverse)
 library(here)
 ```
@@ -66,7 +66,7 @@ Call the function by adding the parentheses:
 ```{r include = FALSE}
 # Call like functions exported from packages
 ```
-```{r 21-execute-like-functions-exported-from-packages}
+```{r 21-call-like-functions-exported-from-packages}
 read_weather_data()
 ```
 
@@ -88,7 +88,7 @@ A function can also be used as input for a pipe:
 # Pipe
 ```
 ```{r 21-pipe}
-read_weather_data() %>% 
+read_weather_data() %>%
   count(city_code)
 ```
 

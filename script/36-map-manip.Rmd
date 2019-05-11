@@ -10,7 +10,7 @@ rm(list = ls())
 ### Manipulating all datasets
 
 ```
-```{r 36-setup-07-map-manip-r}
+```{r 36-setup-36-map-manip-r}
 library(tidyverse)
 library(here)
 
@@ -66,7 +66,7 @@ Create a custom function for that specific purpose in a call to `map()`:
 # Create a function to manipulate
 ```
 ```{r 36-create-a-function-to-manipulate}
-manipulator <- function(data) {
+find_good_times <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
     filter(temperature >= 14)
@@ -79,7 +79,7 @@ Let's look at the object `manipulator`, that we created:
 # Functions are first-class objects!
 ```
 ```{r 36-functions-are-first-class-objects}
-manipulator
+find_good_times
 ```
 
 See the ["Function basics"](#function-basics) chapter for a more extensive introduction to functions.
@@ -90,7 +90,7 @@ Testing the function:
 # Test the function
 ```
 ```{r 36-test-the-function}
-manipulator(input_data[[4]])
+find_good_times(input_data[[4]])
 ```
 
 Now let's use `map()` to let our function act on the entire dataset:
@@ -99,8 +99,8 @@ Now let's use `map()` to let our function act on the entire dataset:
 # Run the function on the entire dataset
 ```
 ```{r 36-run-the-function-on-the-entire-dataset}
-manipulated_data <- map(input_data, ~ manipulator(.))
-manipulated_data
+good_times <- map(input_data, ~ find_good_times(.))
+good_times
 ```
 
 `map()` allows for the following shortcut notation for functions with one argument only:
@@ -109,8 +109,9 @@ manipulated_data
 # Shortcut
 ```
 ```{r 36-shortcut}
-map(input_data, manipulator)
+map(input_data, find_good_times)
 ```
+
 
 ```{r include = FALSE}
 # Exercises

@@ -10,7 +10,7 @@ rm(list = ls())
 ### Arguments
 
 ```
-```{r 22-setup-32-args-r}
+```{r 22-setup-22-args-r}
 library(tidyverse)
 library(here)
 ```
@@ -29,6 +29,8 @@ weather_path <- function(filename) {
   # Returned value
   here("data/weather", filename)
 }
+
+weather_path("milan.xlsx")
 ```
 
 Call functions from within functions:

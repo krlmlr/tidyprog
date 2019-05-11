@@ -10,7 +10,7 @@ rm(list = ls())
 ### Nesting and unnesting
 
 ```
-```{r 43-setup-13-unnest-r}
+```{r 43-setup-43-unnest-r}
 library(tidyverse)
 library(here)
 
@@ -38,15 +38,48 @@ dict_data %>%
   unnest()
 ```
 
+This is very similar to `bind_rows()` of the `data` column.
+
+```{r include = FALSE}
+# This is very similar to bind_rows():
+```
+```{r 43-bind-rows-equivalent}
+dict_data %>%
+  pull(data) %>%
+  bind_rows()
+```
+
+```{r include = FALSE}
+# What happens with data of different shape?
+```
+```{r 43-data-shape}
+check_columns_same <- function(x, y) {
+  stopifnot(identical(colnames(x), colnames(y)))
+}
+
+bind_rows <- function(data_frames) {
+  # Called for the side effect
+  reduce(data_frames, check_columns_same)
+
+  dplyr::bind_rows(data_frames)
+}
+
+try(
+  dict_data %>%
+    pull(data) %>%
+    bind_rows()
+)
+```
+
 Data flattened in this way is useful if the parts can be combined naturally into a larger dataset.
 Iterating over columns in the nested view corresponds to grouped operations in the flat view.
 
 ```{r include = FALSE}
 # Mapping in nested view are grouped operation in the flat view:
 ```
-```{r 43-unnested-grouped}
+```{r 43-mapping-in-nested-view-are-grouped-operation-in-the-flat-view}
 dict_data %>%
-  mutate(n = map_int(data, nrow)) %>% 
+  mutate(n = map_int(data, nrow)) %>%
   select(-data)
 
 dict_data %>%
@@ -79,6 +112,7 @@ dict_data %>%
   mutate(date = as.Date(time)) %>%
   nest(-date)
 ```
+
 
 ```{r include = FALSE}
 # Exercises

@@ -57,7 +57,7 @@ try(print(
 # This requires tidyeval support from the function that is called!
 aes
 
-### Exercises
+# Exercises
 
 # mutate_map_dbl() function
 mutate_map_dbl <- function(.data, col, expr) {

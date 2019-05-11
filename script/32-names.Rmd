@@ -10,7 +10,7 @@ rm(list = ls())
 ### Named vectors and two-column tibbles
 
 ```
-```{r 32-setup-03-names-r}
+```{r 32-setup-32-names-r}
 library(tidyverse)
 library(here)
 ```
@@ -82,6 +82,7 @@ Some operations producing vectors from vectors cause the names to be lost:
 # Not all operations maintain vector names!
 ```
 ```{r 32-not-all-operations-maintain-vector-names}
+paste0("'", weather_filenames, "'")
 weather_filenames %>%
   here()
 ```
@@ -93,10 +94,18 @@ A possible solution can be in many cases to change the order of the transformati
 ```
 ```{r 32-move-the-here-call-into-tibble-land}
 dict %>%
+  mutate(weather_filename_here = here(weather_filename))
+
+dict %>%
+  mutate(weather_filename_here = here(weather_filename)) %>%
+  select(city_code, weather_filename_here)
+
+dict %>%
   mutate(weather_filename_here = here(weather_filename)) %>%
   select(city_code, weather_filename_here) %>%
   deframe()
 ```
+
 
 ```{r include = FALSE}
 # Exercises

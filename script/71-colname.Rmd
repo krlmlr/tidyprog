@@ -97,7 +97,7 @@ aes
 
 
 ```{r include = FALSE}
-### Exercises
+# Exercises
 ```
 ```{r 71-exercises}
 

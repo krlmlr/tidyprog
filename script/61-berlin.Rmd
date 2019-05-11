@@ -10,7 +10,7 @@ rm(list = ls())
 ### Traversing
 
 ```
-```{r 61-setup-71-berlin-r}
+```{r 61-setup-61-berlin-r}
 library(tidyverse)
 library(here)
 ```
@@ -49,15 +49,18 @@ With the function `purrr::pluck()`, there is however a more universal tool avail
 ```{r 61-uniform-access-with-pluck}
 berlin %>%
   pluck("type")
+berlin[["type"]]
 
 berlin %>%
   pluck("features")
 
 berlin %>%
   pluck("features", 1)
+berlin[["features"]][[1]]
 
 berlin %>%
   pluck("features", 1, "geometry")
+berlin[["features"]][[1]][["geometry"]]
 
 berlin %>%
   pluck("features", 1, "geometry", "coordinates")

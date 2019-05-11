@@ -10,7 +10,7 @@ rm(list = ls())
 ### <No caption defined>
 
 ```
-```{r 90-setup-60-split-strings-r}
+```{r 90-setup-90-split-strings-r}
 
 
 library(tidyverse)
@@ -52,7 +52,7 @@ dict %>%
 ```{r include = FALSE}
 # Need flatten:
 ```
-```{r 90-same-result-with-map-2}
+```{r 90-need-flatten}
 dict %>%
   mutate(split = flatten(map(name, ~ strsplit(., " "))))
 ```

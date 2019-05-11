@@ -9,7 +9,7 @@ This chapter uses the `manipulated_data` object from the ["Manipulating all data
 ### Manipulating pairwise
 
 ```
-```{r 41-setup-06-map-2-r}
+```{r 41-setup-41-map-2-r}
 library(tidyverse)
 library(here)
 
@@ -21,22 +21,22 @@ input_data <-
   deframe() %>%
   map(~ readxl::read_excel(here(.)))
 
-manipulator <- function(data) {
+find_good_times <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
     filter(temperature >= 14)
 }
 
-manipulated_data <-
+good_times <-
   input_data %>%
-  map(manipulator)
+  map(find_good_times)
 
-manipulated_data
+good_times
 ```
 
 ## Manipulating pairwise
 
-Here we take discuss cases when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.
+Here we discuss cases when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.
 
 We first prepare a list of future output filenames:
 
@@ -44,29 +44,43 @@ We first prepare a list of future output filenames:
 # Write back results: new file names
 ```
 ```{r 41-write-back-results-new-file-names}
-output_filenames <- tempfile(names(manipulated_data), fileext = ".csv")
+output_filenames <- tempfile(names(good_times), fileext = ".csv")
 output_filenames
 ```
 
 We want to use `readr::write_csv()` to write each tibble into the respective file.
 `write_csv()` needs at least 2 arguments: the tibble itself and the path to the filename.
+For illustration, we implement a file-centric wrapper function that takes the file name as first argument and also prints a message every time a file is written.
 We use `map2()` to handle this:
 
 ```{r include = FALSE}
 # Iterate over pairs
 ```
 ```{r 41-iterate-over-pairs}
-map2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
+process_csv <- function(file, data) {
+  readr::write_csv(data, file)
+  message("Writing ", file)
+  invisible(file)
+}
+
+map2(good_times, output_filenames, ~ process_csv(..2, ..1))
+
+invisible(map2(good_times, output_filenames, ~ process_csv(..2, ..1)))
 ```
 
-Since we are just interested in the side-effects of `write_csv()` and not in the displayed output, we rather use the related function `walk2()`, which does not return output.
+Because `process_csv()` returns the file name, it is available as output.
+Since we are just interested in the side-effects of `write_csv()` and not in the displayed output, we can use the related function `walk2()`.
 
 ```{r include = FALSE}
 # We don't really need the output
 ```
 ```{r 41-we-don-t-really-need-the-output}
-walk2(manipulated_data, output_filenames, ~ readr::write_csv(..1, ..2))
+walk2(good_times, output_filenames, ~ process_csv(..2, ..1))
+
+print(walk2(good_times, output_filenames, ~ process_csv(..2, ..1)))
 ```
+
+`walk2()` returns its first argument so that it can be used in a pipe.
 
 
 ```{r include = FALSE}

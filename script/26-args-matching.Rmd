@@ -10,7 +10,7 @@ rm(list = ls())
 ### Argument matching
 
 ```
-```{r 26-setup-36-args-matching-r}
+```{r 26-setup-26-args-matching-r}
 
 ```
 </details>
@@ -40,7 +40,6 @@ Arguments are matched partially, which can be convenient but is also a source of
 # Partial matching
 ```
 ```{r 26-partial-matching}
-use_names(3, 4)
 use_names(o = 3, 4)
 use_names(3, o = 4)
 use_names(o = 3, t = 4)
@@ -75,6 +74,19 @@ ellipsis_test <- function(...) {
 }
 
 ellipsis_test(a = 1, 2, c = 3:5)
+```
+
+Arguments in ellipsis can be accessed with `..1`, `..2` etc.
+
+```{r include = FALSE}
+# Arguments in ellipsis can be accessed with ..1, ..2 etc.
+```
+```{r 26-arguments-in-ellipsis-can-be-accessed-with-1-2-etc}
+ellipsis_direct_test <- function(...) {
+  list(..1, ..2)
+}
+
+ellipsis_direct_test(a = 1, 2, c = 3:5)
 ```
 
 

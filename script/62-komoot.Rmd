@@ -10,7 +10,7 @@ rm(list = ls())
 ### Iterating and traversing
 
 ```
-```{r 62-setup-72-komoot-r}
+```{r 62-setup-62-komoot-r}
 library(tidyverse)
 library(here)
 ```

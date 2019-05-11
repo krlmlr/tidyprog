@@ -10,7 +10,7 @@ rm(list = ls())
 ### Pure functions and side effects
 
 ```
-```{r 52-setup-44-function-purity-r}
+```{r 52-setup-52-function-purity-r}
 library(tidyverse)
 ```
 </details>

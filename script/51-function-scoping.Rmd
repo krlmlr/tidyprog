@@ -6,7 +6,7 @@ rm(list = ls())
 ### Scope
 
 ```
-```{r 51-setup-43-function-scoping-r}
+```{r 51-setup-51-function-scoping-r}
 ```
 
 ## Scope

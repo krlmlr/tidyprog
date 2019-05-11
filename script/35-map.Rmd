@@ -10,7 +10,7 @@ rm(list = ls())
 ### Processing multiple files
 
 ```
-```{r 35-setup-06-map-r}
+```{r 35-setup-35-map-r}
 library(tidyverse)
 library(here)
 
@@ -32,8 +32,23 @@ As just seen, manually choosing just one entry of a vector works like so:
 # Read a single input file
 ```
 ```{r 35-read-a-single-input-file}
+input_files[[1]]
+here(input_files[[1]])
 readxl::read_excel(here(input_files[[1]]))
 ```
+
+However, if we try to read all files from the vector with `read_excel()`, this fails:
+
+```{r include = FALSE}
+# Try reading all input files
+```
+```{r 35-try-reading-all-input-files}
+here(input_files)
+try(readxl::read_excel(here(input_files)))
+```
+
+Unlike `here()`, the `read_excel()` function can process only one file at a time.
+We need to iterate explicitly.
 
 With `map()`, you can successively work through the whole vector and each time let the same function deal with the respective entry.
 The output of `map()` is a list where each element contains one results.
@@ -45,6 +60,21 @@ The list is named if the input is named:
 ```{r 35-read-all-input-files}
 input_data <-
   map(input_files, ~ readxl::read_excel(here(.)))
+```
+
+The `map()` call above is equivalent to the following code:
+
+```{r include = FALSE}
+# Equivalent code
+```
+```{r 35-equivalent-code}
+input_data <-
+  list(
+    berlin = readxl::read_excel(here(input_files[[1]])),
+    toronto = readxl::read_excel(here(input_files[[2]])),
+    tel_aviv = readxl::read_excel(here(input_files[[3]])),
+    zurich = readxl::read_excel(here(input_files[[4]]))
+  )
 ```
 
 Let's take a closer look at what we produced:
@@ -67,6 +97,7 @@ names(input_data)
 input_files %>%
   map(~ readxl::read_excel(here(.)))
 ```
+
 
 ```{r include = FALSE}
 # Exercises

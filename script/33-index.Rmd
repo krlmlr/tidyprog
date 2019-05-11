@@ -2,6 +2,7 @@
 rm(list = ls())
 ```
 
+
 ## Indexing/subsetting {#indexing}
 
 <details><summary>*Click here to show setup code.*</summary>
@@ -9,7 +10,7 @@ rm(list = ls())
 ### Indexing/subsetting
 
 ```
-```{r 33-setup-04-index-r}
+```{r 33-setup-33-index-r}
 library(tidyverse)
 library(here)
 
@@ -42,6 +43,8 @@ There are different ways of accessing individual entries of the named vector:
 ```{r 33-access-individual-input-files}
 input_files[1]
 input_files[[1]]
+
+input_files["berlin"]
 input_files[["berlin"]]
 ```
 
@@ -61,11 +64,12 @@ Consistent pipe-friendly access of single elements:
 # Consistent pipe-friendly access of single elements
 ```
 ```{r 33-consistent-pipe-friendly-access-of-single-elements}
-input_files %>% 
+input_files %>%
   pluck(1)
-input_files %>% 
+input_files %>%
   pluck("berlin")
 ```
+
 
 ```{r include = FALSE}
 # Exercises

@@ -10,7 +10,7 @@ rm(list = ls())
 ### Transposing
 
 ```
-```{r 65-setup-74-transpose-r}
+```{r 65-setup-65-transpose-r}
 library(tidyverse)
 library(here)
 
@@ -53,6 +53,7 @@ coordinates_transposed <-
   coordinates %>%
   transpose() %>%
   map(~ flatten_dbl(.))
+coordinates_transposed
 ```
 
 

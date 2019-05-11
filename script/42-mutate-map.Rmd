@@ -10,7 +10,7 @@ rm(list = ls())
 ### Moving to tibble-land
 
 ```
-```{r 42-setup-12-mutate-map-r}
+```{r 42-setup-42-mutate-map-r}
 library(tidyverse)
 library(here)
 
@@ -34,8 +34,11 @@ Calling `enframe()` to produce a data frame from `input_data` leads to a maybe a
 # Lists are also vectors, enframe() returns a nested tibble!
 ```
 ```{r 42-lists-are-also-vectors-enframe-returns-a-nested-tibble}
-input_data %>%
+nested_input_data <-
+  input_data %>%
   enframe()
+
+nested_input_data
 ```
 
 This is because lists are also vectors.
@@ -55,7 +58,21 @@ dict %>%
 ```
 
 This works because `R` interprets columns of tibbles as vectors, which can be fed to `map()`.
-Staying in "tibble-land" as long as possible helps retaining other iportant components of the data you are processing, so that you can keep using familiar data transformation tools.
+To simplify the `map()` call, we create an intermediate column:
+
+```{r include = FALSE}
+# Create an intermediate column to simplify the map() call:
+```
+```{r 42-create-an-intermediate-column-to-simplify-the-map-call}
+dict %>%
+  select(city_code, weather_filename) %>%
+  mutate(path = here(weather_filename)) %>%
+  mutate(data = map(path, readxl::read_excel))
+```
+
+
+Staying in "tibble-land" as long as possible helps retaining other important components of the data you are processing, so that you can keep using familiar data transformation tools.
+
 
 ```{r include = FALSE}
 # Keep important columns
@@ -76,30 +93,78 @@ This pattern can also be used with the `map2()` family of functions:
 ```{r include = FALSE}
 # Also with map2:
 ```
-```{r 42-map2}
-dict_data %>% 
+```{r 42-also-with-map-2}
+dict_data_with_desc <-
+  dict_data %>%
   mutate(
     desc = map2_chr(
       name, rows,
-      ~ paste0(ncol(..2), " columns in data for ", ..1)
+      ~ paste0(..2, " rows in data for ", ..1)
     )
   )
 ```
+
+Because `mutate()` always appends to the end, the most recently added column can always be accessed with `pull()`:
+
+```{r include = FALSE}
+# Access the most recently added column with pull():
+```
+```{r 42-access-the-most-recently-added-column-with-pull}
+dict_data_with_desc %>%
+  pull()
+```
+
 
 More generally, `pmap()` supports functions with an arbitrary number of arguments:
 
 ```{r include = FALSE}
-# Keep important columns
+# More than two arguments:
 ```
-```{r 42-pmap}
-dict_data %>% 
+```{r 42-more-than-two-arguments}
+dict_data %>%
   mutate(
+    cols = map_int(data, ncol),
     desc = pmap_chr(
-      list(name, rows),
-      ~ paste0(ncol(..2), " columns in data for ", ..1)
+      list(name, rows, cols),
+      ~ paste0(..2, " rows and ", ..3, " cols in data for ", ..1)
     )
   )
 ```
+
+
+```{r include = FALSE}
+# A nicer interface?
+```
+```{r 42-a-nicer-interface, include = FALSE}
+map_mutate <- function(.data, col, expr) {
+  col <- rlang::enexpr(col)
+
+  .data %>%
+    mutate(data = map(!!col, expr))
+}
+
+dict %>%
+  map_mutate(weather_filename, ~ readxl::read_excel(here(.)))
+```
+
+
+```{r include = FALSE}
+# Process a tibble rowwise: an alternative
+```
+```{r 42-process-a-tibble-rowwise-an-alternative, include = FALSE}
+processor <- function(row) {
+  row %>%
+    mutate(cells = prod(dim(data[[1]])))
+}
+
+dict_data %>%
+  rowid_to_column() %>%
+  nest(-rowid) %>%
+  pull() %>%
+  map(processor) %>%
+  bind_rows()
+```
+
 
 ```{r include = FALSE}
 # Exercises

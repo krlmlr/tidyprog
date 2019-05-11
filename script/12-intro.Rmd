@@ -17,7 +17,7 @@ We will always load the following packages:
 ### Review of visualization and data transformation
 
 ```
-```{r 12-setup-01-intro-r}
+```{r 12-setup-12-intro-r}
 library(tidyverse)
 library(here)
 ```
@@ -119,12 +119,18 @@ Lineplot with different line types and an additional visualisation of the line r
 # Temperature and apparent temperature
 ```
 ```{r 12-temperature-and-apparent-temperature}
+weather_data %>%
+  select(city_code, time, temperature, apparentTemperature) %>%
+  gather(kind, temperature, -city_code, -time)
+
 temperature_data <-
   weather_data %>%
   select(city_code, time, temperature, apparentTemperature) %>%
   gather(kind, temperature, -city_code, -time) %>%
   mutate(apparent = (kind == "apparentTemperature")) %>%
   select(-kind)
+
+temperature_data
 
 temperature_data %>%
   ggplot(aes(x = time, color = city_code)) +

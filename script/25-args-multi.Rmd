@@ -10,7 +10,7 @@ rm(list = ls())
 ### Multiple arguments
 
 ```
-```{r 25-setup-35-args-multi-r}
+```{r 25-setup-25-args-multi-r}
 library(tidyverse)
 library(here)
 
@@ -59,6 +59,18 @@ read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
     filter( !(city_code == "toronto" & omit_toronto) )
 }
 ```
+
+Prefer passing arguments by name rather than only giving the value, especially if the intent of the value is not clear from just reading it.
+
+```{r 25-good}
+# Good:
+read_weather_data(omit_zurich = TRUE)
+read_weather_data(omit_toronto = TRUE)
+
+# Bad:
+read_weather_data(TRUE)
+```
+
 
 Use the so called ellipsis (`...`) when you want to provide the possibility for the user to call your function with a list of arguments of unspecified length. 
 This can be e.g. useful for passing arguments downstream:

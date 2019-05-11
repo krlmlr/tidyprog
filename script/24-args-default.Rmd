@@ -10,7 +10,7 @@ rm(list = ls())
 ### Default values
 
 ```
-```{r 24-setup-34-args-default-r}
+```{r 24-setup-24-args-default-r}
 library(tidyverse)
 library(here)
 

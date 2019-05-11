@@ -10,7 +10,7 @@ rm(list = ls())
 ### Accessing APIs
 
 ```
-```{r 67-setup-77-json-r}
+```{r 67-setup-67-json-r}
 library(tidyverse)
 library(here)
 ```

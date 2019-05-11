@@ -5,14 +5,12 @@ rm(list = ls())
 
 ## Typed output
 
-
-
 <details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
 ### Typed output
 
 ```
-```{r 37-setup-08-map-type-r}
+```{r 37-setup-37-map-type-r}
 library(tidyverse)
 library(here)
 
@@ -51,12 +49,15 @@ input_data %>%
   map_int(~ nrow(.))
 ```
 
-If the output is a character variable, use `map_chr()`:
+If the output is of type character, use `map_chr()`:
 
 ```{r include = FALSE}
 # ... or a character vector?
 ```
 ```{r 37-or-a-character-vector}
+input_data %>%
+  map_chr(~ nrow(.))
+
 input_data %>%
   map_chr(~ as.character(nrow(.)))
 ```
