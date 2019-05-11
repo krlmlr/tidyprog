@@ -131,6 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i>Links</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#package-versions-used"><i class="fa fa-check"></i>Package versions used</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
@@ -310,10 +311,10 @@ manipulated_data</code></pre>
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpN8eA2m/berlin2bbb22389cf5.csv&quot;  
-## [2] &quot;/tmp/RtmpN8eA2m/toronto2bbb5070ad49.csv&quot; 
-## [3] &quot;/tmp/RtmpN8eA2m/tel_aviv2bbb4148afef.csv&quot;
-## [4] &quot;/tmp/RtmpN8eA2m/zurich2bbb3477c03d.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/Rtmpy2wEBL/berlin2c5a399e7eca.csv&quot;  
+## [2] &quot;/tmp/Rtmpy2wEBL/toronto2c5a19ea06ec.csv&quot; 
+## [3] &quot;/tmp/Rtmpy2wEBL/tel_aviv2c5a7f1a9d07.csv&quot;
+## [4] &quot;/tmp/Rtmpy2wEBL/zurich2c5a470128c2.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 We use <code>map2()</code> to handle this:</p>
