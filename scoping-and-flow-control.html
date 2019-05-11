@@ -224,7 +224,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#a-custom-plotting-function"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#do-yo-need-tidy-evaluation"><i class="fa fa-check"></i><b>7.2</b> Do yo need tidy evaluation?</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#explicit-quote-unquote-of-ellipsis"><i class="fa fa-check"></i><b>7.3</b> Explicit quote-unquote of ellipsis</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#names-1"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
+<li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section"><i class="fa fa-check"></i><b>7.5</b> <No caption defined></a></li>
+<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section-1"><i class="fa fa-check"></i><b>7.6</b> <No caption defined></a></li>
+<li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section-2"><i class="fa fa-check"></i><b>7.7</b> <No caption defined></a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
 <li class="chapter" data-level="8.1" data-path="best-practices.html"><a href="best-practices.html#description"><i class="fa fa-check"></i><b>8.1</b> DESCRIPTION</a></li>
 <li class="chapter" data-level="8.2" data-path="best-practices.html"><a href="best-practices.html#r"><i class="fa fa-check"></i><b>8.2</b> R</a></li>
@@ -326,7 +334,7 @@ a</code></pre></li>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmpy2wEBL/file2c5a5e1eb2be</code></pre>
+<pre><code>## 2 written to /tmp/RtmpahEa2y/file2c2f20ac79df</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -334,7 +342,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmpy2wEBL/file2c5a3710fc48</code></pre>
+<pre><code>## 6 written to /tmp/RtmpahEa2y/file2c2f5503e856</code></pre>
 <pre><code>## [1] 7</code></pre>
 <div id="exercises-17" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Exercises</h3>
@@ -553,7 +561,7 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8277a80&gt;</code></pre>
+## &lt;environment: 0x9c3a398&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -589,7 +597,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x9fcd5e8&gt;</code></pre>
+## &lt;environment: 0x9deb710&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
@@ -614,7 +622,7 @@ read_loudly</code></pre>
 ##     .f &lt;- as_mapper(.f)
 ##     function(...) capture_error(.f(...), otherwise, quiet)
 ## }
-## &lt;bytecode: 0xc299080&gt;
+## &lt;bytecode: 0x7b6c030&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">possibly</code></pre>
 <pre><code>## function (.f, otherwise, quiet = TRUE) 
@@ -631,7 +639,7 @@ read_loudly</code></pre>
 ##         })
 ##     }
 ## }
-## &lt;bytecode: 0x9ca19f0&gt;
+## &lt;bytecode: 0x7aec198&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre></li>
 </ol>
 

@@ -224,7 +224,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#rectangulate"><i class="fa fa-check"></i><b>6.6</b> Rectangling</a></li>
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a></li>
+<li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#a-custom-plotting-function"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#do-yo-need-tidy-evaluation"><i class="fa fa-check"></i><b>7.2</b> Do yo need tidy evaluation?</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#explicit-quote-unquote-of-ellipsis"><i class="fa fa-check"></i><b>7.3</b> Explicit quote-unquote of ellipsis</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#names-1"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
+<li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section"><i class="fa fa-check"></i><b>7.5</b> <No caption defined></a></li>
+<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section-1"><i class="fa fa-check"></i><b>7.6</b> <No caption defined></a></li>
+<li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section-2"><i class="fa fa-check"></i><b>7.7</b> <No caption defined></a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
 <li class="chapter" data-level="8.1" data-path="best-practices.html"><a href="best-practices.html#description"><i class="fa fa-check"></i><b>8.1</b> DESCRIPTION</a></li>
 <li class="chapter" data-level="8.2" data-path="best-practices.html"><a href="best-practices.html#r"><i class="fa fa-check"></i><b>8.2</b> R</a></li>
@@ -254,7 +262,355 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>writing functions that work with datasets of different shape</p>
 </blockquote>
+<p>This chapter offers an introduction to tidy evaluation.</p>
+<div id="a-custom-plotting-function" class="section level2">
+<h2><span class="header-section-number">7.1</span> A custom plotting function</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rlang)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rlang&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
+## 
+##     %@%, as_function, flatten, flatten_chr, flatten_dbl,
+##     flatten_int, flatten_lgl, flatten_raw, invoke, list_along,
+##     modify, prepend, splice</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">tidy_histogram &lt;-<span class="st"> </span><span class="cf">function</span>(.data, x) {
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_histogram</span>()
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
 
+<span class="kw">try</span>(<span class="kw">print</span>(
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">tidy_histogram</span>(a)
+))</code></pre>
+<pre><code>## Error in FUN(X[[i]], ...) : object &#39;a&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">print</span>(
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">tidy_histogram</span>(<span class="st">&quot;a&quot;</span>)
+))</code></pre>
+<p><img src="tidyprog_files/figure-html/71-would-that-work-1.png" width="672" /></p>
+<pre><code>## Error : StatBin requires a continuous x variable: the x variable is discrete. Perhaps you want stat=&quot;count&quot;?</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">x =</span> <span class="dv">11</span><span class="op">:</span><span class="dv">20</span>)
+
+data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tidy_histogram</span>(a)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="tidyprog_files/figure-html/71-no-the-function-is-looking-for-a-variable-named-x-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">tidy_histogram &lt;-<span class="st"> </span><span class="cf">function</span>(.data, x) {
+  <span class="co"># Treat the argument as a variable name</span>
+  expr &lt;-<span class="st"> </span><span class="kw">enquo</span>(x)
+
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># Tell ggplot2 that expr *contains* the name of the variable,</span>
+<span class="st">    </span><span class="co"># instead of expecting a variable named `expr`</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="op">!!</span>expr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_histogram</span>()
+}
+
+data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tidy_histogram</span>(a)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="tidyprog_files/figure-html/71-solution-quote-unquote-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tidy_histogram</span>(x)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="tidyprog_files/figure-html/71-solution-quote-unquote-2.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">print</span>(
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">tidy_histogram</span>(y)
+))</code></pre>
+<p><img src="tidyprog_files/figure-html/71-solution-quote-unquote-3.png" width="672" /></p>
+<pre><code>## Error in FUN(X[[i]], ...) : object &#39;y&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">aes</code></pre>
+<pre><code>## function (x, y, ...) 
+## {
+##     exprs &lt;- rlang::enquos(x = x, y = y, ...)
+##     is_missing &lt;- vapply(exprs, rlang::quo_is_missing, logical(1))
+##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
+##     rename_aes(aes)
+## }
+## &lt;bytecode: 0x7619bf8&gt;
+## &lt;environment: namespace:ggplot2&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col, expr) {
+  quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(col)
+
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">new_column =</span> <span class="kw">map_dbl</span>(<span class="op">!!</span>quo, expr))
+}
+
+iris_nested &lt;-
+<span class="st">  </span>iris <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species)
+
+iris_nested <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_map_dbl</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 3</span><span>
+##   </span><span style='font-weight: bold;'>Species</span><span>    </span><span style='font-weight: bold;'>data</span><span>              </span><span style='font-weight: bold;'>new_column</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> setosa     </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>      0.246
+## </span><span style='color: #555555;'>2</span><span> versicolor </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>      1.33 
+## </span><span style='color: #555555;'>3</span><span> virginica  </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>      2.03
+</span></CODE></PRE>
+</div>
+<div id="do-yo-need-tidy-evaluation" class="section level2">
+<h2><span class="header-section-number">7.2</span> Do yo need tidy evaluation?</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">summarize_ungroup &lt;-<span class="st"> </span><span class="cf">function</span>(.data, ...) {
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(...) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ungroup</span>()
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day &lt;-
+<span class="st">  </span>nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year, month, day) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize_ungroup</span>(<span class="kw">mean</span>(air_time, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+
+mean_airtime_per_day</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 365 x 4</span><span>
+##    </span><span style='font-weight: bold;'>year</span><span> </span><span style='font-weight: bold;'>month</span><span>   </span><span style='font-weight: bold;'>day</span><span> </span><span style='font-weight: bold;'>`mean(air_time, na.rm = TRUE)`</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>                          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1                           170.
+## </span><span style='color: #555555;'>2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     2                           162.
+## </span><span style='color: #555555;'>3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     3                           157.
+## </span><span style='color: #555555;'># … with 362 more rows</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">groups</span>()</code></pre>
+<pre><code>## NULL</code></pre>
+</div>
+<div id="explicit-quote-unquote-of-ellipsis" class="section level2">
+<h2><span class="header-section-number">7.3</span> Explicit quote-unquote of ellipsis</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rlang)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">summarize_ungroup &lt;-<span class="st"> </span><span class="cf">function</span>(.data, ...) {
+  <span class="co"># Capture (quote) with enquos()</span>
+  quos &lt;-<span class="st"> </span><span class="kw">enquos</span>(...)
+
+  <span class="co"># Use (unquote-splice) with !!!</span>
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="op">!!!</span>quos) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ungroup</span>()
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day &lt;-
+<span class="st">  </span>nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year, month, day) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize_ungroup</span>(<span class="kw">mean</span>(air_time, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+
+mean_airtime_per_day</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 365 x 4</span><span>
+##    </span><span style='font-weight: bold;'>year</span><span> </span><span style='font-weight: bold;'>month</span><span>   </span><span style='font-weight: bold;'>day</span><span> </span><span style='font-weight: bold;'>`mean(air_time, na.rm = TRUE)`</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>                          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1                           170.
+## </span><span style='color: #555555;'>2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     2                           162.
+## </span><span style='color: #555555;'>3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     3                           157.
+## </span><span style='color: #555555;'># … with 362 more rows</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">groups</span>()</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">aes</code></pre>
+<pre><code>## function (x, y, ...) 
+## {
+##     exprs &lt;- rlang::enquos(x = x, y = y, ...)
+##     is_missing &lt;- vapply(exprs, rlang::quo_is_missing, logical(1))
+##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
+##     rename_aes(aes)
+## }
+## &lt;bytecode: 0x7619bf8&gt;
+## &lt;environment: namespace:ggplot2&gt;</code></pre>
+</div>
+<div id="names-1" class="section level2">
+<h2><span class="header-section-number">7.4</span> Names</h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rlang)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">gsu &lt;-<span class="st"> </span><span class="cf">function</span>(.data, ...) {
+  <span class="co"># Capture (quote) with enquos()</span>
+  quos &lt;-<span class="st"> </span><span class="kw">enquos</span>(...)
+
+  is_named &lt;-<span class="st"> </span>(<span class="kw">names2</span>(quos) <span class="op">!=</span><span class="st"> &quot;&quot;</span>)
+  named_quos &lt;-<span class="st"> </span>quos[is_named]
+  unnamed_quos &lt;-<span class="st"> </span>quos[<span class="op">!</span>is_named]
+
+  <span class="co"># Use (unquote-splice) with !!!</span>
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(<span class="op">!!!</span>unnamed_quos) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="op">!!!</span>named_quos) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ungroup</span>()
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day &lt;-
+<span class="st">  </span>nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gsu</span>(year, month, day, <span class="dt">mean_air_time =</span> <span class="kw">mean</span>(air_time, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+
+mean_airtime_per_day</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 365 x 4</span><span>
+##    </span><span style='font-weight: bold;'>year</span><span> </span><span style='font-weight: bold;'>month</span><span>   </span><span style='font-weight: bold;'>day</span><span> </span><span style='font-weight: bold;'>mean_air_time</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     1          170.
+## </span><span style='color: #555555;'>2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     2          162.
+## </span><span style='color: #555555;'>3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>013     1     3          157.
+## </span><span style='color: #555555;'># … with 362 more rows</span><span>
+</span></CODE></PRE>
+</div>
+<div id="section" class="section level2">
+<h2><span class="header-section-number">7.5</span> <No caption defined></h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rlang)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quos</span>(<span class="dt">x =</span> a)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $x
+## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^a</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3685f80</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sym</span>(<span class="st">&quot;b&quot;</span>)
+x_quos &lt;-<span class="st"> </span><span class="kw">quos</span>(<span class="dt">x =</span> <span class="op">!!</span>a)
+x_quos</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $x
+## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^b</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3685f80</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quos</span>(<span class="dt">y =</span> c, <span class="op">!!!</span>x_quos)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $y
+## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^c</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3685f80</span><span>
+## 
+## $x
+## </span><span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^b</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3685f80</span><span>
+</span></CODE></PRE>
+</div>
+<div id="section-1" class="section level2">
+<h2><span class="header-section-number">7.6</span> <No caption defined></h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rlang)</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col, ...) {
+  quos &lt;-<span class="st"> </span><span class="kw">build_quos</span>(<span class="op">!!</span><span class="kw">enquo</span>(col), ...)
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="op">!!!</span>quos)
+}
+
+build_quos &lt;-<span class="st"> </span><span class="cf">function</span>(col, ...) {
+  args &lt;-<span class="st"> </span><span class="kw">list</span>(...)
+  <span class="kw">stopifnot</span>(<span class="kw">length</span>(args) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+
+  expr &lt;-<span class="st"> </span>args[[<span class="dv">1</span>]]
+
+  map_quo &lt;-<span class="st"> </span><span class="kw">build_map_quo</span>(<span class="op">!!</span><span class="kw">enquo</span>(col), expr)
+
+  <span class="kw">set_names</span>(<span class="kw">list</span>(map_quo), <span class="kw">names</span>(args))
+}
+
+build_map_quo &lt;-<span class="st"> </span><span class="cf">function</span>(col, expr) {
+  quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(col)
+  <span class="kw">quo</span>(<span class="kw">map_dbl</span>(<span class="op">!!</span>quo, expr))
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_quos</span>(data, <span class="dt">mean_petal_width =</span> <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## $mean_petal_width
+## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^data</span><span style='color: #0000BB;'>, expr)</span><span>
+## env:  </span><span style='color: #0000BB;'>0xc912680</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, expr)</span><span>
+## env:  </span><span style='color: #0000BB;'>0xb21b9d0</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_map_dbl</span>(data, <span class="dt">mean_petal_width =</span> <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 3</span><span>
+##   </span><span style='font-weight: bold;'>Species</span><span>    </span><span style='font-weight: bold;'>data</span><span>              </span><span style='font-weight: bold;'>mean_petal_width</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> setosa     </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            0.246
+## </span><span style='color: #555555;'>2</span><span> versicolor </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            1.33 
+## </span><span style='color: #555555;'>3</span><span> virginica  </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            2.03
+</span></CODE></PRE>
+</div>
+<div id="section-2" class="section level2">
+<h2><span class="header-section-number">7.7</span> <No caption defined></h2>
+<details>
+<p><summary><em>Click here to show setup code.</em></summary></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rlang)
+
+mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col, ...) {
+  quos &lt;-<span class="st"> </span><span class="kw">build_quos</span>(<span class="op">!!</span><span class="kw">enquo</span>(col), ...)
+  .data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="op">!!!</span>quos)
+}</code></pre>
+</details>
+<pre class="sourceCode r"><code class="sourceCode r">build_quos &lt;-<span class="st"> </span><span class="cf">function</span>(col, ...) {
+  args &lt;-<span class="st"> </span><span class="kw">enquos</span>(...)
+  <span class="kw">stopifnot</span>(<span class="kw">length</span>(args) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+
+  expr &lt;-<span class="st"> </span>args[[<span class="dv">1</span>]]
+
+  map_quo &lt;-<span class="st"> </span><span class="kw">build_map_quo</span>(<span class="op">!!</span><span class="kw">enquo</span>(col), <span class="op">!!</span>expr)
+
+  <span class="kw">set_names</span>(<span class="kw">list</span>(map_quo), <span class="kw">names</span>(args))
+}
+
+build_map_quo &lt;-<span class="st"> </span><span class="cf">function</span>(col, expr) {
+  quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(col)
+  mapper &lt;-<span class="st"> </span><span class="kw">as_mapper_quosure</span>(<span class="op">!!</span><span class="kw">enquo</span>(expr))
+  <span class="kw">quo</span>(<span class="kw">map_dbl</span>(<span class="op">!!</span>quo, <span class="op">!!</span>mapper))
+}
+
+as_mapper_quosure &lt;-<span class="st"> </span><span class="cf">function</span>(expr) {
+  quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(expr)
+
+  rlang<span class="op">::</span><span class="kw">new_function</span>(<span class="kw">alist</span>(<span class="dt">... =</span> , <span class="dt">. =</span> ..<span class="dv">1</span>, <span class="dt">.x =</span> ..<span class="dv">1</span>, <span class="dt">.y =</span> ..<span class="dv">2</span>), <span class="kw">quo_get_expr</span>(quo))
+}</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_mapper</span>(<span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<pre><code>## &lt;lambda&gt;
+## function (..., .x = ..1, .y = ..2, . = ..1) 
+## mean(.$Petal.Width)
+## &lt;environment: 0x3685f80&gt;
+## attr(,&quot;class&quot;)
+## [1] &quot;rlang_lambda_function&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_mapper_quosure</span>(<span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<pre><code>## function (..., . = ..1, .x = ..1, .y = ..2) 
+## mean(.$Petal.Width)
+## &lt;environment: 0x9dbd5b8&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
+## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, &lt;function(..., . = ..1, .x = ..1,
+##           .y = ..2) mean(.$Petal.Width)&gt;)</span><span>
+## env:  </span><span style='color: #0000BB;'>0xcd276a8</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_map_dbl</span>(data, <span class="dt">mean_petal_width =</span> <span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 3 x 3</span><span>
+##   </span><span style='font-weight: bold;'>Species</span><span>    </span><span style='font-weight: bold;'>data</span><span>              </span><span style='font-weight: bold;'>mean_petal_width</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> setosa     </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            0.246
+## </span><span style='color: #555555;'>2</span><span> versicolor </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            1.33 
+## </span><span style='color: #555555;'>3</span><span> virginica  </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            2.03
+</span></CODE></PRE>
+
+</div>
 </div>
             </section>
 
