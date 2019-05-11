@@ -17,10 +17,10 @@ coordinates_transposed <-
 
 # A tibble is internally a list of named vectors of equal length:
 coordinates_transposed %>%
-  set_names(c("lon", "lat"))
+  rlang::set_names(c("lon", "lat"))
 
 coordinates_transposed %>%
-  set_names(c("lon", "lat")) %>%
+  rlang::set_names(c("lon", "lat")) %>%
   as_tibble()
 
 # Name repair helps if you don't know the names yet

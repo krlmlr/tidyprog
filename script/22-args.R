@@ -9,6 +9,8 @@ weather_path <- function(filename) {
   here("data/weather", filename)
 }
 
+weather_path("milan.xlsx")
+
 # Functions can be called by other functions
 read_weather_data <- function() {
   # Read all files

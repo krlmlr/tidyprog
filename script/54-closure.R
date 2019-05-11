@@ -7,6 +7,7 @@ weather_path <- function(filename) {
   # Returned value
   here("data/weather", filename)
 }
+
 read_weather_file <- function(filename) {
   readxl::read_excel(weather_path(filename))
 }
@@ -31,7 +32,10 @@ read_tel_aviv <- make_read_weather_file("tel_aviv.xlsx")
 read_zurich <- make_read_weather_file("zurich.xlsx")
 
 read_berlin
+read_toronto
+
 read_berlin()
+read_toronto()
 
 # Use case: adverbs -- wrappers for other verbs
 loudly <- function(f) {
@@ -49,3 +53,14 @@ loudly <- function(f) {
 read_loudly <- loudly(read_weather_file)
 read_loudly
 read_loudly("berlin.xlsx")
+
+# safely()
+cities <- list("berlin", "toronto", "milan", "tel_aviv")
+try(map(cities, get_weather_data_for))
+map(cities, safely(get_weather_data_for))
+safely(get_weather_data_for)
+
+map(cities, ~ safely(get_weather_data_for)(.))
+
+safe_get_weather_data_for <- safely(get_weather_data_for)
+map(cities, ~ safe_get_weather_data_for(.))

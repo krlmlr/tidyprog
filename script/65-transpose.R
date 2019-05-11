@@ -22,3 +22,4 @@ coordinates_transposed <-
   coordinates %>%
   transpose() %>%
   map(~ flatten_dbl(.))
+coordinates_transposed
