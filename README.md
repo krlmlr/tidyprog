@@ -1,5 +1,9 @@
 # tidyprog
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/krlmlr/tidyprog.svg?branch=master)](https://travis-ci.org/krlmlr/tidyprog)
+<!-- badges: end -->
+
 Programming in the tidyverse.
 
 ## Hacking
