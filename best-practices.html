@@ -274,8 +274,10 @@ usethis<span class="op">::</span><span class="kw">use_description</span>()</code
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
 devtools<span class="op">::</span><span class="kw">load_all</span>()</code></pre>
 <p>Declare that your project requires the tidyverse and the here package:</p>
-<pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">&quot;tidyverse&quot;</span>)
-usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">&quot;here&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">usethis<span class="op">::</span><span class="kw">use_package</span>(<span class="st">&quot;here&quot;</span>)
+<span class="co"># Currently doesn&#39;t work, add manually</span>
+<span class="co"># https://github.com/r-lib/usethis/issues/760</span>
+<span class="co"># usethis::use_package(&quot;tidyverse&quot;)</span></code></pre>
 </div>
 <div id="r" class="section level2">
 <h2><span class="header-section-number">8.2</span> R</h2>
