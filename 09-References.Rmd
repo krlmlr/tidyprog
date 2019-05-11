@@ -15,3 +15,5 @@
 - What they forgot to teach you: https://whattheyforgot.org/
 
 - Parallel processing with a purrr-like interface: https://davisvaughan.github.io/furrr/
+
+- Tidyverse principles: https://principles.tidyverse.org/
