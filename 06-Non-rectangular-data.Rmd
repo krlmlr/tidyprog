@@ -4,5 +4,5 @@
 
 This chapter gives an example for processing deeply nested lists and converting them to data frames.
 
-```{r child = here("script", "6.Rmd")}
+```{r child = here::here("script", "6.Rmd")}
 ```

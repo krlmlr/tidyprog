@@ -1,0 +1,124 @@
+```{r 71-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## A custom plotting function
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### A custom plotting function
+
+```
+```{r 71-setup-71-colname-r}
+library(tidyverse)
+library(rlang)
+```
+</details>
+
+
+```{r include = FALSE}
+# First attempt: create a function that plots a histogram,
+# taking a variable name as input
+```
+```{r 71-first-attempt-create-a-function-that-plots-a-histogram}
+tidy_histogram <- function(.data, x) {
+  .data %>%
+    ggplot(aes(x = x)) +
+    geom_histogram()
+}
+```
+
+
+```{r include = FALSE}
+# Would that work?
+```
+```{r 71-would-that-work}
+data <- tibble(a = 1:10)
+
+try(print(
+  data %>%
+    tidy_histogram(a)
+))
+
+try(print(
+  data %>%
+    tidy_histogram("a")
+))
+```
+
+
+```{r include = FALSE}
+# No, the function is looking for a variable named x,
+# no matter what we pass in:
+```
+```{r 71-no-the-function-is-looking-for-a-variable-named-x}
+data <- tibble(a = 1:10, x = 11:20)
+
+data %>%
+  tidy_histogram(a)
+```
+
+
+```{r include = FALSE}
+# Solution: quote-unquote
+```
+```{r 71-solution-quote-unquote}
+tidy_histogram <- function(.data, x) {
+  # Treat the argument as a variable name
+  expr <- enquo(x)
+
+  .data %>%
+    # Tell ggplot2 that expr *contains* the name of the variable,
+    # instead of expecting a variable named `expr`
+    ggplot(aes(x = !!expr)) +
+    geom_histogram()
+}
+
+data %>%
+  tidy_histogram(a)
+
+data %>%
+  tidy_histogram(x)
+
+try(print(
+  data %>%
+    tidy_histogram(y)
+))
+```
+
+
+```{r include = FALSE}
+# This requires tidyeval support from the function that is called!
+```
+```{r 71-this-requires-tidyeval-support-from-the-function-that-is-called}
+aes
+```
+
+
+```{r include = FALSE}
+### Exercises
+```
+```{r 71-exercises}
+
+```
+
+
+```{r include = FALSE}
+# mutate_map_dbl() function
+```
+```{r 71-mutate-map-dbl-function}
+mutate_map_dbl <- function(.data, col, expr) {
+  quo <- enquo(col)
+
+  .data %>%
+    mutate(new_column = map_dbl(!!quo, expr))
+}
+
+iris_nested <-
+  iris %>%
+  nest(-Species)
+
+iris_nested %>%
+  mutate_map_dbl(data, ~ mean(.$Petal.Width))
+```

@@ -1,0 +1,36 @@
+```{r 75-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## <No caption defined>
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### <No caption defined>
+
+```
+```{r 75-setup-75-debug-r}
+library(rlang)
+```
+</details>
+
+
+```{r include = FALSE}
+# Use quos() to understand what will happen:
+```
+```{r 75-use-quos-to-understand-what-will-happen}
+quos(x = a)
+
+a <- sym("b")
+x_quos <- quos(x = !!a)
+x_quos
+```
+
+
+```{r include = FALSE}
+# quos() can be nested:
+```
+```{r 75-quos-can-be-nested}
+quos(y = c, !!!x_quos)
+```

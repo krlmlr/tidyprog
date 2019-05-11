@@ -1,0 +1,20 @@
+```{r child = here::here("script", "71-colname.Rmd")}
+```
+
+```{r child = here::here("script", "72-forward.Rmd")}
+```
+
+```{r child = here::here("script", "73-enquos.Rmd")}
+```
+
+```{r child = here::here("script", "74-named.Rmd")}
+```
+
+```{r child = here::here("script", "75-debug.Rmd")}
+```
+
+```{r child = here::here("script", "76-names.Rmd")}
+```
+
+```{r child = here::here("script", "77-mapper.Rmd")}
+```
