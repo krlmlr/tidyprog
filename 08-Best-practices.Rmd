@@ -34,8 +34,10 @@ devtools::load_all()
 Declare that your project requires the tidyverse and the here package:
 
 ```r
-usethis::use_package("tidyverse")
 usethis::use_package("here")
+# Currently doesn't work, add manually
+# https://github.com/r-lib/usethis/issues/760
+# usethis::use_package("tidyverse")
 ```
 
 
