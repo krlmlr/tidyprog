@@ -14,3 +14,6 @@ push:
 
 pull:
 	git subtree pull --prefix proj ../tidyprog-proj website
+
+test:
+	ls proj/script/* | parallel --halt now,fail=1 R --vanilla -q -f && rm Rplots.pdf
