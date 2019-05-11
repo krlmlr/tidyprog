@@ -39,7 +39,7 @@ read_weather_data()
 ls()
 
 # Pipe
-read_weather_data() %>% 
+read_weather_data() %>%
   count(city_code)
 
 # Assign result to use in further operations
@@ -53,14 +53,14 @@ read_weather_data_non_europe <- function() {
   tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
 
   # Create ensemble dataset
-  weather_data <- bind_rows(
+  weather_data_non_europe <- bind_rows(
     toronto = toronto,
     tel_aviv = tel_aviv,
     .id = "city_code"
   )
 
   # Return it
-  weather_data
+  weather_data_non_europe
 }
 
 read_weather_data_non_europe()

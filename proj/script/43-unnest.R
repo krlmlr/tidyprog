@@ -14,9 +14,31 @@ dict_data <-
 dict_data %>%
   unnest()
 
+# What happens with data of different shape?
+dict_data %>%
+  pull(data) %>%
+  bind_rows()
+
+check_columns_same <- function(x, y) {
+  stopifnot(identical(colnames(x), colnames(y)))
+}
+
+bind_rows <- function(data_frames) {
+  # Called for the side effect
+  reduce(data_frames, check_columns_same)
+
+  dplyr::bind_rows(data_frames)
+}
+
+try(
+  dict_data %>%
+    pull(data) %>%
+    bind_rows()
+)
+
 # Mapping in nested view are grouped operation in the flat view:
 dict_data %>%
-  mutate(n = map_int(data, nrow)) %>% 
+  mutate(n = map_int(data, nrow)) %>%
   select(-data)
 
 dict_data %>%
@@ -36,11 +58,11 @@ dict_data %>%
 
 # Exercises
 
-iris %>% 
-  group_by(Species) %>% 
-  summarize_all(list(Mean = mean)) %>% 
+iris %>%
+  group_by(Species) %>%
+  summarize_all(list(Mean = mean)) %>%
   ungroup()
 
-dict_data %>% 
-  as.list() %>% 
+dict_data %>%
+  as.list() %>%
   enframe()

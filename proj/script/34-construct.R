@@ -10,7 +10,7 @@ list(1:3, 5)
 list(1:3, "5")
 
 # Lists can be nested:
-list(
+nested <- list(
   1:3,
   list(4, "5"),
   list(
@@ -19,6 +19,9 @@ list(
   )
 )
 
+nested
+str(nested)
+
 # Vectors and lists can have names:
 c(a = 1, b = 2, c = 3)
 list(a = 1:3, b = 5)
@@ -26,6 +29,7 @@ rlang::set_names(1:3, letters[1:3])
 
 # Preview: vctrs::list_of() to construct typed lists
 #vctrs::list_of(1, 2, 3)
+#try(vctrs::list_of(1, 2, "3"))
 #vctrs::list_of(letters[1:3], "e")
 
 # Exercises

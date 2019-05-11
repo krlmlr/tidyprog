@@ -52,7 +52,7 @@ get_weather_data_for <- function(city_code = "zurich") {
 
 # Test:
 
-get_weather_data_for() %>% 
+get_weather_data_for() %>%
   select(temperature)
-get_weather_data_for("tel_aviv") %>% 
+get_weather_data_for("tel_aviv") %>%
   select(temperature)

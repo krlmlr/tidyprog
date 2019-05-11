@@ -17,15 +17,18 @@ berlin$features[[1]]
 # Uniform access with pluck():
 berlin %>%
   pluck("type")
+berlin[["type"]]
 
 berlin %>%
   pluck("features")
 
 berlin %>%
   pluck("features", 1)
+berlin[["features"]][[1]]
 
 berlin %>%
   pluck("features", 1, "geometry")
+berlin[["features"]][[1]][["geometry"]]
 
 berlin %>%
   pluck("features", 1, "geometry", "coordinates")

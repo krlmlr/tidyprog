@@ -25,49 +25,53 @@ input_data %>%
   map(~ filter(., temperature >= 14))
 
 # Create a function to manipulate
-manipulator <- function(data) {
+find_good_times <- function(data) {
   data %>%
     select(time, contains("emperature")) %>%
     filter(temperature >= 14)
 }
 
 # Functions are first-class objects!
-manipulator
+find_good_times
 
 # Test the function
-manipulator(input_data[[4]])
+find_good_times(input_data[[4]])
 
 # Run the function on the entire dataset
-manipulated_data <- map(input_data, ~ manipulator(.))
-manipulated_data
+good_times <- map(input_data, ~ find_good_times(.))
+good_times
 
 # Shortcut
-map(input_data, manipulator)
+map(input_data, find_good_times)
 
 # Exercises
 
-input_data %>% 
+input_data %>%
   map(~ summarize(., mean(temperature), mean(humidity)))
 
 compute_daily_mean <- function(data) {
-  data %>% 
-    group_by(as.Date(time)) %>% 
-    summarize(mean(temperature), mean(humidity)) %>% 
+  data %>%
+    group_by(as.Date(time)) %>%
+    summarize(mean(temperature), mean(humidity)) %>%
     ungroup()
 }
-input_data %>% 
+input_data %>%
   map(compute_daily_mean)
 
-input_data %>% 
+input_data %>%
   map(dim)
-input_data %>% 
-  map(dim) %>% 
+input_data %>%
+  map(dim) %>%
   map(prod)
 
 create_plot <- function(data) {
-  data %>% 
+  data %>%
     ggplot(aes(x = pressure, y = humidity, color = temperature)) +
     geom_path()
 }
-input_data %>% 
+
+plots <-
+  input_data %>%
   map(create_plot)
+
+plots
