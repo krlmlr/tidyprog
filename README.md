@@ -10,7 +10,7 @@ Programming in the tidyverse.
 
 ### Creating a new script
 
-1. Draft an `.R` script in `proj/script/??-slug.R`
+1. Draft an `.R` script in `proj/script/??-slug.R`, use an existing script as template
 
 2. Run `make scaffold` to create the corresponding `.Rmd` file
 
