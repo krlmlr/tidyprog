@@ -33,3 +33,7 @@ Use `qmv` on the `.Rmd` files, then `make id purl`
 ### Testing
 
 Run `make test`, currently not integrated in CI
+
+---
+
+Licensed under [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
