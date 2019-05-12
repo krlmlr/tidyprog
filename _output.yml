@@ -6,6 +6,8 @@ bookdown::gitbook:
         link: https://github.com/krlmlr/tidyprog/edit/master/%s
     sharing:
       facebook: no
+      twitter: no
+      linkedin: no
       github: yes
 bookdown::pdf_book:
   includes:
