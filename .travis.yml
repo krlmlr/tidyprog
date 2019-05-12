@@ -39,6 +39,7 @@ addons:
     - texlive-luatex
     - lmodern
     - fonts-lmodern
+    - texlive-fonts-recommended
 
 env:
   global:
