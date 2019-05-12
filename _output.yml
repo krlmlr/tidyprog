@@ -1,5 +1,12 @@
 bookdown::gitbook:
   css: scroll.css
+  config:
+    download: [pdf]
+    edit:
+        link: https://github.com/krlmlr/tidyprog/edit/master/%s
+    sharing:
+      facebook: no
+      github: yes
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
