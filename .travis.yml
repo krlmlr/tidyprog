@@ -38,6 +38,7 @@ addons:
     packages:
     - texlive-luatex
     - lmodern
+    - fonts-lmodern
 
 env:
   global:
