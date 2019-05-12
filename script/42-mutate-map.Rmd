@@ -21,6 +21,16 @@ input_data <-
   select(city_code, weather_filename) %>%
   deframe() %>%
   map(~ readxl::read_excel(here(.)))
+
+find_good_times <- function(data) {
+  data %>%
+    select(time, contains("emperature")) %>%
+    filter(temperature >= 14)
+}
+
+good_times <-
+  input_data %>%
+  map(find_good_times)
 ```
 </details>
 
@@ -182,7 +192,7 @@ dict_data %>%
     Implement the same functionality using `map2()` inside a `mutate()`, and `enframe()`:
 
     ```r
-    manipulated_data %>%
+    good_times %>%
       ___() %>%
       mutate(___ = map2()) %>%
       deframe()

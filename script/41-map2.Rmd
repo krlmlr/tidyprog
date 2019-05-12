@@ -95,7 +95,7 @@ print(walk2(good_times, output_filenames, ~ process_csv(..2, ..1)))
     # map2() and walk2() are pipable:
     ```
     ```{r results = "hide"}
-    manipulated_data %>% 
+    good_times %>% 
       walk2(output_filenames, ~ readr::write_csv(..1, ..2)) %>% 
       map_int(nrow)
     ```
