@@ -400,6 +400,9 @@ weather_filenames</code></pre>
 <span class="st">  </span><span class="kw">names</span>()</code></pre>
 <pre><code>## [1] &quot;berlin&quot;   &quot;toronto&quot;  &quot;tel_aviv&quot; &quot;zurich&quot;</code></pre>
 <p>Some operations producing vectors from vectors cause the names to be lost:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;&#39;&quot;</span>, weather_filenames, <span class="st">&quot;&#39;&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;&#39;data/weather/berlin.xlsx&#39;&quot;   &quot;&#39;data/weather/toronto.xlsx&#39;&quot; 
+## [3] &quot;&#39;data/weather/tel_aviv.xlsx&#39;&quot; &quot;&#39;data/weather/zurich.xlsx&#39;&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">weather_filenames <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">here</span>()</code></pre>
 <pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
@@ -407,6 +410,27 @@ weather_filenames</code></pre>
 ## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
 ## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
 <p>A possible solution can be in many cases to change the order of the transformations, so that the creation of the named vector comes last (or at least later):</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_filename_here =</span> <span class="kw">here</span>(weather_filename))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 6</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>weather_filename</span><span>   </span><span style='font-weight: bold;'>name</span><span>      </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span> </span><span style='font-weight: bold;'>weather_filename_here</span><span>   
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                   
+## </span><span style='color: #555555;'>1</span><span> berlin    data/weather/berl… Berlin  13.4   52.5 /home/travis/build/krlm…
+## </span><span style='color: #555555;'>2</span><span> toronto   data/weather/toro… Toron… -</span><span style='color: #BB0000;'>79.4</span><span>   43.7 /home/travis/build/krlm…
+## </span><span style='color: #555555;'>3</span><span> tel_aviv  data/weather/tel_… Tel A…  34.8   32.1 /home/travis/build/krlm…
+## </span><span style='color: #555555;'>4</span><span> zurich    data/weather/zuri… Zürich   8.54  47.4 /home/travis/build/krlm…
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_filename_here =</span> <span class="kw">here</span>(weather_filename)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename_here)</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>weather_filename_here</span><span>                                        
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                        
+## </span><span style='color: #555555;'>1</span><span> berlin    /home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx  
+## </span><span style='color: #555555;'>2</span><span> toronto   /home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx 
+## </span><span style='color: #555555;'>3</span><span> tel_aviv  /home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx
+## </span><span style='color: #555555;'>4</span><span> zurich    /home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx
+</span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_filename_here =</span> <span class="kw">here</span>(weather_filename)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename_here) <span class="op">%&gt;%</span>
@@ -437,11 +461,11 @@ fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">
 <span class="st">  </span><span class="kw">select</span>(_____, _____) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">___</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 45 x 18</span><span>
- ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>    </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
- ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file      56 rw-rw-r--   2019-05-11 </span><span style='color: #555555;'>20:24:04</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>12-intro.</span><span>… file    5.7K rw-rw-r--   2019-05-11 </span><span style='color: #555555;'>20:24:04</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file     370 rw-rw-r--   2019-05-11 </span><span style='color: #555555;'>20:24:04</span><span> trav… trav…
+ ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
+ ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file       56 rw-rw-r--   2019-05-12 </span><span style='color: #555555;'>08:13:53</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>12-intro.</span><span>… file    5.85K rw-rw-r--   2019-05-12 </span><span style='color: #555555;'>08:13:53</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      370 rw-rw-r--   2019-05-12 </span><span style='color: #555555;'>08:13:53</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 42 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
@@ -495,6 +519,9 @@ input_files</code></pre>
 ## &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="dv">1</span>]]</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[<span class="st">&quot;berlin&quot;</span>]</code></pre>
+<pre><code>##                     berlin 
+## &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="st">&quot;berlin&quot;</span>]]</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <p>Choose multiple entries with:</p>
@@ -505,10 +532,10 @@ input_files</code></pre>
 <pre><code>##                     berlin                     zurich 
 ## &quot;data/weather/berlin.xlsx&quot; &quot;data/weather/zurich.xlsx&quot;</code></pre>
 <p>Consistent pipe-friendly access of single elements:</p>
-<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="dv">1</span>)</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">input_files <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;berlin&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
 <div id="exercises-8" class="section level3">
@@ -562,14 +589,16 @@ They are a special type of vector – they can contain elements of different typ
 ## [[2]]
 ## [1] &quot;5&quot;</code></pre>
 <p>Lists can also contain other lists.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(
+<pre class="sourceCode r"><code class="sourceCode r">nested &lt;-<span class="st"> </span><span class="kw">list</span>(
   <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
   <span class="kw">list</span>(<span class="dv">4</span>, <span class="st">&quot;5&quot;</span>),
   <span class="kw">list</span>(
     <span class="kw">list</span>(letters[<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]),
     <span class="dv">9</span>
   )
-)</code></pre>
+)
+
+nested</code></pre>
 <pre><code>## [[1]]
 ## [1] 1 2 3
 ## 
@@ -589,6 +618,16 @@ They are a special type of vector – they can contain elements of different typ
 ## 
 ## [[3]][[2]]
 ## [1] 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(nested)</code></pre>
+<pre><code>## List of 3
+##  $ : int [1:3] 1 2 3
+##  $ :List of 2
+##   ..$ : num 4
+##   ..$ : chr &quot;5&quot;
+##  $ :List of 2
+##   ..$ :List of 1
+##   .. ..$ : chr [1:3] &quot;f&quot; &quot;g&quot; &quot;h&quot;
+##   ..$ : num 9</code></pre>
 <p>Vectors (and also lists) can have names.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>, <span class="dt">c =</span> <span class="dv">3</span>)</code></pre>
 <pre><code>## a b c 
@@ -604,6 +643,7 @@ They are a special type of vector – they can contain elements of different typ
 ## 1 2 3</code></pre>
 <p>The new {vctrs} package defines a data type for lists where all elements have the same type: a stricter list, but more powerful than a bare vector.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#vctrs::list_of(1, 2, 3)</span>
+<span class="co">#try(vctrs::list_of(1, 2, &quot;3&quot;))</span>
 <span class="co">#vctrs::list_of(letters[1:3], &quot;e&quot;)</span></code></pre>
 <div id="exercises-9" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> Exercises</h3>
@@ -644,6 +684,10 @@ input_files &lt;-
 <p>Here we look at how to act on each entry of a list or a vector using <code>purrr::map()</code>:</p>
 <p>We start with the named vector <code>input_files</code> from section <a href="simple-iteration.html#indexing">“Indexing”</a>.
 As just seen, manually choosing just one entry of a vector works like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_files[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## [1] &quot;data/weather/berlin.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">here</span>(input_files[[<span class="dv">1</span>]])</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">1</span>]]))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -657,11 +701,29 @@ As just seen, manually choosing just one entry of a vector works like so:</p>
 ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 </span></CODE></PRE>
+<p>However, if we try to read all files from the vector with <code>read_excel()</code>, this fails:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">here</span>(input_files)</code></pre>
+<pre><code>## [1] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/berlin.xlsx&quot;  
+## [2] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/toronto.xlsx&quot; 
+## [3] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/tel_aviv.xlsx&quot;
+## [4] &quot;/home/travis/build/krlmlr/tidyprog/data/weather/zurich.xlsx&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files)))</code></pre>
+<pre><code>## Error : `path` must be a string</code></pre>
+<p>Unlike <code>here()</code>, the <code>read_excel()</code> function can process only one file at a time.
+We need to iterate explicitly.</p>
 <p>With <code>map()</code>, you can successively work through the whole vector and each time let the same function deal with the respective entry.
 The output of <code>map()</code> is a list where each element contains one results.
 The list is named if the input is named:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
 <span class="st">  </span><span class="kw">map</span>(input_files, <span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<p>The <code>map()</code> call above is equivalent to the following code:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data &lt;-
+<span class="st">  </span><span class="kw">list</span>(
+    <span class="dt">berlin =</span> readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">1</span>]])),
+    <span class="dt">toronto =</span> readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">2</span>]])),
+    <span class="dt">tel_aviv =</span> readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">3</span>]])),
+    <span class="dt">zurich =</span> readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(input_files[[<span class="dv">4</span>]]))
+  )</code></pre>
 <p>Let’s take a closer look at what we produced:</p>
 <pre class="sourceCode r"><code class="sourceCode r">input_data</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
@@ -1013,30 +1075,30 @@ Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> 
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
 <p>Create a custom function for that specific purpose in a call to <code>map()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+<pre class="sourceCode r"><code class="sourceCode r">find_good_times &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
   data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
 }</code></pre>
 <p>Let’s look at the object <code>manipulator</code>, that we created:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manipulator</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">find_good_times</code></pre>
 <pre><code>## function(data) {
 ##   data %&gt;%
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x3685f80&gt;</code></pre>
+## &lt;environment: 0x2df2f80&gt;</code></pre>
 <p>See the <a href="function-basics.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
 <p>Testing the function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manipulator</span>(input_data[[<span class="dv">4</span>]])</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find_good_times</span>(input_data[[<span class="dv">4</span>]])</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 1 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
 <p>Now let’s use <code>map()</code> to let our function act on the entire dataset:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manipulated_data &lt;-<span class="st"> </span><span class="kw">map</span>(input_data, <span class="op">~</span><span class="st"> </span><span class="kw">manipulator</span>(.))
-manipulated_data</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">good_times &lt;-<span class="st"> </span><span class="kw">map</span>(input_data, <span class="op">~</span><span class="st"> </span><span class="kw">find_good_times</span>(.))
+good_times</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
@@ -1067,7 +1129,7 @@ manipulated_data</code></pre>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
 <p><code>map()</code> allows for the following shortcut notation for functions with one argument only:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(input_data, manipulator)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(input_data, find_good_times)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
@@ -1205,16 +1267,16 @@ input_data <span class="op">%&gt;%</span><span class="st"> </span>
 ___ <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">___</span>(___)</code></pre>
 <pre><code>## $berlin</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <pre><code>## 
 ## $toronto</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-141-2.png" width="672" /></p>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-144-2.png" width="672" /></p>
 <pre><code>## 
 ## $tel_aviv</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-141-3.png" width="672" /></p>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-144-3.png" width="672" /></p>
 <pre><code>## 
 ## $zurich</code></pre>
-<p><img src="tidyprog_files/figure-html/unnamed-chunk-141-4.png" width="672" /></p></li>
+<p><img src="tidyprog_files/figure-html/unnamed-chunk-144-4.png" width="672" /></p></li>
 </ol>
 </div>
 </div>
@@ -1255,7 +1317,11 @@ Therefore we can call <code>map_int()</code>, to create a named integer vector:<
 <span class="st">  </span><span class="kw">map_int</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
 <pre><code>##   berlin  toronto tel_aviv   zurich 
 ##       49       49       49       49</code></pre>
-<p>If the output is a character variable, use <code>map_chr()</code>:</p>
+<p>If the output is of type character, use <code>map_chr()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.))</code></pre>
+<pre><code>##   berlin  toronto tel_aviv   zurich 
+##     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;     &quot;49&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="kw">nrow</span>(.)))</code></pre>
 <pre><code>##   berlin  toronto tel_aviv   zurich 

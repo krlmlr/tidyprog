@@ -273,17 +273,17 @@ input_data &lt;-
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
 
-manipulator &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+find_good_times &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
   data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
 }
 
-manipulated_data &lt;-
+good_times &lt;-
 <span class="st">  </span>input_data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(manipulator)
+<span class="st">  </span><span class="kw">map</span>(find_good_times)
 
-manipulated_data</code></pre>
+good_times</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
@@ -315,54 +315,92 @@ manipulated_data</code></pre>
 </span></CODE></PRE>
 <div id="manipulating-pairwise" class="section level2">
 <h2><span class="header-section-number">4.1</span> Manipulating pairwise</h2>
-<p>Here we take discuss cases when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.</p>
+<p>Here we discuss cases when you want to iterate through two lists (of the same length) in parallel and use each value pair as two of the input parameters of a function.</p>
 <p>We first prepare a list of future output filenames:</p>
-<pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(manipulated_data), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(good_times), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpahEa2y/berlin2c2f3965b701.csv&quot;  
-## [2] &quot;/tmp/RtmpahEa2y/toronto2c2f7c9d85ca.csv&quot; 
-## [3] &quot;/tmp/RtmpahEa2y/tel_aviv2c2f40d977d4.csv&quot;
-## [4] &quot;/tmp/RtmpahEa2y/zurich2c2f1d23f034.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/Rtmpnfj6Wj/berlin2c4873a6ce91.csv&quot;  
+## [2] &quot;/tmp/Rtmpnfj6Wj/toronto2c481d29ec3c.csv&quot; 
+## [3] &quot;/tmp/Rtmpnfj6Wj/tel_aviv2c485e1fc424.csv&quot;
+## [4] &quot;/tmp/Rtmpnfj6Wj/zurich2c487ed6136f.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
+For illustration, we implement a file-centric wrapper function that takes the file name as first argument and also prints a message every time a file is written.
 We use <code>map2()</code> to handle this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">process_csv &lt;-<span class="st"> </span><span class="cf">function</span>(file, data) {
+  readr<span class="op">::</span><span class="kw">write_csv</span>(data, file)
+  <span class="kw">message</span>(<span class="st">&quot;Writing &quot;</span>, file)
+  <span class="kw">invisible</span>(file)
+}
+
+<span class="kw">map2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>))</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/berlin2c4873a6ce91.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/toronto2c481d29ec3c.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/tel_aviv2c485e1fc424.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/zurich2c487ed6136f.csv</code></pre>
+<pre><code>## $berlin
+## [1] &quot;/tmp/Rtmpnfj6Wj/berlin2c4873a6ce91.csv&quot;
+## 
+## $toronto
+## [1] &quot;/tmp/Rtmpnfj6Wj/toronto2c481d29ec3c.csv&quot;
+## 
+## $tel_aviv
+## [1] &quot;/tmp/Rtmpnfj6Wj/tel_aviv2c485e1fc424.csv&quot;
+## 
+## $zurich
+## [1] &quot;/tmp/Rtmpnfj6Wj/zurich2c487ed6136f.csv&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>(<span class="kw">map2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>)))</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/berlin2c4873a6ce91.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/toronto2c481d29ec3c.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/tel_aviv2c485e1fc424.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/zurich2c487ed6136f.csv</code></pre>
+<p>Because <code>process_csv()</code> returns the file name, it is available as output.
+Since we are just interested in the side-effects of <code>write_csv()</code> and not in the displayed output, we can use the related function <code>walk2()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>))</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/berlin2c4873a6ce91.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/toronto2c481d29ec3c.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/tel_aviv2c485e1fc424.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/zurich2c487ed6136f.csv</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">walk2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>)))</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/berlin2c4873a6ce91.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/toronto2c481d29ec3c.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/tel_aviv2c485e1fc424.csv</code></pre>
+<pre><code>## Writing /tmp/Rtmpnfj6Wj/zurich2c487ed6136f.csv</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
-##   </span><span style='font-weight: bold;'>time</span><span>                 </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
-##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-## </span><span style='color: #555555;'>1</span><span> 2019-04-28T17:00:00Z        14.1                14.1
-## </span><span style='color: #555555;'>2</span><span> 2019-04-29T12:00:00Z        15.6                15.6
-## </span><span style='color: #555555;'>3</span><span> 2019-04-29T13:00:00Z        17.4                17.4
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        14.1                14.1
+## </span><span style='color: #555555;'>2</span><span> 2019-04-29 </span><span style='color: #555555;'>12:00:00</span><span>        15.6                15.6
+## </span><span style='color: #555555;'>3</span><span> 2019-04-29 </span><span style='color: #555555;'>13:00:00</span><span>        17.4                17.4
 ## </span><span style='color: #555555;'># … with 13 more rows</span><span>
 ## 
 ## $toronto
 ## </span><span style='color: #555555;'># A tibble: 0 x 3</span><span>
-## </span><span style='color: #555555;'># … with 3 variables: </span><span style='color: #555555;font-weight: bold;'>time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## </span><span style='color: #555555;'># … with 3 variables: </span><span style='color: #555555;font-weight: bold;'>time</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 ## 
 ## $tel_aviv
 ## </span><span style='color: #555555;'># A tibble: 49 x 3</span><span>
-##   </span><span style='font-weight: bold;'>time</span><span>                 </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
-##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-## </span><span style='color: #555555;'>1</span><span> 2019-04-28T15:00:00Z        23.9                23.9
-## </span><span style='color: #555555;'>2</span><span> 2019-04-28T16:00:00Z        23.1                23.1
-## </span><span style='color: #555555;'>3</span><span> 2019-04-28T17:00:00Z        22.4                22.4
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span>        23.9                23.9
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span>        23.1                23.1
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span>        22.4                22.4
 ## </span><span style='color: #555555;'># … with 46 more rows</span><span>
 ## 
 ## $zurich
 ## </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
-##   </span><span style='font-weight: bold;'>time</span><span>                 </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
-##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-## </span><span style='color: #555555;'>1</span><span> 2019-04-30T15:00:00Z        14.3                14.3
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-30 </span><span style='color: #555555;'>15:00:00</span><span>        14.3                14.3
 </span></CODE></PRE>
-<p>Since we are just interested in the side-effects of <code>write_csv()</code> and not in the displayed output, we rather use the related function <code>walk2()</code>, which does not return output.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(manipulated_data, output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>))</code></pre>
+<p><code>walk2()</code> returns its first argument so that it can be used in a pipe.</p>
 <div id="exercises-13" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>What does the following code display?</p>
-<pre class="sourceCode r"><code class="sourceCode r">manipulated_data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">good_times <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">walk2</span>(output_filenames, <span class="op">~</span><span class="st"> </span>readr<span class="op">::</span><span class="kw">write_csv</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">map_int</span>(nrow)</code></pre></li>
 </ol>
@@ -381,13 +419,26 @@ input_data &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))</code></pre>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">here</span>(.)))
+
+find_good_times &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+  data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(time, <span class="kw">contains</span>(<span class="st">&quot;emperature&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(temperature <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
+}
+
+good_times &lt;-
+<span class="st">  </span>input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(find_good_times)</code></pre>
 </details>
 <p>How to combine the abilities of <code>map()</code> &amp; co., which work on vectors and lists, with our commonly used data structure, the tibble?</p>
 <p>We start with the named list of tibbles called <code>input_data</code> from section <a href="simple-iteration.html#map">“Processing all files”</a> and with <code>dict</code> from section <a href="simple-iteration.html#names">“Named vectors and two-column tibbles”</a>.</p>
 <p>Calling <code>enframe()</code> to produce a data frame from <code>input_data</code> leads to a maybe at first surprising, but oftentimes useful result:</p>
-<pre class="sourceCode r"><code class="sourceCode r">input_data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">enframe</span>()</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">nested_input_data &lt;-
+<span class="st">  </span>input_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">enframe</span>()
+
+nested_input_data</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
 ##   </span><span style='font-weight: bold;'>name</span><span>     </span><span style='font-weight: bold;'>value</span><span>             
 ##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>            
@@ -413,7 +464,20 @@ In our case each list entry contains a tibble, which can be “nested” into ea
 ## </span><span style='color: #555555;'>4</span><span> zurich    data/weather/zurich.xlsx   </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>
 </span></CODE></PRE>
 <p>This works because <code>R</code> interprets columns of tibbles as vectors, which can be fed to <code>map()</code>.
-Staying in “tibble-land” as long as possible helps retaining other iportant components of the data you are processing, so that you can keep using familiar data transformation tools.</p>
+To simplify the <code>map()</code> call, we create an intermediate column:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(city_code, weather_filename) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">path =</span> <span class="kw">here</span>(weather_filename)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">map</span>(path, readxl<span class="op">::</span>read_excel))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 4</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>weather_filename</span><span>      </span><span style='font-weight: bold;'>path</span><span>                           </span><span style='font-weight: bold;'>data</span><span>      
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                          </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>    
+## </span><span style='color: #555555;'>1</span><span> berlin    data/weather/berlin.… /home/travis/build/krlmlr/tid… </span><span style='color: #555555;'>&lt;tibble [</span><span>…
+## </span><span style='color: #555555;'>2</span><span> toronto   data/weather/toronto… /home/travis/build/krlmlr/tid… </span><span style='color: #555555;'>&lt;tibble [</span><span>…
+## </span><span style='color: #555555;'>3</span><span> tel_aviv  data/weather/tel_avi… /home/travis/build/krlmlr/tid… </span><span style='color: #555555;'>&lt;tibble [</span><span>…
+## </span><span style='color: #555555;'>4</span><span> zurich    data/weather/zurich.… /home/travis/build/krlmlr/tid… </span><span style='color: #555555;'>&lt;tibble [</span><span>…
+</span></CODE></PRE>
+<p>Staying in “tibble-land” as long as possible helps retaining other important components of the data you are processing, so that you can keep using familiar data transformation tools.</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data &lt;-
 <span class="st">  </span>dict <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
@@ -431,36 +495,35 @@ dict_data</code></pre>
 ## </span><span style='color: #555555;'>4</span><span> zurich    Zürich     8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [49 × 18]&gt;</span><span>    49
 </span></CODE></PRE>
 <p>This pattern can also be used with the <code>map2()</code> family of functions:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data_with_desc &lt;-
+<span class="st">  </span>dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">desc =</span> <span class="kw">map2_chr</span>(
       name, rows,
-      <span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(<span class="kw">ncol</span>(..<span class="dv">2</span>), <span class="st">&quot; columns in data for &quot;</span>, ..<span class="dv">1</span>)
+      <span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(..<span class="dv">2</span>, <span class="st">&quot; rows in data for &quot;</span>, ..<span class="dv">1</span>)
     )
   )</code></pre>
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 7</span><span>
-##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>name</span><span>       </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span> </span><span style='font-weight: bold;'>data</span><span>            </span><span style='font-weight: bold;'>rows</span><span> </span><span style='font-weight: bold;'>desc</span><span>                 
-##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                
-## </span><span style='color: #555555;'>1</span><span> berlin    Berlin   13.4   52.5 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-## </span><span style='color: #555555;'>2</span><span> toronto   Toronto -</span><span style='color: #BB0000;'>79.4</span><span>   43.7 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-## </span><span style='color: #555555;'>3</span><span> tel_aviv  Tel Av…  34.8   32.1 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-## </span><span style='color: #555555;'>4</span><span> zurich    Zürich    8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-</span></CODE></PRE>
+<p>Because <code>mutate()</code> always appends to the end, the most recently added column can always be accessed with <code>pull()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data_with_desc <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>()</code></pre>
+<pre><code>## [1] &quot;49 rows in data for Berlin&quot;   &quot;49 rows in data for Toronto&quot; 
+## [3] &quot;49 rows in data for Tel Aviv&quot; &quot;49 rows in data for Zürich&quot;</code></pre>
 <p>More generally, <code>pmap()</code> supports functions with an arbitrary number of arguments:</p>
-<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">cols =</span> <span class="kw">map_int</span>(data, ncol),
     <span class="dt">desc =</span> <span class="kw">pmap_chr</span>(
-      <span class="kw">list</span>(name, rows),
-      <span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(<span class="kw">ncol</span>(..<span class="dv">2</span>), <span class="st">&quot; columns in data for &quot;</span>, ..<span class="dv">1</span>)
+      <span class="kw">list</span>(name, rows, cols),
+      <span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(..<span class="dv">2</span>, <span class="st">&quot; rows and &quot;</span>, ..<span class="dv">3</span>, <span class="st">&quot; cols in data for &quot;</span>, ..<span class="dv">1</span>)
     )
   )</code></pre>
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 7</span><span>
-##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>name</span><span>       </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span> </span><span style='font-weight: bold;'>data</span><span>            </span><span style='font-weight: bold;'>rows</span><span> </span><span style='font-weight: bold;'>desc</span><span>                 
-##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                
-## </span><span style='color: #555555;'>1</span><span> berlin    Berlin   13.4   52.5 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-## </span><span style='color: #555555;'>2</span><span> toronto   Toronto -</span><span style='color: #BB0000;'>79.4</span><span>   43.7 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-## </span><span style='color: #555555;'>3</span><span> tel_aviv  Tel Av…  34.8   32.1 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
-## </span><span style='color: #555555;'>4</span><span> zurich    Zürich    8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [49 ×</span><span>…    49 </span><span style='color: #555555;'>"</span><span> columns in data fo…
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 8</span><span>
+##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>name</span><span>       </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span> </span><span style='font-weight: bold;'>data</span><span>        </span><span style='font-weight: bold;'>rows</span><span>  </span><span style='font-weight: bold;'>cols</span><span> </span><span style='font-weight: bold;'>desc</span><span>               
+##   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              
+## </span><span style='color: #555555;'>1</span><span> berlin    Berlin   13.4   52.5 </span><span style='color: #555555;'>&lt;tibble [</span><span>…    49    18 49 rows and 18 col…
+## </span><span style='color: #555555;'>2</span><span> toronto   Toronto -</span><span style='color: #BB0000;'>79.4</span><span>   43.7 </span><span style='color: #555555;'>&lt;tibble [</span><span>…    49    18 49 rows and 18 col…
+## </span><span style='color: #555555;'>3</span><span> tel_aviv  Tel Av…  34.8   32.1 </span><span style='color: #555555;'>&lt;tibble [</span><span>…    49    17 49 rows and 17 col…
+## </span><span style='color: #555555;'>4</span><span> zurich    Zürich    8.54  47.4 </span><span style='color: #555555;'>&lt;tibble [</span><span>…    49    18 49 rows and 18 col…
 </span></CODE></PRE>
 <div id="exercises-14" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Exercises</h3>
@@ -473,7 +536,7 @@ dict_data</code></pre>
 ##              zurich 
 ##   &quot;zurich: 49 rows&quot;</code></pre>
 <p>Implement the same functionality using <code>map2()</code> inside a <code>mutate()</code>, and <code>enframe()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">manipulated_data <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">good_times <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">___</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">___ =</span> <span class="kw">map2</span>()) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">deframe</span>()</code></pre></li>
@@ -512,10 +575,44 @@ This expands our tibble by repeating the formerly unnested column entries as man
 ## #   </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 </span></CODE></PRE>
+<p>This is very similar to <code>bind_rows()</code> of the <code>data</code> column.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(data) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 196 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 193 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">check_columns_same &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  <span class="kw">stopifnot</span>(<span class="kw">identical</span>(<span class="kw">colnames</span>(x), <span class="kw">colnames</span>(y)))
+}
+
+bind_rows &lt;-<span class="st"> </span><span class="cf">function</span>(data_frames) {
+  <span class="co"># Called for the side effect</span>
+  <span class="kw">reduce</span>(data_frames, check_columns_same)
+
+  dplyr<span class="op">::</span><span class="kw">bind_rows</span>(data_frames)
+}
+
+<span class="kw">try</span>(
+  dict_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">pull</span>(data) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">bind_rows</span>()
+)</code></pre>
+<pre><code>## Error in fn(out, elt, ...) : 
+##   identical(colnames(x), colnames(y)) is not TRUE</code></pre>
 <p>Data flattened in this way is useful if the parts can be combined naturally into a larger dataset.
 Iterating over columns in the nested view corresponds to grouped operations in the flat view.</p>
 <pre class="sourceCode r"><code class="sourceCode r">dict_data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">map_int</span>(data, nrow)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">map_int</span>(data, nrow)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>data)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 5</span><span>
 ##   </span><span style='font-weight: bold;'>city_code</span><span> </span><span style='font-weight: bold;'>name</span><span>        </span><span style='font-weight: bold;'>lng</span><span>   </span><span style='font-weight: bold;'>lat</span><span>     </span><span style='font-weight: bold;'>n</span><span>

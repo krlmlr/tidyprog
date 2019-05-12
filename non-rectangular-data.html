@@ -434,6 +434,8 @@ We know from <a href="simple-iteration.html#indexing">“Indexing”</a> that we
 <pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;type&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;FeatureCollection&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin[[<span class="st">&quot;type&quot;</span>]]</code></pre>
+<pre><code>## [1] &quot;FeatureCollection&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>)</code></pre>
 <pre><code>## [[1]]
@@ -519,8 +521,60 @@ We know from <a href="simple-iteration.html#indexing">“Indexing”</a> that we
 ## 
 ## $properties$name
 ## [1] &quot;Berlin&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin[[<span class="st">&quot;features&quot;</span>]][[<span class="dv">1</span>]]</code></pre>
+<pre><code>## $geometry
+## $geometry$coordinates
+## $geometry$coordinates[[1]]
+## [1] 13.38886
+## 
+## $geometry$coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## $geometry$type
+## [1] &quot;Point&quot;
+## 
+## 
+## $type
+## [1] &quot;Feature&quot;
+## 
+## $properties
+## $properties$osm_id
+## [1] 240109189
+## 
+## $properties$osm_type
+## [1] &quot;N&quot;
+## 
+## $properties$country
+## [1] &quot;Germany&quot;
+## 
+## $properties$osm_key
+## [1] &quot;place&quot;
+## 
+## $properties$city
+## [1] &quot;Berlin&quot;
+## 
+## $properties$osm_value
+## [1] &quot;city&quot;
+## 
+## $properties$postcode
+## [1] &quot;10117&quot;
+## 
+## $properties$name
+## [1] &quot;Berlin&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">berlin <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pluck</span>(<span class="st">&quot;features&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;geometry&quot;</span>)</code></pre>
+<pre><code>## $coordinates
+## $coordinates[[1]]
+## [1] 13.38886
+## 
+## $coordinates[[2]]
+## [1] 52.51704
+## 
+## 
+## $type
+## [1] &quot;Point&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">berlin[[<span class="st">&quot;features&quot;</span>]][[<span class="dv">1</span>]][[<span class="st">&quot;geometry&quot;</span>]]</code></pre>
 <pre><code>## $coordinates
 ## $coordinates[[1]]
 ## [1] 13.38886
@@ -903,7 +957,7 @@ In the <code>*</code> we need to specify what class the output will be:</p>
 <pre><code>## [1] 13.38886 52.51704</code></pre>
 <p>Let’s use <code>map()</code> to apply this to the entire list of our cities’ coordinates:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
+<span class="st">  </span><span class="kw">map</span>(flatten_dbl)</code></pre>
 <pre><code>## [[1]]
 ## [1] 13.38886 52.51704
 ## 
@@ -971,7 +1025,13 @@ The first vector contains the longitude and the second the latitude of our citie
 <pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed &lt;-
 <span class="st">  </span>coordinates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))</code></pre>
+<span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">flatten_dbl</span>(.))
+coordinates_transposed</code></pre>
+<pre><code>## [[1]]
+## [1]  13.388860 -79.387207  34.780527   8.542322
+## 
+## [[2]]
+## [1] 52.51704 43.65396 32.08048 47.37240</code></pre>
 <div id="exercises-22" class="section level3">
 <h3><span class="header-section-number">6.5.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
@@ -1006,14 +1066,14 @@ What if we don’t get our data in such a form?</p>
 <p>A tibble is internally a list of named vectors of equal length.
 In two easy steps we can therefore make a tibble out of the unnamed list <code>coordinates_transposed</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>))</code></pre>
+<span class="st">  </span>rlang<span class="op">::</span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>))</code></pre>
 <pre><code>## $lon
 ## [1]  13.388860 -79.387207  34.780527   8.542322
 ## 
 ## $lat
 ## [1] 52.51704 43.65396 32.08048 47.37240</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">coordinates_transposed <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>rlang<span class="op">::</span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">as_tibble</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 4 x 2</span><span>
 ##      </span><span style='font-weight: bold;'>lon</span><span>   </span><span style='font-weight: bold;'>lat</span><span>

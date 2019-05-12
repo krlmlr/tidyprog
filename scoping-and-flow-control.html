@@ -334,7 +334,7 @@ a</code></pre></li>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/RtmpahEa2y/file2c2f20ac79df</code></pre>
+<pre><code>## 2 written to /tmp/Rtmpnfj6Wj/file2c484d27ca3b</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -342,7 +342,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/RtmpahEa2y/file2c2f5503e856</code></pre>
+<pre><code>## 6 written to /tmp/Rtmpnfj6Wj/file2c48ab6a647</code></pre>
 <pre><code>## [1] 7</code></pre>
 <div id="exercises-17" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Exercises</h3>
@@ -532,8 +532,17 @@ weather_path &lt;-<span class="st"> </span><span class="cf">function</span>(file
   <span class="co"># Returned value</span>
   <span class="kw">here</span>(<span class="st">&quot;data/weather&quot;</span>, filename)
 }
+
 read_weather_file &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {
   readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="kw">weather_path</span>(filename))
+}
+
+get_weather_file_for &lt;-<span class="st"> </span><span class="cf">function</span>(city_code) {
+  <span class="kw">paste0</span>(city_code, <span class="st">&quot;.xlsx&quot;</span>)
+}
+
+get_weather_data_for &lt;-<span class="st"> </span><span class="cf">function</span>(city_code) {
+  <span class="kw">read_weather_file</span>(<span class="kw">get_weather_file_for</span>(city_code))
 }</code></pre>
 </details>
 <p>Closures can e.g. be used during function definition.</p>
@@ -561,7 +570,12 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x9c3a398&gt;</code></pre>
+## &lt;environment: 0x8b70b50&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">read_toronto</code></pre>
+<pre><code>## function() {
+##     read_weather_file(filename)
+##   }
+## &lt;environment: 0x8ddbc10&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -569,6 +583,19 @@ read_berlin</code></pre>
 ## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
 ## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
 ## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_toronto</span>()</code></pre>
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
 ## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
@@ -597,7 +624,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x9deb710&gt;</code></pre>
+## &lt;environment: 0x5e86f70&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
@@ -612,6 +639,199 @@ read_loudly</code></pre>
 ## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 ## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 </span></CODE></PRE>
+<p>The <code>safely()</code> function is another example from the purrr package:</p>
+<pre class="sourceCode r"><code class="sourceCode r">cities &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;berlin&quot;</span>, <span class="st">&quot;toronto&quot;</span>, <span class="st">&quot;milan&quot;</span>, <span class="st">&quot;tel_aviv&quot;</span>)
+<span class="kw">try</span>(<span class="kw">map</span>(cities, get_weather_data_for))</code></pre>
+<pre><code>## Error : `path` does not exist: &#39;/home/travis/build/krlmlr/tidyprog/data/weather/milan.xlsx&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(cities, <span class="kw">safely</span>(get_weather_data_for))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## [[1]]
+## [[1]]$result
+## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## [[1]]$error
+## NULL
+## 
+## 
+## [[2]]
+## [[2]]$result
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## [[2]]$error
+## NULL
+## 
+## 
+## [[3]]
+## [[3]]$result
+## NULL
+## 
+## [[3]]$error
+## &lt;simpleError: `path` does not exist: '/home/travis/build/krlmlr/tidyprog/data/weather/milan.xlsx'&gt;
+## 
+## 
+## [[4]]
+## [[4]]$result
+## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## [[4]]$error
+## NULL
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">safely</span>(get_weather_data_for)</code></pre>
+<pre><code>## function (...) 
+## capture_error(.f(...), otherwise, quiet)
+## &lt;bytecode: 0xa83b270&gt;
+## &lt;environment: 0x55feba0&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(cities, <span class="op">~</span><span class="st"> </span><span class="kw">safely</span>(get_weather_data_for)(.))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## [[1]]
+## [[1]]$result
+## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## [[1]]$error
+## NULL
+## 
+## 
+## [[2]]
+## [[2]]$result
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## [[2]]$error
+## NULL
+## 
+## 
+## [[3]]
+## [[3]]$result
+## NULL
+## 
+## [[3]]$error
+## &lt;simpleError: `path` does not exist: '/home/travis/build/krlmlr/tidyprog/data/weather/milan.xlsx'&gt;
+## 
+## 
+## [[4]]
+## [[4]]$result
+## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## [[4]]$error
+## NULL
+</span></CODE></PRE>
+<pre class="sourceCode r"><code class="sourceCode r">safe_get_weather_data_for &lt;-<span class="st"> </span><span class="kw">safely</span>(get_weather_data_for)
+<span class="kw">map</span>(cities, <span class="op">~</span><span class="st"> </span><span class="kw">safe_get_weather_data_for</span>(.))</code></pre>
+<PRE class="fansi fansi-output"><CODE>## [[1]]
+## [[1]]$result
+## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Mostly… part…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## [[1]]$error
+## NULL
+## 
+## 
+## [[2]]
+## [[2]]$result
+## </span><span style='color: #555555;'># A tibble: 49 x 18</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 13 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>precipType</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+## 
+## [[2]]$error
+## NULL
+## 
+## 
+## [[3]]
+## [[3]]$result
+## NULL
+## 
+## [[3]]$error
+## &lt;simpleError: `path` does not exist: '/home/travis/build/krlmlr/tidyprog/data/weather/milan.xlsx'&gt;
+## 
+## 
+## [[4]]
+## [[4]]$result
+## </span><span style='color: #555555;'># A tibble: 49 x 17</span><span>
+##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
+##   </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## </span><span style='color: #555555;'>1</span><span> 2019-04-28 </span><span style='color: #555555;'>15:00:00</span><span> Partly… part…               0                0
+## </span><span style='color: #555555;'>2</span><span> 2019-04-28 </span><span style='color: #555555;'>16:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'>3</span><span> 2019-04-28 </span><span style='color: #555555;'>17:00:00</span><span> Clear   clea…               0                0
+## </span><span style='color: #555555;'># … with 46 more rows, and 12 more variables: </span><span style='color: #555555;font-weight: bold;'>temperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>apparentTemperature</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>dewPoint</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>humidity</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>pressure</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windSpeed</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windGust</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>windBearing</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+## #   </span><span style='color: #555555;font-weight: bold;'>cloudCover</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>uvIndex</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>visibility</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>ozone</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+## 
+## [[4]]$error
+## NULL
+</span></CODE></PRE>
 <div id="exercises-19" class="section level3">
 <h3><span class="header-section-number">5.4.1</span> Exercises</h3>
 <ol style="list-style-type: decimal">
@@ -622,7 +842,7 @@ read_loudly</code></pre>
 ##     .f &lt;- as_mapper(.f)
 ##     function(...) capture_error(.f(...), otherwise, quiet)
 ## }
-## &lt;bytecode: 0x7b6c030&gt;
+## &lt;bytecode: 0xa83b778&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">possibly</code></pre>
 <pre><code>## function (.f, otherwise, quiet = TRUE) 
@@ -639,7 +859,7 @@ read_loudly</code></pre>
 ##         })
 ##     }
 ## }
-## &lt;bytecode: 0x7aec198&gt;
+## &lt;bytecode: 0x70c85a8&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre></li>
 </ol>
 
