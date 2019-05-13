@@ -33,14 +33,6 @@ dist: xenial
 cache: packages
 latex: true
 
-addons:
-  apt:
-    packages:
-    - texlive-luatex
-    - lmodern
-    - fonts-lmodern
-    - texlive-fonts-recommended
-
 env:
   global:
   - _R_CHECK_FORCE_SUGGESTS_=false
