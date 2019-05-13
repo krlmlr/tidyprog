@@ -229,9 +229,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#do-yo-need-tidy-evaluation"><i class="fa fa-check"></i><b>7.2</b> Do yo need tidy evaluation?</a></li>
 <li class="chapter" data-level="7.3" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#explicit-quote-unquote-of-ellipsis"><i class="fa fa-check"></i><b>7.3</b> Explicit quote-unquote of ellipsis</a></li>
 <li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#names-1"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
-<li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section"><i class="fa fa-check"></i><b>7.5</b> <No caption defined></a></li>
-<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section-1"><i class="fa fa-check"></i><b>7.6</b> <No caption defined></a></li>
-<li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#section-2"><i class="fa fa-check"></i><b>7.7</b> <No caption defined></a></li>
+<li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#debugging"><i class="fa fa-check"></i><b>7.5</b> Debugging</a></li>
+<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argument-names"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
+<li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#purrr-style-mappers"><i class="fa fa-check"></i><b>7.7</b> purrr-style mappers</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
 <li class="chapter" data-level="8.1" data-path="best-practices.html"><a href="best-practices.html#description"><i class="fa fa-check"></i><b>8.1</b> DESCRIPTION</a></li>
@@ -319,10 +319,10 @@ good_times</code></pre>
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(good_times), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpLeqSdR/berlin2d3efe6eb93.csv&quot;   
-## [2] &quot;/tmp/RtmpLeqSdR/toronto2d3e74cbcd58.csv&quot; 
-## [3] &quot;/tmp/RtmpLeqSdR/tel_aviv2d3e55c6a953.csv&quot;
-## [4] &quot;/tmp/RtmpLeqSdR/zurich2d3e6c9674d8.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpvOpEJq/berlin2ce12905a22e.csv&quot; 
+## [2] &quot;/tmp/RtmpvOpEJq/toronto2ce1c9ccd6e.csv&quot; 
+## [3] &quot;/tmp/RtmpvOpEJq/tel_aviv2ce1ceddade.csv&quot;
+## [4] &quot;/tmp/RtmpvOpEJq/zurich2ce17d9a4973.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 For illustration, we implement a file-centric wrapper function that takes the file name as first argument and also prints a message every time a file is written.
@@ -334,38 +334,38 @@ We use <code>map2()</code> to handle this:</p>
 }
 
 <span class="kw">map2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>))</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/berlin2d3efe6eb93.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/toronto2d3e74cbcd58.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/tel_aviv2d3e55c6a953.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/zurich2d3e6c9674d8.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/berlin2ce12905a22e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/toronto2ce1c9ccd6e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/tel_aviv2ce1ceddade.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/zurich2ce17d9a4973.csv</code></pre>
 <pre><code>## $berlin
-## [1] &quot;/tmp/RtmpLeqSdR/berlin2d3efe6eb93.csv&quot;
+## [1] &quot;/tmp/RtmpvOpEJq/berlin2ce12905a22e.csv&quot;
 ## 
 ## $toronto
-## [1] &quot;/tmp/RtmpLeqSdR/toronto2d3e74cbcd58.csv&quot;
+## [1] &quot;/tmp/RtmpvOpEJq/toronto2ce1c9ccd6e.csv&quot;
 ## 
 ## $tel_aviv
-## [1] &quot;/tmp/RtmpLeqSdR/tel_aviv2d3e55c6a953.csv&quot;
+## [1] &quot;/tmp/RtmpvOpEJq/tel_aviv2ce1ceddade.csv&quot;
 ## 
 ## $zurich
-## [1] &quot;/tmp/RtmpLeqSdR/zurich2d3e6c9674d8.csv&quot;</code></pre>
+## [1] &quot;/tmp/RtmpvOpEJq/zurich2ce17d9a4973.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>(<span class="kw">map2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>)))</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/berlin2d3efe6eb93.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/toronto2d3e74cbcd58.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/tel_aviv2d3e55c6a953.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/zurich2d3e6c9674d8.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/berlin2ce12905a22e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/toronto2ce1c9ccd6e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/tel_aviv2ce1ceddade.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/zurich2ce17d9a4973.csv</code></pre>
 <p>Because <code>process_csv()</code> returns the file name, it is available as output.
 Since we are just interested in the side-effects of <code>write_csv()</code> and not in the displayed output, we can use the related function <code>walk2()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>))</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/berlin2d3efe6eb93.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/toronto2d3e74cbcd58.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/tel_aviv2d3e55c6a953.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/zurich2d3e6c9674d8.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/berlin2ce12905a22e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/toronto2ce1c9ccd6e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/tel_aviv2ce1ceddade.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/zurich2ce17d9a4973.csv</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">walk2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>)))</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/berlin2d3efe6eb93.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/toronto2d3e74cbcd58.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/tel_aviv2d3e55c6a953.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpLeqSdR/zurich2d3e6c9674d8.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/berlin2ce12905a22e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/toronto2ce1c9ccd6e.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/tel_aviv2ce1ceddade.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpvOpEJq/zurich2ce17d9a4973.csv</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
