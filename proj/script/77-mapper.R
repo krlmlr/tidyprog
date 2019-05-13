@@ -1,3 +1,5 @@
+### purrr-style mappers
+
 library(tidyverse)
 library(rlang)
 

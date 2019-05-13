@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## <No caption defined>
+## purrr-style mappers
 
 <details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
-### <No caption defined>
+### purrr-style mappers
 
 ```
 ```{r 77-setup-77-mapper-r}
