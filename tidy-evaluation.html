@@ -269,13 +269,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(rlang)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;rlang&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
-## 
-##     %@%, as_function, flatten, flatten_chr, flatten_dbl,
-##     flatten_int, flatten_lgl, flatten_raw, invoke, list_along,
-##     modify, prepend, splice</code></pre>
 </details>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_histogram &lt;-<span class="st"> </span><span class="cf">function</span>(.data, x) {
   .data <span class="op">%&gt;%</span>
@@ -334,7 +327,7 @@ data <span class="op">%&gt;%</span>
 ##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## &lt;bytecode: 0x6f949e8&gt;
+## &lt;bytecode: 0x7110740&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col, expr) {
   quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(col)
@@ -427,7 +420,7 @@ mean_airtime_per_day</code></pre>
 ##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## &lt;bytecode: 0x6f949e8&gt;
+## &lt;bytecode: 0x7110740&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 <div id="names-1" class="section level2">
@@ -475,7 +468,7 @@ mean_airtime_per_day</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $x
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^a</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2df2f80</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3336108</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sym</span>(<span class="st">&quot;b&quot;</span>)
 x_quos &lt;-<span class="st"> </span><span class="kw">quos</span>(<span class="dt">x =</span> <span class="op">!!</span>a)
@@ -483,18 +476,18 @@ x_quos</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $x
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^b</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2df2f80</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3336108</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quos</span>(<span class="dt">y =</span> c, <span class="op">!!!</span>x_quos)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $y
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^c</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2df2f80</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3336108</span><span>
 ## 
 ## $x
 ## </span><span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^b</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2df2f80</span><span>
+## env:  </span><span style='color: #0000BB;'>0x3336108</span><span>
 </span></CODE></PRE>
 </div>
 <div id="section-1" class="section level2">
@@ -529,12 +522,12 @@ build_map_quo &lt;-<span class="st"> </span><span class="cf">function</span>(col
 <PRE class="fansi fansi-output"><CODE>## $mean_petal_width
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^data</span><span style='color: #0000BB;'>, expr)</span><span>
-## env:  </span><span style='color: #0000BB;'>0xa52d530</span><span>
+## env:  </span><span style='color: #0000BB;'>0xb1893c0</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, expr)</span><span>
-## env:  </span><span style='color: #0000BB;'>0x8c9f7e0</span><span>
+## env:  </span><span style='color: #0000BB;'>0xbddc980</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span>
@@ -586,18 +579,18 @@ as_mapper_quosure &lt;-<span class="st"> </span><span class="cf">function</span>
 <pre><code>## &lt;lambda&gt;
 ## function (..., .x = ..1, .y = ..2, . = ..1) 
 ## mean(.$Petal.Width)
-## &lt;environment: 0x2df2f80&gt;
+## &lt;environment: 0x3336108&gt;
 ## attr(,&quot;class&quot;)
 ## [1] &quot;rlang_lambda_function&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_mapper_quosure</span>(<span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <pre><code>## function (..., . = ..1, .x = ..1, .y = ..2) 
 ## mean(.$Petal.Width)
-## &lt;environment: 0x9a96840&gt;</code></pre>
+## &lt;environment: 0xb4ee618&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, &lt;function(..., . = ..1, .x = ..1,
 ##           .y = ..2) mean(.$Petal.Width)&gt;)</span><span>
-## env:  </span><span style='color: #0000BB;'>0xab9d9b8</span><span>
+## env:  </span><span style='color: #0000BB;'>0xa05ee80</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span>
@@ -632,9 +625,9 @@ as_mapper_quosure &lt;-<span class="st"> </span><span class="cf">function</span>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "google": false,
 "linkedin": false,
 "weibo": false,
@@ -648,14 +641,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/krlmlr/tidyprog/edit/master/07-Tidy-evaluation.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["tidyprog.pdf"],
 "toc": {
 "collapse": "subsection"
 }

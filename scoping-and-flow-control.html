@@ -334,7 +334,7 @@ a</code></pre></li>
 
 <span class="kw">side_effect_function</span>(<span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre><code>## 2 written to /tmp/Rtmpnfj6Wj/file2c484d27ca3b</code></pre>
+<pre><code>## 2 written to /tmp/RtmpLeqSdR/file2d3e7de98949</code></pre>
 <p>Separation helps isolate the side effects.
 If side effect functions return the input, they remain composable with pure functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%&gt;%</span>
@@ -342,7 +342,7 @@ If side effect functions return the input, they remain composable with pure func
 <span class="st">  </span><span class="kw">side_effect_function</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pure_function</span>()</code></pre>
 <pre><code>## [1] 6</code></pre>
-<pre><code>## 6 written to /tmp/Rtmpnfj6Wj/file2c48ab6a647</code></pre>
+<pre><code>## 6 written to /tmp/RtmpLeqSdR/file2d3e1c3a542d</code></pre>
 <pre><code>## [1] 7</code></pre>
 <div id="exercises-17" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Exercises</h3>
@@ -570,12 +570,12 @@ read_berlin</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8b70b50&gt;</code></pre>
+## &lt;environment: 0xbd53108&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">read_toronto</code></pre>
 <pre><code>## function() {
 ##     read_weather_file(filename)
 ##   }
-## &lt;environment: 0x8ddbc10&gt;</code></pre>
+## &lt;environment: 0xc142108&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_berlin</span>()</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>summary</span><span> </span><span style='font-weight: bold;'>icon</span><span>  </span><span style='font-weight: bold;'>precipIntensity</span><span> </span><span style='font-weight: bold;'>precipProbabili…</span><span>
@@ -624,7 +624,7 @@ read_loudly</code></pre>
 ## 
 ##     f(...)
 ##   }
-## &lt;environment: 0x5e86f70&gt;</code></pre>
+## &lt;environment: 0x726f9a0&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_loudly</span>(<span class="st">&quot;berlin.xlsx&quot;</span>)</code></pre>
 <pre><code>## 1 argument(s)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 49 x 18</span><span>
@@ -707,8 +707,8 @@ read_loudly</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">safely</span>(get_weather_data_for)</code></pre>
 <pre><code>## function (...) 
 ## capture_error(.f(...), otherwise, quiet)
-## &lt;bytecode: 0xa83b270&gt;
-## &lt;environment: 0x55feba0&gt;</code></pre>
+## &lt;bytecode: 0x84d8170&gt;
+## &lt;environment: 0x88f13f8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(cities, <span class="op">~</span><span class="st"> </span><span class="kw">safely</span>(get_weather_data_for)(.))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## [[1]]
 ## [[1]]$result
@@ -842,7 +842,7 @@ read_loudly</code></pre>
 ##     .f &lt;- as_mapper(.f)
 ##     function(...) capture_error(.f(...), otherwise, quiet)
 ## }
-## &lt;bytecode: 0xa83b778&gt;
+## &lt;bytecode: 0x84d8678&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">possibly</code></pre>
 <pre><code>## function (.f, otherwise, quiet = TRUE) 
@@ -859,7 +859,7 @@ read_loudly</code></pre>
 ##         })
 ##     }
 ## }
-## &lt;bytecode: 0x70c85a8&gt;
+## &lt;bytecode: 0x9d5ac50&gt;
 ## &lt;environment: namespace:purrr&gt;</code></pre></li>
 </ol>
 
@@ -892,9 +892,9 @@ read_loudly</code></pre>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "google": false,
 "linkedin": false,
 "weibo": false,
@@ -908,14 +908,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/krlmlr/tidyprog/edit/master/05-Function-arguments-and-scoping.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["tidyprog.pdf"],
 "toc": {
 "collapse": "subsection"
 }
