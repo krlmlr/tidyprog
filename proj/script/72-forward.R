@@ -1,4 +1,4 @@
-### Do yo need tidy evaluation?
+### Do you need tidy evaluation?
 
 library(tidyverse)
 

@@ -3,11 +3,11 @@ rm(list = ls())
 ```
 
 
-## Do yo need tidy evaluation?
+## Do you need tidy evaluation?
 
 <details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
-### Do yo need tidy evaluation?
+### Do you need tidy evaluation?
 
 ```
 ```{r 72-setup-72-forward-r}
