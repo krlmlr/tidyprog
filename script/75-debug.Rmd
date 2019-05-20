@@ -15,6 +15,7 @@ library(rlang)
 ```
 </details>
 
+You can use the capturing functions (creating `quosures` or `expressions`) also outside of functions:
 
 ```{r include = FALSE}
 # Use quos() to understand what will happen:
@@ -27,6 +28,12 @@ x_quos <- quos(x = !!a)
 x_quos
 ```
 
+The `sym()` function here creates a so-called `symbol` from a `character` variable.
+A `symbol` can be evaluated with `!!` in tidyverse functions.
+
+Capturing expressions in quosures can help you understand what is happening behind the scenes and for example give you clues as to why your code is not doing what it is supposed to do.
+
+Quosures can also be nested:
 
 ```{r include = FALSE}
 # quos() can be nested:
