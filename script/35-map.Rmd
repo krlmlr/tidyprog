@@ -1,0 +1,157 @@
+```{r 35-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Processing multiple files {#map}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Processing multiple files
+
+```
+```{r 35-setup-35-map-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+
+input_files <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe()
+```
+</details>
+
+Here we look at how to act on each entry of a list or a vector using `purrr::map()`:
+
+We start with the named vector `input_files` from section ["Indexing"](#indexing).
+As just seen, manually choosing just one entry of a vector works like so:
+
+```{r include = FALSE}
+# Read a single input file
+```
+```{r 35-read-a-single-input-file}
+input_files[[1]]
+here(input_files[[1]])
+readxl::read_excel(here(input_files[[1]]))
+```
+
+However, if we try to read all files from the vector with `read_excel()`, this fails:
+
+```{r include = FALSE}
+# Try reading all input files
+```
+```{r 35-try-reading-all-input-files}
+here(input_files)
+try(readxl::read_excel(here(input_files)))
+```
+
+Unlike `here()`, the `read_excel()` function can process only one file at a time.
+We need to iterate explicitly.
+
+With `map()`, you can successively work through the whole vector and each time let the same function deal with the respective entry.
+The output of `map()` is a list where each element contains one results.
+The list is named if the input is named:
+
+```{r include = FALSE}
+# Read all input files
+```
+```{r 35-read-all-input-files}
+input_data <-
+  map(input_files, ~ readxl::read_excel(here(.)))
+```
+
+The `map()` call above is equivalent to the following code:
+
+```{r include = FALSE}
+# Equivalent code
+```
+```{r 35-equivalent-code}
+input_data <-
+  list(
+    berlin = readxl::read_excel(here(input_files[[1]])),
+    toronto = readxl::read_excel(here(input_files[[2]])),
+    tel_aviv = readxl::read_excel(here(input_files[[3]])),
+    zurich = readxl::read_excel(here(input_files[[4]]))
+  )
+```
+
+Let's take a closer look at what we produced:
+
+```{r include = FALSE}
+# Analyze the results
+```
+```{r 35-analyze-the-results}
+input_data
+input_data[[1]]
+names(input_data)
+```
+
+`map()` can be included in your pipe in the following way:
+
+```{r include = FALSE}
+# Pipe notation
+```
+```{r 35-pipe-notation}
+input_files %>%
+  map(~ readxl::read_excel(here(.)))
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Read only the data for Toronto and Tel Aviv, using subsetting or `filter()`. Compare.
+
+    ```r
+    input_files[_____] %>% 
+      map(~ readxl::read_excel(here(.)))
+
+    input_files %>%
+      ___() %>% 
+      filter(name %in% c(_____)) %>% 
+      ___() %>% 
+      map(~ readxl::read_excel(here(.)))
+    ```
+    
+    ```{r echo = FALSE}
+    input_files[c("toronto", "tel_aviv")] %>% 
+      map(~ readxl::read_excel(here(.)))
+
+    input_files %>%
+      enframe() %>% 
+      filter(name %in% c("toronto", "tel_aviv")) %>% 
+      deframe() %>% 
+      map(~ readxl::read_excel(here(.)))
+    ```
+
+1. Compute the absolute file name with `here()` outside of the `map()` call.
+
+    ```r
+    input_files %>% 
+      enframe() %>% 
+      ___(_____) %>% 
+      deframe() %>% 
+      map(~ readxl::read_excel(.))
+    ```
+
+    ```{r echo = FALSE}
+    input_files %>% 
+      enframe() %>% 
+      mutate(value = here(value)) %>% 
+      deframe() %>% 
+      map(~ readxl::read_excel(.))
+    ```
+
+1. Can you explain what happens when you call `enframe()` on the result?
+
+    ```r
+    input_files %>%
+      map(~ readxl::read_excel(here(.))) %>% 
+      enframe()
+    ```
+    

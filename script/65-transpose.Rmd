@@ -1,0 +1,71 @@
+```{r 65-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Transposing {#transpose}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Transposing
+
+```
+```{r 65-setup-65-transpose-r}
+library(tidyverse)
+library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+coordinates <-
+  komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates"))
+```
+</details>
+
+You might know the mathematical concept of transposition from your linear algebra courses.
+A similar concept is available in `R` when we are dealing with lists.
+
+We are starting in our setup with `komoot_content` and `coordinates` from section ["Iterating and traversing"](#komoot).
+
+Let's apply `purrr::transpose()` to our list `coordinates`:
+
+```{r include = FALSE}
+# Transposing inside out:
+```
+```{r 65-transposing-inside-out}
+coordinates %>%
+  transpose()
+```
+
+What was originally a list with 4 elements of which each one was a list of 2 elements has become a list of 2 elements of which each one is a list of 4 elements.
+With `flatten_dbl()` we can simplify the structure, so that we end up with a list of 2, where each element consists of a vector of 4.
+The first vector contains the longitude and the second the latitude of our cities:
+
+```{r include = FALSE}
+# Flatten to simplify structure:
+```
+```{r 65-flatten-to-simplify-structure}
+coordinates_transposed <-
+  coordinates %>%
+  transpose() %>%
+  map(~ flatten_dbl(.))
+coordinates_transposed
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Explain what happens if you transpose a tibble:
+
+    ```r
+    komoot %>%
+      transpose()
+    ```

@@ -1,0 +1,124 @@
+```{r 61-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Traversing {#berlin}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Traversing
+
+```
+```{r 61-setup-61-berlin-r}
+library(tidyverse)
+library(here)
+```
+</details>
+
+We are now working with the results from downloading geolocation data from [photon.komoot.de](http://photon.komoot.de/).
+This is stored in the file `here("data/komoot-berlin.rds")` and we can read it with `readRDS()`:
+
+```{r include = FALSE}
+# Results from downloading geolocation data from photon.komoot.de:
+```
+```{r 61-results-from-downloading-geolocation-data-from-photon-komoot-de}
+berlin <- readRDS(here("data/komoot-berlin.rds"))
+
+berlin
+str(berlin)
+```
+
+As you can see it is a somewhat complex list structure.
+We know from ["Indexing"](#indexing) that we can access it's components in the following way:
+
+```{r include = FALSE}
+# Access components
+```
+```{r 61-access-components}
+berlin$type
+berlin$features
+berlin$features[[1]]
+```
+
+With the function `purrr::pluck()`, there is however a more universal tool available for accessing elements of more complex lists:
+
+```{r include = FALSE}
+# Uniform access with pluck():
+```
+```{r 61-uniform-access-with-pluck}
+berlin %>%
+  pluck("type")
+berlin[["type"]]
+
+berlin %>%
+  pluck("features")
+
+berlin %>%
+  pluck("features", 1)
+berlin[["features"]][[1]]
+
+berlin %>%
+  pluck("features", 1, "geometry")
+berlin[["features"]][[1]][["geometry"]]
+
+berlin %>%
+  pluck("features", 1, "geometry", "coordinates")
+```
+
+Similarly:
+
+```{r include = FALSE}
+# Accessing different properties
+```
+```{r 61-accessing-different-properties}
+berlin %>%
+  pluck("features", 1, "properties", "country")
+```
+
+And as one more important characteristic of a `tidyverse`-function, `pluck()` is pipe-able:
+
+```{r include = FALSE}
+# Composable
+```
+```{r 61-composable}
+berlin %>%
+  pluck("features", 1) %>%
+  pluck("properties", "country")
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Introduce a variable for the first feature. Collect the coordinates, the country and the postal code.
+        
+    ```r
+    first_feature <-
+      berlin %>% 
+      ___(_____)
+    
+    first_feature %>% 
+      ___(_____)
+    
+    first_feature %>% 
+      ___(_____)
+    
+    first_feature %>% 
+      ___(_____)
+    ```
+    
+    ```{r echo = FALSE}
+    first_feature <-
+      berlin %>% 
+      pluck("features", 1)
+    first_feature %>% 
+      pluck("coordinates")
+    first_feature %>% 
+      pluck("properties", "country")
+    first_feature %>% 
+      pluck("properties", "postcode")
+    ```

@@ -1,0 +1,151 @@
+```{r 21-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Definition and execution
+
+The following packages are used for this chapter.
+
+```{r include = FALSE}
+### Definition and execution
+
+```
+```{r 21-setup-21-function-r}
+library(tidyverse)
+library(here)
+```
+
+
+```{r include = FALSE}
+# Important! Please reset the R session before running this script.
+# (In RStudio: Session/Restart R)
+```
+```{r 21-important-please-reset-the-r-session-before-running-this-script}
+
+```
+
+Create functions for tasks that need to be executed repeatedly, or to hide implementation details.
+
+```{r include = FALSE}
+# Declare a function to hide implementation details
+```
+```{r 21-declare-a-function-to-hide-implementation-details}
+read_weather_data <- function() {
+  # Read all files
+  berlin <- readxl::read_excel(here("data/weather", "berlin.xlsx"))
+  toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+  tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+  zurich <- readxl::read_excel(here("data/weather", "zurich.xlsx"))
+
+  # Create ensemble dataset
+  weather_data <- bind_rows(
+    berlin = berlin,
+    toronto = toronto,
+    tel_aviv = tel_aviv,
+    zurich = zurich,
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+```
+
+Display the code of any function by writing its name without the subsequent parentheses:
+
+```{r include = FALSE}
+# Functions are first-class objects
+```
+```{r 21-functions-are-first-class-objects}
+read_weather_data
+```
+
+Call the function by adding the parentheses:
+
+```{r include = FALSE}
+# Call like functions exported from packages
+```
+```{r 21-call-like-functions-exported-from-packages}
+read_weather_data()
+```
+
+
+Execution of the function does not create new variables in the global environment.
+The only object in the global environment is the function itself:
+
+```{r include = FALSE}
+# Variables are local, execution doesn't change global variables.
+# (The effect is only seen when starting R in a fresh session.)
+```
+```{r 21-variables-are-local-execution-doesn-t-change-global-variables}
+ls()
+```
+
+A function can also be used as input for a pipe:
+
+```{r include = FALSE}
+# Pipe
+```
+```{r 21-pipe}
+read_weather_data() %>%
+  count(city_code)
+```
+
+To reuse a function value, assign it to a variable:
+
+```{r include = FALSE}
+# Assign result to use in further operations
+```
+```{r 21-assign-result-to-use-in-further-operations}
+weather_data <- read_weather_data()
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Create a modified version of the function to return only data for Toronto and Tel Aviv. Call it.
+
+    ```r
+    read_weather_data_non_europe <- function() {
+      _______
+    }
+    
+    _______
+    ```
+    
+    ```{r echo = FALSE}
+    read_weather_data_non_europe <- function() {
+      # Read non-Europe files
+      toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+      tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+    
+      # Create ensemble dataset
+      weather_data <- bind_rows(
+        toronto = toronto,
+        tel_aviv = tel_aviv,
+        .id = "city_code"
+      )
+    
+      # Return it
+      weather_data
+    }
+    
+    read_weather_data_non_europe()
+    ```
+    
+
+1. Compute number of rows for Europe, count observations to validate:
+
+    ```r
+    nrow(_____) - nrow(_____)
+    ```
+    
+    ```{r echo = FALSE}
+    # Double-check:
+    nrow(read_weather_data()) - nrow(read_weather_data_non_europe())
+    ```

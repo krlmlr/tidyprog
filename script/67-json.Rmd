@@ -1,0 +1,59 @@
+```{r 67-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Accessing APIs
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Accessing APIs
+
+```
+```{r 67-setup-67-json-r}
+library(tidyverse)
+library(here)
+```
+</details>
+
+
+```{r include = FALSE}
+# Use httr::GET() for GET requests:
+```
+```{r 67-use-httr-get-for-get-requests}
+req <- httr::GET("https://photon.komoot.de/api/?q=Paradeplatz&limit=3")
+```
+
+
+```{r include = FALSE}
+# Wait for the request to be processed:
+```
+```{r 67-wait-for-the-request-to-be-processed}
+httr::stop_for_status(req)
+```
+
+
+```{r include = FALSE}
+# Read the response:
+```
+```{r 67-read-the-response}
+content <- httr::content(req)
+content
+```
+
+
+```{r include = FALSE}
+# Display the original response:
+```
+```{r 67-display-the-original-response}
+text_content <- httr::content(req, as = "text")
+cat(text_content)
+```
+
+
+```{r include = FALSE}
+# Pretty-print the original response:
+```
+```{r 67-pretty-print-the-original-response}
+cat(jsonlite::prettify(text_content))
+```

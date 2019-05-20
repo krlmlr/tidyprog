@@ -1,0 +1,27 @@
+# `r if (knitr::is_html_output()) '# References {-}'`
+
+- R for data science: https://r4ds.had.co.nz/
+
+- Row oriented workflows: https://github.com/jennybc/row-oriented-workflows#readme
+
+- Advanced R: http://adv-r.had.co.nz/
+
+- Tidy evaluation: https://tidyeval.tidyverse.org/
+
+- R packages: http://r-pkgs.had.co.nz/
+
+- roxygen2: Vignettes in https://cran.r-project.org/package=roxygen2, especially:
+
+    - [Introduction to roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
+
+    - [Generating Rd files](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html) for an overview of available tags
+
+    - [Write R documentation in Markdown](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html)
+
+- How R searches and finds stuff: http://blog.obeautifulcode.com/R/How-R-Searches-And-Finds-Stuff/
+
+- What they forgot to teach you: https://whattheyforgot.org/
+
+- Parallel processing with a purrr-like interface: https://davisvaughan.github.io/furrr/
+
+- Tidyverse principles: https://principles.tidyverse.org/

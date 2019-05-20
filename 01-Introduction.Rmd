@@ -1,2 +1,81 @@
 # Introduction
 
+The `tidyverse` has quickly developed over the last years.
+Its first implementation as a collection of partly older packages was in the second half of 2016.
+All its packages "share an underlying design philosophy, grammar, and data structures."^[citation from [tidyverse homepage](https://www.tidyverse.org/)]
+It is for sure difficult to tell, if "learning the `tidyverse`" is a hard task, since the result of this assessment might differ from person to person.
+We do believe though, that there are concepts in its approach, which -- when grasped -- have the potential to increase one's productivity, since code creation will seem more natural.
+While this might be true for all languages (once you speak it well enough, things go smoothly), in our opinion the `tidyverse` worth exploring in depth, since it is
+
+1. consistent: an especially well designed framework that aims at making data analysis and programming intuitive,
+2. evolving: constantly deepened understanding for challenges arising in modern data analysis leads to improving ergonomic user interfaces.
+
+This section gives a brief overview, introduces the data used for the course, and offers a refresher for tidy data manipulation and visualization.
+
+## Overview
+
+This course covers several topics, which everyone working more intently with the `tidyverse` almost inevitably needs to deal with at some point or another.
+The topics are organized in chapters that contain mostly R code with output and text.
+In each section, exercises are provided.
+
+Each subsection corresponds to an R script in the [`script` directory](`r tidyprog_repo("script")`) in the [sister repository on GitHub](`r tidyprog_repo()`).
+For example, the code from the next section 1.2 can be found in [`12-intro.R`](`r tidyprog_repo("script", "12-intro.R")`).
+Clone or download the repository and open the `R-workshop.Rproj` file to run the script.
+(It is important to open the `.Rproj` file and not only the `.R` scripts.)
+
+1. Function basics
+
+    > structuring the code to avoid too much copy-pasting
+    
+    Using functions to structure code. This part is independent of the subsequent section.
+    
+    - We begin with how to define and execute a function
+    - Discussion of a function's arguments (from both the developers' and the users' perspective)
+    - A few words on function design
+    
+2. Simple iteration
+    
+    > processing multiple files that contain different parts of the same dataset
+    
+    This part introduces iteration and is independent of the previous section.
+    
+    - How to get from a list or a vector to a tibble and vice-versa
+    - Indexing for vectors and lists
+    - Applying a function to each element of a list or a vector
+
+3. Pairwise iteration and nesting
+
+    More advanced iteration.
+    
+    - Simultaneously feed two or more separate lists of inputs into a function working with those two arguments
+    - Iterate rowwise through columns in a tibble
+    - Nested tibbles, a very powerful concept
+    
+4. Scoping and flow control
+
+    More advanced functional concepts.
+    
+    - Data lifecycle
+    - Purity
+    - Control flow
+    - Metaprogramming
+    
+5. Non-rectangular data
+    
+    > working with raw data from online services (JSON)
+    
+    Processing hierarchical lists as commonly returned from web APIs.
+    
+    - Data lifecycle
+    - Purity
+    - Control flow
+    - Metaprogramming
+
+6. Tidy evaluation
+
+    > writing functions that work with datasets of different shape
+    
+    TBD
+
+```{r child = here("script", "1.Rmd")}
+```

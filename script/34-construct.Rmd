@@ -1,0 +1,88 @@
+```{r 34-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Construction
+
+<details><summary>*Click here to show setup code.*</summary>
+</details>
+
+The `c()` function constructs vectors.
+All elements of a vector must have the same type.
+
+```{r include = FALSE}
+### Construction
+
+```
+```{r 34-setup-34-construct-r}
+c(1, 2, 3)
+c(1:3, 5)
+c(1:3, "5")
+```
+
+Lists are constructed with `list()`.
+They are a special type of vector -- they can contain elements of different type and length.
+
+```{r include = FALSE}
+# Use list() to construct a list, all elements can have different types and lengths:
+```
+```{r 34-use-list-to-construct-a-list-all-elements-can-have-different-types-and-lengths}
+list(1, 2, 3)
+list(1:3, 5)
+list(1:3, "5")
+```
+
+Lists can also contain other lists.
+
+```{r include = FALSE}
+# Lists can be nested:
+```
+```{r 34-lists-can-be-nested}
+nested <- list(
+  1:3,
+  list(4, "5"),
+  list(
+    list(letters[6:8]),
+    9
+  )
+)
+
+nested
+str(nested)
+```
+
+Vectors (and also lists) can have names.
+
+```{r include = FALSE}
+# Vectors and lists can have names:
+```
+```{r 34-vectors-and-lists-can-have-names}
+c(a = 1, b = 2, c = 3)
+list(a = 1:3, b = 5)
+rlang::set_names(1:3, letters[1:3])
+```
+
+The new {vctrs} package defines a data type for lists where all elements have the same type: a stricter list, but more powerful than a bare vector.
+
+```{r include = FALSE}
+# Preview: vctrs::list_of() to construct typed lists
+```
+```{r 34-preview-vctrs-list-of-to-construct-typed-lists}
+#vctrs::list_of(1, 2, 3)
+#try(vctrs::list_of(1, 2, "3"))
+#vctrs::list_of(letters[1:3], "e")
+```
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Explain the differences between the outputs below.
+
+    ```{r echo = TRUE}
+    c(a = list(1:3), b = list(4:5))
+    list(a = list(1:3), b = list(4:5))
+    ```

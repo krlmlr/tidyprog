@@ -20,7 +20,9 @@ Imports:
     darksky,
     here,
     leaflet,
+    nycflights13,
     plotly,
+    sessioninfo,
     shiny,
     tidyverse
 Roxygen: list(markdown = TRUE)

@@ -1,0 +1,152 @@
+```{r 43-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Nesting and unnesting {#nest}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Nesting and unnesting
+
+```
+```{r 43-setup-43-unnest-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+
+dict_data <-
+  dict %>%
+  mutate(data = map(weather_filename, ~ readxl::read_excel(here(.)))) %>%
+  select(-weather_filename)
+```
+</details>
+
+How to work with nested data?
+
+We start with the tibble `dict_data` from section ["Moving to tibble-land"](#mut_map), which includes the nested tibbles in its column `data`.
+
+If we want to actually look at the data we can directly use `tidyr::unnest()` on the whole tibble, which by default acts on all list-columns.
+This expands our tibble by repeating the formerly unnested column entries as many times, as each nested tibble has rows:
+
+```{r include = FALSE}
+# Flatten a nested tibble with unnest():
+```
+```{r 43-flatten-a-nested-tibble-with-unnest}
+dict_data %>%
+  unnest()
+```
+
+This is very similar to `bind_rows()` of the `data` column.
+
+```{r include = FALSE}
+# This is very similar to bind_rows():
+```
+```{r 43-bind-rows-equivalent}
+dict_data %>%
+  pull(data) %>%
+  bind_rows()
+```
+
+```{r include = FALSE}
+# What happens with data of different shape?
+```
+```{r 43-data-shape}
+check_columns_same <- function(x, y) {
+  stopifnot(identical(colnames(x), colnames(y)))
+}
+
+bind_rows <- function(data_frames) {
+  # Called for the side effect
+  reduce(data_frames, check_columns_same)
+
+  dplyr::bind_rows(data_frames)
+}
+
+try(
+  dict_data %>%
+    pull(data) %>%
+    bind_rows()
+)
+```
+
+Data flattened in this way is useful if the parts can be combined naturally into a larger dataset.
+Iterating over columns in the nested view corresponds to grouped operations in the flat view.
+
+```{r include = FALSE}
+# Mapping in nested view are grouped operation in the flat view:
+```
+```{r 43-mapping-in-nested-view-are-grouped-operation-in-the-flat-view}
+dict_data %>%
+  mutate(n = map_int(data, nrow)) %>%
+  select(-data)
+
+dict_data %>%
+  unnest() %>%
+  count(name)
+```
+
+Inversely, if you want to have a more condensed view of your data, you can nest again.
+By default, the function `tidyr::nest()` will nest all data.
+Therefore it is often useful to tell it, which columns to ignore:
+
+```{r include = FALSE}
+# Inverse operation: nest()
+```
+```{r 43-inverse-operation-nest}
+dict_data %>%
+  unnest() %>%
+  nest(-city_code, -name, -lng, -lat)
+```
+
+Using this, we structure our data in new, customized ways.
+For processing of daily data over all cities, we create a new column `date`:
+
+```{r include = FALSE}
+# Split into daily data:
+```
+```{r 43-split-into-daily-data}
+dict_data %>%
+  unnest() %>%
+  mutate(date = as.Date(time)) %>%
+  nest(-date)
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Implement the following code as a mapping over a nested tibble. Use a helper function:
+
+    ```{r}
+    iris %>% 
+      group_by(Species) %>% 
+      summarize_all(list(Mean = mean)) %>% 
+      ungroup()
+    ```
+        
+    ```r
+    summarize_to_mean <- function(data) {
+      data %>% 
+        ___(_____)
+    }
+    
+    iris %>%
+      nest(___) %>% 
+      mutate(data = map(___, summarize_to_mean)) %>%
+      unnest()
+    ```
+
+1. When is a grouped operation preferable over nesting? Discuss.
+
+1. Data frames are lists under the hood. Explain the output of the following code. What use cases can you imagine?
+
+    ```{r}
+    dict_data %>% 
+      as.list() %>% 
+      enframe()
+    ```

@@ -2,6 +2,7 @@
 
 > working with raw data from online services (JSON)
 
+This chapter gives an example for processing deeply nested lists and converting them to data frames.
 
-```{r child = here("script", "7.Rmd")}
+```{r child = here::here("script", "6.Rmd")}
 ```

@@ -1,0 +1,124 @@
+```{r 25-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Multiple arguments
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Multiple arguments
+
+```
+```{r 25-setup-25-args-multi-r}
+library(tidyverse)
+library(here)
+
+
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+
+get_weather_file_for <- function(city_code) {
+  paste0(city_code, ".xlsx")
+}
+
+get_weather_data_for <- function(city_code) {
+  read_weather_file(get_weather_file_for(city_code))
+}
+```
+</details>
+
+We start once more with the functions `weather_path()` from section ["Arguments"](#args) and `get_weather_data_for()` from section ["Intermediate variables"](#intermediate).
+
+What are the considerations when using multiple function arguments?
+You can add new parameters in a very straightforward manner like this:
+
+```{r include = FALSE}
+# Multiple function arguments are separated by comma:
+```
+```{r 25-multiple-function-arguments-are-separated-by-comma}
+read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
+  # Create ensemble dataset from files on disk
+  weather_data <- bind_rows(
+    berlin = get_weather_data_for("berlin"),
+    toronto = get_weather_data_for("toronto"),
+    tel_aviv = get_weather_data_for("tel_aviv"),
+    zurich = get_weather_data_for("zurich"),
+    .id = "city_code"
+  )
+
+  # Return it (filtered)
+  weather_data %>%
+    filter( !(city_code == "zurich" & omit_zurich) ) %>%
+    filter( !(city_code == "toronto" & omit_toronto) )
+}
+```
+
+Prefer passing arguments by name rather than only giving the value, especially if the intent of the value is not clear from just reading it.
+
+```{r 25-good}
+# Good:
+read_weather_data(omit_zurich = TRUE)
+read_weather_data(omit_toronto = TRUE)
+
+# Bad:
+read_weather_data(TRUE)
+```
+
+
+Use the so called ellipsis (`...`) when you want to provide the possibility for the user to call your function with a list of arguments of unspecified length. 
+This can be e.g. useful for passing arguments downstream:
+
+```{r include = FALSE}
+# Ellipsis: variable argument list, useful for passing arguments downstream
+```
+```{r 25-ellipsis-variable-argument-list-useful-for-passing-arguments-downstream}
+weather_path <- function(...) {
+  # All arguments are passed on
+  here("data/weather", ...)
+}
+
+weather_path("berlin.xlsx")
+
+weather_path("some", "subdir", "with", "a", "file.csv")
+```
+
+
+Mind, that despite altering the original function and adding new features to it, the original call still works as before:
+
+```{r include = FALSE}
+# Note: despite many changes and new features,
+# the original call still works!
+# (This can be tested automatically!)
+```
+```{r 25-note-despite-many-changes-and-new-features}
+read_weather_data()
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. What does the following return? Why?
+
+    ```r
+    read_weather_data(TRUE, omit_z = FALSE) %>%
+      count(city_code)
+    ```
+
+    ```{r include = FALSE}
+    # What does the following return? Why?
+    read_weather_data(TRUE, omit_z = FALSE) %>%
+      count(city_code)
+    ```
+    
+    See the next section for ideas on avoiding this behavior.

@@ -1,0 +1,161 @@
+# Best practices
+
+R code is often organized in packages that can be installed from centralized repositories such as CRAN or GitHub.
+If you are new to writing R packages, this course cannot give a complete introduction into packages.
+It is still useful to embrace some very few concepts of R packages to gain access to a vast toolbox and also organize your code in a standardized way familiar to other users.
+With the first steps in place, the road to your first R package may become less steep.
+
+- Create a `DESCRIPTION` file to declare dependencies and allow easy reloading of the functions you define
+- Store your functions in `.R` files in the `R/` directory in your project
+    - Scripts that you execute live in `script/` or a similar directory
+- Use [roxygen2](https://github.com/klutometis/roxygen) to document your functions close to the source
+- Write tests for your functions, e.g. with [testthat](https://testthat.r-lib.org/)
+
+See [R packages](http://r-pkgs.had.co.nz/) for a more comprehensive treatment.
+
+
+## DESCRIPTION
+
+Create and open a new RStudio project.
+Then, create a `DESCRIPTION` file with `usethis::use_description()`:
+
+```r
+# install.packages("usethis")
+usethis::use_description()
+```
+
+Double-check success:
+
+```r
+# install.packages("devtools")
+devtools::load_all()
+```
+
+Declare that your project requires the tidyverse and the here package:
+
+```r
+usethis::use_package("here")
+# Currently doesn't work, add manually
+# https://github.com/r-lib/usethis/issues/760
+# usethis::use_package("tidyverse")
+```
+
+
+
+
+## R
+
+With a `DESCRIPTION` file defined, create a new `.R` file and save it in the `R/` directory.
+(Create this directory if it does not exist.)
+Create a function in this file, save the file:
+
+```{r}
+hi <- function(text = "Hello, world!") {
+  print(text)
+  invisible(text)
+}
+```
+
+Do not source the file.
+
+Restart R (with Ctrl + Shift + F10 in RStudio).
+
+Run `devtools::load_all()` again, you can use the shortcut Ctrl + Shift + L or Cmd + Shift + L in RStudio.
+
+Check that you can run `hi()` in the console:
+
+```{r}
+hi()
+hi("Wow!")
+```
+
+Edit the function:
+
+```{r}
+hi <- function(text = "Wow!") {
+  print(text)
+  invisible(text)
+}
+```
+
+Save the file, but do not source it.
+
+Run `devtools::load_all()` again, you can use the shortcut Ctrl + Shift + L or Cmd + Shift + L in RStudio.
+
+Check that the new implementation of `hi()` is active:
+
+```{r}
+hi()
+```
+
+All functions that are required for your project are stored in this directory.
+Do not store executable scripts, use a `script/` directory.
+
+
+## roxygen2
+
+The following intuitive annotation syntax is a standard way to create documentation for your functions:
+
+```{r}
+#' Print a welcome message
+#' 
+#' This function prints "Wow!", or a custom text, on the console.
+#'
+#' @param text The text to print, "Wow!" by default.
+#' 
+#' @return The `text` argument, invisibly.
+#' 
+#' @examples
+#' hi()
+#' hi("Hello!")
+hi <- function(text = "Wow!") {
+  print(text)
+  invisible(text)
+}
+```
+
+This annotation can be rendered to a nicely looking HTML page with the roxygen2 and pkgdown packages.
+All you need to do is provide (and maintain) it.
+
+
+
+## testthat
+
+Automated tests make sure that the functions you write today continue working tomorrow.
+Create your first test with `usethis::use_test()`:
+
+```r
+# install.packages("testthat")
+usethis::use_test("hi")
+```
+
+The file `tests/testthat/test-hi.R` is created, with the following contents:
+
+```r
+test_that("multiplication works", {
+  expect_equal(2 * 2, 4)
+})
+```
+
+Replace this predefined text with a test that makes more sense for us:
+
+```r
+test_that("hi() works", {
+  expect_output(hi(), "Wow")
+  expect_output(hi("Hello"), "Hello")
+})
+```
+
+Run the new test with `devtools::test()`, you can use the shortcut Ctrl + Shift + T or Cmd + Shift + T in RStudio.
+
+Check that the test actually detects failures by modifying the implementation of `hi()` and rerunning the test:
+
+```{r}
+hi <- function(text = "Oops!") {
+  print(text)
+  invisible(text)
+}
+```
+
+Run the new test with `devtools::test()`, you can use the shortcut Ctrl + Shift + T or Cmd + Shift + T in RStudio.
+One test should be failing now.

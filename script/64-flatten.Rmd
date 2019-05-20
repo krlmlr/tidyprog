@@ -1,0 +1,63 @@
+```{r 64-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Flattening {#flatten}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Flattening
+
+```
+```{r 64-setup-64-flatten-r}
+library(tidyverse)
+library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+coordinates <-
+  komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates"))
+```
+</details>
+
+It can occur that we end up with lists which are unnecessarily deep and we would like to make them flatter to make it easier to handle them.
+
+We are starting in our setup with `komoot_content` and `coordinates` from section ["Iterating and traversing"](#komoot).
+
+An example for an list that seems a bit too deep is given here:
+
+```{r include = FALSE}
+# Odd structure:
+```
+```{r 64-odd-structure}
+coordinates %>%
+  pluck(1)
+```
+
+We can chop off a layer of a list and end up with a vector with one of the functions `purrr::flatten_*()`. 
+In the `*` we need to specify what class the output will be:
+
+```{r include = FALSE}
+# Flattening can chop off a layer, need to specify output type:
+```
+```{r 64-flattening-can-chop-off-a-layer-need-to-specify-output-type}
+coordinates %>%
+  pluck(1) %>%
+  flatten_dbl()
+```
+
+Let's use `map()` to apply this to the entire list of our cities' coordinates:
+
+```{r include = FALSE}
+# Apply to entire list:
+```
+```{r 64-apply-to-entire-list}
+coordinates %>%
+  map(flatten_dbl)
+```

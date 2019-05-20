@@ -1,0 +1,196 @@
+```{r 36-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Manipulating all datasets {#map_manip}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Manipulating all datasets
+
+```
+```{r 36-setup-36-map-manip-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+
+input_data <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe() %>%
+  map(~ readxl::read_excel(here(.)))
+```
+</details>
+
+How to selectively manipulate specific parts of a list of datasets?
+
+We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map).
+Of each tibble we only want the column `time` and all the columns whose name contains "emperature".
+We test with the first entry:
+
+```{r include = FALSE}
+# Manipulate first result
+```
+```{r 36-manipulate-first-result}
+input_data[[1]] %>%
+  select(time, contains("emperature"))
+```
+
+To apply this on all entries, we use `map()` again.
+Note that we need an explicit dot (`.`) in the `select()` call here, to indicate the position where each sub-dataset will be plugged in.
+
+```{r include = FALSE}
+# Manipulate results
+```
+```{r 36-manipulate-results}
+input_data %>%
+  map(~ select(., time, contains("emperature")))
+```
+
+We can extend this to preserve only the observations with `temperature` greater or equal than 14°C:
+
+```{r include = FALSE}
+# Manipulate results more
+```
+```{r 36-manipulate-results-more}
+input_data %>%
+  map(~ select(., time, contains("emperature"))) %>%
+  map(~ filter(., temperature >= 14))
+```
+
+Create a custom function for that specific purpose in a call to `map()`:
+
+```{r include = FALSE}
+# Create a function to manipulate
+```
+```{r 36-create-a-function-to-manipulate}
+find_good_times <- function(data) {
+  data %>%
+    select(time, contains("emperature")) %>%
+    filter(temperature >= 14)
+}
+```
+
+Let's look at the object `manipulator`, that we created:
+
+```{r include = FALSE}
+# Functions are first-class objects!
+```
+```{r 36-functions-are-first-class-objects}
+find_good_times
+```
+
+See the ["Function basics"](#function-basics) chapter for a more extensive introduction to functions.
+
+Testing the function:
+
+```{r include = FALSE}
+# Test the function
+```
+```{r 36-test-the-function}
+find_good_times(input_data[[4]])
+```
+
+Now let's use `map()` to let our function act on the entire dataset:
+
+```{r include = FALSE}
+# Run the function on the entire dataset
+```
+```{r 36-run-the-function-on-the-entire-dataset}
+good_times <- map(input_data, ~ find_good_times(.))
+good_times
+```
+
+`map()` allows for the following shortcut notation for functions with one argument only:
+
+```{r include = FALSE}
+# Shortcut
+```
+```{r 36-shortcut}
+map(input_data, find_good_times)
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Use `summarize()` to compute the mean temperature and humidity for each city during that period.
+
+    ```r
+    input_data %>% 
+      ___(~ ___(., mean(___), mean(___)))
+    ```
+    
+    ```{r echo = FALSE}
+    input_data %>% 
+      map(~ summarize(., mean(temperature), mean(humidity)))
+    ```
+
+1. Create a function to compute the daily mean of these values for each dataset:
+
+    ```r
+    compute_daily_mean <- ___(data) {
+      data %>%
+        ___(as.Date(time)) %>%
+        ___(_____) %>%
+        ungroup()
+    }
+    input_data %>% 
+      ___(___)
+    ```
+    
+    ```{r echo = FALSE}
+    compute_daily_mean <- function(data) {
+      data %>% 
+        group_by(as.Date(time)) %>% 
+        summarize(mean(temperature), mean(humidity)) %>% 
+        ungroup()
+    }
+    input_data %>% 
+      map(compute_daily_mean)
+    ```
+
+1. Use the `dim()` function to compute the dimensions of each sub-dataset. Then, use `prod()` to compute the number of cells. Discuss your observation.
+
+    ```r
+    input_data %>% 
+      _____
+    input_data %>% 
+      _____ %>% 
+      _____
+    ```
+    
+    ```{r echo = FALSE}
+    input_data %>% 
+      map(dim)
+    input_data %>% 
+      map(dim) %>% 
+      map(prod)
+    ```
+
+1. Create four plots of humidity vs. pressure, one for each city. Use `geom_path()`, map `temperature` to the `color` aesthetic:
+
+    ```r
+    create_plot <- function(___) {
+      ___ %>% 
+        ggplot(aes(_____)) +
+        geom_path()
+    }
+    ___ %>% 
+      ___(___)
+    ```
+    
+    ```{r echo = FALSE}
+    create_plot <- function(data) {
+      data %>% 
+        ggplot(aes(x = pressure, y = humidity, color = temperature)) +
+        geom_path()
+    }
+    input_data %>% 
+      map(create_plot)
+    ```

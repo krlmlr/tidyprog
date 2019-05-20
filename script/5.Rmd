@@ -1,5 +1,11 @@
-```{r child = here::here("script", "51-function-if.Rmd")}
+```{r child = here::here("script", "51-function-scoping.Rmd")}
 ```
 
-```{r child = here::here("script", "52-closure.Rmd")}
+```{r child = here::here("script", "52-function-purity.Rmd")}
+```
+
+```{r child = here::here("script", "53-function-if.Rmd")}
+```
+
+```{r child = here::here("script", "54-closure.Rmd")}
 ```

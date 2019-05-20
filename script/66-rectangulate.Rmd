@@ -1,0 +1,61 @@
+```{r 66-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Rectangling {#rectangulate}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Rectangling
+
+```
+```{r 66-setup-66-rectangulate-r}
+library(tidyverse)
+library(here)
+
+komoot <- readRDS(here("data/komoot.rds"))
+
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+coordinates_transposed <-
+  komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates")) %>%
+  transpose() %>%
+  map(~ flatten_dbl(.))
+```
+</details>
+Most of us `R`-users feel most at ease when dealing in `R` with data frames on which we can use a plethora of well-known (by us) functions with non-startling behaviour.
+What if we don't get our data in such a form?
+
+We are starting in our setup with the list `coordinates_transposed` from section ["Transposing"](#transpose).
+
+A tibble is internally a list of named vectors of equal length.
+In two easy steps we can therefore make a tibble out of the unnamed list `coordinates_transposed`:
+```{r include = FALSE}
+# A tibble is internally a list of named vectors of equal length:
+```
+```{r 66-a-tibble-is-internally-a-list-of-named-vectors-of-equal-length}
+coordinates_transposed %>%
+  rlang::set_names(c("lon", "lat"))
+
+coordinates_transposed %>%
+  rlang::set_names(c("lon", "lat")) %>%
+  as_tibble()
+```
+
+If you want to keep the names open for now, but still get a tibble, you can set `as_tibble()`'s argument `.name_repair = "universal"`:
+
+```{r include = FALSE}
+# Name repair helps if you don't know the names yet
+```
+```{r 66-name-repair-helps-if-you-don-t-know-the-names-yet}
+coordinates_transposed %>%
+  as_tibble(.name_repair = "universal")
+
+coordinates_transposed %>%
+  as_tibble(.name_repair = "universal") %>%
+  rename(lon = ...1, lat = ...2)
+```

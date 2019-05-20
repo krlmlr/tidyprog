@@ -1,0 +1,209 @@
+```{r 12-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Review of visualization and data transformation
+
+This section is a refresher for visualization and data transformation in the tidyverse.
+Readers familiar with the first half or [R for data science](https://r4ds.had.co.nz/) will recognize the concepts repeated here.
+The data used throughout this course is presented, plotted and briefly analyzed.
+
+The code in each chapter is self-contained.
+The code in each section is also self-contained, but the necessary setup code is hidden and can be expanded with a click.
+We will always load the following packages:
+
+```{r include = FALSE}
+### Review of visualization and data transformation
+
+```
+```{r 12-setup-12-intro-r}
+library(tidyverse)
+library(here)
+```
+
+Functions from other packages may be used with the `::` notation.
+
+
+### Data {#intro-data}
+
+We will be working with hourly measurements of weather data ([link to data documentation](https://darksky.net/dev/docs)) in four cities (Berlin, Toronto, Tel Aviv and Zurich) between 2019-04-28, 3pm and 2019-04-30, 3pm.
+Thus we have 49 observations in each city.
+Variables are:
+
+- `time`
+- `summary` (how to describe the weather in one word)
+- `icon` (mix of description of weather plus time of day)
+- `precipIntensity` (intensity of precipitation [mm/h])
+- `precipProbability`
+- `temperature`
+- `apparentTemperature`
+- `dewPoint`
+- `humidity`
+- `pressure`
+- `windSpeed`
+- `windGust`
+- `windBearing` (direction in degrees)
+- `cloudCover`
+- `uvIndex`
+- `visibility`
+- `ozone`
+- `precipType`
+
+
+Reading in the data, which is stored in MS Excel-Files:
+
+```{r include = FALSE}
+# Read all files
+```
+```{r 12-read-all-files}
+berlin <- readxl::read_excel(here("data/weather", "berlin.xlsx"))
+toronto <- readxl::read_excel(here("data/weather", "toronto.xlsx"))
+tel_aviv <- readxl::read_excel(here("data/weather", "tel_aviv.xlsx"))
+zurich <- readxl::read_excel(here("data/weather", "zurich.xlsx"))
+```
+
+Create one larger tibble from the four smaller ones:
+
+```{r include = FALSE}
+# Create ensemble dataset
+```
+```{r 12-create-ensemble-dataset}
+weather_data <- bind_rows(
+  berlin = berlin,
+  toronto = toronto,
+  tel_aviv = tel_aviv,
+  zurich = zurich,
+  .id = "city_code"
+)
+```
+
+### Exploration
+
+```{r include = FALSE}
+# Show the data
+```
+```{r 12-show-the-data}
+weather_data
+```
+
+Example plot of humidity vs. pressure (`geom_path()` ensures that points are connected according to their order in the tibble):
+
+```{r include = FALSE}
+# Visibility vs. humitidy
+```
+```{r 12-visibility-vs-humitidy}
+weather_data %>%
+  ggplot(aes(x = pressure, y = humidity, color = city_code)) +
+  geom_path()
+```
+
+Barplots of number of occurences of each kind of weather per city:
+
+```{r include = FALSE}
+# Summary
+```
+```{r 12-summary}
+weather_data %>%
+  ggplot(aes(x = city_code)) +
+  geom_bar(aes(fill = summary))
+
+weather_data %>%
+  ggplot(aes(x = city_code)) +
+  geom_bar(aes(fill = summary), position = position_dodge2("dodge", preserve = "single"))
+```
+
+Lineplot with different line types and an additional visualisation of the line range (here, difference between apparent and actual temperature):
+
+```{r include = FALSE}
+# Temperature and apparent temperature
+```
+```{r 12-temperature-and-apparent-temperature}
+weather_data %>%
+  select(city_code, time, temperature, apparentTemperature) %>%
+  gather(kind, temperature, -city_code, -time)
+
+temperature_data <-
+  weather_data %>%
+  select(city_code, time, temperature, apparentTemperature) %>%
+  gather(kind, temperature, -city_code, -time) %>%
+  mutate(apparent = (kind == "apparentTemperature")) %>%
+  select(-kind)
+
+temperature_data
+
+temperature_data %>%
+  ggplot(aes(x = time, color = city_code)) +
+  geom_linerange(data = weather_data, aes(ymin = temperature, ymax = apparentTemperature)) +
+  geom_line(aes(linetype = apparent, y = temperature))
+```
+
+Relation of temperature difference between actual and apparent temperature (cf. line range in last plot) with wind speed, shown as scatter plot.
+
+```{r include = FALSE}
+# Compute and plot temperature difference
+```
+```{r 12-compute-and-plot-temperature-difference}
+weather_data %>%
+  mutate(apparentTemperatureReduction = temperature - apparentTemperature) %>%
+  filter(city_code != "tel_aviv") %>%
+  ggplot(aes(x = windSpeed, y = apparentTemperatureReduction)) +
+  geom_point(aes(color = city_code))
+```
+
+### Further dplyr transformations
+
+If you want to compare measurements of the same observable at two different points in time, maybe the most straightforward way to do so is to create a new column with an appropriate lag:
+
+```{r include = FALSE}
+# Compute lag for temperature, pressure and humidity.
+# How to compute temperature difference to previous hour?
+```
+```{r 12-compute-lag-for-temperature-pressure-and-humidity}
+weather_data %>%
+  group_by(city_code) %>%
+  mutate_at(vars(temperature, pressure, humidity), list(lag = lag)) %>%
+  ungroup()
+```
+
+
+Count observations per category or combinations of categories:
+
+```{r include = FALSE}
+# Count observations
+```
+```{r 12-count-observations}
+weather_data %>%
+  count(city_code)
+
+weather_data %>%
+  count(city_code, summary)
+```
+
+Use `summarize()` to create a tibble with mean and maximum temperature for each city:
+
+```{r include = FALSE}
+# Compute mean and max temperature
+```
+```{r 12-compute-mean-and-max-temperature}
+weather_data %>%
+  group_by(city_code) %>%
+  summarize(temperature_mean = mean(temperature), temperature_max = max(temperature)) %>%
+  ungroup()
+```
+
+Compute and display summary data for all numeric variables:
+
+```{r include = FALSE}
+# Compute and display summary data for all numeric variables
+```
+```{r 12-compute-and-display-summary-data-for-all-numeric-variables}
+weather_data %>%
+  group_by(city_code) %>%
+  summarize_if(is.numeric, list(mean = mean, sd = sd, min = min, max = max)) %>%
+  ungroup() %>%
+  gather(key, value, -city_code) %>%
+  separate(key, into = c("indicator", "fun")) %>%
+  xtabs(value ~ city_code + indicator + fun, .) %>%
+  ftable()
+```

@@ -9,5 +9,11 @@ purl:
 id:
 	R -q -f id.R
 
-sync:
+push:
 	git subtree push --prefix proj ../tidyprog-proj website
+
+pull:
+	git subtree pull --prefix proj ../tidyprog-proj website
+
+test:
+	ls proj/script/* | parallel --halt now,fail=1 R --vanilla -q -f && rm Rplots.pdf

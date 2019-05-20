@@ -1,0 +1,74 @@
+```{r 77-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## purrr-style mappers
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### purrr-style mappers
+
+```
+```{r 77-setup-77-mapper-r}
+library(tidyverse)
+library(rlang)
+
+mutate_map_dbl <- function(.data, col, ...) {
+  quos <- build_quos(!!enquo(col), ...)
+  .data %>%
+    mutate(!!!quos)
+}
+```
+</details>
+
+
+```{r include = FALSE}
+# Refining build_quos() to get rid of the tilde:
+```
+```{r 77-refining-build-quos-to-get-rid-of-the-tilde}
+build_quos <- function(col, ...) {
+  args <- enquos(...)
+  stopifnot(length(args) == 1)
+
+  expr <- args[[1]]
+
+  map_quo <- build_map_quo(!!enquo(col), !!expr)
+
+  set_names(list(map_quo), names(args))
+}
+
+build_map_quo <- function(col, expr) {
+  quo <- enquo(col)
+  mapper <- as_mapper_quosure(!!enquo(expr))
+  quo(map_dbl(!!quo, !!mapper))
+}
+
+as_mapper_quosure <- function(expr) {
+  quo <- enquo(expr)
+
+  rlang::new_function(alist(... = , . = ..1, .x = ..1, .y = ..2), quo_get_expr(quo))
+}
+```
+
+
+```{r include = FALSE}
+# Test it:
+```
+```{r 77-test-it}
+as_mapper(~ mean(.$Petal.Width))
+
+as_mapper_quosure(mean(.$Petal.Width))
+
+build_map_quo(mean_petal_width, mean(.$Petal.Width))
+```
+
+
+```{r include = FALSE}
+# Run it:
+```
+```{r 77-run-it}
+iris %>%
+  nest(-Species) %>%
+  mutate_map_dbl(data, mean_petal_width = mean(.$Petal.Width))
+```

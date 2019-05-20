@@ -1,0 +1,113 @@
+```{r 52-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Pure functions and side effects
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Pure functions and side effects
+
+```
+```{r 52-setup-52-function-purity-r}
+library(tidyverse)
+```
+</details>
+
+Functions should do one thing, and do it well.^[Unix philosophy, originated by Ken Thompson]
+
+```{r include = FALSE}
+# Functions should do one thing, and do it well.
+```
+```{r 52-functions-should-do-one-thing-and-do-it-well}
+
+```
+
+A *pure function* is one that is called for its return value and which has no side effects:
+
+```{r include = FALSE}
+# Pure function: called for its return value, no side effects!
+```
+```{r 52-pure-function-called-for-its-return-value-no-side-effects}
+pure_function <- function(x) {
+  x + 1
+}
+
+pure_function(1)
+```
+
+For functions with side effect, it is good practice to return the input invisibly:
+
+```{r include = FALSE}
+# Function with side effect: called for its side effect, returns input
+# invisibly (=no changes to return value).
+```
+```{r 52-function-with-side-effect-called-for-its-side-effect-returns-input}
+side_effect_function <- function(x) {
+  file <- tempfile()
+  writeLines(format(x), tempfile())
+  print(x)
+  message(x, " written to ", file)
+
+  invisible(x)
+}
+
+side_effect_function(2)
+```
+
+
+Separation helps isolate the side effects.
+If side effect functions return the input, they remain composable with pure functions:
+
+
+
+```{r include = FALSE}
+# Separation helps isolate the side effects.
+# If side effect functions return the input, they remain composable with
+# pure functions.
+```
+```{r 52-separation-helps-isolate-the-side-effects}
+5 %>%
+  pure_function() %>%
+  side_effect_function() %>%
+  pure_function()
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. In the above example, which part of the pipe triggers the display of `6` and `7`, respectively?
+
+1. How do you create a function that returns more than one value?
+
+1. Implement your own purely functional version of `sum()` by using `reduce()`. (Hint: `` `+` `` is a function that takes two arguments and returns the sum.)
+    
+    ```r
+    reduce(1:5, ___)
+    ```
+    ```{r echo = FALSE}
+    reduce(1:5, `+`)
+    ```
+
+1. Implement your own purely functional version of `cumsum()` by using `accumulate()`. 
+
+    ```r
+    accumulate(1:5, ___)
+    ```
+    ```{r echo = FALSE}
+    accumulate(1:5, `+`)
+    ```
+
+1. Implement your own purely functional version of `cumsum()` by using `reduce()` only. (Hint: Use `tail(., 1)` to access the last element of a vector.)
+
+    ```r
+    reduce(1:5, ~ _____)
+    ```
+    ```{r echo = FALSE}
+    reduce(1:5, ~ c(..1, tail(..1, 1) + ..2))
+    ```

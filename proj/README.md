@@ -82,4 +82,4 @@ Please review the [introductory script located in `script/01-intro.R`](script/01
 
 ## Material
 
-To be announced.
+https://bit.ly/tidyprog

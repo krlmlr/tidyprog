@@ -1,0 +1,188 @@
+```{r 53-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Control flow
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Control flow
+
+```
+```{r 53-setup-53-function-if-r}
+library(tidyverse)
+library(here)
+
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+```
+</details>
+
+We start once more with the functions `weather_path()` from section ["Arguments"](#args) and `read_weather_file()` from section ["Intermediate variables"](#intermediate).
+
+A way to regulate the control flow is by using `if ()`:
+
+```{r include = FALSE}
+# if () executes code conditionally
+```
+```{r 53-if-executes-code-conditionally}
+read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
+  # Create ensemble dataset from files on disk
+  weather_data <- bind_rows(
+    berlin = read_weather_file("berlin.xlsx"),
+    toronto = read_weather_file("toronto.xlsx"),
+    tel_aviv = read_weather_file("tel_aviv.xlsx"),
+    zurich = read_weather_file("zurich.xlsx"),
+    .id = "city_code"
+  )
+
+  # Filter, conditionally
+  if (omit_zurich) {
+    weather_data <-
+      weather_data %>%
+      filter(city_code != "zurich")
+  }
+
+  if (omit_toronto) {
+    weather_data <-
+      weather_data %>%
+      filter(city_code != "toronto")
+  }
+
+  # Return result
+  weather_data
+}
+
+read_weather_data(omit_toronto = TRUE, omit_zurich = TRUE) %>%
+  count(city_code)
+
+read_weather_data(omit_toronto = TRUE, omit_zurich = FALSE) %>%
+  count(city_code)
+```
+
+
+
+
+This can be useful if aiming at a possible early return:
+
+```{r include = FALSE}
+# Useful with an early return()
+# && and ||: shortcut operators for scalar logical
+```
+```{r 53-useful-with-an-early-return}
+read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
+  # Create ensemble dataset from files on disk
+  weather_data <- bind_rows(
+    berlin = read_weather_file("berlin.xlsx"),
+    toronto = read_weather_file("toronto.xlsx"),
+    tel_aviv = read_weather_file("tel_aviv.xlsx"),
+    zurich = read_weather_file("zurich.xlsx"),
+    .id = "city_code"
+  )
+
+  # Can keep original data?
+  if (!omit_zurich && !omit_toronto) {
+    return(weather_data)
+  }
+
+  # Filter, conditionally
+  if (omit_zurich) {
+    weather_data <-
+      weather_data %>%
+      filter(city_code != "zurich")
+  }
+
+  if (omit_toronto) {
+    weather_data <-
+      weather_data %>%
+      filter(city_code != "toronto")
+  }
+
+  # Return result
+  weather_data
+}
+```
+
+
+Conditional branching with if-else-logic. 
+(This is just for illustration, you should not implement code like this!)
+
+```{r include = FALSE}
+# else if/else: branching
+# (Just for illustration, do not implement code like this!)
+```
+```{r 53-else-if-else-branching}
+read_weather_data <- function(omit_zurich = FALSE, omit_toronto = FALSE) {
+  # Create ensemble dataset from files on disk
+  weather_data <- bind_rows(
+    berlin = read_weather_file("berlin.xlsx"),
+    toronto = read_weather_file("toronto.xlsx"),
+    tel_aviv = read_weather_file("tel_aviv.xlsx"),
+    zurich = read_weather_file("zurich.xlsx"),
+    .id = "city_code"
+  )
+
+  # Filter, conditionally, and return
+  if (!omit_zurich && !omit_toronto) {
+    weather_data
+  } else if (omit_zurich && !omit_toronto) {
+    weather_data %>%
+      filter(city_code != "zurich")
+  } else if (!omit_zurich && omit_toronto) {
+    weather_data %>%
+      filter(city_code != "toronto")
+  } else {
+    # Filter both
+    weather_data %>%
+      filter(city_code != "zurich") %>%
+      filter(city_code != "toronto")
+  }
+}
+
+read_weather_data(omit_toronto = TRUE) %>%
+  count(city_code)
+read_weather_data(omit_zurich = TRUE) %>%
+  count(city_code)
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Implement a function that branches over an argument and returns the sum or the product of the input, respectively.
+
+    ```r
+    agg <- function(_____) {
+      if (fun == "___") {
+        sum(x)
+      } else if (_____) {
+        prod(___)
+      } else {
+        rlang::abort('`fun` must be "sum" or "prod".')
+      }
+    }
+    ```
+    ```{r include = FALSE}
+    agg <- function(x, fun) {
+      if (fun == "sum") {
+        sum(x)
+      } else if (fun == "prod") {
+        prod(x)
+      } else {
+        rlang::abort('`fun` must be "sum" or "prod".')
+      }
+    }
+    ```
+    ```{r}
+    agg(1:4, "sum")
+    agg(1:4, "prod")
+    ```

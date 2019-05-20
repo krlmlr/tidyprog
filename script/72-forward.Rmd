@@ -1,0 +1,44 @@
+```{r 72-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Do you need tidy evaluation?
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Do you need tidy evaluation?
+
+```
+```{r 72-setup-72-forward-r}
+library(tidyverse)
+```
+</details>
+
+
+```{r include = FALSE}
+# Implement a version of summarize() that ungroups:
+```
+```{r 72-implement-a-version-of-summarize-that-ungroups}
+summarize_ungroup <- function(.data, ...) {
+  .data %>%
+    summarize(...) %>%
+    ungroup()
+}
+```
+
+
+```{r include = FALSE}
+# Test it:
+```
+```{r 72-test-it}
+mean_airtime_per_day <-
+  nycflights13::flights %>%
+  group_by(year, month, day) %>%
+  summarize_ungroup(mean(air_time, na.rm = TRUE))
+
+mean_airtime_per_day
+
+mean_airtime_per_day %>%
+  groups()
+```

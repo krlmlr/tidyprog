@@ -1,0 +1,97 @@
+```{r 33-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Indexing/subsetting {#indexing}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Indexing/subsetting
+
+```
+```{r 33-setup-33-index-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+```
+</details>
+
+Here we look at the indexing of a named vector (works equivalently for a named list).
+
+We start with the data frame `dict` from section ["Named vectors and two-column tibbles"](#names).
+Create named vector of the -- future -- input files:
+
+```{r include = FALSE}
+# Collect input files as a named vector
+```
+```{r 33-collect-input-files-as-a-named-vector}
+input_files <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe()
+input_files
+names(input_files)
+```
+
+There are different ways of accessing individual entries of the named vector:
+
+```{r include = FALSE}
+# Access individual input files
+```
+```{r 33-access-individual-input-files}
+input_files[1]
+input_files[[1]]
+
+input_files["berlin"]
+input_files[["berlin"]]
+```
+
+Choose multiple entries with:
+
+```{r include = FALSE}
+# Access multiple input files
+```
+```{r 33-access-multiple-input-files}
+input_files[1:2]
+input_files[c("berlin", "zurich")]
+```
+
+Consistent pipe-friendly access of single elements:
+
+```{r include = FALSE}
+# Consistent pipe-friendly access of single elements
+```
+```{r 33-consistent-pipe-friendly-access-of-single-elements}
+input_files %>%
+  pluck(1)
+input_files %>%
+  pluck("berlin")
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Explain the difference between `[` and `[[` subsetting.
+
+1. Implement a variant of subsetting in "tibble-land" with a combination of `enframe()`, `slice()` or `filter()`, and `deframe()`:
+    
+    ```r
+    input_files %>%
+      enframe() %>% 
+      ___(_____) %>% 
+      deframe()
+    ```
+    
+    ```{r echo = FALSE}
+    input_files %>%
+      enframe() %>% 
+      filter(name == "toronto") %>% 
+      deframe()
+    ```
+    

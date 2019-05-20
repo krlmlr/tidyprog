@@ -1,0 +1,132 @@
+```{r 62-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Iterating and traversing {#komoot}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Iterating and traversing
+
+```
+```{r 62-setup-62-komoot-r}
+library(tidyverse)
+library(here)
+```
+</details>
+
+Now we are not only working with the geolocation data for Berlin, but we are adding data for our usual suspects:
+
+```{r include = FALSE}
+# Results from downloading geolocation data for all cities from photon.komoot.de:
+```
+```{r 62-results-from-downloading-geolocation-data-for-all-cities-from-photon-komoot-de}
+komoot <- readRDS(here("data/komoot.rds"))
+
+komoot
+```
+
+It looks slightly different from the list `berlin` from section ["Traversing"](#berlin).
+That is because we have the list-of-2 stored for each city in the column `content`.
+By using `pull()` on `content`,  we can produce a list containing the information for all cities:
+
+```{r include = FALSE}
+# Results are stored in the "content" column:
+```
+```{r 62-results-are-stored-in-the-content-column}
+komoot_content <-
+  komoot %>%
+  pull(content)
+
+berlin <-
+  komoot_content %>%
+  pluck(1)
+
+berlin %>%
+  pluck("features", 1, "geometry", "coordinates")
+
+toronto <-
+  komoot_content %>%
+  pluck(2)
+
+toronto %>%
+  pluck("features", 1, "geometry", "coordinates")
+```
+
+With `map()` we can access the same element of the respective list for each city:
+
+```{r include = FALSE}
+# Apply same pluck() on all values with map():
+```
+```{r 62-apply-same-pluck-on-all-values-with-map}
+komoot_content %>%
+  map(~ pluck(., "features", 1, "geometry", "coordinates"))
+```
+
+With `map()` we can also use a shorthand notation for this, without the need to use `pluck()`.
+We can just give it a list of the arguments which we would normally use as arguments for `pluck()`:
+
+```{r include = FALSE}
+# Shortcut:
+```
+```{r 62-shortcut}
+komoot_content %>%
+  map(list("features", 1, "geometry", "coordinates"))
+```
+
+The access path can also be stored in a variable:
+
+
+```{r include = FALSE}
+# Can also be stored in a variable:
+```
+```{r 62-can-also-be-stored-in-a-variable}
+accessor <- list("features", 1, "geometry", "coordinates")
+coordinates <-
+  komoot_content %>%
+  map(accessor)
+coordinates
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Augment `komoot` with a columns containing information on the first feature only.
+    
+    ```{r echo = FALSE}
+    komoot_first <- 
+      komoot %>% 
+      mutate(
+        first_feature = map(content, list("features", 1))
+      )
+    komoot_first
+    ```
+
+1. Augment `komoot_first` with columns containing information on coordinates, place and postal code. Use accessors and appropriate types for the columns.
+    
+    ```r
+    acc_coordinates <- _____
+    acc_country <- _____
+    komoot_first %>% 
+      mutate(
+        coordinates = ___(___, acc_coordinates),
+        country = _____,
+        postcode = map_chr(_____, ~ pluck(___, .default = NA))
+      )
+    ```
+
+    ```{r echo = FALSE}
+    acc_coordinates <- list("coordinates")
+    acc_country <- list("properties", "country")
+    komoot_first %>% 
+      mutate(
+        coordinates = map(first_feature, acc_coordinates),
+        country = map_chr(first_feature, acc_country),
+        postcode = map_chr(first_feature, ~ pluck(., "properties", "postcode", .default = NA))
+      )
+    ```

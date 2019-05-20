@@ -1,0 +1,65 @@
+```{r 76-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Argument names
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Argument names
+
+```
+```{r 76-setup-76-names-r}
+library(tidyverse)
+library(rlang)
+```
+</details>
+
+
+```{r include = FALSE}
+# A mutate_map() variant that allows naming the output column:
+```
+```{r 76-a-mutate-map-variant-that-allows-naming-the-output-column}
+mutate_map_dbl <- function(.data, col, ...) {
+  quos <- build_quos(!!enquo(col), ...)
+  .data %>%
+    mutate(!!!quos)
+}
+
+build_quos <- function(col, ...) {
+  args <- list(...)
+  stopifnot(length(args) == 1)
+
+  expr <- args[[1]]
+
+  map_quo <- build_map_quo(!!enquo(col), expr)
+
+  set_names(list(map_quo), names(args))
+}
+
+build_map_quo <- function(col, expr) {
+  quo <- enquo(col)
+  quo(map_dbl(!!quo, expr))
+}
+```
+
+
+```{r include = FALSE}
+# Test it:
+```
+```{r 76-test-it}
+build_quos(data, mean_petal_width = ~ mean(.$Petal.Width))
+
+build_map_quo(mean_petal_width, ~ mean(.$Petal.Width))
+```
+
+
+```{r include = FALSE}
+# Run it:
+```
+```{r 76-run-it}
+iris %>%
+  nest(-Species) %>%
+  mutate_map_dbl(data, mean_petal_width = ~ mean(.$Petal.Width))
+```

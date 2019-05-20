@@ -1,0 +1,58 @@
+```{r 73-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Explicit quote-unquote of ellipsis
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Explicit quote-unquote of ellipsis
+
+```
+```{r 73-setup-73-enquos-r}
+library(tidyverse)
+library(rlang)
+```
+</details>
+
+
+```{r include = FALSE}
+# Explicit capturing with enquos():
+```
+```{r 73-explicit-capturing-with-enquos}
+summarize_ungroup <- function(.data, ...) {
+  # Capture (quote) with enquos()
+  quos <- enquos(...)
+
+  # Use (unquote-splice) with !!!
+  .data %>%
+    summarize(!!!quos) %>%
+    ungroup()
+}
+```
+
+
+```{r include = FALSE}
+# Test it:
+```
+```{r 73-test-it}
+mean_airtime_per_day <-
+  nycflights13::flights %>%
+  group_by(year, month, day) %>%
+  summarize_ungroup(mean(air_time, na.rm = TRUE))
+
+mean_airtime_per_day
+
+mean_airtime_per_day %>%
+  groups()
+```
+
+
+```{r include = FALSE}
+# aes() does the same:
+# (summarize() did not at the time of writing: https://github.com/tidyverse/dplyr/pull/4357)
+```
+```{r 73-aes-does-the-same}
+aes
+```

@@ -1,0 +1,92 @@
+```{r 51-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+```{r include = FALSE}
+### Scope
+
+```
+```{r 51-setup-51-function-scoping-r}
+```
+
+## Scope
+
+What happens if a function defines variables that have a variable by the same name in the global environment?
+
+We start with a variable defined in the global environment:
+
+```{r include = FALSE}
+# Define global variable
+```
+```{r 51-init}
+a <- 5
+```
+
+A function can access global variables:
+
+```{r include = FALSE}
+# A function can access global variables:
+```
+```{r 51-a-function-can-access-global-variables}
+f <- function() {
+  a
+}
+
+f()
+```
+
+On the other hand, a variable which is defined inside a function is contained in that function.
+It will not be known outside of that function.
+Respectively, it won't overwrite the value of global variables.
+
+```{r include = FALSE}
+# When a function writes to a variable, it always writes in scope
+```
+```{r 51-when-a-function-writes-to-a-variable-it-always-writes-in-scope}
+f <- function() {
+  a <- 2
+  a
+}
+
+f()
+a
+```
+
+
+Global variables are a (hidden) part of a function's interface.
+Ideally, functions are be self-contained, independent of global variables.
+Notable exceptions are objects are used across your entire analysis, such as "the dataset".
+(Otherwise you would need to pass them across many layers.)
+
+```{r include = FALSE}
+# Global variables are a (hidden) part of a function's interface!
+# Best practice: self-contained functions, independent of global variables
+```
+```{r 51-global-variables-are-a-hidden-part-of-a-function-s-interface}
+
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Double-check what happens if two functions declare/use a variable of the same name.
+    
+    ```{r results = "hide"}
+    # Variables in different functions
+    f1 <- function() {
+      a <- 3
+      a + f2()
+    }
+
+    f2 <- function() {
+      a
+    }
+    
+    f1()
+    f2()
+    a
+    ```

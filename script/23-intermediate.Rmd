@@ -1,0 +1,98 @@
+```{r 23-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Use case: Intermediate variables {#intermediate}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Use case: Intermediate variables
+
+```
+```{r 23-setup-23-intermediate-r}
+library(tidyverse)
+library(here)
+
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+```
+</details>
+
+We start with the function `weather_path()` from section ["Arguments"](#args).
+
+Functions can help to avoid having to use intermediate variables:
+
+```{r include = FALSE}
+# Functions can help eliminate intermediate variables
+```
+```{r 23-functions-can-help-eliminate-intermediate-variables}
+read_weather_file <- function(filename) {
+  readxl::read_excel(weather_path(filename))
+}
+
+read_weather_data <- function() {
+  # Create ensemble dataset from files on disk
+  weather_data <- bind_rows(
+    berlin = read_weather_file("berlin.xlsx"),
+    toronto = read_weather_file("toronto.xlsx"),
+    tel_aviv = read_weather_file("tel_aviv.xlsx"),
+    zurich = read_weather_file("zurich.xlsx"),
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+
+read_weather_data()
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Implement a helper function `get_weather_file_for()` that takes a city code as input and returns the file name for the corresponding Excel file. Intended usage: `get_weather_file_for("berlin")`. Test this function on a few example inputs.
+
+    ```r
+    get_weather_file_for <- _____ {
+      paste0(city_code, ".xlsx")
+    }
+    ```
+    
+    ```{r echo = FALSE}
+    # Operate on city codes, not file names:
+    get_weather_file_for <- function(city_code) {
+      paste0(city_code, ".xlsx")
+    }
+    ```
+        
+    ```{r}
+    get_weather_file_for("munich")
+    get_weather_file_for("san_diego")
+    ```
+
+
+1. Implement a helper function `get_weather_data_for()` that takes a city code as input (as opposed to a file name). Intended usage: `get_weather_data_for("berlin")`. Update `read_weather_data()` to use `get_weather_data_for()`.
+
+    ```r
+    get_weather_data_for <- _____ {
+      read_weather_file(_____)
+    }
+    ```
+    
+    ```{r echo = FALSE}
+    # High-level reader:
+    get_weather_data_for <- function(city_code) {
+      read_weather_file(get_weather_file_for(city_code))
+    }
+    ```
+    
+    ```{r}
+    get_weather_data_for("toronto")
+    ```

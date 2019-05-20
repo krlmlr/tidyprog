@@ -1,0 +1,89 @@
+```{r 22-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Arguments {#args}
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Arguments
+
+```
+```{r 22-setup-22-args-r}
+library(tidyverse)
+library(here)
+```
+</details>
+
+By adding arguments to your functions, you can turn them into tools for a wide range of applications.
+But it is advisable to be conservative here: try to minimise the number of arguments to the necessary ones, so the user has a clear and intuitive interface to deal with.
+
+Functions with arguments:
+
+```{r include = FALSE}
+# Functions can have arguments
+```
+```{r 22-functions-can-have-arguments}
+weather_path <- function(filename) {
+  # Returned value
+  here("data/weather", filename)
+}
+
+weather_path("milan.xlsx")
+```
+
+Call functions from within functions:
+
+```{r include = FALSE}
+# Functions can be called by other functions
+```
+```{r 22-functions-can-be-called-by-other-functions}
+read_weather_data <- function() {
+  # Read all files
+  berlin <- readxl::read_excel(weather_path("berlin.xlsx"))
+  toronto <- readxl::read_excel(weather_path("toronto.xlsx"))
+  tel_aviv <- readxl::read_excel(weather_path("tel_aviv.xlsx"))
+  zurich <- readxl::read_excel(weather_path("zurich.xlsx"))
+
+  # Create ensemble dataset
+  weather_data <- bind_rows(
+    berlin = berlin,
+    toronto = toronto,
+    tel_aviv = tel_aviv,
+    zurich = zurich,
+    .id = "city_code"
+  )
+
+  # Return it
+  weather_data
+}
+```
+
+The function still needs to be called for testing it.
+It is a good practice to always immediately test a the newly created or updated function by running it:
+
+```{r include = FALSE}
+# Still need to run a function
+```
+```{r 22-still-need-to-run-a-function}
+read_weather_data()
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. How does the behavior of `read_weather_data()` change if we update the definition of the `read_weather()` function as follows:
+
+    ```r
+    weather_path <- function(filename) {
+      # Returned value
+      here("data", "weather", filename)
+    }
+    ```
+    
+    Hint: Define this function with a different name and check its output values, before running `read_weather_data()` again.

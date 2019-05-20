@@ -1,0 +1,14 @@
+# Simple iteration
+
+> Processing multiple files that contain different parts of the same dataset
+
+This chapter introduces iteration as a concept to repeat the same operation over a sequence of inputs.
+It is largely independent of the previous chapter.
+
+```{r 03-setup, include = FALSE}
+library(here)
+```
+
+
+```{r child = here("script", "3.Rmd")}
+```

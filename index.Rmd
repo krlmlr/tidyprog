@@ -8,13 +8,59 @@ site: bookdown::bookdown_site
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE)
-options(tibble.print_min = 3, tibble.print_max = 5)
+options(tibble.print_min = 3, tibble.print_max = 5, max.print = 20)
 if (!knitr::is_latex_output()) {
   options(crayon.enabled = TRUE, pillar.bold = TRUE)
   fansi::set_knit_hooks(knitr::knit_hooks)
 }
 library(here)
+
+this_repo <- function(...) {
+  file.path("https://github.com/krlmlr/tidyprog", ...)
+}
+
+tidyprog_repo <- function(...) {
+  file.path("https://github.com/krlmlr/tidyprog-proj/tree/2019-05-zhr", ...)
+}
 ```
 
 
 # Preface {-}
+
+Material for the [zhRcourse workshop "Programming in the tidyverse"](https://www.zhrcourses.uzh.ch/en/programm2019/tidyverse.html) on May 10, 2019.
+
+## Links {-}
+
+- This website: https://bit.ly/tidyprog
+    - Longer URL: https://krlmlr.github.io/tidyprog/
+
+- Scripts and installation instructions: `r tidyprog_repo()`
+    - Prepared scripts: `r tidyprog_repo("script")`
+    - Live code: `r tidyprog_repo("live")`
+    - The code **will be updated live** with a delay of a few seconds during the workshop, it is **not necessary** to repeat the instructor's typing
+
+- rstudio.cloud server: https://rstudio.cloud/project/329883
+    - Sign up, or log in with Google or GitHub
+    - Click the "Save a private copy" link next to the **TEMPORARY** label in red in the header
+    - All necessary packages are preinstalled
+
+- The source project for this material: `r this_repo()`
+
+## Package versions used {-}
+
+<details><summary>Click to expand</summary>
+
+```{r include = FALSE}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+withr::with_options(list(width = 80), print(sessioninfo::session_info()))
+```
+
+</details>
+
+## License
+
+Licensed under [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).

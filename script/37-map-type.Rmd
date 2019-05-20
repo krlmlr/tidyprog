@@ -1,0 +1,162 @@
+```{r 37-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+
+## Typed output
+
+<details><summary>*Click here to show setup code.*</summary>
+```{r include = FALSE}
+### Typed output
+
+```
+```{r 37-setup-37-map-type-r}
+library(tidyverse)
+library(here)
+
+dict <- readxl::read_excel(here("data/cities.xlsx"))
+
+input_data <-
+  dict %>%
+  select(city_code, weather_filename) %>%
+  deframe() %>%
+  map(~ readxl::read_excel(here(.)))
+```
+</details>
+
+If we know, what the output of each function call in a `map()` sequence looks like, we can often call a sub-type of `map()` to produce a more condensed output.
+
+We start with the named list of tibbles called `input_data` from section ["Processing all files"](#map).
+
+We want to know the number of rows of each tibble in `input_data`:
+
+```{r include = FALSE}
+# map() returns a list
+```
+```{r 37-map-returns-a-list}
+input_data %>%
+  map(~ nrow(.))
+```
+
+Each time an integer is produced.
+Therefore we can call `map_int()`, to create a named integer vector:
+
+```{r include = FALSE}
+# Return an integer vector with map_int()
+```
+```{r 37-return-an-integer-vector-with-map-int}
+input_data %>%
+  map_int(~ nrow(.))
+```
+
+If the output is of type character, use `map_chr()`:
+
+```{r include = FALSE}
+# ... or a character vector?
+```
+```{r 37-or-a-character-vector}
+input_data %>%
+  map_chr(~ nrow(.))
+
+input_data %>%
+  map_chr(~ as.character(nrow(.)))
+```
+
+There are sub-types of the `map()` function for each atomic type:
+
+- integer: `map_int()`
+
+- numeric (double-precision value): `map_dbl()`
+
+- character (strings): `map_chr()`
+
+- logical (flags): `map_lgl()`
+
+- raw (bytes): `map_raw()`
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Explain what happens if you try to use `map_dbl()` with the `dim()` output:
+
+    ```r
+    input_data %>% 
+      map_dbl(dim)
+    ```
+
+1. Extract a concise version of the first temperature value for each dataset:
+
+    ```r
+    input_data %>% 
+      map(~ slice(., 1)) %>%
+      ___(~ pull(_____))
+    ```
+    
+    ```{r echo = FALSE}
+    input_data %>% 
+      map(~ slice(., 1)) %>%
+      map_dbl(~ pull(., temperature))
+    ```
+
+1. Use `paste0()` to build a textual description for the weather during the observed period in a function. Create a two-column tibble.
+
+    ```r
+    summarize_weather <- _____ {
+      ___ %>%
+        ___(
+          _____,
+          _____,
+          _____,
+          summary = paste(rle(summary)$values, collapse = ", then ")
+        )
+    }
+
+    describe_weather <- function(weather_summary) {
+      weather_summary %>%
+        mutate(
+          text = paste0(
+            "We had temperatures between ", min_temp, " and ", max_temp, " °C.",
+            "The average humidity was ", round(mean_humidity * 100), " %. ",
+            "The weather was ", summary, "."
+          )
+        ) %>% 
+        pull()
+    }
+    
+    input_data %>% 
+      ___(___) %>%
+      ___(___) %>% 
+      ___()
+    ```
+    
+    ```{r echo = FALSE}
+    summarize_weather <- function(data) {
+      data %>%
+        summarize(
+          max_temp = max(temperature),
+          min_temp = min(temperature),
+          mean_humidity = mean(humidity),
+          summary = paste(rle(summary)$values, collapse = ", then ")
+        )
+    }
+
+    describe_weather <- function(weather_summary) {
+      weather_summary %>%
+        mutate(
+          text = paste0(
+            "We had temperatures between ", min_temp, " and ", max_temp, " °C.",
+            "The average humidity was ", round(mean_humidity * 100), " %. ",
+            "The weather was ", summary, "."
+          )
+        ) %>% 
+        pull()
+    }
+    
+    input_data %>% 
+      map(summarize_weather) %>%
+      map_chr(describe_weather) %>% 
+      enframe()
+    ```

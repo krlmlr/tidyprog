@@ -1,0 +1,110 @@
+```{r 31-remove-all, include = FALSE}
+rm(list = ls())
+```
+
+The following packages are required throughout this chapter:
+
+```{r include = FALSE}
+### Vectors and columns
+
+```
+```{r 31-setup-31-dir-r}
+library(tidyverse)
+library(here)
+```
+
+## Vectors and columns
+
+So far we focus on the data frame, or tibble, as primary object for data analysis.
+Internally, a tibble is a list of vectors of the same length.
+Accessing a row in a tibble requires finding the same index in that list of vectors.
+
+Here we explore the relationship between columns of data frames and their corresponding vectors, i.e. the answer to "how to get from one to the other?":
+
+We can e.g. get a vector with the files in a specific directory of our current project^[function `here::here()` is taking care of making sure we start from the root directory of our current project] like this:
+
+```{r include = FALSE}
+# Show all files, see also fs::dir_ls()
+```
+```{r 31-show-all-files-see-also-fs-dir-ls}
+files <- dir(here("data/weather"), full.names = TRUE)
+files
+```
+
+You can create a tibble from it using `tibble::enframe()`:
+
+```{r include = FALSE}
+# Convert to a tibble
+```
+```{r 31-convert-to-a-tibble}
+files_df <-
+  files %>%
+  enframe()
+
+files_df
+```
+
+The `name` column might be unwanted in some cases. Suppress its creation by setting `name = NULL`:
+
+```{r include = FALSE}
+# Remove the name column
+```
+```{r 31-remove-the-name-column}
+files_df_1 <-
+  files %>%
+  enframe(name = NULL)
+
+files_df_1
+```
+
+Another way to create a tibble from a vector is using `tibble::tibble()`. 
+You can name the newly created columns by assigning the vectors they are created from to (quoted or unquoted) column names:
+
+```{r include = FALSE}
+# Construct tibble from a vector
+```
+```{r 31-construct-tibble-from-a-vector}
+tibble(filename = files)
+```
+
+The other direction -- producing a vector from a tibble column -- works with `dplyr::pull()`. 
+By default `pull()` will turn the rightmost column into a vector and ignore the rest of the tibble:
+
+```{r include = FALSE}
+# Extract a column as a vector
+```
+```{r 31-extract-a-column-as-a-vector}
+files_df %>%
+  pull()
+```
+
+Turn a specific column into a vector by providing the desired column name to `pull()`, either quoted or unquoted:
+
+```{r include = FALSE}
+# Extract a specific column as a vector
+```
+```{r 31-extract-a-specific-column-as-a-vector}
+files_df %>%
+  pull(name)
+```
+
+
+```{r include = FALSE}
+# Exercises
+```
+
+### Exercises
+
+1. Investigate the output of `fs::dir_ls()` with `enframe()`. Explain.
+
+    ```r
+    # install.packages("fs")
+    fs::dir_ls()
+    fs::dir_ls() %>%
+      ___()
+    ```
+    
+    ```{r echo = FALSE}
+    fs::dir_ls() %>% 
+      enframe()
+    ```
