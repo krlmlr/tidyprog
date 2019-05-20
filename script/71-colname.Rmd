@@ -16,6 +16,10 @@ library(rlang)
 ```
 </details>
 
+Knowledge of tidy evaluation can become necessary when creating own functions in the framework of the tidyverse.
+
+Let's try to build a function that takes a data frame and an unquoted column name and produces a histogram from this column.
+A naive approach would be the following function definition:
 
 ```{r include = FALSE}
 # First attempt: create a function that plots a histogram,
@@ -29,6 +33,7 @@ tidy_histogram <- function(.data, x) {
 }
 ```
 
+Let's test this function in an easy setting:
 
 ```{r include = FALSE}
 # Would that work?
@@ -47,6 +52,9 @@ try(print(
 ))
 ```
 
+Neither the first nor the second attempt worked. What went wrong?
+
+If we add another column called `x`, it suddenly works:
 
 ```{r include = FALSE}
 # No, the function is looking for a variable named x,
@@ -59,6 +67,12 @@ data %>%
   tidy_histogram(a)
 ```
 
+The reason for it is, that our function is hard-coded to display a variable called `x`.
+The problem lies in the code-snippet `aes(x = x)`.
+
+In the tidyverse the solution for avoiding these ambiguities is by using expressions to capture the meaning (here: user input) of an unquoted variable and subsequently the bang-bang-operator (`!!`) to access/pass on this meaning at the right place.
+
+In our example we do the following:
 
 ```{r include = FALSE}
 # Solution: quote-unquote
@@ -87,6 +101,9 @@ try(print(
 ))
 ```
 
+But this behavior is different from our usual base-R usage of variables in functions.
+How do some functions behave this way and others another way?
+Let's have a look at how the 'problematic' tidyverse function `aes()` is implemented:
 
 ```{r include = FALSE}
 # This requires tidyeval support from the function that is called!
@@ -95,6 +112,9 @@ try(print(
 aes
 ```
 
+The reason for the behavior seen above is that the function itself makes use of capturing user input as an expression.
+In this case it uses the function `enquos()`, which captures one or more expressions along with an unique identifier for the environment in which they are supposed to be evaluated eventually.
+When a function is not capturing user input as expressions, it will behave in the old-fashioned base R ways.
 
 ```{r include = FALSE}
 # Exercises
@@ -103,6 +123,8 @@ aes
 
 ```
 
+As an example of a newly-built function in the tidyverse, here is a function that combines the functionalities of `dplyr::mutate()` and `purrr::map_dbl()`.
+It takes as arguments a data frame, the column it is supposed to act upon and the function call it is supposed to use on each of the columns values:
 
 ```{r include = FALSE}
 # mutate_map_dbl() function
