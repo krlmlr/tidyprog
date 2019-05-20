@@ -16,6 +16,8 @@ library(rlang)
 ```
 </details>
 
+User input in an ellipsis can be named or unnamed.
+We can distinguish between those two kinds and make use of this distinction, in the following way creating a special interface for the function:
 
 ```{r include = FALSE}
 # Combo: unnamed arguments define grouping, named arguments define summary
@@ -37,6 +39,7 @@ gsu <- function(.data, ...) {
 }
 ```
 
+The `named_quos` are our summary columns (name is name of the column, value is the expression to be used on the input column(s)) and the `unnamed_quos` are now the grouping columns:
 
 ```{r include = FALSE}
 # Test it:
