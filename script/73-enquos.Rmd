@@ -16,6 +16,12 @@ library(rlang)
 ```
 </details>
 
+There are cases though, when you need knowledge about what the user added to the ellipsis.
+This is then handled by capturing the content in a quosure, which can be unquoted by the `!!!`-operator.
+You need the "triple-bang" operator here, because the ellipsis can hold more than one variable.
+`!!!` does two things: it unquotes the content and splices it into the current call.
+
+We can practice this with our little new tidyverse function `summarize_ungroup()`:
 
 ```{r include = FALSE}
 # Explicit capturing with enquos():
@@ -32,6 +38,7 @@ summarize_ungroup <- function(.data, ...) {
 }
 ```
 
+We didn't need to capture the content, but it still works, as we can see here:
 
 ```{r include = FALSE}
 # Test it:
@@ -48,6 +55,7 @@ mean_airtime_per_day %>%
   groups()
 ```
 
+To come back to our original example: `aes()` uses exactly this "quote-unquote-splice"-pattern:
 
 ```{r include = FALSE}
 # aes() does the same:
@@ -56,3 +64,5 @@ mean_airtime_per_day %>%
 ```{r 73-aes-does-the-same}
 aes
 ```
+
+At the time of producing the material for this course, `summarize()` did not make use of this pattern.
