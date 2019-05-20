@@ -70,7 +70,7 @@ data %>%
 The reason for it is, that our function is hard-coded to display a variable called `x`.
 The problem lies in the code-snippet `aes(x = x)`.
 
-In the tidyverse the solution for avoiding these ambiguities is by using expressions to capture the meaning (here: user input) of an unquoted variable and subsequently the bang-bang-operator (`!!`) to access/pass on this meaning at the right place.
+In the tidyverse the solution for avoiding these ambiguities is by using expressions to capture the meaning (here: user input) of an unquoted variable and subsequently the bang-bang-operator (written in the code as `!!`; also called "unquote") to access/pass on this meaning at the right place.
 
 In our example we do the following:
 
