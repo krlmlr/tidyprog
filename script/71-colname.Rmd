@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## A custom plotting function
+## A custom plotting function {#colname}
 
 <details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}

@@ -16,6 +16,10 @@ library(rlang)
 ```
 </details>
 
+At the end of section [A custom plotting function](#colname) we defined a function `mutate_map_dbl()`.
+A downside of this function was, that it did create the desired new column, but you weren't able to specify the column name in the function call.
+
+Let's try to improve this aspect of the function:
 
 ```{r include = FALSE}
 # A mutate_map() variant that allows naming the output column:
@@ -44,6 +48,14 @@ build_map_quo <- function(col, expr) {
 }
 ```
 
+Again, like in section [Names](#named) we are able to make use of the fact that an expression in an ellipsis of sorts `x = y` is treated in a way, that `x` is the name and `y` is the value of an object (here we used this in the code snippet `names(args)`).
+
+A lot of things happen here:
+1. the main function `mutate_map_dbl()` calls a helper function `build_quos()`
+2. `build_quos()` in turn calls a helper's helper function `build_map_quo()`
+3. `mutate_map_dbl()` then uses the output of the nested function calls to (hopefully) produce the desired result.
+
+What output do the two helper functions produce? Let's test it:
 
 ```{r include = FALSE}
 # Test it:
@@ -54,6 +66,7 @@ build_quos(data, mean_petal_width = ~ mean(.$Petal.Width))
 build_map_quo(mean_petal_width, ~ mean(.$Petal.Width))
 ```
 
+And finally, let's see if our function lives up to our expectations:
 
 ```{r include = FALSE}
 # Run it:
@@ -63,3 +76,5 @@ iris %>%
   nest(-Species) %>%
   mutate_map_dbl(data, mean_petal_width = ~ mean(.$Petal.Width))
 ```
+
+<!-- Now go and try to do this in base R :) -->

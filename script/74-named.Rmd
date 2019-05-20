@@ -3,7 +3,7 @@ rm(list = ls())
 ```
 
 
-## Names
+## Names {#named}
 
 <details><summary>*Click here to show setup code.*</summary>
 ```{r include = FALSE}
