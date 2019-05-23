@@ -131,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i>Links</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#package-versions-used"><i class="fa fa-check"></i>Package versions used</a></li>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
@@ -263,14 +263,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>writing functions that work with datasets of different shape</p>
 </blockquote>
 <p>This chapter offers an introduction to tidy evaluation.</p>
-<div id="colname" class="section level2">
-<h2><span class="header-section-number">7.1</span> A custom plotting function</h2>
-<details>
-<p><summary><em>Click here to show setup code.</em></summary></p>
+<p>Knowledge of tidy evaluation can become necessary when creating own functions in the framework of the tidyverse.
+The code in this chapter requires the rlang package, which provides the functions required for tidy evaluation, in addition to the tidyverse.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(rlang)</code></pre>
-</details>
-<p>Knowledge of tidy evaluation can become necessary when creating own functions in the framework of the tidyverse.</p>
+<div id="colname" class="section level2">
+<h2><span class="header-section-number">7.1</span> A custom plotting function</h2>
 <p>Let’s try to build a function that takes a data frame and an unquoted column name and produces a histogram from this column.
 A naive approach would be the following function definition:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_histogram &lt;-<span class="st"> </span><span class="cf">function</span>(.data, x) {
@@ -340,7 +338,7 @@ Let’s have a look at how the ‘problematic’ tidyverse function <code>aes()<
 ##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## &lt;bytecode: 0x47e7ca8&gt;
+## &lt;bytecode: 0x46211b0&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>The reason for the behavior seen above is that the function itself makes use of capturing user input as an expression.
 In this case it uses the function <code>enquos()</code>, which captures one or more expressions along with an unique identifier for the environment in which they are supposed to be evaluated eventually.
@@ -452,7 +450,7 @@ mean_airtime_per_day</code></pre>
 ##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## &lt;bytecode: 0x47e7ca8&gt;
+## &lt;bytecode: 0x46211b0&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>At the time of producing the material for this course, <code>summarize()</code> did not make use of this pattern.</p>
 </div>
@@ -505,7 +503,7 @@ mean_airtime_per_day</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $x
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^a</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2d46808</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sym</span>(<span class="st">&quot;b&quot;</span>)
 x_quos &lt;-<span class="st"> </span><span class="kw">quos</span>(<span class="dt">x =</span> <span class="op">!!</span>a)
@@ -513,7 +511,7 @@ x_quos</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $x
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^b</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2d46808</span><span>
 </span></CODE></PRE>
 <p>The <code>sym()</code> function here creates a so-called <code>symbol</code> from a <code>character</code> variable.
 Unquoting a symbol variable means that the symbol is interpreted as a variable in the dataset.</p>
@@ -523,12 +521,12 @@ Unquoting a symbol variable means that the symbol is interpreted as a variable i
 <PRE class="fansi fansi-output"><CODE>## $y
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^c</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2d46808</span><span>
 ## 
 ## $x
 ## </span><span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^b</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2d46808</span><span>
 </span></CODE></PRE>
 </div>
 <div id="argnames" class="section level2">
@@ -572,12 +570,12 @@ build_map_quo &lt;-<span class="st"> </span><span class="cf">function</span>(col
 <PRE class="fansi fansi-output"><CODE>## $mean_petal_width
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^data</span><span style='color: #0000BB;'>, expr)</span><span>
-## env:  </span><span style='color: #0000BB;'>0xa0aeda0</span><span>
+## env:  </span><span style='color: #0000BB;'>0x7be3f68</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, expr)</span><span>
-## env:  </span><span style='color: #0000BB;'>0x9635558</span><span>
+## env:  </span><span style='color: #0000BB;'>0x9a6c2f0</span><span>
 </span></CODE></PRE>
 <p>And finally, let’s see if our function lives up to our expectations:</p>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
@@ -637,18 +635,18 @@ The helper function <code>as_mapper_quosure()</code> creates a new function with
 <pre><code>## &lt;lambda&gt;
 ## function (..., .x = ..1, .y = ..2, . = ..1) 
 ## mean(.$Petal.Width)
-## &lt;environment: 0x2f0dc30&gt;
+## &lt;environment: 0x2d46808&gt;
 ## attr(,&quot;class&quot;)
 ## [1] &quot;rlang_lambda_function&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_mapper_quosure</span>(<span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <pre><code>## function (..., . = ..1, .x = ..1, .y = ..2) 
 ## mean(.$Petal.Width)
-## &lt;environment: 0x97f7c48&gt;</code></pre>
+## &lt;environment: 0xa8b2a00&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, &lt;function(..., . = ..1, .x = ..1,
 ##           .y = ..2) mean(.$Petal.Width)&gt;)</span><span>
-## env:  </span><span style='color: #0000BB;'>0x8e68880</span><span>
+## env:  </span><span style='color: #0000BB;'>0xb318fa0</span><span>
 </span></CODE></PRE>
 <p>We see that our function <code>as_mapper_quosure()</code> is closely related to the function <code>purrr::as_mapper()</code>, but produces a quosure of a proper function and not a lambda function.
 Also, it does not require the tilde.</p>

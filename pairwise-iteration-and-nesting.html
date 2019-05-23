@@ -131,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i>Links</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#package-versions-used"><i class="fa fa-check"></i>Package versions used</a></li>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
@@ -319,10 +319,10 @@ good_times</code></pre>
 <p>We first prepare a list of future output filenames:</p>
 <pre class="sourceCode r"><code class="sourceCode r">output_filenames &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="kw">names</span>(good_times), <span class="dt">fileext =</span> <span class="st">&quot;.csv&quot;</span>)
 output_filenames</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpNdxAag/berlin30a014ff79e7.csv&quot;  
-## [2] &quot;/tmp/RtmpNdxAag/toronto30a07dc84fbc.csv&quot; 
-## [3] &quot;/tmp/RtmpNdxAag/tel_aviv30a03213cd71.csv&quot;
-## [4] &quot;/tmp/RtmpNdxAag/zurich30a06fb97bc6.csv&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpE8vQn5/berlin2d4c31306e62.csv&quot;  
+## [2] &quot;/tmp/RtmpE8vQn5/toronto2d4c64e38f37.csv&quot; 
+## [3] &quot;/tmp/RtmpE8vQn5/tel_aviv2d4c30e4b6fe.csv&quot;
+## [4] &quot;/tmp/RtmpE8vQn5/zurich2d4c403fbd3.csv&quot;</code></pre>
 <p>We want to use <code>readr::write_csv()</code> to write each tibble into the respective file.
 <code>write_csv()</code> needs at least 2 arguments: the tibble itself and the path to the filename.
 For illustration, we implement a file-centric wrapper function that takes the file name as first argument and also prints a message every time a file is written.
@@ -334,38 +334,38 @@ We use <code>map2()</code> to handle this:</p>
 }
 
 <span class="kw">map2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>))</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/berlin30a014ff79e7.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/toronto30a07dc84fbc.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/tel_aviv30a03213cd71.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/zurich30a06fb97bc6.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/berlin2d4c31306e62.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/toronto2d4c64e38f37.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c30e4b6fe.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/zurich2d4c403fbd3.csv</code></pre>
 <pre><code>## $berlin
-## [1] &quot;/tmp/RtmpNdxAag/berlin30a014ff79e7.csv&quot;
+## [1] &quot;/tmp/RtmpE8vQn5/berlin2d4c31306e62.csv&quot;
 ## 
 ## $toronto
-## [1] &quot;/tmp/RtmpNdxAag/toronto30a07dc84fbc.csv&quot;
+## [1] &quot;/tmp/RtmpE8vQn5/toronto2d4c64e38f37.csv&quot;
 ## 
 ## $tel_aviv
-## [1] &quot;/tmp/RtmpNdxAag/tel_aviv30a03213cd71.csv&quot;
+## [1] &quot;/tmp/RtmpE8vQn5/tel_aviv2d4c30e4b6fe.csv&quot;
 ## 
 ## $zurich
-## [1] &quot;/tmp/RtmpNdxAag/zurich30a06fb97bc6.csv&quot;</code></pre>
+## [1] &quot;/tmp/RtmpE8vQn5/zurich2d4c403fbd3.csv&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invisible</span>(<span class="kw">map2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>)))</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/berlin30a014ff79e7.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/toronto30a07dc84fbc.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/tel_aviv30a03213cd71.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/zurich30a06fb97bc6.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/berlin2d4c31306e62.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/toronto2d4c64e38f37.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c30e4b6fe.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/zurich2d4c403fbd3.csv</code></pre>
 <p>Because <code>process_csv()</code> returns the file name, it is available as output.
 Since we are just interested in the side-effects of <code>write_csv()</code> and not in the displayed output, we can use the related function <code>walk2()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">walk2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>))</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/berlin30a014ff79e7.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/toronto30a07dc84fbc.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/tel_aviv30a03213cd71.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/zurich30a06fb97bc6.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/berlin2d4c31306e62.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/toronto2d4c64e38f37.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c30e4b6fe.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/zurich2d4c403fbd3.csv</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">walk2</span>(good_times, output_filenames, <span class="op">~</span><span class="st"> </span><span class="kw">process_csv</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>)))</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/berlin30a014ff79e7.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/toronto30a07dc84fbc.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/tel_aviv30a03213cd71.csv</code></pre>
-<pre><code>## Writing /tmp/RtmpNdxAag/zurich30a06fb97bc6.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/berlin2d4c31306e62.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/toronto2d4c64e38f37.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c30e4b6fe.csv</code></pre>
+<pre><code>## Writing /tmp/RtmpE8vQn5/zurich2d4c403fbd3.csv</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $berlin
 ## <span style='color: #555555;'># A tibble: 16 x 3</span><span>
 ##   </span><span style='font-weight: bold;'>time</span><span>                </span><span style='font-weight: bold;'>temperature</span><span> </span><span style='font-weight: bold;'>apparentTemperature</span><span>
