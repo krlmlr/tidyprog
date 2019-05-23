@@ -16,7 +16,10 @@ library(here)
 ```
 </details>
 
-
+When dealing with web-APIs, query results come frequently in the JSON (**J**ava**S**cript **O**bject **N**otation) format.
+How to deal with this in R?
+A way to "talk" with APIs is provided by the package {httr}.
+The "GET"-query is executed by using `httr::GET()` with the URL, containing the query specifics, as an argument:
 ```{r include = FALSE}
 # Use httr::GET() for GET requests:
 ```
@@ -24,7 +27,7 @@ library(here)
 req <- httr::GET("https://photon.komoot.de/api/?q=Paradeplatz&limit=3")
 ```
 
-
+If you are using this command in a script, you need to wait until the query is finished processing:
 ```{r include = FALSE}
 # Wait for the request to be processed:
 ```
@@ -32,7 +35,7 @@ req <- httr::GET("https://photon.komoot.de/api/?q=Paradeplatz&limit=3")
 httr::stop_for_status(req)
 ```
 
-
+The result of the query can be accessed via `httr::content()`:
 ```{r include = FALSE}
 # Read the response:
 ```
@@ -41,7 +44,10 @@ content <- httr::content(req)
 content
 ```
 
+As you can see, the result, as it is displayed in R, is already a nested list at this point.
+And we know how to deal with these objects.
 
+The object did originally come as a JSON object though, which you can see if you look at the literal result of the query:
 ```{r include = FALSE}
 # Display the original response:
 ```
@@ -50,7 +56,7 @@ text_content <- httr::content(req, as = "text")
 cat(text_content)
 ```
 
-
+The package {jsonlite} has the function `jsonlite::prettify()` to offer, in order to display a one-line JSON-structure in a more clearly laid-out manner:
 ```{r include = FALSE}
 # Pretty-print the original response:
 ```

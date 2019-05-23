@@ -22,6 +22,12 @@ mutate_map_dbl <- function(.data, col, ...) {
 ```
 </details>
 
+Is there still potential to improve our function `mutate_map_dbl()`?
+
+We start here with only the highest level function definition of `mutate_map_dbl()` from section [Argument names](#argnames), i.e. without the definition of its helper functions `build_quos()` and `build_map_quo()`.
+
+What we are trying to achieve now, is to rid ourselves from the need to provide the tilde before the function.
+This is a slightly more tricky task, and here is how to go about it:
 
 ```{r include = FALSE}
 # Refining build_quos() to get rid of the tilde:
@@ -51,6 +57,8 @@ as_mapper_quosure <- function(expr) {
 }
 ```
 
+We needed to add one more level in the hierarchy of function calling.
+The helper function `as_mapper_quosure()` creates a new function with the help of `rlang::new_function()`, which eventually makes it possible to leave out the tilde.
 
 ```{r include = FALSE}
 # Test it:
@@ -63,6 +71,10 @@ as_mapper_quosure(mean(.$Petal.Width))
 build_map_quo(mean_petal_width, mean(.$Petal.Width))
 ```
 
+We see that our function `as_mapper_quosure()` is closely related to the function `purrr::as_mapper()`, but produces a quosure of a proper function and not a lambda function.
+Also, it does not require the tilde.
+
+So much to the theory, but does our main function also still behave in the right way?
 
 ```{r include = FALSE}
 # Run it:
