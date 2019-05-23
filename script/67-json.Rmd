@@ -47,7 +47,7 @@ content
 As you can see, the result, as it is displayed in R, is already a nested list at this point.
 And we know how to deal with these objects.
 
-The object did originally come as a JSON object though, which you can see, if you look at the literal result of the query like so:
+The object did originally come as a JSON object though, which you can see if you look at the literal result of the query:
 ```{r include = FALSE}
 # Display the original response:
 ```

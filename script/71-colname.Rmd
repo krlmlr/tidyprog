@@ -114,7 +114,8 @@ aes
 
 The reason for the behavior seen above is that the function itself makes use of capturing user input as an expression.
 In this case it uses the function `enquos()`, which captures one or more expressions along with an unique identifier for the environment in which they are supposed to be evaluated eventually.
-When a function is not capturing user input as expressions, it will behave in the old-fashioned base R ways.
+The default is to evaluate an expression ("standard evaluation").
+With `enquo()` and `enquos()` the expressions that correspond to user input are captured.
 
 ```{r include = FALSE}
 # Exercises

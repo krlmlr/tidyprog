@@ -17,7 +17,7 @@ library(tidyverse)
 
 So does everyone who wants to create any functions in the framework of the tidyverse need deep knowledge about tidy evaluation?
 
-The answer is, it depends: often enough, you can avoid the need for this knowledge.
+The answer is, it depends: often enough, things "just work".
 In the following example, which is a slight extension of `dplyr::summarize()`, you do not need to capture any expressions.
 The function takes a data frame and an ellipsis.
 And the ellipsis can be directly passed on to a tidyverse function (buzzphrase: "pass the dots").

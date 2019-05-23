@@ -29,7 +29,7 @@ x_quos
 ```
 
 The `sym()` function here creates a so-called `symbol` from a `character` variable.
-A `symbol` can be evaluated with `!!` in tidyverse functions.
+Unquoting a symbol variable means that the symbol is interpreted as a variable in the dataset.
 
 Capturing expressions in quosures can help you understand what is happening behind the scenes and for example give you clues as to why your code is not doing what it is supposed to do.
 

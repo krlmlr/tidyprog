@@ -39,7 +39,7 @@ gsu <- function(.data, ...) {
 }
 ```
 
-The `named_quos` are our summary columns (name is name of the column, value is the expression to be used on the input column(s)) and the `unnamed_quos` are now the grouping columns:
+The `named_quos` are our summary columns (name is name of the new column, value is the expression to be used on the input column(s)) and the `unnamed_quos` are now the grouping columns:
 
 ```{r include = FALSE}
 # Test it:

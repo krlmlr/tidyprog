@@ -17,8 +17,8 @@ library(rlang)
 </details>
 
 There are cases though, when you need knowledge about what the user added to the ellipsis.
-This is then handled by capturing the content in a quosure, which can be unquoted by the `!!!`-operator.
-You need the "triple-bang" operator here, because the ellipsis can hold more than one variable.
+This is then handled by capturing the content in a list of quosures, which can be unquoted by the `!!!`-operator.
+You need the "triple-bang" operator here, because the ellipsis can hold more than one expression.
 `!!!` does two things: it unquotes the content and splices it into the current call.
 
 We can practice this with our little new tidyverse function `summarize_ungroup()`:
@@ -38,7 +38,7 @@ summarize_ungroup <- function(.data, ...) {
 }
 ```
 
-We didn't need to capture the content, but it still works, as we can see here:
+We didn't need to process the content, but it still works, as we can see here:
 
 ```{r include = FALSE}
 # Test it:
