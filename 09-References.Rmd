@@ -25,3 +25,5 @@
 - Parallel processing with a purrr-like interface: https://davisvaughan.github.io/furrr/
 
 - Tidyverse principles: https://principles.tidyverse.org/
+
+- Recursive lists to use in teaching and examples: https://github.com/jennybc/repurrrsive
