@@ -27,7 +27,7 @@ The "GET"-query is executed by using `httr::GET()` with the URL, containing the 
 req <- httr::GET("https://photon.komoot.de/api/?q=Paradeplatz&limit=3")
 ```
 
-If you are using this command in a script, you might want to make sure the following command is only executed once the query is finished processing:
+If you are using this command in a script, you need to wait until the query is finished processing:
 ```{r include = FALSE}
 # Wait for the request to be processed:
 ```
