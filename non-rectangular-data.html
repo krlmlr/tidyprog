@@ -225,12 +225,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a><ul>
-<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#a-custom-plotting-function"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
+<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#colname"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
 <li class="chapter" data-level="7.2" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#do-you-need-tidy-evaluation"><i class="fa fa-check"></i><b>7.2</b> Do you need tidy evaluation?</a></li>
 <li class="chapter" data-level="7.3" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#explicit-quote-unquote-of-ellipsis"><i class="fa fa-check"></i><b>7.3</b> Explicit quote-unquote of ellipsis</a></li>
-<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#names-1"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#named"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
 <li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#debugging"><i class="fa fa-check"></i><b>7.5</b> Debugging</a></li>
-<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argument-names"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
+<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argnames"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#purrr-style-mappers"><i class="fa fa-check"></i><b>7.7</b> purrr-style mappers</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
@@ -1119,8 +1119,14 @@ In two easy steps we can therefore make a tibble out of the unnamed list <code>c
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(here)</code></pre>
 </details>
+<p>When dealing with web-APIs, query results come frequently in the JSON (<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation) format.
+How to deal with this in R?
+A way to “talk” with APIs is provided by the package {httr}.
+The “GET”-query is executed by using <code>httr::GET()</code> with the URL, containing the query specifics, as an argument:</p>
 <pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;https://photon.komoot.de/api/?q=Paradeplatz&amp;limit=3&quot;</span>)</code></pre>
+<p>If you are using this command in a script, you need to wait until the query is finished processing:</p>
 <pre class="sourceCode r"><code class="sourceCode r">httr<span class="op">::</span><span class="kw">stop_for_status</span>(req)</code></pre>
+<p>The result of the query can be accessed via <code>httr::content()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">content &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(req)
 content</code></pre>
 <pre><code>## $features
@@ -1296,9 +1302,13 @@ content</code></pre>
 ## 
 ## $type
 ## [1] &quot;FeatureCollection&quot;</code></pre>
+<p>As you can see, the result, as it is displayed in R, is already a nested list at this point.
+And we know how to deal with these objects.</p>
+<p>The object did originally come as a JSON object though, which you can see if you look at the literal result of the query:</p>
 <pre class="sourceCode r"><code class="sourceCode r">text_content &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(req, <span class="dt">as =</span> <span class="st">&quot;text&quot;</span>)
 <span class="kw">cat</span>(text_content)</code></pre>
 <pre><code>## {&quot;features&quot;:[{&quot;geometry&quot;:{&quot;coordinates&quot;:[8.538948327037028,47.369806999999994],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:905841,&quot;osm_type&quot;:&quot;R&quot;,&quot;extent&quot;:[8.5381631,47.3702704,8.5395156,47.3693475],&quot;country&quot;:&quot;Switzerland&quot;,&quot;osm_key&quot;:&quot;highway&quot;,&quot;city&quot;:&quot;Zurich&quot;,&quot;osm_value&quot;:&quot;pedestrian&quot;,&quot;postcode&quot;:&quot;8001&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;Zurich&quot;}},{&quot;geometry&quot;:{&quot;coordinates&quot;:[7.1082488,50.8860177],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:389550464,&quot;osm_type&quot;:&quot;N&quot;,&quot;country&quot;:&quot;Germany&quot;,&quot;osm_key&quot;:&quot;place&quot;,&quot;city&quot;:&quot;Cologne&quot;,&quot;osm_value&quot;:&quot;locality&quot;,&quot;postcode&quot;:&quot;51147&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;North Rhine-Westphalia&quot;}},{&quot;geometry&quot;:{&quot;coordinates&quot;:[8.684257597277371,49.3867415],&quot;type&quot;:&quot;Point&quot;},&quot;type&quot;:&quot;Feature&quot;,&quot;properties&quot;:{&quot;osm_id&quot;:391678888,&quot;osm_type&quot;:&quot;W&quot;,&quot;extent&quot;:[8.6836355,49.3871856,8.6848797,49.3862973],&quot;country&quot;:&quot;Germany&quot;,&quot;osm_key&quot;:&quot;place&quot;,&quot;city&quot;:&quot;Heidelberg&quot;,&quot;osm_value&quot;:&quot;locality&quot;,&quot;postcode&quot;:&quot;69120&quot;,&quot;name&quot;:&quot;Paradeplatz&quot;,&quot;state&quot;:&quot;Baden-Württemberg&quot;}}],&quot;type&quot;:&quot;FeatureCollection&quot;}</code></pre>
+<p>The package {jsonlite} has the function <code>jsonlite::prettify()</code> to offer, in order to display a one-line JSON-structure in a more clearly laid-out manner:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(jsonlite<span class="op">::</span><span class="kw">prettify</span>(text_content))</code></pre>
 <pre><code>## {
 ##     &quot;features&quot;: [

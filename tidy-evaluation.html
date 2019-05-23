@@ -225,12 +225,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a><ul>
-<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#a-custom-plotting-function"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
+<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#colname"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
 <li class="chapter" data-level="7.2" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#do-you-need-tidy-evaluation"><i class="fa fa-check"></i><b>7.2</b> Do you need tidy evaluation?</a></li>
 <li class="chapter" data-level="7.3" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#explicit-quote-unquote-of-ellipsis"><i class="fa fa-check"></i><b>7.3</b> Explicit quote-unquote of ellipsis</a></li>
-<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#names-1"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#named"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
 <li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#debugging"><i class="fa fa-check"></i><b>7.5</b> Debugging</a></li>
-<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argument-names"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
+<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argnames"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#purrr-style-mappers"><i class="fa fa-check"></i><b>7.7</b> purrr-style mappers</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
@@ -263,18 +263,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>writing functions that work with datasets of different shape</p>
 </blockquote>
 <p>This chapter offers an introduction to tidy evaluation.</p>
-<div id="a-custom-plotting-function" class="section level2">
+<div id="colname" class="section level2">
 <h2><span class="header-section-number">7.1</span> A custom plotting function</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(rlang)</code></pre>
 </details>
+<p>Knowledge of tidy evaluation can become necessary when creating own functions in the framework of the tidyverse.</p>
+<p>Let’s try to build a function that takes a data frame and an unquoted column name and produces a histogram from this column.
+A naive approach would be the following function definition:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_histogram &lt;-<span class="st"> </span><span class="cf">function</span>(.data, x) {
   .data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_histogram</span>()
 }</code></pre>
+<p>Let’s test this function in an easy setting:</p>
 <pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
 
 <span class="kw">try</span>(<span class="kw">print</span>(
@@ -288,12 +292,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ))</code></pre>
 <p><img src="tidyprog_files/figure-html/71-would-that-work-1.png" width="672" /></p>
 <pre><code>## Error : StatBin requires a continuous x variable: the x variable is discrete. Perhaps you want stat=&quot;count&quot;?</code></pre>
+<p>Neither the first nor the second attempt worked. What went wrong?</p>
+<p>If we add another column called <code>x</code>, it suddenly works:</p>
 <pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">x =</span> <span class="dv">11</span><span class="op">:</span><span class="dv">20</span>)
 
 data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tidy_histogram</span>(a)</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="tidyprog_files/figure-html/71-no-the-function-is-looking-for-a-variable-named-x-1.png" width="672" /></p>
+<p>The reason for it is, that our function is hard-coded to display a variable called <code>x</code>.
+The problem lies in the code-snippet <code>aes(x = x)</code>.</p>
+<p>In the tidyverse the solution for avoiding these ambiguities is by using expressions to capture the meaning (here: user input) of an unquoted variable and subsequently the bang-bang-operator (written in the code as <code>!!</code>; also called “unquote”) to access/pass on this meaning at the right place.</p>
+<p>In our example we do the following:</p>
 <pre class="sourceCode r"><code class="sourceCode r">tidy_histogram &lt;-<span class="st"> </span><span class="cf">function</span>(.data, x) {
   <span class="co"># Treat the argument as a variable name</span>
   expr &lt;-<span class="st"> </span><span class="kw">enquo</span>(x)
@@ -319,6 +329,9 @@ data <span class="op">%&gt;%</span>
 ))</code></pre>
 <p><img src="tidyprog_files/figure-html/71-solution-quote-unquote-3.png" width="672" /></p>
 <pre><code>## Error in FUN(X[[i]], ...) : object &#39;y&#39; not found</code></pre>
+<p>But this behavior is different from our usual base-R usage of variables in functions.
+How do some functions behave this way and others another way?
+Let’s have a look at how the ‘problematic’ tidyverse function <code>aes()</code> is implemented:</p>
 <pre class="sourceCode r"><code class="sourceCode r">aes</code></pre>
 <pre><code>## function (x, y, ...) 
 ## {
@@ -327,8 +340,14 @@ data <span class="op">%&gt;%</span>
 ##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## &lt;bytecode: 0x695dd20&gt;
+## &lt;bytecode: 0x47e7ca8&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
+<p>The reason for the behavior seen above is that the function itself makes use of capturing user input as an expression.
+In this case it uses the function <code>enquos()</code>, which captures one or more expressions along with an unique identifier for the environment in which they are supposed to be evaluated eventually.
+The default is to evaluate an expression (“standard evaluation”).
+With <code>enquo()</code> and <code>enquos()</code> the expressions that correspond to user input are captured.</p>
+<p>As an example of a newly-built function in the tidyverse, here is a function that combines the functionalities of <code>dplyr::mutate()</code> and <code>purrr::map_dbl()</code>.
+It takes as arguments a data frame, the column it is supposed to act upon and the function call it is supposed to use on each of the columns values:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col, expr) {
   quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(col)
 
@@ -356,11 +375,17 @@ iris_nested <span class="op">%&gt;%</span>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
 </details>
+<p>So does everyone who wants to create any functions in the framework of the tidyverse need deep knowledge about tidy evaluation?</p>
+<p>The answer is, it depends: often enough, things “just work”.
+In the following example, which is a slight extension of <code>dplyr::summarize()</code>, you do not need to capture any expressions.
+The function takes a data frame and an ellipsis.
+And the ellipsis can be directly passed on to a tidyverse function (buzzphrase: “pass the dots”).</p>
 <pre class="sourceCode r"><code class="sourceCode r">summarize_ungroup &lt;-<span class="st"> </span><span class="cf">function</span>(.data, ...) {
   .data <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">summarize</span>(...) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ungroup</span>()
 }</code></pre>
+<p>The function does what it promised to do:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day &lt;-
 <span class="st">  </span>nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(year, month, day) <span class="op">%&gt;%</span>
@@ -386,6 +411,11 @@ mean_airtime_per_day</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(rlang)</code></pre>
 </details>
+<p>There are cases though, when you need knowledge about what the user added to the ellipsis.
+This is then handled by capturing the content in a list of quosures, which can be unquoted by the <code>!!!</code>-operator.
+You need the “triple-bang” operator here, because the ellipsis can hold more than one expression.
+<code>!!!</code> does two things: it unquotes the content and splices it into the current call.</p>
+<p>We can practice this with our little new tidyverse function <code>summarize_ungroup()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">summarize_ungroup &lt;-<span class="st"> </span><span class="cf">function</span>(.data, ...) {
   <span class="co"># Capture (quote) with enquos()</span>
   quos &lt;-<span class="st"> </span><span class="kw">enquos</span>(...)
@@ -395,6 +425,7 @@ mean_airtime_per_day</code></pre>
 <span class="st">    </span><span class="kw">summarize</span>(<span class="op">!!!</span>quos) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ungroup</span>()
 }</code></pre>
+<p>We didn’t need to process the content, but it still works, as we can see here:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day &lt;-
 <span class="st">  </span>nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(year, month, day) <span class="op">%&gt;%</span>
@@ -412,6 +443,7 @@ mean_airtime_per_day</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">groups</span>()</code></pre>
 <pre><code>## NULL</code></pre>
+<p>To come back to our original example: <code>aes()</code> uses exactly this “quote-unquote-splice”-pattern:</p>
 <pre class="sourceCode r"><code class="sourceCode r">aes</code></pre>
 <pre><code>## function (x, y, ...) 
 ## {
@@ -420,16 +452,19 @@ mean_airtime_per_day</code></pre>
 ##     aes &lt;- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## &lt;bytecode: 0x695dd20&gt;
+## &lt;bytecode: 0x47e7ca8&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
+<p>At the time of producing the material for this course, <code>summarize()</code> did not make use of this pattern.</p>
 </div>
-<div id="names-1" class="section level2">
+<div id="named" class="section level2">
 <h2><span class="header-section-number">7.4</span> Names</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(rlang)</code></pre>
 </details>
+<p>User input in an ellipsis can be named or unnamed.
+We can distinguish between those two kinds and make use of this distinction, in the following way creating a special interface for the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r">gsu &lt;-<span class="st"> </span><span class="cf">function</span>(.data, ...) {
   <span class="co"># Capture (quote) with enquos()</span>
   quos &lt;-<span class="st"> </span><span class="kw">enquos</span>(...)
@@ -444,6 +479,7 @@ mean_airtime_per_day</code></pre>
 <span class="st">    </span><span class="kw">summarize</span>(<span class="op">!!!</span>named_quos) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ungroup</span>()
 }</code></pre>
+<p>The <code>named_quos</code> are our summary columns (name is name of the new column, value is the expression to be used on the input column(s)) and the <code>unnamed_quos</code> are now the grouping columns:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mean_airtime_per_day &lt;-
 <span class="st">  </span>nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gsu</span>(year, month, day, <span class="dt">mean_air_time =</span> <span class="kw">mean</span>(air_time, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
@@ -464,11 +500,12 @@ mean_airtime_per_day</code></pre>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rlang)</code></pre>
 </details>
+<p>You can use the capturing functions (creating <code>quosures</code> or <code>expressions</code>) also outside of functions:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quos</span>(<span class="dt">x =</span> a)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $x
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^a</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2b80108</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sym</span>(<span class="st">&quot;b&quot;</span>)
 x_quos &lt;-<span class="st"> </span><span class="kw">quos</span>(<span class="dt">x =</span> <span class="op">!!</span>a)
@@ -476,27 +513,34 @@ x_quos</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $x
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^b</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2b80108</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
 </span></CODE></PRE>
+<p>The <code>sym()</code> function here creates a so-called <code>symbol</code> from a <code>character</code> variable.
+Unquoting a symbol variable means that the symbol is interpreted as a variable in the dataset.</p>
+<p>Capturing expressions in quosures can help you understand what is happening behind the scenes and for example give you clues as to why your code is not doing what it is supposed to do.</p>
+<p>Quosures can also be nested:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quos</span>(<span class="dt">y =</span> c, <span class="op">!!!</span>x_quos)</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $y
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^c</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2b80108</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
 ## 
 ## $x
 ## </span><span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^b</span><span>
-## env:  </span><span style='color: #0000BB;'>0x2b80108</span><span>
+## env:  </span><span style='color: #0000BB;'>0x2f0dc30</span><span>
 </span></CODE></PRE>
 </div>
-<div id="argument-names" class="section level2">
+<div id="argnames" class="section level2">
 <h2><span class="header-section-number">7.6</span> Argument names</h2>
 <details>
 <p><summary><em>Click here to show setup code.</em></summary></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(rlang)</code></pre>
 </details>
+<p>At the end of section <a href="tidy-evaluation.html#colname">A custom plotting function</a> we defined a function <code>mutate_map_dbl()</code>.
+A downside of this function was, that it did create the desired new column, but you weren’t able to specify the column name in the function call.</p>
+<p>Let’s try to improve this aspect of the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r">mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col, ...) {
   quos &lt;-<span class="st"> </span><span class="kw">build_quos</span>(<span class="op">!!</span><span class="kw">enquo</span>(col), ...)
   .data <span class="op">%&gt;%</span>
@@ -518,17 +562,24 @@ build_map_quo &lt;-<span class="st"> </span><span class="cf">function</span>(col
   quo &lt;-<span class="st"> </span><span class="kw">enquo</span>(col)
   <span class="kw">quo</span>(<span class="kw">map_dbl</span>(<span class="op">!!</span>quo, expr))
 }</code></pre>
+<p>Again, like in section <a href="tidy-evaluation.html#named">Names</a> we are able to make use of the fact that an expression in an ellipsis of sorts <code>x = y</code> is treated in a way, that <code>x</code> is the name and <code>y</code> is the value of an object (here we used this in the code snippet <code>names(args)</code>).</p>
+<p>A lot of things happen here:
+1. the main function <code>mutate_map_dbl()</code> calls a helper function <code>build_quos()</code>
+2. <code>build_quos()</code> in turn calls a helper’s helper function <code>build_map_quo()</code>
+3. <code>mutate_map_dbl()</code> then uses the output of the nested function calls to (hopefully) produce the desired result.</p>
+<p>What output do the two helper functions produce? Let’s test it:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_quos</span>(data, <span class="dt">mean_petal_width =</span> <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## $mean_petal_width
 ## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^data</span><span style='color: #0000BB;'>, expr)</span><span>
-## env:  </span><span style='color: #0000BB;'>0x7eede98</span><span>
+## env:  </span><span style='color: #0000BB;'>0xa0aeda0</span><span>
 </span></CODE></PRE>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, expr)</span><span>
-## env:  </span><span style='color: #0000BB;'>0x6a68810</span><span>
+## env:  </span><span style='color: #0000BB;'>0x9635558</span><span>
 </span></CODE></PRE>
+<p>And finally, let’s see if our function lives up to our expectations:</p>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate_map_dbl</span>(data, <span class="dt">mean_petal_width =</span> <span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
@@ -539,6 +590,7 @@ build_map_quo &lt;-<span class="st"> </span><span class="cf">function</span>(col
 ## </span><span style='color: #555555;'>2</span><span> versicolor </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            1.33 
 ## </span><span style='color: #555555;'>3</span><span> virginica  </span><span style='color: #555555;'>&lt;tibble [50 × 4]&gt;</span><span>            2.03
 </span></CODE></PRE>
+<!-- Now go and try to do this in base R :) -->
 </div>
 <div id="purrr-style-mappers" class="section level2">
 <h2><span class="header-section-number">7.7</span> purrr-style mappers</h2>
@@ -553,6 +605,10 @@ mutate_map_dbl &lt;-<span class="st"> </span><span class="cf">function</span>(.d
 <span class="st">    </span><span class="kw">mutate</span>(<span class="op">!!!</span>quos)
 }</code></pre>
 </details>
+<p>Is there still potential to improve our function <code>mutate_map_dbl()</code>?</p>
+<p>We start here with only the highest level function definition of <code>mutate_map_dbl()</code> from section <a href="tidy-evaluation.html#argnames">Argument names</a>, i.e. without the definition of its helper functions <code>build_quos()</code> and <code>build_map_quo()</code>.</p>
+<p>What we are trying to achieve now, is to rid ourselves from the need to provide the tilde before the function.
+This is a slightly more tricky task, and here is how to go about it:</p>
 <pre class="sourceCode r"><code class="sourceCode r">build_quos &lt;-<span class="st"> </span><span class="cf">function</span>(col, ...) {
   args &lt;-<span class="st"> </span><span class="kw">enquos</span>(...)
   <span class="kw">stopifnot</span>(<span class="kw">length</span>(args) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
@@ -575,23 +631,28 @@ as_mapper_quosure &lt;-<span class="st"> </span><span class="cf">function</span>
 
   rlang<span class="op">::</span><span class="kw">new_function</span>(<span class="kw">alist</span>(<span class="dt">... =</span> , <span class="dt">. =</span> ..<span class="dv">1</span>, <span class="dt">.x =</span> ..<span class="dv">1</span>, <span class="dt">.y =</span> ..<span class="dv">2</span>), <span class="kw">quo_get_expr</span>(quo))
 }</code></pre>
+<p>We needed to add one more level in the hierarchy of function calling.
+The helper function <code>as_mapper_quosure()</code> creates a new function with the help of <code>rlang::new_function()</code>, which eventually makes it possible to leave out the tilde.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_mapper</span>(<span class="op">~</span><span class="st"> </span><span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <pre><code>## &lt;lambda&gt;
 ## function (..., .x = ..1, .y = ..2, . = ..1) 
 ## mean(.$Petal.Width)
-## &lt;environment: 0x2b80108&gt;
+## &lt;environment: 0x2f0dc30&gt;
 ## attr(,&quot;class&quot;)
 ## [1] &quot;rlang_lambda_function&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_mapper_quosure</span>(<span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <pre><code>## function (..., . = ..1, .x = ..1, .y = ..2) 
 ## mean(.$Petal.Width)
-## &lt;environment: 0x6aa7a70&gt;</code></pre>
+## &lt;environment: 0x97f7c48&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">build_map_quo</span>(mean_petal_width, <span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>
 <PRE class="fansi fansi-output"><CODE>## <span style='font-weight: bold;'>&lt;quosure&gt;</span><span>
 ## expr: </span><span style='color: #0000BB;'>^map_dbl(</span><span style='color: #00BB00;'>^mean_petal_width</span><span style='color: #0000BB;'>, &lt;function(..., . = ..1, .x = ..1,
 ##           .y = ..2) mean(.$Petal.Width)&gt;)</span><span>
-## env:  </span><span style='color: #0000BB;'>0x6948740</span><span>
+## env:  </span><span style='color: #0000BB;'>0x8e68880</span><span>
 </span></CODE></PRE>
+<p>We see that our function <code>as_mapper_quosure()</code> is closely related to the function <code>purrr::as_mapper()</code>, but produces a quosure of a proper function and not a lambda function.
+Also, it does not require the tilde.</p>
+<p>So much to the theory, but does our main function also still behave in the right way?</p>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nest</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate_map_dbl</span>(data, <span class="dt">mean_petal_width =</span> <span class="kw">mean</span>(.<span class="op">$</span>Petal.Width))</code></pre>

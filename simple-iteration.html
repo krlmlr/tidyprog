@@ -225,12 +225,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="non-rectangular-data.html"><a href="non-rectangular-data.html#accessing-apis"><i class="fa fa-check"></i><b>6.7</b> Accessing APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html"><i class="fa fa-check"></i><b>7</b> Tidy evaluation</a><ul>
-<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#a-custom-plotting-function"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
+<li class="chapter" data-level="7.1" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#colname"><i class="fa fa-check"></i><b>7.1</b> A custom plotting function</a></li>
 <li class="chapter" data-level="7.2" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#do-you-need-tidy-evaluation"><i class="fa fa-check"></i><b>7.2</b> Do you need tidy evaluation?</a></li>
 <li class="chapter" data-level="7.3" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#explicit-quote-unquote-of-ellipsis"><i class="fa fa-check"></i><b>7.3</b> Explicit quote-unquote of ellipsis</a></li>
-<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#names-1"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
+<li class="chapter" data-level="7.4" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#named"><i class="fa fa-check"></i><b>7.4</b> Names</a></li>
 <li class="chapter" data-level="7.5" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#debugging"><i class="fa fa-check"></i><b>7.5</b> Debugging</a></li>
-<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argument-names"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
+<li class="chapter" data-level="7.6" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#argnames"><i class="fa fa-check"></i><b>7.6</b> Argument names</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-evaluation.html"><a href="tidy-evaluation.html#purrr-style-mappers"><i class="fa fa-check"></i><b>7.7</b> purrr-style mappers</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>8</b> Best practices</a><ul>
@@ -463,9 +463,9 @@ fs<span class="op">::</span><span class="kw">dir_info</span>() <span class="op">
 <PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'># A tibble: 45 x 18</span><span>
  ##   </span><span style='font-weight: bold;'>path</span><span>       </span><span style='font-weight: bold;'>type</span><span>     </span><span style='font-weight: bold;'>size</span><span> </span><span style='font-weight: bold;'>permissions</span><span> </span><span style='font-weight: bold;'>modification_time</span><span>   </span><span style='font-weight: bold;'>user</span><span>  </span><span style='font-weight: bold;'>group</span><span>
  ##   </span><span style='color: #555555;font-style: italic;'>&lt;fs::path&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::b&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fs::perms&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
- ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file       56 rw-rw-r--   2019-05-14 </span><span style='color: #555555;'>07:32:00</span><span> trav… trav…
- ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>12-intro.</span><span>… file    5.85K rw-rw-r--   2019-05-14 </span><span style='color: #555555;'>07:32:00</span><span> trav… trav…
- ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      370 rw-rw-r--   2019-05-14 </span><span style='color: #555555;'>07:32:00</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>1</span><span> </span><span style='color: #00BB00;'>1.Rmd</span><span>      file       56 rw-rw-r--   2019-05-23 </span><span style='color: #555555;'>10:04:42</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>2</span><span> </span><span style='color: #00BB00;'>12-intro.</span><span>… file    5.85K rw-rw-r--   2019-05-23 </span><span style='color: #555555;'>10:04:42</span><span> trav… trav…
+ ## </span><span style='color: #555555;'>3</span><span> </span><span style='color: #00BB00;'>2.Rmd</span><span>      file      370 rw-rw-r--   2019-05-23 </span><span style='color: #555555;'>10:04:42</span><span> trav… trav…
  ## </span><span style='color: #555555;'># … with 42 more rows, and 11 more variables: </span><span style='color: #555555;font-weight: bold;'>device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>hard_links</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>special_device_id</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>inode</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
  ## #   </span><span style='color: #555555;font-weight: bold;'>block_size</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>blocks</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>flags</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, </span><span style='color: #555555;font-weight: bold;'>generation</span><span style='color: #555555;'> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
@@ -1087,7 +1087,7 @@ Note that we need an explicit dot (<code>.</code>) in the <code>select()</code> 
 ##     select(time, contains(&quot;emperature&quot;)) %&gt;%
 ##     filter(temperature &gt;= 14)
 ## }
-## &lt;environment: 0x2b80108&gt;</code></pre>
+## &lt;environment: 0x2f0dc30&gt;</code></pre>
 <p>See the <a href="function-basics.html#function-basics">“Function basics”</a> chapter for a more extensive introduction to functions.</p>
 <p>Testing the function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find_good_times</span>(input_data[[<span class="dv">4</span>]])</code></pre>
