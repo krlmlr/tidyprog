@@ -3,9 +3,10 @@ rm(list = ls())
 ```
 
 
-## A custom plotting function {#colname}
 
-<details><summary>*Click here to show setup code.*</summary>
+Knowledge of tidy evaluation can become necessary when creating own functions in the framework of the tidyverse.
+The code in this chapter requires the rlang package, which provides the functions required for tidy evaluation, in addition to the tidyverse.
+
 ```{r include = FALSE}
 ### A custom plotting function
 
@@ -14,9 +15,8 @@ rm(list = ls())
 library(tidyverse)
 library(rlang)
 ```
-</details>
 
-Knowledge of tidy evaluation can become necessary when creating own functions in the framework of the tidyverse.
+## A custom plotting function {#colname}
 
 Let's try to build a function that takes a data frame and an unquoted column name and produces a histogram from this column.
 A naive approach would be the following function definition:
