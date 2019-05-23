@@ -29,6 +29,8 @@ tidyprog_repo <- function(...) {
 
 Material for the [zhRcourse workshop "Programming in the tidyverse"](https://www.zhrcourses.uzh.ch/en/programm2019/tidyverse.html) on May 10, 2019.
 
+See the controls at the top of the website for searching, font size, editing, and a link to the PDF version of the material.
+
 ## Links {-}
 
 - This website: https://bit.ly/tidyprog
