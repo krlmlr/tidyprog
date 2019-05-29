@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{23 May 2019, 13:56 CEST}
+    \date{29 May 2019, 21:54 CEST}
 
 \usepackage{booktabs}
 
@@ -208,7 +208,7 @@ Click to expand
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       UTC                         
-##  date     2019-05-23                  
+##  date     2019-05-29                  
 ## 
 ## - Packages -------------------------------------------------------------------
 ##  package     * version     date       lib source                           
@@ -223,7 +223,7 @@ Click to expand
 ##  crayon        1.3.4       2017-09-16 [1] CRAN (R 3.6.0)                   
 ##  digest        0.6.19      2019-05-20 [1] CRAN (R 3.6.0)                   
 ##  dplyr       * 0.8.1       2019-05-14 [1] CRAN (R 3.6.0)                   
-##  evaluate      0.13        2019-02-12 [1] CRAN (R 3.6.0)                   
+##  evaluate      0.14        2019-05-28 [1] CRAN (R 3.6.0)                   
 ##  forcats     * 0.4.0       2019-02-17 [1] CRAN (R 3.6.0)                   
 ##  generics      0.0.2       2018-11-29 [1] CRAN (R 3.6.0)                   
 ##  ggplot2     * 3.1.1       2019-04-07 [1] CRAN (R 3.6.0)                   
@@ -244,7 +244,7 @@ Click to expand
 ##  modelr        0.1.4       2019-02-18 [1] CRAN (R 3.6.0)                   
 ##  munsell       0.5.0       2018-06-12 [1] CRAN (R 3.6.0)                   
 ##  nlme          3.1-139     2019-04-09 [3] CRAN (R 3.6.0)                   
-##  pillar        1.4.0       2019-05-11 [1] CRAN (R 3.6.0)                   
+##  pillar        1.4.1       2019-05-28 [1] CRAN (R 3.6.0)                   
 ##  pkgconfig     2.0.2       2018-08-16 [1] CRAN (R 3.6.0)                   
 ##  plyr          1.8.4       2016-06-08 [1] CRAN (R 3.6.0)                   
 ##  purrr       * 0.3.2       2019-03-15 [1] CRAN (R 3.6.0)                   
@@ -262,7 +262,7 @@ Click to expand
 ##  stringi       1.4.3       2019-03-12 [1] CRAN (R 3.6.0)                   
 ##  stringr     * 1.4.0       2019-02-10 [1] CRAN (R 3.6.0)                   
 ##  tibble      * 2.1.1       2019-03-16 [1] CRAN (R 3.6.0)                   
-##  tic           0.2.13.9015 2019-05-23 [1] Github (ropenscilabs/tic@7401f5c)
+##  tic           0.2.13.9016 2019-05-29 [1] Github (ropenscilabs/tic@31cd3db)
 ##  tidyr       * 0.8.3       2019-03-01 [1] CRAN (R 3.6.0)                   
 ##  tidyselect    0.2.5       2018-10-11 [1] CRAN (R 3.6.0)                   
 ##  tidyverse   * 1.2.1       2017-11-14 [1] CRAN (R 3.6.0)                   
@@ -867,7 +867,7 @@ Display the code of any function by writing its name without the subsequent pare
 ##   # Return it
 ##   weather_data
 ## }
-## <environment: 0x2d46808>
+## <environment: 0x36a96e8>
 \end{verbatim}
 
 Call the function by adding the parentheses:
@@ -2287,9 +2287,9 @@ A possible solution can be in many cases to change the order of the transformati
 ## # A tibble: 45 x 18
 ##   path       type     size permissions modification_time   user  group
 ##   <fs::path> <fct> <fs::b> <fs::perms> <dttm>              <chr> <chr>
-## 1 1.Rmd      file       56 rw-rw-r--   2019-05-23 11:55:16 trav~ trav~
-## 2 12-intro.~ file    5.85K rw-rw-r--   2019-05-23 11:55:16 trav~ trav~
-## 3 2.Rmd      file      370 rw-rw-r--   2019-05-23 11:55:16 trav~ trav~
+## 1 1.Rmd      file       56 rw-rw-r--   2019-05-29 19:54:06 trav~ trav~
+## 2 12-intro.~ file    5.85K rw-rw-r--   2019-05-29 19:54:06 trav~ trav~
+## 3 2.Rmd      file      370 rw-rw-r--   2019-05-29 19:54:06 trav~ trav~
 ## # ... with 42 more rows, and 11 more variables: device_id <dbl>,
 ## #   hard_links <dbl>, special_device_id <dbl>, inode <dbl>,
 ## #   block_size <dbl>, blocks <dbl>, flags <int>, generation <dbl>,
@@ -3290,7 +3290,7 @@ Let's look at the object \texttt{manipulator}, that we created:
 ##     select(time, contains("emperature")) %>%
 ##     filter(temperature >= 14)
 ## }
-## <environment: 0x2d46808>
+## <environment: 0x36a96e8>
 \end{verbatim}
 
 See the \protect\hyperlink{function-basics}{``Function basics''} chapter for a more extensive introduction to functions.
@@ -3819,10 +3819,10 @@ We first prepare a list of future output filenames:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "/tmp/RtmpE8vQn5/berlin2d4c57d56f98.csv"  
-## [2] "/tmp/RtmpE8vQn5/toronto2d4c700b321d.csv" 
-## [3] "/tmp/RtmpE8vQn5/tel_aviv2d4c5af207c7.csv"
-## [4] "/tmp/RtmpE8vQn5/zurich2d4c64988e34.csv"
+## [1] "/tmp/RtmpCquLue/berlin2db82d59d14a.csv"  
+## [2] "/tmp/RtmpCquLue/toronto2db85d81f229.csv" 
+## [3] "/tmp/RtmpCquLue/tel_aviv2db853a25188.csv"
+## [4] "/tmp/RtmpCquLue/zurich2db8cd845a8.csv"
 \end{verbatim}
 
 We want to use \texttt{readr::write\_csv()} to write each tibble into the respective file.
@@ -3843,33 +3843,33 @@ We use \texttt{map2()} to handle this:
 \end{Shaded}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/berlin2d4c57d56f98.csv
+## Writing /tmp/RtmpCquLue/berlin2db82d59d14a.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/toronto2d4c700b321d.csv
+## Writing /tmp/RtmpCquLue/toronto2db85d81f229.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c5af207c7.csv
+## Writing /tmp/RtmpCquLue/tel_aviv2db853a25188.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/zurich2d4c64988e34.csv
+## Writing /tmp/RtmpCquLue/zurich2db8cd845a8.csv
 \end{verbatim}
 
 \begin{verbatim}
 ## $berlin
-## [1] "/tmp/RtmpE8vQn5/berlin2d4c57d56f98.csv"
+## [1] "/tmp/RtmpCquLue/berlin2db82d59d14a.csv"
 ## 
 ## $toronto
-## [1] "/tmp/RtmpE8vQn5/toronto2d4c700b321d.csv"
+## [1] "/tmp/RtmpCquLue/toronto2db85d81f229.csv"
 ## 
 ## $tel_aviv
-## [1] "/tmp/RtmpE8vQn5/tel_aviv2d4c5af207c7.csv"
+## [1] "/tmp/RtmpCquLue/tel_aviv2db853a25188.csv"
 ## 
 ## $zurich
-## [1] "/tmp/RtmpE8vQn5/zurich2d4c64988e34.csv"
+## [1] "/tmp/RtmpCquLue/zurich2db8cd845a8.csv"
 \end{verbatim}
 
 \begin{Shaded}
@@ -3879,19 +3879,19 @@ We use \texttt{map2()} to handle this:
 \end{Shaded}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/berlin2d4c57d56f98.csv
+## Writing /tmp/RtmpCquLue/berlin2db82d59d14a.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/toronto2d4c700b321d.csv
+## Writing /tmp/RtmpCquLue/toronto2db85d81f229.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c5af207c7.csv
+## Writing /tmp/RtmpCquLue/tel_aviv2db853a25188.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/zurich2d4c64988e34.csv
+## Writing /tmp/RtmpCquLue/zurich2db8cd845a8.csv
 \end{verbatim}
 
 Because \texttt{process\_csv()} returns the file name, it is available as output.
@@ -3904,19 +3904,19 @@ Since we are just interested in the side-effects of \texttt{write\_csv()} and no
 \end{Shaded}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/berlin2d4c57d56f98.csv
+## Writing /tmp/RtmpCquLue/berlin2db82d59d14a.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/toronto2d4c700b321d.csv
+## Writing /tmp/RtmpCquLue/toronto2db85d81f229.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c5af207c7.csv
+## Writing /tmp/RtmpCquLue/tel_aviv2db853a25188.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/zurich2d4c64988e34.csv
+## Writing /tmp/RtmpCquLue/zurich2db8cd845a8.csv
 \end{verbatim}
 
 \begin{Shaded}
@@ -3926,19 +3926,19 @@ Since we are just interested in the side-effects of \texttt{write\_csv()} and no
 \end{Shaded}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/berlin2d4c57d56f98.csv
+## Writing /tmp/RtmpCquLue/berlin2db82d59d14a.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/toronto2d4c700b321d.csv
+## Writing /tmp/RtmpCquLue/toronto2db85d81f229.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/tel_aviv2d4c5af207c7.csv
+## Writing /tmp/RtmpCquLue/tel_aviv2db853a25188.csv
 \end{verbatim}
 
 \begin{verbatim}
-## Writing /tmp/RtmpE8vQn5/zurich2d4c64988e34.csv
+## Writing /tmp/RtmpCquLue/zurich2db8cd845a8.csv
 \end{verbatim}
 
 \begin{verbatim}
@@ -4597,7 +4597,7 @@ For functions with side effect, it is good practice to return the input invisibl
 \end{verbatim}
 
 \begin{verbatim}
-## 2 written to /tmp/RtmpE8vQn5/file2d4c2a95aeb4
+## 2 written to /tmp/RtmpCquLue/file2db857e8d848
 \end{verbatim}
 
 Separation helps isolate the side effects.
@@ -4617,7 +4617,7 @@ If side effect functions return the input, they remain composable with pure func
 \end{verbatim}
 
 \begin{verbatim}
-## 6 written to /tmp/RtmpE8vQn5/file2d4c6eb88914
+## 6 written to /tmp/RtmpCquLue/file2db8125e18b7
 \end{verbatim}
 
 \begin{verbatim}
@@ -4959,7 +4959,7 @@ Here we create a function that loads a particular dataset:
 ## function() {
 ##     read_weather_file(filename)
 ##   }
-## <environment: 0x92d9aa0>
+## <environment: 0xa373998>
 \end{verbatim}
 
 \begin{Shaded}
@@ -4972,7 +4972,7 @@ Here we create a function that loads a particular dataset:
 ## function() {
 ##     read_weather_file(filename)
 ##   }
-## <environment: 0x9788ac8>
+## <environment: 0x9aa9290>
 \end{verbatim}
 
 \begin{Shaded}
@@ -5044,7 +5044,7 @@ Use closures as wrappers for other verbs/functions (such functions are also call
 ## 
 ##     f(...)
 ##   }
-## <environment: 0x9722690>
+## <environment: 0x7161160>
 \end{verbatim}
 
 \begin{Shaded}
@@ -5161,8 +5161,8 @@ The \texttt{safely()} function is another example from the purrr package:
 \begin{verbatim}
 ## function (...) 
 ## capture_error(.f(...), otherwise, quiet)
-## <bytecode: 0x8b43540>
-## <environment: 0xaec4d60>
+## <bytecode: 0x93fe5d0>
+## <environment: 0x94fcff8>
 \end{verbatim}
 
 \begin{Shaded}
@@ -5322,7 +5322,7 @@ The \texttt{safely()} function is another example from the purrr package:
 ##     .f <- as_mapper(.f)
 ##     function(...) capture_error(.f(...), otherwise, quiet)
 ## }
-## <bytecode: 0x8b43a48>
+## <bytecode: 0x93fead8>
 ## <environment: namespace:purrr>
 \end{verbatim}
 
@@ -5347,7 +5347,7 @@ The \texttt{safely()} function is another example from the purrr package:
 ##         })
 ##     }
 ## }
-## <bytecode: 0xc09ecd8>
+## <bytecode: 0x7c3b2e8>
 ## <environment: namespace:purrr>
 \end{verbatim}
 \end{enumerate}
@@ -7064,7 +7064,7 @@ Let's have a look at how the `problematic' tidyverse function \texttt{aes()} is 
 ##     aes <- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## <bytecode: 0x46211b0>
+## <bytecode: 0x4d808c0>
 ## <environment: namespace:ggplot2>
 \end{verbatim}
 
@@ -7248,7 +7248,7 @@ To come back to our original example: \texttt{aes()} uses exactly this ``quote-u
 ##     aes <- new_aes(exprs[!is_missing], env = parent.frame())
 ##     rename_aes(aes)
 ## }
-## <bytecode: 0x46211b0>
+## <bytecode: 0x4d808c0>
 ## <environment: namespace:ggplot2>
 \end{verbatim}
 
@@ -7333,7 +7333,7 @@ You can use the capturing functions (creating \texttt{quosures} or \texttt{expre
 ## $x
 ## <quosure>
 ## expr: ^a
-## env:  0x2d46808
+## env:  0x36a96e8
 \end{verbatim}
 
 \begin{Shaded}
@@ -7348,7 +7348,7 @@ You can use the capturing functions (creating \texttt{quosures} or \texttt{expre
 ## $x
 ## <quosure>
 ## expr: ^b
-## env:  0x2d46808
+## env:  0x36a96e8
 \end{verbatim}
 
 The \texttt{sym()} function here creates a so-called \texttt{symbol} from a \texttt{character} variable.
@@ -7368,12 +7368,12 @@ Quosures can also be nested:
 ## $y
 ## <quosure>
 ## expr: ^c
-## env:  0x2d46808
+## env:  0x36a96e8
 ## 
 ## $x
 ## <quosure>
 ## expr: ^b
-## env:  0x2d46808
+## env:  0x36a96e8
 \end{verbatim}
 
 \hypertarget{argnames}{%
@@ -7438,7 +7438,7 @@ What output do the two helper functions produce? Let's test it:
 ## $mean_petal_width
 ## <quosure>
 ## expr: ^map_dbl(^data, expr)
-## env:  0xa7ea678
+## env:  0xb7b7ef8
 \end{verbatim}
 
 \begin{Shaded}
@@ -7450,7 +7450,7 @@ What output do the two helper functions produce? Let's test it:
 \begin{verbatim}
 ## <quosure>
 ## expr: ^map_dbl(^mean_petal_width, expr)
-## env:  0x94a6088
+## env:  0xbf54580
 \end{verbatim}
 
 And finally, let's see if our function lives up to our expectations:
@@ -7519,7 +7519,11 @@ This is a slightly more tricky task, and here is how to go about it:
 \NormalTok{as_mapper_quosure <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(expr) \{}
 \NormalTok{  quo <-}\StringTok{ }\KeywordTok{enquo}\NormalTok{(expr)}
 
-\NormalTok{  rlang}\OperatorTok{::}\KeywordTok{new_function}\NormalTok{(}\KeywordTok{alist}\NormalTok{(}\DataTypeTok{... =}\NormalTok{ , }\DataTypeTok{. =}\NormalTok{ ..}\DecValTok{1}\NormalTok{, }\DataTypeTok{.x =}\NormalTok{ ..}\DecValTok{1}\NormalTok{, }\DataTypeTok{.y =}\NormalTok{ ..}\DecValTok{2}\NormalTok{), }\KeywordTok{quo_get_expr}\NormalTok{(quo))}
+\NormalTok{  rlang}\OperatorTok{::}\KeywordTok{new_function}\NormalTok{(}
+    \KeywordTok{alist}\NormalTok{(}\DataTypeTok{... =}\NormalTok{ , }\DataTypeTok{. =}\NormalTok{ ..}\DecValTok{1}\NormalTok{, }\DataTypeTok{.x =}\NormalTok{ ..}\DecValTok{1}\NormalTok{, }\DataTypeTok{.y =}\NormalTok{ ..}\DecValTok{2}\NormalTok{),}
+    \KeywordTok{quo_get_expr}\NormalTok{(quo),}
+    \KeywordTok{quo_get_env}\NormalTok{(quo)}
+\NormalTok{  )}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -7537,7 +7541,7 @@ The helper function \texttt{as\_mapper\_quosure()} creates a new function with t
 ## <lambda>
 ## function (..., .x = ..1, .y = ..2, . = ..1) 
 ## mean(.$Petal.Width)
-## <environment: 0x2d46808>
+## <environment: 0x36a96e8>
 ## attr(,"class")
 ## [1] "rlang_lambda_function"
 \end{verbatim}
@@ -7551,7 +7555,7 @@ The helper function \texttt{as\_mapper\_quosure()} creates a new function with t
 \begin{verbatim}
 ## function (..., . = ..1, .x = ..1, .y = ..2) 
 ## mean(.$Petal.Width)
-## <environment: 0xa36cc70>
+## <environment: 0x36a96e8>
 \end{verbatim}
 
 \begin{Shaded}
@@ -7564,7 +7568,7 @@ The helper function \texttt{as\_mapper\_quosure()} creates a new function with t
 ## <quosure>
 ## expr: ^map_dbl(^mean_petal_width, <function(..., . = ..1, .x = ..1,
 ##           .y = ..2) mean(.$Petal.Width)>)
-## env:  0xa16d350
+## env:  0x9d7ee30
 \end{verbatim}
 
 We see that our function \texttt{as\_mapper\_quosure()} is closely related to the function \texttt{purrr::as\_mapper()}, but produces a quosure of a proper function and not a lambda function.
