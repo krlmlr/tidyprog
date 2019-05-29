@@ -53,7 +53,11 @@ build_map_quo <- function(col, expr) {
 as_mapper_quosure <- function(expr) {
   quo <- enquo(expr)
 
-  rlang::new_function(alist(... = , . = ..1, .x = ..1, .y = ..2), quo_get_expr(quo))
+  rlang::new_function(
+    alist(... = , . = ..1, .x = ..1, .y = ..2),
+    quo_get_expr(quo),
+    quo_get_env(quo)
+  )
 }
 ```
 
